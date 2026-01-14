@@ -1,4 +1,4 @@
-import { useCallback, useRef, useEffect } from 'react';
+import { useCallback, useRef, useEffect, useState } from 'react';
 import { GoogleMap } from '@react-google-maps/api';
 import { MarkerClusterer } from '@googlemaps/markerclusterer';
 import type { Venue } from '../../types/venue';
@@ -55,6 +55,15 @@ export function VenueMap({ venues, onVenueSelect }: VenueMapProps) {
   const markersRef = useRef<google.maps.Marker[]>([]);
   const clustererRef = useRef<MarkerClusterer | null>(null);
   const { hoveredVenueId } = useVenueStore();
+  const [mapType, setMapType] = useState<'roadmap' | 'satellite'>('roadmap');
+
+  const toggleMapType = useCallback(() => {
+    const newType = mapType === 'roadmap' ? 'satellite' : 'roadmap';
+    setMapType(newType);
+    if (mapRef.current) {
+      mapRef.current.setMapTypeId(newType);
+    }
+  }, [mapType]);
 
   const onLoad = useCallback((map: google.maps.Map) => {
     mapRef.current = map;
@@ -158,13 +167,37 @@ export function VenueMap({ venues, onVenueSelect }: VenueMapProps) {
   }, [hoveredVenueId, venues]);
 
   return (
-    <GoogleMap
-      mapContainerStyle={containerStyle}
-      center={WORLD_CENTER}
-      zoom={DEFAULT_ZOOM}
-      onLoad={onLoad}
-      onUnmount={onUnmount}
-      options={mapOptions}
-    />
+    <div className="relative w-full h-full">
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={WORLD_CENTER}
+        zoom={DEFAULT_ZOOM}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+        options={mapOptions}
+      />
+      {/* Map Type Toggle Button */}
+      <button
+        onClick={toggleMapType}
+        className="absolute top-3 left-3 bg-white rounded-lg shadow-md px-3 py-2 flex items-center gap-2 hover:bg-gray-50 transition-colors z-10 border border-gray-200"
+        title={mapType === 'roadmap' ? 'Switch to satellite view' : 'Switch to map view'}
+      >
+        {mapType === 'roadmap' ? (
+          <>
+            <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span className="text-sm font-medium text-gray-700">Satellite</span>
+          </>
+        ) : (
+          <>
+            <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+            </svg>
+            <span className="text-sm font-medium text-gray-700">Map</span>
+          </>
+        )}
+      </button>
+    </div>
   );
 }
