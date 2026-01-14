@@ -157,10 +157,10 @@ export function VenuePanel({ venue, onClose }: VenuePanelProps) {
         <VenuePhotos venue={venue} />
 
         {/* Videos */}
-        {venue.videos.length > 0 && <VenueVideos videos={venue.videos} />}
+        {venue.videos && venue.videos.length > 0 && <VenueVideos videos={venue.videos} />}
 
         {/* Reviews */}
-        <VenueReviews reviews={venue.reviews} />
+        {venue.reviews && <VenueReviews reviews={venue.reviews} />}
 
         {/* Contact */}
         <div>
