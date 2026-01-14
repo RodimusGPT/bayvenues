@@ -16,7 +16,13 @@ export interface Video {
 
 export interface HeaderImage {
   url: string;
-  source: 'youtube' | 'og_image' | 'fallback';
+  source: 'youtube' | 'og_image' | 'fallback' | 'google';
+}
+
+export interface GalleryImage {
+  url: string;
+  thumbnail?: string;
+  source: 'google' | 'venue' | 'fallback';
 }
 
 export interface Venue {
@@ -55,6 +61,7 @@ export interface Venue {
   };
   google_maps_url: string;
   headerImage?: HeaderImage;
+  headerImages?: GalleryImage[];
   youtubeSearch?: string;
 }
 

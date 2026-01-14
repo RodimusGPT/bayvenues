@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import type { Venue, Country } from '../../types/venue';
 import { COUNTRY_COLORS, getCountryForRegion } from '../../types/venue';
 import { formatPriceRange, formatCapacity } from '../../utils/formatters';
@@ -7,6 +6,7 @@ import { VenueVideos } from './VenueVideos';
 import { VenueReviews } from './VenueReviews';
 import { FavoriteButton } from '../ui/FavoriteButton';
 import { HideButton } from '../ui/HideButton';
+import { ImageCarousel } from '../ui/ImageCarousel';
 
 interface VenuePanelProps {
   venue: Venue;
@@ -27,12 +27,9 @@ const COUNTRY_FLAGS: Record<Country, string> = {
 export function VenuePanel({ venue, onClose }: VenuePanelProps) {
   const country = getCountryForRegion(venue.region);
   const countryColor = COUNTRY_COLORS[country];
-  const [imageError, setImageError] = useState(false);
 
-  // Reset image error state when venue changes
-  useEffect(() => {
-    setImageError(false);
-  }, [venue.id]);
+  // Check if we have any images to display
+  const hasImages = (venue.headerImages && venue.headerImages.length > 0) || venue.headerImage;
 
   return (
     <aside className="fixed right-0 top-[57px] bottom-0 w-full sm:w-[420px] bg-white shadow-2xl overflow-y-auto z-40 animate-slide-in-right venue-panel">
@@ -47,19 +44,16 @@ export function VenuePanel({ venue, onClose }: VenuePanelProps) {
         </svg>
         <span className="text-base font-semibold">Back to map</span>
       </button>
-      {/* Header Image */}
-      {venue.headerImage && !imageError ? (
-        <div className="relative h-48 sm:h-56 w-full overflow-hidden">
-          <img
-            src={venue.headerImage.url}
-            alt={venue.name}
-            className="w-full h-full object-cover"
-            loading="eager"
-            onError={() => setImageError(true)}
+      {/* Header Image Carousel */}
+      {hasImages ? (
+        <div className="relative">
+          <ImageCarousel
+            images={venue.headerImages || []}
+            fallbackImage={venue.headerImage}
+            venueName={venue.name}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
           {/* Action buttons overlay */}
-          <div className="absolute top-3 right-3 flex items-center gap-2">
+          <div className="absolute top-3 right-3 flex items-center gap-2 z-20">
             <FavoriteButton
               venueId={venue.id}
               size="md"
@@ -82,11 +76,17 @@ export function VenuePanel({ venue, onClose }: VenuePanelProps) {
             </button>
           </div>
           {/* Image source badge */}
-          <span className="absolute bottom-3 right-3 px-2 py-1 bg-black/40 text-white text-xs rounded-full">
-            {venue.headerImage.source === 'youtube' ? 'Video' : venue.headerImage.source === 'og_image' ? 'Official' : venue.venue_type[0]}
+          <span className="absolute bottom-3 right-3 px-2 py-1 bg-black/40 text-white text-xs rounded-full z-20">
+            {venue.headerImages && venue.headerImages.length > 0
+              ? `${venue.headerImages.length} Photos`
+              : venue.headerImage?.source === 'youtube'
+                ? 'Video'
+                : venue.headerImage?.source === 'og_image'
+                  ? 'Official'
+                  : venue.venue_type[0]}
           </span>
           {/* Venue name overlay */}
-          <div className="absolute bottom-0 left-0 right-0 p-4">
+          <div className="absolute bottom-0 left-0 right-0 p-4 z-10 pointer-events-none">
             <div className="flex items-center gap-2 mb-1">
               <span
                 className="w-3 h-3 rounded-full flex-shrink-0"
