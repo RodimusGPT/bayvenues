@@ -1,0 +1,5367 @@
+{
+  "meta": {
+    "title": "Bay Area Wedding Venues Guide",
+    "description": "Comprehensive list of wedding venues in North Bay, Peninsula, South Bay, Monterey, Santa Cruz, and Carmel areas",
+    "last_updated": "2026-01-14",
+    "total_venues": 121,
+    "regions": [
+      "North Bay",
+      "Peninsula",
+      "South Bay",
+      "Monterey",
+      "Santa Cruz",
+      "Carmel"
+    ]
+  },
+  "venues": [
+    {
+      "id": "nb-001",
+      "name": "Charles Krug Winery",
+      "region": "North Bay",
+      "subregion": "Napa Valley",
+      "address": "2800 Main St, St. Helena, CA 94574",
+      "description": "California's oldest winery (1861) offering historic charm with vineyard views. One of only five Napa wineries legally permitted to host weddings. Features the Carriage House with vaulted ceilings and reclaimed wine barrel wood.",
+      "capacity": {
+        "min": 50,
+        "max": 800
+      },
+      "price_range": {
+        "min": 10000,
+        "max": 15000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Winery",
+        "Historic"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://charleskrug.com/weddings/",
+      "phone": "(707) 967-2229",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/charleskrugwedding/",
+        "google": "https://www.google.com/search?q=charles+krug+winery+wedding&tbm=isch"
+      },
+      "videos": [
+        {
+          "title": "Charles Krug Winery Wedding Video",
+          "url": "https://www.youtube.com/watch?v=JhdH142OSU4"
+        },
+        {
+          "title": "Stunning Charles Krug Winery Wedding",
+          "url": "https://www.youtube.com/watch?v=kODO2NIDkBQ"
+        }
+      ],
+      "reviews": {
+        "summary": "Staff praised as responsive and professional. Beautiful upstairs reception hall. Note: Beer/wine only, no liquor. Events must end at 10pm.",
+        "pros": [
+          "Historic charm",
+          "Responsive staff",
+          "Beautiful grounds"
+        ],
+        "cons": [
+          "No hard alcohol",
+          "10pm curfew",
+          "6-case wine minimum"
+        ]
+      },
+      "location": {
+        "lat": 38.5052,
+        "lng": -122.4697
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=38.5052,-122.4697"
+    },
+    {
+      "id": "nb-002",
+      "name": "V. Sattui Winery",
+      "region": "North Bay",
+      "subregion": "Napa Valley",
+      "address": "1111 White Lane, St. Helena, CA 94574",
+      "description": "Award-winning Tuscan-style winery named among Top Five Winery Wedding Venues in The World. Features a stunning barrel room lit with candles and gorgeous florals throughout.",
+      "capacity": {
+        "min": 12,
+        "max": 250
+      },
+      "price_range": {
+        "min": 6750,
+        "max": 9950,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Winery"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.vsattui.com/weddings/",
+      "phone": "(707) 963-7774",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/vsattuiwedding/",
+        "google": "https://www.google.com/search?q=v+sattui+winery+wedding&tbm=isch"
+      },
+      "videos": [
+        {
+          "title": "V Sattui Winery Wedding Film",
+          "url": "https://www.youtube.com/watch?v=QOiH450E_W8"
+        }
+      ],
+      "reviews": {
+        "summary": "Fairy-tale barrel room setting. Events allowed until 11pm. Mixed reviews on catering quality during peak season.",
+        "pros": [
+          "Beautiful barrel room",
+          "Late hours (11pm)",
+          "Stunning florals"
+        ],
+        "cons": [
+          "Inconsistent catering",
+          "Non-refundable deposits"
+        ]
+      },
+      "location": {
+        "lat": 38.5048,
+        "lng": -122.4651
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=38.5048,-122.4651"
+    },
+    {
+      "id": "nb-003",
+      "name": "Viansa Sonoma Winery",
+      "region": "North Bay",
+      "subregion": "Sonoma",
+      "address": "25200 Arnold Dr, Sonoma, CA 95476",
+      "description": "Tuscan architecture with breathtaking Sonoma Valley views. Features romantic courtyard, Pavilion, and Barrel Room. Staff receives extremely high praise for attentiveness.",
+      "capacity": {
+        "min": 50,
+        "max": 400
+      },
+      "price_range": {
+        "min": 17500,
+        "max": 19500,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Winery"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.viansa.com/weddings/",
+      "phone": "(707) 935-4726",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/viansawedding/",
+        "google": "https://www.google.com/search?q=viansa+sonoma+wedding&tbm=isch"
+      },
+      "videos": [
+        {
+          "title": "Viansa Winery Wedding",
+          "url": "https://www.youtube.com/watch?v=BqISDuqJBc8"
+        }
+      ],
+      "reviews": {
+        "summary": "Magical sunset views during cocktail hour. Requires full-service wedding planner. Can be windy in late summer.",
+        "pros": [
+          "Breathtaking views",
+          "Excellent staff",
+          "Multiple venue spaces"
+        ],
+        "cons": [
+          "Can be windy",
+          "Requires wedding planner",
+          "High demand"
+        ]
+      },
+      "location": {
+        "lat": 38.2542,
+        "lng": -122.4556
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=38.2542,-122.4556"
+    },
+    {
+      "id": "nb-004",
+      "name": "Beringer Vineyards",
+      "region": "North Bay",
+      "subregion": "Napa Valley",
+      "address": "2000 Main St, St. Helena, CA 94574",
+      "description": "Historic Victorian winery founded in 1876. Features the Rhine House mansion with 17th-century German-style architecture and stunning gardens.",
+      "capacity": {
+        "min": 50,
+        "max": 300
+      },
+      "price_range": {
+        "min": 10825,
+        "max": 15000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Winery",
+        "Historic"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.beringer.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/beringerwedding/",
+        "google": "https://www.google.com/search?q=beringer+vineyards+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Historic Rhine House is architectural gem. Beautiful gardens and grounds.",
+        "pros": [
+          "Historic mansion",
+          "Beautiful architecture",
+          "Vineyard setting"
+        ],
+        "cons": [
+          "Limited availability"
+        ]
+      },
+      "location": {
+        "lat": 38.5104,
+        "lng": -122.4797
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=38.5104,-122.4797"
+    },
+    {
+      "id": "nb-005",
+      "name": "Carneros Resort and Spa",
+      "region": "North Bay",
+      "subregion": "Napa Valley",
+      "address": "4048 Sonoma Hwy, Napa, CA 94559",
+      "description": "Luxury resort with 28 acres of rolling vineyards and gardens. Features multiple indoor and outdoor venues with stunning wine country views.",
+      "capacity": {
+        "min": 20,
+        "max": 500
+      },
+      "price_range": {
+        "min": 6250,
+        "max": 25000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Resort",
+        "Spa"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.carnerosresort.com/weddings/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/carnerosresortwedding/",
+        "google": "https://www.google.com/search?q=carneros+resort+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Luxury accommodations with wine country charm. Excellent spa services for wedding parties.",
+        "pros": [
+          "Luxury resort",
+          "Multiple venues",
+          "On-site accommodations"
+        ],
+        "cons": [
+          "Premium pricing"
+        ]
+      },
+      "location": {
+        "lat": 38.2461,
+        "lng": -122.3394
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=38.2461,-122.3394"
+    },
+    {
+      "id": "nb-006",
+      "name": "Mountain House Estate",
+      "region": "North Bay",
+      "subregion": "Sonoma",
+      "address": "38999 Highway 128, Cloverdale, CA 95425",
+      "description": "40 acres of rolling hills with Live Oak and Redwood trees. Exclusive use of entire venue, late hours until 2am. Owners praised for flexibility and personal touch.",
+      "capacity": {
+        "min": 50,
+        "max": 250
+      },
+      "price_range": {
+        "min": 5500,
+        "max": 21000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Estate",
+        "Rustic"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.mountainhouseestate.com/",
+      "phone": "(707) 894-5454",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/mountainhouseestate/",
+        "google": "https://www.google.com/search?q=mountain+house+estate+wedding&tbm=isch"
+      },
+      "videos": [
+        {
+          "title": "Mountain House Estate Wedding",
+          "url": "https://www.youtube.com/watch?v=CX8hSQGajvk"
+        }
+      ],
+      "reviews": {
+        "summary": "Venue so stunning minimal decor needed. Late hours (2am) are rare find. Flexible with vendors.",
+        "pros": [
+          "Late hours (2am)",
+          "Exclusive use",
+          "Flexible vendors",
+          "Beautiful setting"
+        ],
+        "cons": [
+          "Remote location"
+        ]
+      },
+      "location": {
+        "lat": 38.7939,
+        "lng": -123.0822
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=38.7939,-123.0822"
+    },
+    {
+      "id": "nb-007",
+      "name": "Chateau St. Jean",
+      "region": "North Bay",
+      "subregion": "Sonoma",
+      "address": "8555 Sonoma Hwy, Kenwood, CA 95452",
+      "description": "French Chateau-style winery with stunning gardens and Mediterranean architecture. Features elegant grounds perfect for outdoor ceremonies.",
+      "capacity": {
+        "min": 50,
+        "max": 500
+      },
+      "price_range": {
+        "min": 8000,
+        "max": 15000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Winery",
+        "Estate"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.chateaustjean.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/chateaustjeanwedding/",
+        "google": "https://www.google.com/search?q=chateau+st+jean+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Elegant French-inspired setting with beautiful formal gardens.",
+        "pros": [
+          "Beautiful architecture",
+          "Formal gardens",
+          "Wine country setting"
+        ],
+        "cons": []
+      },
+      "location": {
+        "lat": 38.4444,
+        "lng": -122.5472
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=38.4444,-122.5472"
+    },
+    {
+      "id": "nb-008",
+      "name": "Garden Valley Ranch",
+      "region": "North Bay",
+      "subregion": "Sonoma",
+      "address": "498 Pepper Rd, Petaluma, CA 94952",
+      "description": "Charming rose farm with 8 acres of gardens. Budget-friendly option with intimate setting among thousands of rose bushes.",
+      "capacity": {
+        "min": 20,
+        "max": 150
+      },
+      "price_range": {
+        "min": 1250,
+        "max": 10500,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Garden",
+        "Farm"
+      ],
+      "setting": [
+        "Outdoor"
+      ],
+      "website": "https://gardenvalley.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/gardenvalleyranch/",
+        "google": "https://www.google.com/search?q=garden+valley+ranch+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Romantic rose garden setting. Great value for intimate weddings.",
+        "pros": [
+          "Affordable",
+          "Rose gardens",
+          "Intimate setting"
+        ],
+        "cons": [
+          "Outdoor only",
+          "Limited capacity"
+        ]
+      },
+      "location": {
+        "lat": 38.2422,
+        "lng": -122.6619
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=38.2422,-122.6619"
+    },
+    {
+      "id": "nb-009",
+      "name": "Marin Art & Garden Center",
+      "region": "North Bay",
+      "subregion": "Marin",
+      "address": "30 Sir Francis Drake Blvd, Ross, CA 94957",
+      "description": "Beautiful garden venue in Marin County with multiple outdoor spaces including a stunning amphitheater and historic buildings.",
+      "capacity": {
+        "min": 50,
+        "max": 300
+      },
+      "price_range": {
+        "min": 1000,
+        "max": 10000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Garden"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.magc.org/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/marinartandgardencenter/",
+        "google": "https://www.google.com/search?q=marin+art+garden+center+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Beautiful gardens in convenient Marin location. Variety of ceremony spaces.",
+        "pros": [
+          "Beautiful gardens",
+          "Multiple spaces",
+          "Good value"
+        ],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.9633,
+        "lng": -122.5572
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.9633,-122.5572"
+    },
+    {
+      "id": "nb-010",
+      "name": "Deer Park Villa",
+      "region": "North Bay",
+      "subregion": "Marin",
+      "address": "367 Bolinas Rd, Fairfax, CA 94930",
+      "description": "Stunning redwood grove setting in the heart of Marin. Features outdoor ceremony space surrounded by majestic redwood trees.",
+      "capacity": {
+        "min": 50,
+        "max": 650
+      },
+      "price_range": {
+        "min": 9000,
+        "max": 16000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Redwood",
+        "Estate"
+      ],
+      "setting": [
+        "Outdoor"
+      ],
+      "website": "https://www.deerparkvilla.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/deerparkvilla/",
+        "google": "https://www.google.com/search?q=deer+park+villa+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Magical redwood grove ceremony space. Large capacity for outdoor events.",
+        "pros": [
+          "Redwood setting",
+          "Large capacity",
+          "Marin location"
+        ],
+        "cons": [
+          "Outdoor focused"
+        ]
+      },
+      "location": {
+        "lat": 37.9864,
+        "lng": -122.6003
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.9864,-122.6003"
+    },
+    {
+      "id": "pen-001",
+      "name": "Filoli Historic House & Garden",
+      "region": "Peninsula",
+      "subregion": "Woodside",
+      "address": "86 Canada Road, Woodside, CA 94062",
+      "description": "National Historic Landmark featuring 16 acres of English Renaissance gardens and a 54,000 sq ft Georgian Revival mansion. Nine event spaces available.",
+      "capacity": {
+        "min": 30,
+        "max": 300
+      },
+      "price_range": {
+        "min": 25000,
+        "max": 60000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Historic",
+        "Garden",
+        "Estate"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://filoli.org/rentals/weddings/",
+      "phone": "(650) 364-8300",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/filoliwedding/",
+        "google": "https://www.google.com/search?q=filoli+wedding&tbm=isch"
+      },
+      "videos": [
+        {
+          "title": "A Magical Wedding at Filoli",
+          "url": "https://www.youtube.com/watch?v=PwZpVucJE9U"
+        }
+      ],
+      "reviews": {
+        "summary": "Stunning historic venue with meticulously curated gardens. Requires approved wedding planner. Premium pricing reflects exclusive experience.",
+        "pros": [
+          "16 acres of gardens",
+          "Historic mansion",
+          "Full private use"
+        ],
+        "cons": [
+          "Premium pricing",
+          "Requires approved planner",
+          "Strict vendor requirements"
+        ]
+      },
+      "location": {
+        "lat": 37.4697,
+        "lng": -122.3106
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.4697,-122.3106"
+    },
+    {
+      "id": "pen-002",
+      "name": "Kohl Mansion",
+      "region": "Peninsula",
+      "subregion": "Burlingame",
+      "address": "2750 Adeline Drive, Burlingame, CA 94010",
+      "description": "1914 Tudor Revival mansion on the National Register of Historic Places. Features English rose garden, oak woodlands, and elegant Great Hall with grand staircase.",
+      "capacity": {
+        "min": 50,
+        "max": 300
+      },
+      "price_range": {
+        "min": 12000,
+        "max": 33000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Historic",
+        "Mansion"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://kohlmansion.com/",
+      "phone": "(650) 762-1130",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/kohlmansion/",
+        "google": "https://www.google.com/search?q=kohl+mansion+wedding&tbm=isch"
+      },
+      "videos": [
+        {
+          "title": "Kohl Mansion Wedding Film",
+          "url": "https://www.youtube.com/watch?v=rJB49w3eUJw"
+        }
+      ],
+      "reviews": {
+        "summary": "Gorgeous historic mansion with exclusive use included. No corkage fees. Responsive professional staff.",
+        "pros": [
+          "Historic charm",
+          "No corkage fees",
+          "Exclusive use",
+          "Rose garden"
+        ],
+        "cons": [
+          "No AC",
+          "Music ends at 11pm",
+          "Weekend availability limited"
+        ]
+      },
+      "location": {
+        "lat": 37.5231,
+        "lng": -122.3647
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.5231,-122.3647"
+    },
+    {
+      "id": "pen-003",
+      "name": "Thomas Fogarty Winery",
+      "region": "Peninsula",
+      "subregion": "Woodside",
+      "address": "19501 Skyline Blvd, Woodside, CA 94062",
+      "description": "Perched 2,000 feet above Silicon Valley with panoramic bay views from San Francisco to San Jose. Floor-to-ceiling windows showcase stunning vineyard setting.",
+      "capacity": {
+        "min": 50,
+        "max": 200
+      },
+      "price_range": {
+        "min": 7500,
+        "max": 15500,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Winery"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.fogartywinery.com/",
+      "phone": "(650) 851-6777",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/thomasfogarty/",
+        "google": "https://www.google.com/search?q=thomas+fogarty+winery+wedding&tbm=isch"
+      },
+      "videos": [
+        {
+          "title": "Mountain Top Wedding at Thomas Fogarty",
+          "url": "https://www.youtube.com/watch?v=TxOCq0K5Dok"
+        }
+      ],
+      "reviews": {
+        "summary": "Amazing panoramic views. 9-hour rental included. Can get chilly at night - recommend backup plan.",
+        "pros": [
+          "Stunning views",
+          "9-hour rental",
+          "Award-winning wines"
+        ],
+        "cons": [
+          "Can be cold/windy",
+          "Preferred vendor list required",
+          "Beer/wine only"
+        ]
+      },
+      "location": {
+        "lat": 37.3444,
+        "lng": -122.2039
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.3444,-122.2039"
+    },
+    {
+      "id": "pen-004",
+      "name": "The Mountain Terrace",
+      "region": "Peninsula",
+      "subregion": "Woodside",
+      "address": "17285 Skyline Blvd, Woodside, CA 94062",
+      "description": "Redwood forest venue with large outdoor meadow, indoor bar and dance floor, terrace dining, and stunning bay views.",
+      "capacity": {
+        "min": 50,
+        "max": 400
+      },
+      "price_range": {
+        "min": 2500,
+        "max": 23000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Redwood",
+        "Forest"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.themountainterrace.com/",
+      "phone": "(650) 851-1606",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/themountainterrace/",
+        "google": "https://www.google.com/search?q=mountain+terrace+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Stunning redwood setting. Excellent coordinators. Delicious food and service.",
+        "pros": [
+          "Redwood grove",
+          "Bay views",
+          "Excellent staff",
+          "Venue exclusivity"
+        ],
+        "cons": [
+          "All beverages through venue"
+        ]
+      },
+      "location": {
+        "lat": 37.3256,
+        "lng": -122.3581
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.3256,-122.3581"
+    },
+    {
+      "id": "pen-005",
+      "name": "The Ritz-Carlton Half Moon Bay",
+      "region": "Peninsula",
+      "subregion": "Half Moon Bay",
+      "address": "1 Miramontes Point Road, Half Moon Bay, CA 94019",
+      "description": "Dramatic luxury resort on ocean bluffs with sweeping Pacific views. Features elegant ballrooms and oceanfront lawn for ceremonies.",
+      "capacity": {
+        "min": 50,
+        "max": 400
+      },
+      "price_range": {
+        "min": 22000,
+        "max": 100000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Resort",
+        "Oceanfront",
+        "Luxury"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.ritzcarlton.com/en/hotels/hafrz-the-ritz-carlton-half-moon-bay/weddings/",
+      "phone": "(650) 712-7000",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/ritzcarltonhalfmoonbay/",
+        "google": "https://www.google.com/search?q=ritz+carlton+half+moon+bay+wedding&tbm=isch"
+      },
+      "videos": [
+        {
+          "title": "Ritz Carlton Half Moon Bay Wedding",
+          "url": "https://www.youtube.com/watch?v=ere78a5zigA"
+        }
+      ],
+      "reviews": {
+        "summary": "Stunning oceanfront setting with top-notch Ritz-Carlton service. Very expensive. Some reports of inconsistent food quality.",
+        "pros": [
+          "Ocean views",
+          "Luxury service",
+          "Large ballroom",
+          "On-site accommodations"
+        ],
+        "cons": [
+          "Very expensive",
+          "Multiple weddings per weekend",
+          "Inconsistent reviews"
+        ]
+      },
+      "location": {
+        "lat": 37.4297,
+        "lng": -122.4428
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.4297,-122.4428"
+    },
+    {
+      "id": "pen-006",
+      "name": "Rosewood Sand Hill",
+      "region": "Peninsula",
+      "subregion": "Menlo Park",
+      "address": "2825 Sand Hill Road, Menlo Park, CA 94025",
+      "description": "Forbes Five-Star luxury resort on 16 pristine acres with Santa Cruz Mountain views. Features glamorous ballroom and expansive outdoor lawns.",
+      "capacity": {
+        "min": 50,
+        "max": 500
+      },
+      "price_range": {
+        "min": 25000,
+        "max": 75000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Resort",
+        "Luxury"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.rosewoodhotels.com/en/sand-hill-menlo-park/weddings",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/rosewoodsandhill/",
+        "google": "https://www.google.com/search?q=rosewood+sand+hill+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Five-star luxury experience with stunning grounds. Premium pricing.",
+        "pros": [
+          "Five-star service",
+          "Beautiful grounds",
+          "Mountain views"
+        ],
+        "cons": [
+          "Premium pricing"
+        ]
+      },
+      "location": {
+        "lat": 37.4197,
+        "lng": -122.2036
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.4197,-122.2036"
+    },
+    {
+      "id": "pen-007",
+      "name": "Domenico Winery",
+      "region": "Peninsula",
+      "subregion": "San Carlos",
+      "address": "1697 Industrial Road, San Carlos, CA 94070",
+      "description": "Boutique urban winery with industrial-chic ambiance. Features white-washed brick walls, wine barrels, 20-foot ceilings, and 30-foot bar.",
+      "capacity": {
+        "min": 50,
+        "max": 300
+      },
+      "price_range": {
+        "min": 6500,
+        "max": 25000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Winery",
+        "Urban"
+      ],
+      "setting": [
+        "Indoor"
+      ],
+      "website": "https://events.domenicowinery.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/domenicowinery/",
+        "google": "https://www.google.com/search?q=domenico+winery+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Winery experience without driving to Napa/Sonoma. Industrial-chic vibe.",
+        "pros": [
+          "Convenient Peninsula location",
+          "Industrial-chic style",
+          "No long drive"
+        ],
+        "cons": [
+          "Indoor only"
+        ]
+      },
+      "location": {
+        "lat": 37.5069,
+        "lng": -122.2589
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.5069,-122.2589"
+    },
+    {
+      "id": "pen-008",
+      "name": "Sam's Chowder House",
+      "region": "Peninsula",
+      "subregion": "Half Moon Bay",
+      "address": "4210 Cabrillo Highway North, Half Moon Bay, CA 94019",
+      "description": "Award-winning oceanfront restaurant on a cliff overlooking Pillar Point Harbor. Beach ceremonies available with beachfront lawn.",
+      "capacity": {
+        "min": 10,
+        "max": 300
+      },
+      "price_range": {
+        "min": 3285,
+        "max": 15000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Restaurant",
+        "Oceanfront"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://samschowderhouse.com/weddings/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/samschowderhouse/",
+        "google": "https://www.google.com/search?q=sams+chowder+house+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Best waterfront dining in Bay Area. Beach ceremony option available.",
+        "pros": [
+          "Ocean views",
+          "Beach ceremonies",
+          "Award-winning food"
+        ],
+        "cons": [
+          "Restaurant setting"
+        ]
+      },
+      "location": {
+        "lat": 37.5006,
+        "lng": -122.4783
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.5006,-122.4783"
+    },
+    {
+      "id": "sb-001",
+      "name": "Nestldown",
+      "region": "South Bay",
+      "subregion": "Los Gatos",
+      "address": "22420 Old Santa Cruz Hwy, Los Gatos, CA 95033",
+      "description": "180-acre private estate in Santa Cruz Mountains with 36 acres of gardens surrounded by redwoods. Features ponds, waterfalls, koi pond, topiary serpents, and fairy cottage.",
+      "capacity": {
+        "min": 125,
+        "max": 200
+      },
+      "price_range": {
+        "min": 14950,
+        "max": 39500,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Estate",
+        "Garden",
+        "Redwood"
+      ],
+      "setting": [
+        "Outdoor"
+      ],
+      "website": "https://www.nestldown.com/",
+      "phone": "(408) 353-5311",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/nestldown/",
+        "google": "https://www.google.com/search?q=nestldown+wedding&tbm=isch"
+      },
+      "videos": [
+        {
+          "title": "Nestldown Wedding Film",
+          "url": "https://www.youtube.com/watch?v=YNm4h31iqo0"
+        }
+      ],
+      "reviews": {
+        "summary": "Magical gardens with whimsical touches like dragon sculpture and mini train. Exclusive use. Must use approved vendors.",
+        "pros": [
+          "Whimsical gardens",
+          "Exclusive use",
+          "Train ride during cocktail hour"
+        ],
+        "cons": [
+          "Expensive",
+          "Approved vendors required",
+          "Limited rain backup"
+        ]
+      },
+      "location": {
+        "lat": 37.1075,
+        "lng": -121.9844
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.1075,-121.9844"
+    },
+    {
+      "id": "sb-002",
+      "name": "Villa Montalvo at Montalvo Arts Center",
+      "region": "South Bay",
+      "subregion": "Saratoga",
+      "address": "15400 Montalvo Rd, Saratoga, CA 95070",
+      "description": "1912 Nationally Registered Historic Landmark featuring 150+ acres with Mediterranean-styled mansion and sweeping Santa Cruz Mountain views.",
+      "capacity": {
+        "min": 50,
+        "max": 350
+      },
+      "price_range": {
+        "min": 30000,
+        "max": 50000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Historic",
+        "Estate",
+        "Garden"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://montalvoarts.org/host/weddings/",
+      "phone": "(408) 961-5858",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/villamontalvo/",
+        "google": "https://www.google.com/search?q=villa+montalvo+wedding&tbm=isch"
+      },
+      "videos": [
+        {
+          "title": "Villa Montalvo Wedding",
+          "url": "https://www.youtube.com/watch?v=yCIvc3TrfBA"
+        }
+      ],
+      "reviews": {
+        "summary": "Stunning historic mansion with Love Temple. Exclusive use. Premium pricing but worth it for the setting.",
+        "pros": [
+          "Historic mansion",
+          "Mountain views",
+          "Exclusive use",
+          "Love Temple"
+        ],
+        "cons": [
+          "Premium pricing",
+          "Music curfews",
+          "Caterer from exclusive list"
+        ]
+      },
+      "location": {
+        "lat": 37.2536,
+        "lng": -122.0069
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.2536,-122.0069"
+    },
+    {
+      "id": "sb-003",
+      "name": "Hakone Estate and Gardens",
+      "region": "South Bay",
+      "subregion": "Saratoga",
+      "address": "21000 Big Basin Way, Saratoga, CA 95070",
+      "description": "The oldest and largest Japanese garden in the Western Hemisphere. Features 18 acres of tranquil gardens with koi pond, Moon Bridge, and bamboo garden.",
+      "capacity": {
+        "min": 10,
+        "max": 180
+      },
+      "price_range": {
+        "min": 300,
+        "max": 9000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Garden",
+        "Japanese"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.hakone.com/weddings-and-receptions",
+      "phone": "(408) 741-4994",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/hakonewedding/",
+        "google": "https://www.google.com/search?q=hakone+gardens+wedding&tbm=isch"
+      },
+      "videos": [
+        {
+          "title": "Hakone Gardens Wedding",
+          "url": "https://www.youtube.com/watch?v=vXwkhIFNwwM"
+        }
+      ],
+      "reviews": {
+        "summary": "Unique Japanese garden setting. BYO alcohol permitted. Felt like destination wedding in Japan.",
+        "pros": [
+          "Unique Japanese setting",
+          "BYO alcohol",
+          "Affordable",
+          "Memoirs of Geisha filming location"
+        ],
+        "cons": [
+          "Early music curfew",
+          "Limited evening hours",
+          "Outdoor focused"
+        ]
+      },
+      "location": {
+        "lat": 37.2567,
+        "lng": -122.0464
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.2567,-122.0464"
+    },
+    {
+      "id": "sb-004",
+      "name": "The Mountain Winery",
+      "region": "South Bay",
+      "subregion": "Saratoga",
+      "address": "14831 Pierce Rd, Saratoga, CA 95070",
+      "description": "Historic 600-acre Paul Masson property with 12 venue spaces offering breathtaking panoramic views of Silicon Valley from the Vista Deck.",
+      "capacity": {
+        "min": 50,
+        "max": 400
+      },
+      "price_range": {
+        "min": 15000,
+        "max": 40000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Winery",
+        "Historic"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.mountainwinery.com/weddings/",
+      "phone": "(408) 741-2822",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/themountainwinery/",
+        "google": "https://www.google.com/search?q=mountain+winery+wedding&tbm=isch"
+      },
+      "videos": [
+        {
+          "title": "The Mountain Winery Wedding",
+          "url": "https://www.youtube.com/watch?v=Fqrwcw7hXW4"
+        }
+      ],
+      "reviews": {
+        "summary": "12 venue spaces with stunning views. Responsive coordinator. No rain plan for Vista Deck.",
+        "pros": [
+          "Panoramic views",
+          "12 venue spaces",
+          "Historic property"
+        ],
+        "cons": [
+          "Exclusive caterer required",
+          "Tent installation expensive",
+          "No outside food"
+        ]
+      },
+      "location": {
+        "lat": 37.2642,
+        "lng": -122.0517
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.2642,-122.0517"
+    },
+    {
+      "id": "sb-005",
+      "name": "Saratoga Springs",
+      "region": "South Bay",
+      "subregion": "Saratoga",
+      "address": "22801 Big Basin Way, Saratoga, CA 95070",
+      "description": "5th-generation family venue in redwood forest featuring Cathedral Grove, Redwood Grove, Longbridge, and Creekside Room.",
+      "capacity": {
+        "min": 50,
+        "max": 500
+      },
+      "price_range": {
+        "min": 4950,
+        "max": 10950,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Redwood",
+        "Forest"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.saratoga-springs.com/weddings",
+      "phone": "(408) 867-3016",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/saratogasprings/",
+        "google": "https://www.google.com/search?q=saratoga+springs+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Fairy-tale Long Bridge ceremony. Allows outside catering. Good value for redwood setting.",
+        "pros": [
+          "Redwood setting",
+          "Outside catering allowed",
+          "Bistro lights included",
+          "Bonfire area"
+        ],
+        "cons": [
+          "Day-of coordinator is venue coordinator",
+          "Limited planning meetings"
+        ]
+      },
+      "location": {
+        "lat": 37.2497,
+        "lng": -122.0603
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.2497,-122.0603"
+    },
+    {
+      "id": "sb-006",
+      "name": "Regale Winery and Vineyards",
+      "region": "South Bay",
+      "subregion": "Los Gatos",
+      "address": "24040 Summit Rd, Los Gatos, CA 95033",
+      "description": "Italian and French-inspired winery in Santa Cruz Mountains with Tuscan charm, vaulted ceilings, and lush gardens.",
+      "capacity": {
+        "min": 50,
+        "max": 100
+      },
+      "price_range": {
+        "min": 9000,
+        "max": 15000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Winery"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.regalewine.com/",
+      "phone": "(408) 353-2500",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/regalewinery/",
+        "google": "https://www.google.com/search?q=regale+winery+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Intimate Tuscan-style winery. Tables, chairs, DJ, and audio included.",
+        "pros": [
+          "Tuscan ambiance",
+          "All-inclusive rentals",
+          "Intimate setting"
+        ],
+        "cons": [
+          "Limited capacity (100)"
+        ]
+      },
+      "location": {
+        "lat": 37.1569,
+        "lng": -121.9833
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.1569,-121.9833"
+    },
+    {
+      "id": "sb-007",
+      "name": "Cinnabar Hills Golf Club",
+      "region": "South Bay",
+      "subregion": "San Jose",
+      "address": "23600 McKean Rd, San Jose, CA 95141",
+      "description": "Award-winning golf club voted Best Wedding Venue in Silicon Valley. Features landscaped outdoor patio and indoor reception with towering skylights.",
+      "capacity": {
+        "min": 50,
+        "max": 200
+      },
+      "price_range": {
+        "min": 3000,
+        "max": 17000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Golf Club"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.cinnabarhills.com/index.php/events/wedding-information",
+      "phone": "(408) 323-7857",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/cinnabarhillswedding/",
+        "google": "https://www.google.com/search?q=cinnabar+hills+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Voted Best Wedding Venue in Silicon Valley. Rolling hills backdrop. In-house catering.",
+        "pros": [
+          "Award-winning venue",
+          "Rolling hills",
+          "Event coordinator included"
+        ],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.2094,
+        "lng": -121.7372
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.2094,-121.7372"
+    },
+    {
+      "id": "sb-008",
+      "name": "Corinthian Grand Ballroom",
+      "region": "South Bay",
+      "subregion": "San Jose",
+      "address": "196 N 3rd St, San Jose, CA 95112",
+      "description": "1924 Scottish Rite Temple in Downtown San Jose with 50-foot ceilings, massive wooden beams, and blue glass panes with gold leaf grillwork.",
+      "capacity": {
+        "min": 100,
+        "max": 700
+      },
+      "price_range": {
+        "min": 2500,
+        "max": 15000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Historic",
+        "Ballroom"
+      ],
+      "setting": [
+        "Indoor"
+      ],
+      "website": "https://epicvenues.net/the-corinthian-grand-ballroom/",
+      "phone": "(408) 938-2323",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/corinthiangrandballroom/",
+        "google": "https://www.google.com/search?q=corinthian+grand+ballroom+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Stunning historic architecture with dramatic 50-foot ceilings. Downtown San Jose location.",
+        "pros": [
+          "Historic architecture",
+          "50-foot ceilings",
+          "Downtown location"
+        ],
+        "cons": [
+          "Indoor only"
+        ]
+      },
+      "location": {
+        "lat": 37.34,
+        "lng": -121.8867
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.34,-121.8867"
+    },
+    {
+      "id": "sb-009",
+      "name": "Willow Heights Mansion",
+      "region": "South Bay",
+      "subregion": "Morgan Hill",
+      "address": "1978 Willow Springs Rd, Morgan Hill, CA 95037",
+      "description": "16,000 sq ft private estate on 26 acres of rolling hills and vineyards. Features marble fireplaces, crystal chandeliers, and 360-degree terrace views.",
+      "capacity": {
+        "min": 30,
+        "max": 300
+      },
+      "price_range": {
+        "min": 3400,
+        "max": 10000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Estate",
+        "Mansion"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.liveloveleal.com/experience/willow-heights-mansion-weddings-celebrations",
+      "phone": "(408) 778-1978",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/willowheightsmansion/",
+        "google": "https://www.google.com/search?q=willow+heights+mansion+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Stunning private estate with overnight accommodations. 360-degree views.",
+        "pros": [
+          "Private estate",
+          "Overnight suites",
+          "360-degree views"
+        ],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.1097,
+        "lng": -121.6622
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.1097,-121.6622"
+    },
+    {
+      "id": "sb-010",
+      "name": "Guglielmo Winery - Villa Emile",
+      "region": "South Bay",
+      "subregion": "Morgan Hill",
+      "address": "1480 E Main Ave, Morgan Hill, CA 95037",
+      "description": "Family-owned Italian winery since 1925 with 85 acres of vineyards. Features Villa Emile Event Center with green lawn, covered stage, and Heritage Room.",
+      "capacity": {
+        "min": 50,
+        "max": 300
+      },
+      "price_range": {
+        "min": 6000,
+        "max": 15000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Winery"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://guglielmowinery.com/weddings/",
+      "phone": "(408) 779-2145",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/guglielmowinery/",
+        "google": "https://www.google.com/search?q=guglielmo+winery+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Old-world Italian charm. All-inclusive packages available.",
+        "pros": [
+          "Italian winery",
+          "All-inclusive options",
+          "Heritage Room"
+        ],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.1831,
+        "lng": -121.7294
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.1831,-121.7294"
+    },
+    {
+      "id": "mon-001",
+      "name": "The Barns at Cooper Molera",
+      "region": "Monterey",
+      "subregion": "Monterey",
+      "address": "535 Polk Street, Monterey, CA 93940",
+      "description": "Historic venue from the 1860s in downtown Monterey with lush gardens of wildflowers, fruit trees, and roses. Combines rustic barn charm with garden settings.",
+      "capacity": {
+        "min": 50,
+        "max": 300
+      },
+      "price_range": {
+        "min": 5200,
+        "max": 58000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Historic",
+        "Barn",
+        "Garden"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://coopermolerabarns.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/coopermolerabarns/",
+        "google": "https://www.google.com/search?q=barns+at+cooper+molera+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Walking distance to downtown Monterey. Beautiful gardens with abundant photo ops.",
+        "pros": [
+          "Downtown location",
+          "Historic charm",
+          "Beautiful gardens"
+        ],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.5978,
+        "lng": -121.8942
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.5978,-121.8942"
+    },
+    {
+      "id": "mon-002",
+      "name": "Monterey Plaza Hotel & Spa",
+      "region": "Monterey",
+      "subregion": "Monterey",
+      "address": "400 Cannery Row, Monterey, CA 93940",
+      "description": "Luxury waterfront hotel on Cannery Row near Monterey Bay Aquarium. Features dramatic oceanfront ceremony spaces and elegant ballrooms.",
+      "capacity": {
+        "min": 50,
+        "max": 250
+      },
+      "price_range": {
+        "min": 15000,
+        "max": 50000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Hotel",
+        "Oceanfront"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://montereyplazahotel.com/weddings",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/montereyplazahotel/",
+        "google": "https://www.google.com/search?q=monterey+plaza+hotel+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Stunning oceanfront location on Cannery Row. Award-winning California coastal cuisine.",
+        "pros": [
+          "Oceanfront",
+          "Cannery Row location",
+          "Award-winning cuisine"
+        ],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.6125,
+        "lng": -121.8944
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.6125,-121.8944"
+    },
+    {
+      "id": "mon-003",
+      "name": "Monterey Bay Aquarium",
+      "region": "Monterey",
+      "subregion": "Monterey",
+      "address": "886 Cannery Row, Monterey, CA 93940",
+      "description": "Unique venue allowing weddings among world-class marine exhibits including Open Sea Gallery, Kelp Forest, and Great Tide Pool.",
+      "capacity": {
+        "min": 100,
+        "max": 300
+      },
+      "price_range": {
+        "min": 5000,
+        "max": 15000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Unique",
+        "Aquarium"
+      ],
+      "setting": [
+        "Indoor",
+        "Outdoor"
+      ],
+      "website": "https://www.montereybayaquarium.org/for-businesses/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/montereybayaquariumwedding/",
+        "google": "https://www.google.com/search?q=monterey+bay+aquarium+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Exchange vows in front of jellyfish, sharks, and sea turtles. Most spectacular venue imaginable.",
+        "pros": [
+          "Unique marine exhibits",
+          "Iconic landmark",
+          "Unforgettable experience"
+        ],
+        "cons": [
+          "Setup after public hours",
+          "Premium pricing"
+        ]
+      },
+      "location": {
+        "lat": 36.6183,
+        "lng": -121.9017
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.6183,-121.9017"
+    },
+    {
+      "id": "mon-004",
+      "name": "The Lodge at Pebble Beach",
+      "region": "Monterey",
+      "subregion": "Pebble Beach",
+      "address": "1700 17 Mile Drive, Pebble Beach, CA 93953",
+      "description": "Legendary resort on the famous 18th fairway overlooking Stillwater Cove. World-class accommodations with unmatched coastal golf course views.",
+      "capacity": {
+        "min": 25,
+        "max": 350
+      },
+      "price_range": {
+        "min": 2200,
+        "max": 50000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Resort",
+        "Golf"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.pebblebeach.com/weddings/venues/the-lodge-at-pebble-beach/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/pebblebeachwedding/",
+        "google": "https://www.google.com/search?q=lodge+at+pebble+beach+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Iconic 18th hole backdrop. World-famous setting with luxury accommodations.",
+        "pros": [
+          "World-famous golf course",
+          "18th fairway views",
+          "Luxury resort"
+        ],
+        "cons": [
+          "Premium pricing"
+        ]
+      },
+      "location": {
+        "lat": 36.5681,
+        "lng": -121.9489
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.5681,-121.9489"
+    },
+    {
+      "id": "mon-005",
+      "name": "The Inn at Spanish Bay",
+      "region": "Monterey",
+      "subregion": "Pebble Beach",
+      "address": "2700 17 Mile Drive, Pebble Beach, CA 93953",
+      "description": "Contemporary luxury resort among majestic pines with over 14,000 sq ft of event space. Features bagpiper at sunset tradition.",
+      "capacity": {
+        "min": 30,
+        "max": 800
+      },
+      "price_range": {
+        "min": 5000,
+        "max": 50000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Resort"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.pebblebeach.com/weddings/venues/the-inn-at-spanish-bay/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/spanishbaywedding/",
+        "google": "https://www.google.com/search?q=inn+at+spanish+bay+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Grand Ballroom with vaulted ceilings. Bagpiper at sunset tradition.",
+        "pros": [
+          "14,000 sq ft event space",
+          "Bagpiper tradition",
+          "Ocean views"
+        ],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.5975,
+        "lng": -121.9475
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.5975,-121.9475"
+    },
+    {
+      "id": "mon-006",
+      "name": "Post Ranch Inn",
+      "region": "Monterey",
+      "subregion": "Big Sur",
+      "address": "47900 Highway 1, Big Sur, CA 93920",
+      "description": "Ultra-luxury resort built into Big Sur cliffs overlooking Pacific. Ideal for microweddings and elopements.",
+      "capacity": {
+        "min": 2,
+        "max": 75
+      },
+      "price_range": {
+        "min": 5000,
+        "max": 20000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Resort",
+        "Luxury",
+        "Cliffside"
+      ],
+      "setting": [
+        "Outdoor"
+      ],
+      "website": "https://postranchinn.com/experience/weddings-and-romance/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/postranchinnwedding/",
+        "google": "https://www.google.com/search?q=post+ranch+inn+wedding&tbm=isch"
+      },
+      "videos": [
+        {
+          "title": "Post Ranch Inn Elopement Film",
+          "url": "https://www.youtube.com/watch?v=E9PEnK0DuKk"
+        }
+      ],
+      "reviews": {
+        "summary": "Five-star service with breathtaking cliff views. Best for intimate weddings under 40 guests.",
+        "pros": [
+          "Cliff-top views",
+          "Five-star luxury",
+          "Intimate setting"
+        ],
+        "cons": [
+          "Small capacity",
+          "Premium pricing",
+          "Best for intimate events only"
+        ]
+      },
+      "location": {
+        "lat": 36.2333,
+        "lng": -121.8667
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.2333,-121.8667"
+    },
+    {
+      "id": "mon-007",
+      "name": "Ventana Big Sur",
+      "region": "Monterey",
+      "subregion": "Big Sur",
+      "address": "48123 Highway 1, Big Sur, CA 93920",
+      "description": "160-acre rustic resort with Sur Vista terrace offering sweeping Pacific views. Features redwood forests, meadows, and multiple pools.",
+      "capacity": {
+        "min": 2,
+        "max": 70
+      },
+      "price_range": {
+        "min": 10000,
+        "max": 50000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Resort",
+        "Redwood"
+      ],
+      "setting": [
+        "Outdoor"
+      ],
+      "website": "https://www.ventanabigsur.com/gatherings/weddings-overview",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/ventanabigsurwedding/",
+        "google": "https://www.google.com/search?q=ventana+big+sur+wedding&tbm=isch"
+      },
+      "videos": [
+        {
+          "title": "Ventana Big Sur Wedding",
+          "url": "https://www.youtube.com/watch?v=XFx329HXeQI"
+        }
+      ],
+      "reviews": {
+        "summary": "5 ceremony sites including Redwood Cathedral and Ocean Meadow. Warmer than coastal areas.",
+        "pros": [
+          "Multiple ceremony sites",
+          "Redwood forest",
+          "Ocean views"
+        ],
+        "cons": [
+          "Full buyout required for 40+ guests",
+          "Best for small weddings"
+        ]
+      },
+      "location": {
+        "lat": 36.2461,
+        "lng": -121.8053
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.2461,-121.8053"
+    },
+    {
+      "id": "sc-001",
+      "name": "Dream Inn Santa Cruz",
+      "region": "Santa Cruz",
+      "subregion": "Santa Cruz",
+      "address": "175 W Cliff Dr, Santa Cruz, CA 95060",
+      "description": "Iconic beachfront hotel with panoramic views of the Boardwalk, Wharf, and Monterey Bay. Features 3,500 sq ft Dream Ballroom with floor-to-ceiling windows.",
+      "capacity": {
+        "min": 50,
+        "max": 200
+      },
+      "price_range": {
+        "min": 9896,
+        "max": 25000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Hotel",
+        "Beachfront"
+      ],
+      "setting": [
+        "Indoor"
+      ],
+      "website": "https://www.dreaminnsantacruz.com/weddings/overview",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/dreaminnwedding/",
+        "google": "https://www.google.com/search?q=dream+inn+santa+cruz+wedding&tbm=isch"
+      },
+      "videos": [
+        {
+          "title": "Dream Inn Santa Cruz Wedding",
+          "url": "https://www.youtube.com/watch?v=iavJkS2nny8"
+        }
+      ],
+      "reviews": {
+        "summary": "Beachfront location with stunning bay views. Coordinator Katie praised as rockstar.",
+        "pros": [
+          "Beachfront",
+          "Floor-to-ceiling windows",
+          "Excellent coordinator"
+        ],
+        "cons": [
+          "Premium pricing"
+        ]
+      },
+      "location": {
+        "lat": 36.9633,
+        "lng": -122.0244
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.9633,-122.0244"
+    },
+    {
+      "id": "sc-002",
+      "name": "Seascape Beach Resort",
+      "region": "Santa Cruz",
+      "subregion": "Aptos",
+      "address": "1 Seascape Resort Dr, Aptos, CA 95003",
+      "description": "Oceanfront resort with three distinct venues: The Bluff overlooking Monterey Bay, The Island with fountains and palm trees, and 17-mile private beach.",
+      "capacity": {
+        "min": 50,
+        "max": 300
+      },
+      "price_range": {
+        "min": 2250,
+        "max": 75000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Resort",
+        "Oceanfront"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://seascaperesort.com/weddings",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/seascapewedding/",
+        "google": "https://www.google.com/search?q=seascape+beach+resort+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Three venue options with private beach access. On-site accommodations.",
+        "pros": [
+          "Three venues",
+          "Private beach",
+          "On-site accommodations"
+        ],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.9756,
+        "lng": -121.9164
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.9756,-121.9164"
+    },
+    {
+      "id": "sc-003",
+      "name": "Roaring Camp Railroads",
+      "region": "Santa Cruz",
+      "subregion": "Felton",
+      "address": "5401 Graham Hill Rd, Felton, CA 95018",
+      "description": "Historic railroad and logging camp in old-growth redwood forest. Unique steam train transports guests to Cathedral Grove ceremony site.",
+      "capacity": {
+        "min": 80,
+        "max": 300
+      },
+      "price_range": {
+        "min": 2000,
+        "max": 14000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Unique",
+        "Redwood",
+        "Historic"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://roaringcamp.com/weddings",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/roaringcampwedding/",
+        "google": "https://www.google.com/search?q=roaring+camp+wedding&tbm=isch"
+      },
+      "videos": [
+        {
+          "title": "Roaring Camp Wedding",
+          "url": "https://www.youtube.com/watch?v=xkw7G_m9AFc"
+        }
+      ],
+      "reviews": {
+        "summary": "Unique steam train experience through redwoods. Old-growth forest setting. Free rehearsal day.",
+        "pros": [
+          "Steam train to ceremony",
+          "Redwood cathedral",
+          "Free rehearsal",
+          "ADA friendly"
+        ],
+        "cons": [
+          "Dim ceiling lighting",
+          "Limited outdoor lighting"
+        ]
+      },
+      "location": {
+        "lat": 37.0483,
+        "lng": -122.0617
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.0483,-122.0617"
+    },
+    {
+      "id": "sc-004",
+      "name": "Kennolyn Hilltop Hacienda",
+      "region": "Santa Cruz",
+      "subregion": "Soquel",
+      "address": "8400 Glen Haven Rd, Soquel, CA 95073",
+      "description": "Picturesque hilltop hideaway on 240 acres overlooking Monterey Bay. Spanish-style architecture with fountains, courtyards, and terraces.",
+      "capacity": {
+        "min": 75,
+        "max": 300
+      },
+      "price_range": {
+        "min": 28000,
+        "max": 50000,
+        "unit": "total_all_inclusive"
+      },
+      "venue_type": [
+        "Estate",
+        "Spanish"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.kennolyn.com/hilltop-hacienda",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/kennolynwedding/",
+        "google": "https://www.google.com/search?q=kennolyn+hilltop+hacienda+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "All-inclusive packages reduce planning stress. Monterey Bay views from hilltop. No corkage fees.",
+        "pros": [
+          "All-inclusive",
+          "Bay views",
+          "No corkage",
+          "Coordinator included"
+        ],
+        "cons": [
+          "10pm curfew",
+          "Weekends only"
+        ]
+      },
+      "location": {
+        "lat": 37.0147,
+        "lng": -121.9553
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.0147,-121.9553"
+    },
+    {
+      "id": "sc-005",
+      "name": "Chaminade Resort & Spa",
+      "region": "Santa Cruz",
+      "subregion": "Santa Cruz",
+      "address": "1 Chaminade Ln, Santa Cruz, CA 95065",
+      "description": "300-acre woodland resort with Spanish heritage and Monterey Bay views. Features 156 guest rooms and Spanish-inspired courtyard with fountain.",
+      "capacity": {
+        "min": 50,
+        "max": 200
+      },
+      "price_range": {
+        "min": 3000,
+        "max": 15000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Resort",
+        "Spa"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.chaminade.com/santacruz-wedding/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/chaminadewedding/",
+        "google": "https://www.google.com/search?q=chaminade+resort+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "All-inclusive packages with complimentary wedding night stay. Spanish-inspired courtyard.",
+        "pros": [
+          "All-inclusive options",
+          "Free wedding night",
+          "On-site accommodations"
+        ],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.9897,
+        "lng": -121.9956
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.9897,-121.9956"
+    },
+    {
+      "id": "sc-006",
+      "name": "Fern River Resort",
+      "region": "Santa Cruz",
+      "subregion": "Felton",
+      "address": "5250 Highway 9, Felton, CA 95018",
+      "description": "Family resort in redwoods along flowing river. Features custom redwood gazebo, manicured meadow, and 15 cabins for guest accommodations.",
+      "capacity": {
+        "min": 50,
+        "max": 200
+      },
+      "price_range": {
+        "min": 500,
+        "max": 8000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Redwood",
+        "Resort"
+      ],
+      "setting": [
+        "Outdoor"
+      ],
+      "website": "https://www.fernriverresort.com/weddings",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/fernriverresort/",
+        "google": "https://www.google.com/search?q=fern+river+resort+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Budget-friendly redwood setting. 15 cabins for guest lodging. Four ceremony locations.",
+        "pros": [
+          "Affordable",
+          "On-site cabins",
+          "River setting",
+          "LED lighting included"
+        ],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.0519,
+        "lng": -122.06
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.0519,-122.06"
+    },
+    {
+      "id": "sc-007",
+      "name": "Felton Guild",
+      "region": "Santa Cruz",
+      "subregion": "Felton",
+      "address": "5449 Highway 9, Felton, CA 95018",
+      "description": "Magical redwood grove with towering ancient trees creating natural cathedral. Outdoor venue with on-site Cowboy Bar & Grill catering.",
+      "capacity": {
+        "min": 50,
+        "max": 250
+      },
+      "price_range": {
+        "min": 4360,
+        "max": 12000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Redwood"
+      ],
+      "setting": [
+        "Outdoor"
+      ],
+      "website": "https://www.feltonguildweddings.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/feltonguild/",
+        "google": "https://www.google.com/search?q=felton+guild+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Affordable redwood cathedral setting. In business since 1994. On-site catering available.",
+        "pros": [
+          "Affordable",
+          "Natural redwood cathedral",
+          "On-site catering"
+        ],
+        "cons": [
+          "Outdoor only"
+        ]
+      },
+      "location": {
+        "lat": 37.0508,
+        "lng": -122.0742
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.0508,-122.0742"
+    },
+    {
+      "id": "car-001",
+      "name": "Holman Ranch",
+      "region": "Carmel",
+      "subregion": "Carmel Valley",
+      "address": "60 Holman Road, Carmel Valley, CA 93924",
+      "description": "750-acre nationally recognized estate that hosted Charlie Chaplin gatherings since 1928. Features historic hacienda, award-winning wines, and exclusive property access.",
+      "capacity": {
+        "min": 2,
+        "max": 400
+      },
+      "price_range": {
+        "min": 45000,
+        "max": 71000,
+        "unit": "total_all_inclusive"
+      },
+      "venue_type": [
+        "Ranch",
+        "Historic",
+        "Winery"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.holmanranch.com/weddings",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/holmanranchwedding/",
+        "google": "https://www.google.com/search?q=holman+ranch+wedding&tbm=isch"
+      },
+      "videos": [
+        {
+          "title": "Holman Ranch Wedding Highlights",
+          "url": "https://www.youtube.com/watch?v=plXfI-FgEMQ"
+        }
+      ],
+      "reviews": {
+        "summary": "Only one event at a time for exclusivity. Almost everything included. Staff makes couples feel like family.",
+        "pros": [
+          "Exclusive access",
+          "All-inclusive",
+          "Historic charm",
+          "On-site lodging"
+        ],
+        "cons": [
+          "Premium pricing",
+          "Events end at 10pm"
+        ]
+      },
+      "location": {
+        "lat": 36.4806,
+        "lng": -121.7453
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.4806,-121.7453"
+    },
+    {
+      "id": "car-002",
+      "name": "Folktale Winery & Vineyards",
+      "region": "Carmel",
+      "subregion": "Carmel Valley",
+      "address": "8940 Carmel Valley Road, Carmel, CA 93923",
+      "description": "French-style chateau with 15 acres of sustainably farmed vineyards. Features stunning Barrel Room with 500+ wine barrels and chandeliers.",
+      "capacity": {
+        "min": 50,
+        "max": 450
+      },
+      "price_range": {
+        "min": 7500,
+        "max": 25000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Winery"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.folktalewinery.com/wedding-events/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/folktalewinery/",
+        "google": "https://www.google.com/search?q=folktale+winery+wedding&tbm=isch"
+      },
+      "videos": [
+        {
+          "title": "Folktale Winery Wedding",
+          "url": "https://www.youtube.com/watch?v=RZsOCNdMrf8"
+        }
+      ],
+      "reviews": {
+        "summary": "Venue naturally decorates itself. Multiple indoor/outdoor spaces. 2026 discounts available.",
+        "pros": [
+          "Beautiful winery",
+          "Multiple venues",
+          "Barrel Room",
+          "On-site bridal accommodations"
+        ],
+        "cons": [
+          "F&B minimums apply"
+        ]
+      },
+      "location": {
+        "lat": 36.4844,
+        "lng": -121.7461
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.4844,-121.7461"
+    },
+    {
+      "id": "car-003",
+      "name": "Mission Ranch",
+      "region": "Carmel",
+      "subregion": "Carmel",
+      "address": "26270 Dolores Street, Carmel, CA 93923",
+      "description": "Historic 22-acre ranch restored by Clint Eastwood. Spectacular views of Point Lobos, Carmel River Beach, and Pacific Ocean. Features resident sheep.",
+      "capacity": {
+        "min": 30,
+        "max": 200
+      },
+      "price_range": {
+        "min": 2500,
+        "max": 10000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Ranch",
+        "Historic"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.missionranchcarmel.com/weddings-and-events.htm",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/missionranchwedding/",
+        "google": "https://www.google.com/search?q=mission+ranch+carmel+wedding&tbm=isch"
+      },
+      "videos": [
+        {
+          "title": "Mission Ranch Wedding Film",
+          "url": "https://www.youtube.com/watch?v=uEZgWhz0DpA"
+        }
+      ],
+      "reviews": {
+        "summary": "Best wedding food guests ever had. Dramatic bridge entrance for bride. Like traveling to Ireland.",
+        "pros": [
+          "Ocean views",
+          "Historic barns",
+          "Clint Eastwood connection",
+          "29 guest rooms"
+        ],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.5414,
+        "lng": -121.9194
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.5414,-121.9194"
+    },
+    {
+      "id": "car-004",
+      "name": "Carmel Valley Ranch",
+      "region": "Carmel",
+      "subregion": "Carmel Valley",
+      "address": "1 Old Ranch Road, Carmel, CA 93923",
+      "description": "500+ acre luxury resort with vineyard, organic garden, 18-hole golf course, and Santa Lucia Mountain views. Vineyard Lawn nestled among Pinot Noir grapevines.",
+      "capacity": {
+        "min": 25,
+        "max": 400
+      },
+      "price_range": {
+        "min": 750,
+        "max": 7450,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Resort",
+        "Winery"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://carmelvalleyranch.com/private-events/weddings/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/carmelvalleyranchwedding/",
+        "google": "https://www.google.com/search?q=carmel+valley+ranch+wedding&tbm=isch"
+      },
+      "videos": [
+        {
+          "title": "Carmel Valley Ranch Wedding",
+          "url": "https://www.youtube.com/watch?v=rxolEXr3hoc"
+        }
+      ],
+      "reviews": {
+        "summary": "5-star treatment throughout. Farm-to-table ingredients grown on property.",
+        "pros": [
+          "Luxury resort",
+          "Farm-to-table",
+          "Golf course",
+          "Multiple venues"
+        ],
+        "cons": [
+          "Premium pricing"
+        ]
+      },
+      "location": {
+        "lat": 36.4814,
+        "lng": -121.7464
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.4814,-121.7464"
+    },
+    {
+      "id": "car-005",
+      "name": "Bernardus Lodge & Spa",
+      "region": "Carmel",
+      "subregion": "Carmel Valley",
+      "address": "415 West Carmel Valley Road, Carmel Valley, CA 93924",
+      "description": "73-room boutique resort on 28 acres with 100+ rose varieties, 5 acres of lavender, and 8 acres of vineyards. Wedding garden with oak backdrop.",
+      "capacity": {
+        "min": 20,
+        "max": 200
+      },
+      "price_range": {
+        "min": 1250,
+        "max": 8600,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Resort",
+        "Spa",
+        "Winery"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.bernarduslodge.com/weddings/overview",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/bernarduslodge/",
+        "google": "https://www.google.com/search?q=bernardus+lodge+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Award-winning spa and restaurant. Beautiful rose gardens and lavender fields.",
+        "pros": [
+          "100+ rose varieties",
+          "Award-winning spa",
+          "Boutique luxury"
+        ],
+        "cons": [
+          "In-house catering only"
+        ]
+      },
+      "location": {
+        "lat": 36.4819,
+        "lng": -121.7414
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.4819,-121.7414"
+    },
+    {
+      "id": "car-006",
+      "name": "Hyatt Carmel Highlands",
+      "region": "Carmel",
+      "subregion": "Carmel Highlands",
+      "address": "120 Highlands Drive, Carmel, CA 93923",
+      "description": "Historic 100-year-old resort perched on cliff overlooking Pacific and Big Sur coastline. Features open-air redwood deck ceremony space.",
+      "capacity": {
+        "min": 20,
+        "max": 150
+      },
+      "price_range": {
+        "min": 3500,
+        "max": 20000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Resort",
+        "Oceanfront"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.hyatt.com/hyatt-hotels/en-US/higph-hyatt-carmel-highlands/weddings",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/hyattcarmelhighlands/",
+        "google": "https://www.google.com/search?q=hyatt+carmel+highlands+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Dramatic Pacific Ocean ceremony backdrop. 100+ years of wedding history.",
+        "pros": [
+          "Cliff-top ocean views",
+          "Historic property",
+          "Big Sur views"
+        ],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.5058,
+        "lng": -121.9292
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.5058,-121.9292"
+    },
+    {
+      "id": "car-007",
+      "name": "Stonepine Estate",
+      "region": "Carmel",
+      "subregion": "Carmel Valley",
+      "address": "150 East Carmel Valley Road, Carmel Valley, CA 93924",
+      "description": "400+ acre Tuscan-style estate featuring 1929 Chateau Noel villa with ivy-covered walls. Includes private chapel, equestrian center, and formal gardens.",
+      "capacity": {
+        "min": 20,
+        "max": 300
+      },
+      "price_range": {
+        "min": 8000,
+        "max": 60000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Estate",
+        "Historic"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.stonepineestate.com/weddings",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/stonepineestate/",
+        "google": "https://www.google.com/search?q=stonepine+estate+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Private chapel on property. Equestrian center with 5 miles of trails. Formal Tuscan gardens.",
+        "pros": [
+          "Private chapel",
+          "Tuscan villa",
+          "Equestrian center",
+          "400+ acres"
+        ],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.4369,
+        "lng": -121.6756
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.4369,-121.6756"
+    },
+    {
+      "id": "car-008",
+      "name": "La Playa Hotel",
+      "region": "Carmel",
+      "subregion": "Carmel-by-the-Sea",
+      "address": "Camino Real at 8th Avenue, Carmel-by-the-Sea, CA 93921",
+      "description": "Historic 1905 Spanish-style mansion two blocks from beach. Following $20 million renovation in 2023, features lush English gardens with 600+ flower varieties.",
+      "capacity": {
+        "min": 20,
+        "max": 150
+      },
+      "price_range": {
+        "min": 5000,
+        "max": 25000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Hotel",
+        "Historic",
+        "Garden"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.laplayahotel.com/weddings/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/laplayahotel/",
+        "google": "https://www.google.com/search?q=la+playa+hotel+carmel+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Award-winning gardens after $20M renovation. Two blocks from Carmel beach.",
+        "pros": [
+          "600+ flower varieties",
+          "2023 renovation",
+          "Beach proximity"
+        ],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.5494,
+        "lng": -121.9247
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.5494,-121.9247"
+    },
+    {
+      "id": "car-009",
+      "name": "Quail Lodge & Golf Club",
+      "region": "Carmel",
+      "subregion": "Carmel Valley",
+      "address": "8205 Valley Greens Drive, Carmel-By-The-Sea, CA 93923",
+      "description": "Resort and golf club 10 minutes from downtown Carmel. Features Quail Meadows outdoor venue with rustic barn, lake, and 8,500+ sq ft of event space.",
+      "capacity": {
+        "min": 24,
+        "max": 300
+      },
+      "price_range": {
+        "min": 7000,
+        "max": 20000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Resort",
+        "Golf"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.quaillodge.com/wedding-venue-carmel",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/quaillodgewedding/",
+        "google": "https://www.google.com/search?q=quail+lodge+carmel+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Multiple venue options including Glass House for intimate events. 18-hole championship golf.",
+        "pros": [
+          "Multiple venues",
+          "Golf course",
+          "Lake views"
+        ],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.4853,
+        "lng": -121.7939
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.4853,-121.7939"
+    },
+    {
+      "id": "car-010",
+      "name": "Carmel Fields by Wedgewood",
+      "region": "Carmel",
+      "subregion": "Carmel Valley",
+      "address": "4860 Carmel Valley Road, Carmel, CA 93923",
+      "description": "Spanish Colonial-style venue with coastal access. Offers garden ceremony or beach ceremonies at Monastery Beach. Most affordable option in Carmel area.",
+      "capacity": {
+        "min": 50,
+        "max": 270
+      },
+      "price_range": {
+        "min": 1995,
+        "max": 7700,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Spanish Colonial"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.wedgewoodweddings.com/carmelfields",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/carmelfields/",
+        "google": "https://www.google.com/search?q=carmel+fields+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "Most affordable Carmel option. All-inclusive packages with beach ceremony option.",
+        "pros": [
+          "Affordable",
+          "All-inclusive",
+          "Beach ceremony option"
+        ],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.4864,
+        "lng": -121.7697
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.4864,-121.7697"
+    },
+    {
+      "id": "nb-011",
+      "name": "Four Seasons Resort Napa Valley",
+      "region": "North Bay",
+      "subregion": "Napa Valley",
+      "address": "400 Silverado Trail, Calistoga, CA 94515",
+      "description": "Ultra-luxury resort with vineyard views, multiple event spaces, and world-class accommodations.",
+      "capacity": {
+        "min": 20,
+        "max": 174
+      },
+      "price_range": {
+        "min": 58185,
+        "max": 154591,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Resort",
+        "Luxury"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.fourseasons.com/napavalley/weddings/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/fourseasonsresortnapavalleywedding/",
+        "google": "https://www.google.com/search?q=Four+Seasons+Resort+Napa+Valley+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 38.5822,
+        "lng": -122.5756
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=38.5822,-122.5756"
+    },
+    {
+      "id": "nb-012",
+      "name": "Solage, Auberge Resorts Collection",
+      "region": "North Bay",
+      "subregion": "Napa Valley",
+      "address": "755 Silverado Trail, Calistoga, CA 94515",
+      "description": "Luxury spa resort with contemporary design, multiple indoor/outdoor venues, and award-winning dining.",
+      "capacity": {
+        "min": 20,
+        "max": 220
+      },
+      "price_range": {
+        "min": 25000,
+        "max": 75000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Resort",
+        "Spa"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://aubergeresorts.com/solage/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/solageaubergeresortscollectionwedding/",
+        "google": "https://www.google.com/search?q=Solage,+Auberge+Resorts+Collection+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 38.5889,
+        "lng": -122.5681
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=38.5889,-122.5681"
+    },
+    {
+      "id": "nb-013",
+      "name": "Auberge du Soleil",
+      "region": "North Bay",
+      "subregion": "Napa Valley",
+      "address": "180 Rutherford Hill Rd, Rutherford, CA 94573",
+      "description": "Ultra-luxury hillside resort with Michelin-starred restaurant, olive groves, and panoramic valley views.",
+      "capacity": {
+        "min": 10,
+        "max": 120
+      },
+      "price_range": {
+        "min": 50000,
+        "max": 150000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Resort",
+        "Luxury"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://aubergeresorts.com/aubergedusoleil/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/aubergedusoleilwedding/",
+        "google": "https://www.google.com/search?q=Auberge+du+Soleil+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 38.4856,
+        "lng": -122.3922
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=38.4856,-122.3922"
+    },
+    {
+      "id": "nb-014",
+      "name": "Churchill Manor",
+      "region": "North Bay",
+      "subregion": "Napa Valley",
+      "address": "485 Brown St, Napa, CA 94559",
+      "description": "Historic Victorian B&B with beautiful gardens, wrap-around veranda, and romantic charm.",
+      "capacity": {
+        "min": 20,
+        "max": 150
+      },
+      "price_range": {
+        "min": 8000,
+        "max": 20000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Historic",
+        "B&B"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://churchillmanor.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/churchillmanorwedding/",
+        "google": "https://www.google.com/search?q=Churchill+Manor+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 38.3006,
+        "lng": -122.2858
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=38.3006,-122.2858"
+    },
+    {
+      "id": "nb-015",
+      "name": "CIA at Greystone",
+      "region": "North Bay",
+      "subregion": "Napa Valley",
+      "address": "2555 Main St, St. Helena, CA 94574",
+      "description": "Culinary Institute of America's historic stone building with stunning architecture and exceptional catering.",
+      "capacity": {
+        "min": 50,
+        "max": 350
+      },
+      "price_range": {
+        "min": 15000,
+        "max": 50000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Historic",
+        "Culinary"
+      ],
+      "setting": [
+        "Indoor"
+      ],
+      "website": "https://www.ciaatgreystone.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/ciaatgreystonewedding/",
+        "google": "https://www.google.com/search?q=CIA+at+Greystone+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 38.5058,
+        "lng": -122.4742
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=38.5058,-122.4742"
+    },
+    {
+      "id": "nb-016",
+      "name": "Gundlach Bundschu Winery",
+      "region": "North Bay",
+      "subregion": "Sonoma",
+      "address": "2000 Denmark St, Sonoma, CA 95476",
+      "description": "California's oldest family-owned winery (since 1858) with stunning vineyard views and historic charm.",
+      "capacity": {
+        "min": 50,
+        "max": 300
+      },
+      "price_range": {
+        "min": 10000,
+        "max": 25000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Winery",
+        "Historic"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.gunbun.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/gundlachbundschuwinerywedding/",
+        "google": "https://www.google.com/search?q=Gundlach+Bundschu+Winery+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 38.2919,
+        "lng": -122.3967
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=38.2919,-122.3967"
+    },
+    {
+      "id": "nb-017",
+      "name": "Kunde Family Winery",
+      "region": "North Bay",
+      "subregion": "Sonoma",
+      "address": "9825 Sonoma Hwy, Kenwood, CA 95452",
+      "description": "Estate winery with spectacular views, wine caves, and multiple event spaces.",
+      "capacity": {
+        "min": 50,
+        "max": 250
+      },
+      "price_range": {
+        "min": 8000,
+        "max": 20000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Winery"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.kunde.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/kundefamilywinerywedding/",
+        "google": "https://www.google.com/search?q=Kunde+Family+Winery+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 38.4269,
+        "lng": -122.5383
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=38.4269,-122.5383"
+    },
+    {
+      "id": "nb-018",
+      "name": "Jacuzzi Family Vineyards",
+      "region": "North Bay",
+      "subregion": "Sonoma",
+      "address": "24724 Arnold Dr, Sonoma, CA 95476",
+      "description": "Italian-style estate with olive groves, bocce courts, and Tuscan architecture.",
+      "capacity": {
+        "min": 30,
+        "max": 150
+      },
+      "price_range": {
+        "min": 6000,
+        "max": 10000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Winery"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.jacuzziwines.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/jacuzzifamilyvineyardswedding/",
+        "google": "https://www.google.com/search?q=Jacuzzi+Family+Vineyards+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 38.2542,
+        "lng": -122.4489
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=38.2542,-122.4489"
+    },
+    {
+      "id": "nb-019",
+      "name": "Vintners Resort",
+      "region": "North Bay",
+      "subregion": "Sonoma",
+      "address": "4350 Barnes Rd, Santa Rosa, CA 95403",
+      "description": "Award-winning resort surrounded by 92 acres of vineyards with multiple event venues.",
+      "capacity": {
+        "min": 50,
+        "max": 900
+      },
+      "price_range": {
+        "min": 10000,
+        "max": 50000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Resort",
+        "Winery"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.vintnersresort.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/vintnersresortwedding/",
+        "google": "https://www.google.com/search?q=Vintners+Resort+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 38.4656,
+        "lng": -122.7614
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=38.4656,-122.7614"
+    },
+    {
+      "id": "nb-020",
+      "name": "Cavallo Point Lodge",
+      "region": "North Bay",
+      "subregion": "Marin",
+      "address": "601 Murray Circle, Sausalito, CA 94965",
+      "description": "Historic lodge at the base of Golden Gate Bridge with stunning bay views and luxury accommodations.",
+      "capacity": {
+        "min": 50,
+        "max": 300
+      },
+      "price_range": {
+        "min": 20000,
+        "max": 75000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Resort",
+        "Historic"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.cavallopoint.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/cavallopointlodgewedding/",
+        "google": "https://www.google.com/search?q=Cavallo+Point+Lodge+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.8331,
+        "lng": -122.4764
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.8331,-122.4764"
+    },
+    {
+      "id": "nb-021",
+      "name": "Nick's Cove",
+      "region": "North Bay",
+      "subregion": "Marin",
+      "address": "23240 CA-1, Marshall, CA 94940",
+      "description": "Waterfront restaurant and cottages on Tomales Bay with oyster bar and rustic charm.",
+      "capacity": {
+        "min": 20,
+        "max": 120
+      },
+      "price_range": {
+        "min": 5000,
+        "max": 20000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Restaurant",
+        "Waterfront"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.nickscove.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/nick'scovewedding/",
+        "google": "https://www.google.com/search?q=Nick's+Cove+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 38.1928,
+        "lng": -122.9089
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=38.1928,-122.9089"
+    },
+    {
+      "id": "nb-022",
+      "name": "Old St. Hillary's",
+      "region": "North Bay",
+      "subregion": "Marin",
+      "address": "201 Esperanza St, Tiburon, CA 94920",
+      "description": "Historic 1888 Gothic Revival chapel with panoramic Bay and Angel Island views.",
+      "capacity": {
+        "min": 20,
+        "max": 125
+      },
+      "price_range": {
+        "min": 2000,
+        "max": 5000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Historic",
+        "Chapel"
+      ],
+      "setting": [
+        "Indoor"
+      ],
+      "website": "https://www.landmarks-society.org/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/oldst.hillary'swedding/",
+        "google": "https://www.google.com/search?q=Old+St.+Hillary's+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.8728,
+        "lng": -122.4622
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.8728,-122.4622"
+    },
+    {
+      "id": "pen-009",
+      "name": "Peninsula Golf & Country Club",
+      "region": "Peninsula",
+      "subregion": "San Mateo",
+      "address": "701 Madera Drive, San Mateo, CA 94403",
+      "description": "Private country club with sweeping golf course views and elegant clubhouse.",
+      "capacity": {
+        "min": 50,
+        "max": 300
+      },
+      "price_range": {
+        "min": 15000,
+        "max": 40000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Country Club",
+        "Golf"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.thepgcc.org/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/peninsulagolfcountryclubwedding/",
+        "google": "https://www.google.com/search?q=Peninsula+Golf+&+Country+Club+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.5394,
+        "lng": -122.3056
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.5394,-122.3056"
+    },
+    {
+      "id": "pen-010",
+      "name": "Half Moon Bay Golf Links",
+      "region": "Peninsula",
+      "subregion": "Half Moon Bay",
+      "address": "2 Miramontes Point Rd, Half Moon Bay, CA 94019",
+      "description": "Oceanfront golf venue with breathtaking coastal views and Grand Event Marquee.",
+      "capacity": {
+        "min": 50,
+        "max": 400
+      },
+      "price_range": {
+        "min": 3000,
+        "max": 20000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Golf",
+        "Coastal"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.halfmoonbaygolf.com/weddings",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/halfmoonbaygolflinkswedding/",
+        "google": "https://www.google.com/search?q=Half+Moon+Bay+Golf+Links+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.4328,
+        "lng": -122.4414
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.4328,-122.4414"
+    },
+    {
+      "id": "pen-011",
+      "name": "Hotel Nia",
+      "region": "Peninsula",
+      "subregion": "Menlo Park",
+      "address": "200 Independence Dr, Menlo Park, CA 94025",
+      "description": "Luxury Silicon Valley hotel with 15,000+ sq ft of event space and modern elegance.",
+      "capacity": {
+        "min": 50,
+        "max": 500
+      },
+      "price_range": {
+        "min": 1500,
+        "max": 15000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Hotel",
+        "Luxury"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.hotelnia.com/weddings-occasions",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/hotelniawedding/",
+        "google": "https://www.google.com/search?q=Hotel+Nia+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.4839,
+        "lng": -122.1486
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.4839,-122.1486"
+    },
+    {
+      "id": "pen-012",
+      "name": "El Prado Hotel",
+      "region": "Peninsula",
+      "subregion": "Palo Alto",
+      "address": "520 Cowper St, Palo Alto, CA 94301",
+      "description": "Forbes-rated boutique hotel with Spanish Revival charm and enchanting courtyard.",
+      "capacity": {
+        "min": 50,
+        "max": 300
+      },
+      "price_range": {
+        "min": 10000,
+        "max": 35000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Hotel",
+        "Boutique"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.elpradopaloalto.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/elpradohotelwedding/",
+        "google": "https://www.google.com/search?q=El+Prado+Hotel+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.4456,
+        "lng": -122.1619
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.4456,-122.1619"
+    },
+    {
+      "id": "pen-013",
+      "name": "Crowne Plaza Foster City",
+      "region": "Peninsula",
+      "subregion": "Foster City",
+      "address": "1221 Chess Dr, Foster City, CA 94404",
+      "description": "Stylish Peninsula hotel with 23,000 sq ft of event space including grand Magellan Ballroom.",
+      "capacity": {
+        "min": 25,
+        "max": 1000
+      },
+      "price_range": {
+        "min": 7400,
+        "max": 12750,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Hotel"
+      ],
+      "setting": [
+        "Indoor"
+      ],
+      "website": "https://www.eventscp.com/weddings",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/crowneplazafostercitywedding/",
+        "google": "https://www.google.com/search?q=Crowne+Plaza+Foster+City+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.5522,
+        "lng": -122.2692
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.5522,-122.2692"
+    },
+    {
+      "id": "pen-014",
+      "name": "Oceano Hotel & Spa",
+      "region": "Peninsula",
+      "subregion": "Half Moon Bay",
+      "address": "280 Capistrano Rd, Half Moon Bay, CA 94019",
+      "description": "Waterfront hotel with 12,000+ sq ft of event space overlooking Pillar Point Harbor.",
+      "capacity": {
+        "min": 50,
+        "max": 300
+      },
+      "price_range": {
+        "min": 3000,
+        "max": 15000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Hotel",
+        "Coastal"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://oceanohalfmoonbay.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/oceanohotelspawedding/",
+        "google": "https://www.google.com/search?q=Oceano+Hotel+&+Spa+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.47,
+        "lng": -122.4431
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.47,-122.4431"
+    },
+    {
+      "id": "pen-015",
+      "name": "Mavericks House",
+      "region": "Peninsula",
+      "subregion": "Half Moon Bay",
+      "address": "107 Broadway, Half Moon Bay, CA 94019",
+      "description": "Stunning waterfront venue with 180-degree ocean views and in-house catering.",
+      "capacity": {
+        "min": 50,
+        "max": 140
+      },
+      "price_range": {
+        "min": 20000,
+        "max": 40000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Coastal"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://maverickshouse.com/weddings",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/maverickshousewedding/",
+        "google": "https://www.google.com/search?q=Mavericks+House+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.4664,
+        "lng": -122.4439
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.4664,-122.4439"
+    },
+    {
+      "id": "pen-016",
+      "name": "Mill Rose Inn",
+      "region": "Peninsula",
+      "subregion": "Half Moon Bay",
+      "address": "615 Mill St, Half Moon Bay, CA 94019",
+      "description": "Charming B&B with gorgeous rose gardens and romantic outdoor setting.",
+      "capacity": {
+        "min": 20,
+        "max": 150
+      },
+      "price_range": {
+        "min": 3500,
+        "max": 6500,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Inn",
+        "Garden"
+      ],
+      "setting": [
+        "Outdoor"
+      ],
+      "website": "https://www.millroseinn.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/millroseinnwedding/",
+        "google": "https://www.google.com/search?q=Mill+Rose+Inn+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.4647,
+        "lng": -122.435
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.4647,-122.435"
+    },
+    {
+      "id": "pen-017",
+      "name": "Allied Arts Guild",
+      "region": "Peninsula",
+      "subregion": "Menlo Park",
+      "address": "75 Arbor Rd, Menlo Park, CA 94025",
+      "description": "Spanish Colonial architecture with lush gardens, beautiful tile work, and historic charm.",
+      "capacity": {
+        "min": 50,
+        "max": 200
+      },
+      "price_range": {
+        "min": 3000,
+        "max": 17000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Historic",
+        "Garden"
+      ],
+      "setting": [
+        "Outdoor"
+      ],
+      "website": "https://alliedartsguild.org/weddings/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/alliedartsguildwedding/",
+        "google": "https://www.google.com/search?q=Allied+Arts+Guild+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.4383,
+        "lng": -122.1639
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.4383,-122.1639"
+    },
+    {
+      "id": "pen-018",
+      "name": "San Mateo County History Museum",
+      "region": "Peninsula",
+      "subregion": "Redwood City",
+      "address": "2200 Broadway, Redwood City, CA 94063",
+      "description": "1910 Old County Courthouse with stunning stained-glass dome and marble columns.",
+      "capacity": {
+        "min": 50,
+        "max": 200
+      },
+      "price_range": {
+        "min": 446,
+        "max": 4600,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Historic",
+        "Museum"
+      ],
+      "setting": [
+        "Indoor"
+      ],
+      "website": "https://historysmc.org/rent-the-museum/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/sanmateocountyhistorymuseumwedding/",
+        "google": "https://www.google.com/search?q=San+Mateo+County+History+Museum+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.4872,
+        "lng": -122.2297
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.4872,-122.2297"
+    },
+    {
+      "id": "pen-019",
+      "name": "Hiller Aviation Museum",
+      "region": "Peninsula",
+      "subregion": "San Carlos",
+      "address": "601 Skyway Rd, San Carlos, CA 94070",
+      "description": "Largest indoor aviation museum in California with unique aircraft displays.",
+      "capacity": {
+        "min": 100,
+        "max": 800
+      },
+      "price_range": {
+        "min": 3000,
+        "max": 10000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Museum",
+        "Unique"
+      ],
+      "setting": [
+        "Indoor"
+      ],
+      "website": "https://www.hiller.org/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/hilleraviationmuseumwedding/",
+        "google": "https://www.google.com/search?q=Hiller+Aviation+Museum+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.5119,
+        "lng": -122.2497
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.5119,-122.2497"
+    },
+    {
+      "id": "pen-020",
+      "name": "CuriOdyssey",
+      "region": "Peninsula",
+      "subregion": "San Mateo",
+      "address": "1651 Coyote Point Dr, San Mateo, CA 94401",
+      "description": "Science museum and wildlife center with Redwood Hall and optional animal encounters.",
+      "capacity": {
+        "min": 50,
+        "max": 350
+      },
+      "price_range": {
+        "min": 1950,
+        "max": 8000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Museum",
+        "Unique"
+      ],
+      "setting": [
+        "Indoor"
+      ],
+      "website": "https://curiodyssey.org/book-an-event/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/curiodysseywedding/",
+        "google": "https://www.google.com/search?q=CuriOdyssey+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.5544,
+        "lng": -122.3328
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.5544,-122.3328"
+    },
+    {
+      "id": "pen-021",
+      "name": "Pearson Ranch",
+      "region": "Peninsula",
+      "subregion": "Woodside",
+      "address": "11862 La Honda Rd, Woodside, CA 94062",
+      "description": "150-acre historic ranch with renovated 100-year-old barn and rustic charm.",
+      "capacity": {
+        "min": 50,
+        "max": 150
+      },
+      "price_range": {
+        "min": 7000,
+        "max": 15000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Ranch",
+        "Barn"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://pearsonranchlandandcattleco.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/pearsonranchwedding/",
+        "google": "https://www.google.com/search?q=Pearson+Ranch+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.3136,
+        "lng": -122.2947
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.3136,-122.2947"
+    },
+    {
+      "id": "sb-011",
+      "name": "Fairmont San Jose",
+      "region": "South Bay",
+      "subregion": "San Jose",
+      "address": "170 S Market St, San Jose, CA 95113",
+      "description": "Luxury hotel with 65,000 sq ft of event space including Imperial and Regency Ballrooms.",
+      "capacity": {
+        "min": 50,
+        "max": 1100
+      },
+      "price_range": {
+        "min": 2000,
+        "max": 20000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Hotel",
+        "Luxury"
+      ],
+      "setting": [
+        "Indoor"
+      ],
+      "website": "https://www.fairmont.com/san-jose/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/fairmontsanjosewedding/",
+        "google": "https://www.google.com/search?q=Fairmont+San+Jose+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.3333,
+        "lng": -121.8911
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.3333,-121.8911"
+    },
+    {
+      "id": "sb-012",
+      "name": "Hayes Mansion",
+      "region": "South Bay",
+      "subregion": "San Jose",
+      "address": "200 Edenvale Ave, San Jose, CA 95136",
+      "description": "Historic mansion estate with 33,000 sq ft of function space and lush gardens.",
+      "capacity": {
+        "min": 50,
+        "max": 1200
+      },
+      "price_range": {
+        "min": 25000,
+        "max": 75000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Historic",
+        "Mansion"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.hayesmansion.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/hayesmansionwedding/",
+        "google": "https://www.google.com/search?q=Hayes+Mansion+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.2614,
+        "lng": -121.8253
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.2614,-121.8253"
+    },
+    {
+      "id": "sb-013",
+      "name": "San Jose Marriott",
+      "region": "South Bay",
+      "subregion": "San Jose",
+      "address": "211 S First St, San Jose, CA 95113",
+      "description": "Downtown hotel with 23,000 sq ft of event space and rooftop observation deck.",
+      "capacity": {
+        "min": 50,
+        "max": 700
+      },
+      "price_range": {
+        "min": 4500,
+        "max": 10000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Hotel"
+      ],
+      "setting": [
+        "Indoor"
+      ],
+      "website": "https://www.marriott.com/sjcsj/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/sanjosemarriottwedding/",
+        "google": "https://www.google.com/search?q=San+Jose+Marriott+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.3308,
+        "lng": -121.8886
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.3308,-121.8886"
+    },
+    {
+      "id": "sb-014",
+      "name": "Testarossa Winery",
+      "region": "South Bay",
+      "subregion": "Los Gatos",
+      "address": "300 College Ave, Los Gatos, CA 95030",
+      "description": "Historic 1888 winery with redwood garden patio and enchanting wine caves.",
+      "capacity": {
+        "min": 50,
+        "max": 130
+      },
+      "price_range": {
+        "min": 4500,
+        "max": 8000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Winery",
+        "Historic"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.testarossa.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/testarossawinerywedding/",
+        "google": "https://www.google.com/search?q=Testarossa+Winery+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.1611,
+        "lng": -121.9592
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.1611,-121.9592"
+    },
+    {
+      "id": "sb-015",
+      "name": "Clos LaChance Winery",
+      "region": "South Bay",
+      "subregion": "San Martin",
+      "address": "1 Hummingbird Ln, San Martin, CA 95046",
+      "description": "Certified sustainable winery with 100 acres of vineyards and multiple event spaces.",
+      "capacity": {
+        "min": 50,
+        "max": 200
+      },
+      "price_range": {
+        "min": 1000,
+        "max": 10000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Winery"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.clos.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/closlachancewinerywedding/",
+        "google": "https://www.google.com/search?q=Clos+LaChance+Winery+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.0797,
+        "lng": -121.6269
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.0797,-121.6269"
+    },
+    {
+      "id": "sb-016",
+      "name": "Kirigin Cellars",
+      "region": "South Bay",
+      "subregion": "Gilroy",
+      "address": "11550 Watsonville Rd, Gilroy, CA 95020",
+      "description": "Historic 1916 winery with 33 acres of vineyards, 1,000 rose bushes, and Tuscan-style clubhouse.",
+      "capacity": {
+        "min": 10,
+        "max": 250
+      },
+      "price_range": {
+        "min": 5000,
+        "max": 15000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Winery",
+        "Historic"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://kirigincellars.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/kirigincellarswedding/",
+        "google": "https://www.google.com/search?q=Kirigin+Cellars+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.0542,
+        "lng": -121.7236
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.0542,-121.7236"
+    },
+    {
+      "id": "sb-017",
+      "name": "Boulder Ridge by Wedgewood",
+      "region": "South Bay",
+      "subregion": "San Jose",
+      "address": "1000 Old Quarry Rd, San Jose, CA 95123",
+      "description": "Hilltop venue with panoramic Almaden Valley views and all-inclusive packages.",
+      "capacity": {
+        "min": 50,
+        "max": 200
+      },
+      "price_range": {
+        "min": 1595,
+        "max": 7995,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Golf Club"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.wedgewoodweddings.com/boulderridge",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/boulderridgebywedgewoodwedding/",
+        "google": "https://www.google.com/search?q=Boulder+Ridge+by+Wedgewood+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.2478,
+        "lng": -121.8211
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.2478,-121.8211"
+    },
+    {
+      "id": "sb-018",
+      "name": "Silver Creek Valley Country Club",
+      "region": "South Bay",
+      "subregion": "San Jose",
+      "address": "5460 Country Club Pkwy, San Jose, CA 95138",
+      "description": "Italian villa-inspired clubhouse with lakeside ceremony site and cascading waterfall.",
+      "capacity": {
+        "min": 50,
+        "max": 500
+      },
+      "price_range": {
+        "min": 25000,
+        "max": 50000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Country Club"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.scvcc.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/silvercreekvalleycountryclubwedding/",
+        "google": "https://www.google.com/search?q=Silver+Creek+Valley+Country+Club+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.2628,
+        "lng": -121.7719
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.2628,-121.7719"
+    },
+    {
+      "id": "sb-019",
+      "name": "Villa Ragusa",
+      "region": "South Bay",
+      "subregion": "Campbell",
+      "address": "35 S 2nd St, Campbell, CA 95008",
+      "description": "European-style banquet hall with 12,000 sq ft, marble staircase, and 14-foot ceilings.",
+      "capacity": {
+        "min": 100,
+        "max": 650
+      },
+      "price_range": {
+        "min": 2000,
+        "max": 10000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Ballroom"
+      ],
+      "setting": [
+        "Indoor"
+      ],
+      "website": "https://villaragusa.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/villaragusawedding/",
+        "google": "https://www.google.com/search?q=Villa+Ragusa+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.3272,
+        "lng": -121.9447
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.3272,-121.9447"
+    },
+    {
+      "id": "sb-020",
+      "name": "Club Auto Sport",
+      "region": "South Bay",
+      "subregion": "San Jose",
+      "address": "521 Charcot Ave, San Jose, CA 95131",
+      "description": "Unique venue featuring exotic car collection, tropical oasis, and 42-ft granite bar.",
+      "capacity": {
+        "min": 15,
+        "max": 250
+      },
+      "price_range": {
+        "min": 2500,
+        "max": 7300,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Unique"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://clubautosport.net/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/clubautosportwedding/",
+        "google": "https://www.google.com/search?q=Club+Auto+Sport+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.3922,
+        "lng": -121.9275
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.3922,-121.9275"
+    },
+    {
+      "id": "sb-021",
+      "name": "Computer History Museum",
+      "region": "South Bay",
+      "subregion": "Mountain View",
+      "address": "1401 N Shoreline Blvd, Mountain View, CA 94043",
+      "description": "Award-winning museum with 12,000 sq ft Grand Hall in the heart of Silicon Valley.",
+      "capacity": {
+        "min": 100,
+        "max": 400
+      },
+      "price_range": {
+        "min": 5000,
+        "max": 15000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Museum",
+        "Tech"
+      ],
+      "setting": [
+        "Indoor"
+      ],
+      "website": "https://computerhistory.org/venue/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/computerhistorymuseumwedding/",
+        "google": "https://www.google.com/search?q=Computer+History+Museum+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.4144,
+        "lng": -122.0775
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.4144,-122.0775"
+    },
+    {
+      "id": "sb-022",
+      "name": "The Ameswell Hotel",
+      "region": "South Bay",
+      "subregion": "Mountain View",
+      "address": "800 Moffett Blvd, Mountain View, CA 94043",
+      "description": "Bay Area's first carbon neutral hotel with 15,000+ sq ft of event space.",
+      "capacity": {
+        "min": 50,
+        "max": 250
+      },
+      "price_range": {
+        "min": 1000,
+        "max": 38000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Hotel",
+        "Eco-Luxury"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.theameswellhotel.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/theameswellhotelwedding/",
+        "google": "https://www.google.com/search?q=The+Ameswell+Hotel+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.4128,
+        "lng": -122.0531
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.4128,-122.0531"
+    },
+    {
+      "id": "sb-023",
+      "name": "La Foret Restaurant",
+      "region": "South Bay",
+      "subregion": "San Jose",
+      "address": "21747 Bertram Rd, San Jose, CA 95120",
+      "description": "Award-winning French restaurant in historic New Almaden foothills mansion.",
+      "capacity": {
+        "min": 20,
+        "max": 150
+      },
+      "price_range": {
+        "min": 1600,
+        "max": 3300,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Restaurant",
+        "Historic"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://laforetrestaurant.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/laforetrestaurantwedding/",
+        "google": "https://www.google.com/search?q=La+Foret+Restaurant+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.2008,
+        "lng": -121.8203
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.2008,-121.8203"
+    },
+    {
+      "id": "mon-008",
+      "name": "The Sanctuary Beach Resort",
+      "region": "Monterey",
+      "subregion": "Marina",
+      "address": "3295 Dunes Dr, Marina, CA 93933",
+      "description": "Only resort in the area offering beach ceremonies on 19 acres of beachfront property.",
+      "capacity": {
+        "min": 10,
+        "max": 200
+      },
+      "price_range": {
+        "min": 2500,
+        "max": 10000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Resort",
+        "Beach"
+      ],
+      "setting": [
+        "Outdoor"
+      ],
+      "website": "https://www.thesanctuarybeachresort.com/weddings",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/thesanctuarybeachresortwedding/",
+        "google": "https://www.google.com/search?q=The+Sanctuary+Beach+Resort+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.7044,
+        "lng": -121.8089
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.7044,-121.8089"
+    },
+    {
+      "id": "mon-009",
+      "name": "Portola Hotel & Spa",
+      "region": "Monterey",
+      "subregion": "Monterey",
+      "address": "2 Portola Plaza, Monterey, CA 93940",
+      "description": "Downtown Monterey hotel with 60,000 sq ft of indoor and outdoor event space.",
+      "capacity": {
+        "min": 24,
+        "max": 1500
+      },
+      "price_range": {
+        "min": 2300,
+        "max": 9250,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Hotel"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.portolahotel.com/weddings",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/portolahotelspawedding/",
+        "google": "https://www.google.com/search?q=Portola+Hotel+&+Spa+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.6028,
+        "lng": -121.8928
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.6028,-121.8928"
+    },
+    {
+      "id": "mon-010",
+      "name": "Asilomar Conference Grounds",
+      "region": "Monterey",
+      "subregion": "Pacific Grove",
+      "address": "800 Asilomar Ave, Pacific Grove, CA 93950",
+      "description": "107-acre beachfront venue with Julia Morgan-designed buildings and 313 guest rooms.",
+      "capacity": {
+        "min": 50,
+        "max": 650
+      },
+      "price_range": {
+        "min": 1650,
+        "max": 4150,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Resort",
+        "Historic"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.visitasilomar.com/weddings/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/asilomarconferencegroundswedding/",
+        "google": "https://www.google.com/search?q=Asilomar+Conference+Grounds+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.6208,
+        "lng": -121.9397
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.6208,-121.9397"
+    },
+    {
+      "id": "mon-011",
+      "name": "TPC Monterey at Pasadera",
+      "region": "Monterey",
+      "subregion": "Monterey",
+      "address": "100 Pasadera Dr, Monterey, CA 93940",
+      "description": "Hacienda-style venue with Spanish Rose Courtyard and Ancient Oak Event Lawn.",
+      "capacity": {
+        "min": 50,
+        "max": 300
+      },
+      "price_range": {
+        "min": 25000,
+        "max": 85000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Golf Club"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.theclubatpasadera.com/weddings",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/tpcmontereyatpasaderawedding/",
+        "google": "https://www.google.com/search?q=TPC+Monterey+at+Pasadera+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.5544,
+        "lng": -121.8489
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.5544,-121.8489"
+    },
+    {
+      "id": "mon-012",
+      "name": "Carmel Mission Basilica",
+      "region": "Monterey",
+      "subregion": "Carmel",
+      "address": "3080 Rio Rd, Carmel, CA 93923",
+      "description": "Historic Spanish Colonial mission and iconic California landmark for Catholic ceremonies.",
+      "capacity": {
+        "min": 50,
+        "max": 349
+      },
+      "price_range": {
+        "min": 1000,
+        "max": 3000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Historic",
+        "Church"
+      ],
+      "setting": [
+        "Indoor"
+      ],
+      "website": "https://carmelmission.org/wedding/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/carmelmissionbasilicawedding/",
+        "google": "https://www.google.com/search?q=Carmel+Mission+Basilica+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.5431,
+        "lng": -121.9219
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.5431,-121.9219"
+    },
+    {
+      "id": "mon-013",
+      "name": "Memory Garden at Monterey State Historic Park",
+      "region": "Monterey",
+      "subregion": "Monterey",
+      "address": "20 Custom House Plaza, Monterey, CA 93940",
+      "description": "Historic garden enclosed by adobe wall with 15-foot fountain centerpiece.",
+      "capacity": {
+        "min": 50,
+        "max": 300
+      },
+      "price_range": {
+        "min": 2500,
+        "max": 3000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Historic",
+        "Garden"
+      ],
+      "setting": [
+        "Outdoor"
+      ],
+      "website": "https://www.parks.ca.gov/?page_id=24737",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/memorygardenatmontereystatehistoricparkwedding/",
+        "google": "https://www.google.com/search?q=Memory+Garden+at+Monterey+State+Historic+Park+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.6008,
+        "lng": -121.8939
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.6008,-121.8939"
+    },
+    {
+      "id": "mon-014",
+      "name": "Pacific Grove Museum of Natural History",
+      "region": "Monterey",
+      "subregion": "Pacific Grove",
+      "address": "165 Forest Ave, Pacific Grove, CA 93950",
+      "description": "Non-traditional venue with galleries and native plant garden near Lover's Point.",
+      "capacity": {
+        "min": 10,
+        "max": 150
+      },
+      "price_range": {
+        "min": 2000,
+        "max": 6000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Museum"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.pgmuseum.org/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/pacificgrovemuseumofnaturalhistorywedding/",
+        "google": "https://www.google.com/search?q=Pacific+Grove+Museum+of+Natural+History+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.6169,
+        "lng": -121.9219
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.6169,-121.9219"
+    },
+    {
+      "id": "mon-015",
+      "name": "Carmel Fields by Wedgewood",
+      "region": "Monterey",
+      "subregion": "Carmel",
+      "address": "4860 Carmel Valley Rd, Carmel, CA 93923",
+      "description": "All-inclusive venue with garden and beach ceremony options at Monastery Beach.",
+      "capacity": {
+        "min": 50,
+        "max": 270
+      },
+      "price_range": {
+        "min": 1995,
+        "max": 7700,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Event Venue"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.wedgewoodweddings.com/carmelfields",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/carmelfieldsbywedgewoodwedding/",
+        "google": "https://www.google.com/search?q=Carmel+Fields+by+Wedgewood+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.4864,
+        "lng": -121.7697
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.4864,-121.7697"
+    },
+    {
+      "id": "mon-016",
+      "name": "The Holly Farm",
+      "region": "Monterey",
+      "subregion": "Carmel",
+      "address": "Carmel, CA (private estate)",
+      "description": "7-acre jungle hideaway designed for 2-5 night destination weddings.",
+      "capacity": {
+        "min": 28,
+        "max": 300
+      },
+      "price_range": {
+        "min": 28000,
+        "max": 57000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Estate"
+      ],
+      "setting": [
+        "Outdoor"
+      ],
+      "website": "https://hollyfarm.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/thehollyfarmwedding/",
+        "google": "https://www.google.com/search?q=The+Holly+Farm+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.5556,
+        "lng": -121.92
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.5556,-121.92"
+    },
+    {
+      "id": "mon-017",
+      "name": "Joullian Vineyards",
+      "region": "Monterey",
+      "subregion": "Carmel Valley",
+      "address": "20300 Cachagua Rd, Carmel Valley, CA 93924",
+      "description": "Mountain vineyard with Venue in the Vines and intimate Barrel Room.",
+      "capacity": {
+        "min": 35,
+        "max": 250
+      },
+      "price_range": {
+        "min": 5000,
+        "max": 15000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Winery"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://joullian.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/joullianvineyardswedding/",
+        "google": "https://www.google.com/search?q=Joullian+Vineyards+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.4089,
+        "lng": -121.5933
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.4089,-121.5933"
+    },
+    {
+      "id": "sc-008",
+      "name": "Waterfall Lodge & Retreat",
+      "region": "Santa Cruz",
+      "subregion": "Ben Lomond",
+      "address": "325 Hidden Falls Trail, Ben Lomond, CA 95005",
+      "description": "80-acre retreat with ancient redwoods, reclaimed 19th-century barn, and 33 cabins.",
+      "capacity": {
+        "min": 50,
+        "max": 150
+      },
+      "price_range": {
+        "min": 10050,
+        "max": 25000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Redwood",
+        "Retreat"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.waterfallsantacruz.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/waterfalllodgeretreatwedding/",
+        "google": "https://www.google.com/search?q=Waterfall+Lodge+&+Retreat+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.0936,
+        "lng": -122.1222
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.0936,-122.1222"
+    },
+    {
+      "id": "sc-009",
+      "name": "The Sequoia Retreat Center",
+      "region": "Santa Cruz",
+      "subregion": "Ben Lomond",
+      "address": "11445 Alba Rd, Ben Lomond, CA 95005",
+      "description": "Award-winning venue in old-growth redwoods with Peace Park and Las Alas Lodge.",
+      "capacity": {
+        "min": 50,
+        "max": 150
+      },
+      "price_range": {
+        "min": 8000,
+        "max": 20000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Redwood",
+        "Retreat"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.sequoiaretreatcenter.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/thesequoiaretreatcenterwedding/",
+        "google": "https://www.google.com/search?q=The+Sequoia+Retreat+Center+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.0794,
+        "lng": -122.1481
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.0794,-122.1481"
+    },
+    {
+      "id": "sc-010",
+      "name": "Amphitheater of the Redwoods at Pema Osel Ling",
+      "region": "Santa Cruz",
+      "subregion": "Watsonville",
+      "address": "Watsonville, CA",
+      "description": "Buddhist retreat center with fairy ring of ancient redwoods for ceremonies.",
+      "capacity": {
+        "min": 65,
+        "max": 300
+      },
+      "price_range": {
+        "min": 10000,
+        "max": 30000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Redwood",
+        "Retreat"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.amphitheateroftheredwoods.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/amphitheateroftheredwoodsatpemaosellingwedding/",
+        "google": "https://www.google.com/search?q=Amphitheater+of+the+Redwoods+at+Pema+Osel+Ling+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.9411,
+        "lng": -121.7492
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.9411,-121.7492"
+    },
+    {
+      "id": "sc-011",
+      "name": "The Grove (Cocoanut Grove)",
+      "region": "Santa Cruz",
+      "subregion": "Santa Cruz",
+      "address": "400 Beach St, Santa Cruz, CA 95060",
+      "description": "Historic 1907 venue - Bay Area's largest oceanfront event space at the Beach Boardwalk.",
+      "capacity": {
+        "min": 100,
+        "max": 950
+      },
+      "price_range": {
+        "min": 1500,
+        "max": 8000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Historic",
+        "Beach"
+      ],
+      "setting": [
+        "Indoor"
+      ],
+      "website": "https://beachboardwalk.com/groups/weddings/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/thegrove(cocoanutgrove)wedding/",
+        "google": "https://www.google.com/search?q=The+Grove+(Cocoanut+Grove)+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.9628,
+        "lng": -122.0175
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.9628,-122.0175"
+    },
+    {
+      "id": "sc-012",
+      "name": "Seymour Marine Discovery Center",
+      "region": "Santa Cruz",
+      "subregion": "Santa Cruz",
+      "address": "100 McAllister Way, Santa Cruz, CA 95060",
+      "description": "Oceanfront aquarium and science center on a secluded bluff above Monterey Bay.",
+      "capacity": {
+        "min": 50,
+        "max": 150
+      },
+      "price_range": {
+        "min": 1700,
+        "max": 7000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Museum",
+        "Coastal"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://seymourcenter.ucsc.edu/weddings/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/seymourmarinediscoverycenterwedding/",
+        "google": "https://www.google.com/search?q=Seymour+Marine+Discovery+Center+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.9492,
+        "lng": -122.0656
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.9492,-122.0656"
+    },
+    {
+      "id": "sc-013",
+      "name": "UCSC Cowell Ranch Hay Barn",
+      "region": "Santa Cruz",
+      "subregion": "Santa Cruz",
+      "address": "1156 High St, Santa Cruz, CA 95064",
+      "description": "Historic 1860 barn on National Register with 30 acres of farmland and bay views.",
+      "capacity": {
+        "min": 50,
+        "max": 180
+      },
+      "price_range": {
+        "min": 5000,
+        "max": 12000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Historic",
+        "Barn"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://cowellhaybarn.ucsc.edu/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/ucsccowellranchhaybarnwedding/",
+        "google": "https://www.google.com/search?q=UCSC+Cowell+Ranch+Hay+Barn+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.9944,
+        "lng": -122.0589
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.9944,-122.0589"
+    },
+    {
+      "id": "sc-014",
+      "name": "The Hollins House",
+      "region": "Santa Cruz",
+      "subregion": "Santa Cruz",
+      "address": "20 Clubhouse Rd, Santa Cruz, CA 95060",
+      "description": "Historic 1931 mansion overlooking Pasatiempo Golf Club with Monterey Bay views.",
+      "capacity": {
+        "min": 50,
+        "max": 200
+      },
+      "price_range": {
+        "min": 3500,
+        "max": 10000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Historic",
+        "Restaurant"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.thehollinshouse.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/thehollinshousewedding/",
+        "google": "https://www.google.com/search?q=The+Hollins+House+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.0128,
+        "lng": -122.0242
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.0128,-122.0242"
+    },
+    {
+      "id": "sc-015",
+      "name": "Highlands House & Park",
+      "region": "Santa Cruz",
+      "subregion": "Ben Lomond",
+      "address": "Ben Lomond, CA",
+      "description": "Elegant 1940s mansion in enchanted Santa Cruz Mountain forests.",
+      "capacity": {
+        "min": 50,
+        "max": 200
+      },
+      "price_range": {
+        "min": 975,
+        "max": 1770,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Historic",
+        "Park"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://parks.santacruzcountyca.gov/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/highlandshouseparkwedding/",
+        "google": "https://www.google.com/search?q=Highlands+House+&+Park+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.085,
+        "lng": -122.1097
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.085,-122.1097"
+    },
+    {
+      "id": "sc-016",
+      "name": "Quail Hollow Ranch County Park",
+      "region": "Santa Cruz",
+      "subregion": "Felton",
+      "address": "Felton, CA",
+      "description": "Former Sunset Magazine publisher's home with ranch house, lawn, and orchard views.",
+      "capacity": {
+        "min": 50,
+        "max": 120
+      },
+      "price_range": {
+        "min": 875,
+        "max": 1500,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Ranch",
+        "Park"
+      ],
+      "setting": [
+        "Outdoor"
+      ],
+      "website": "https://parks.santacruzcountyca.gov/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/quailhollowranchcountyparkwedding/",
+        "google": "https://www.google.com/search?q=Quail+Hollow+Ranch+County+Park+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.0483,
+        "lng": -122.0469
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.0483,-122.0469"
+    },
+    {
+      "id": "sc-017",
+      "name": "Shadowbrook Restaurant",
+      "region": "Santa Cruz",
+      "subregion": "Capitola",
+      "address": "1750 Wharf Rd, Capitola, CA 95010",
+      "description": "Iconic 1947 restaurant reached by cable car, named Most Romantic in Northern California.",
+      "capacity": {
+        "min": 10,
+        "max": 37
+      },
+      "price_range": {
+        "min": 1000,
+        "max": 5000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Restaurant"
+      ],
+      "setting": [
+        "Indoor"
+      ],
+      "website": "https://www.shadowbrook-capitola.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/shadowbrookrestaurantwedding/",
+        "google": "https://www.google.com/search?q=Shadowbrook+Restaurant+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.9856,
+        "lng": -121.9619
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.9856,-121.9619"
+    },
+    {
+      "id": "sc-018",
+      "name": "Aveline",
+      "region": "Santa Cruz",
+      "subregion": "Santa Cruz",
+      "address": "1700 Granite Creek Rd, Santa Cruz, CA 95065",
+      "description": "88-acre mountaintop estate with panoramic Monterey Bay views and old-world villa charm.",
+      "capacity": {
+        "min": 10,
+        "max": 250
+      },
+      "price_range": {
+        "min": 4500,
+        "max": 15000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Estate"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://avelinesantacruz.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/avelinewedding/",
+        "google": "https://www.google.com/search?q=Aveline+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 37.0086,
+        "lng": -121.9658
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=37.0086,-121.9658"
+    },
+    {
+      "id": "car-011",
+      "name": "Albatross Ridge",
+      "region": "Carmel",
+      "subregion": "Carmel Valley",
+      "address": "Carmel Valley, CA",
+      "description": "236-acre elevated vineyard with 360-degree views of Carmel Coast and Valley.",
+      "capacity": {
+        "min": 50,
+        "max": 300
+      },
+      "price_range": {
+        "min": 10000,
+        "max": 30000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Winery"
+      ],
+      "setting": [
+        "Outdoor"
+      ],
+      "website": "https://www.albatrossridge.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/albatrossridgewedding/",
+        "google": "https://www.google.com/search?q=Albatross+Ridge+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.4764,
+        "lng": -121.7344
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.4764,-121.7344"
+    },
+    {
+      "id": "car-012",
+      "name": "L'Auberge Carmel",
+      "region": "Carmel",
+      "subregion": "Carmel-by-the-Sea",
+      "address": "Monte Verde at Seventh, Carmel-by-the-Sea, CA 93921",
+      "description": "Relais & Chateaux property with Forbes Five Star restaurant and 4,500-bottle wine cellar.",
+      "capacity": {
+        "min": 28,
+        "max": 100
+      },
+      "price_range": {
+        "min": 37113,
+        "max": 75000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Hotel",
+        "Luxury"
+      ],
+      "setting": [
+        "Indoor"
+      ],
+      "website": "https://laubergecarmel.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/l'aubergecarmelwedding/",
+        "google": "https://www.google.com/search?q=L'Auberge+Carmel+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.5558,
+        "lng": -121.9231
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.5558,-121.9231"
+    },
+    {
+      "id": "car-013",
+      "name": "Carmel Mission Inn",
+      "region": "Carmel",
+      "subregion": "Carmel",
+      "address": "3665 Rio Rd, Carmel, CA 93923",
+      "description": "Hotel at gateway to Big Sur with 4,500+ sq ft of event space and Central Coast views.",
+      "capacity": {
+        "min": 10,
+        "max": 300
+      },
+      "price_range": {
+        "min": 5000,
+        "max": 20000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Hotel"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.carmelmissioninn.com/weddings/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/carmelmissioninnwedding/",
+        "google": "https://www.google.com/search?q=Carmel+Mission+Inn+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.5392,
+        "lng": -121.9164
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.5392,-121.9164"
+    },
+    {
+      "id": "car-014",
+      "name": "Tickle Pink Inn",
+      "region": "Carmel",
+      "subregion": "Carmel Highlands",
+      "address": "155 Highland Dr, Carmel, CA 93923",
+      "description": "Luxury boutique inn on cliffs overlooking Pacific Ocean and Big Sur coastline.",
+      "capacity": {
+        "min": 10,
+        "max": 50
+      },
+      "price_range": {
+        "min": 5000,
+        "max": 15000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Inn",
+        "Oceanfront"
+      ],
+      "setting": [
+        "Outdoor"
+      ],
+      "website": "https://www.ticklepinkinn.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/ticklepinkinnwedding/",
+        "google": "https://www.google.com/search?q=Tickle+Pink+Inn+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.5089,
+        "lng": -121.9272
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.5089,-121.9272"
+    },
+    {
+      "id": "car-015",
+      "name": "Cypress Inn",
+      "region": "Carmel",
+      "subregion": "Carmel-by-the-Sea",
+      "address": "Lincoln and Seventh, Carmel-by-the-Sea, CA 93921",
+      "description": "Beloved 1929 boutique hotel co-owned by Doris Day with Terry's Restaurant & Lounge.",
+      "capacity": {
+        "min": 10,
+        "max": 20
+      },
+      "price_range": {
+        "min": 3000,
+        "max": 10000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Hotel",
+        "Historic"
+      ],
+      "setting": [
+        "Indoor"
+      ],
+      "website": "https://cypress-inn.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/cypressinnwedding/",
+        "google": "https://www.google.com/search?q=Cypress+Inn+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.5556,
+        "lng": -121.9225
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.5556,-121.9225"
+    },
+    {
+      "id": "car-016",
+      "name": "Villa Sopra Vista",
+      "region": "Carmel",
+      "subregion": "Carmel Valley",
+      "address": "Carmel Valley, CA",
+      "description": "Ultra-luxury 15-acre private estate with panoramic Pacific coast views.",
+      "capacity": {
+        "min": 8,
+        "max": 100
+      },
+      "price_range": {
+        "min": 50000,
+        "max": 150000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Estate",
+        "Luxury"
+      ],
+      "setting": [
+        "Outdoor"
+      ],
+      "website": "https://villasopravista.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/villasopravistawedding/",
+        "google": "https://www.google.com/search?q=Villa+Sopra+Vista+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.4794,
+        "lng": -121.7347
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.4794,-121.7347"
+    },
+    {
+      "id": "car-017",
+      "name": "Santa Lucia Preserve",
+      "region": "Carmel",
+      "subregion": "Carmel",
+      "address": "1 Rancho San Carlos Rd, Carmel, CA 93923",
+      "description": "20,000-acre private preserve with historic Hacienda and iconic Redwood Grove ceremony site.",
+      "capacity": {
+        "min": 50,
+        "max": 300
+      },
+      "price_range": {
+        "min": 30000,
+        "max": 100000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Estate",
+        "Historic"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.santaluciapreserve.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/santaluciapreservewedding/",
+        "google": "https://www.google.com/search?q=Santa+Lucia+Preserve+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.4456,
+        "lng": -121.8069
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.4456,-121.8069"
+    },
+    {
+      "id": "car-018",
+      "name": "Gardener Ranch",
+      "region": "Carmel",
+      "subregion": "Carmel Valley",
+      "address": "114 W Carmel Valley Rd, Carmel Valley, CA 93924",
+      "description": "24-acre property alongside Carmel River with five ceremony sites and overnight lodging.",
+      "capacity": {
+        "min": 50,
+        "max": 350
+      },
+      "price_range": {
+        "min": 26220,
+        "max": 50000,
+        "unit": "total_estimated"
+      },
+      "venue_type": [
+        "Ranch"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://gardenerranch.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/gardenerranchwedding/",
+        "google": "https://www.google.com/search?q=Gardener+Ranch+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.4753,
+        "lng": -121.7353
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.4753,-121.7353"
+    },
+    {
+      "id": "car-019",
+      "name": "Tehama Golf Club",
+      "region": "Carmel",
+      "subregion": "Carmel",
+      "address": "25000 Via Malpaso, Carmel, CA 93923",
+      "description": "Clint Eastwood's private community with 18,000 sq ft Spanish-style clubhouse.",
+      "capacity": {
+        "min": 50,
+        "max": 250
+      },
+      "price_range": {
+        "min": 15000,
+        "max": 50000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Golf Club"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://www.tehamagolfclub.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/tehamagolfclubwedding/",
+        "google": "https://www.google.com/search?q=Tehama+Golf+Club+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.4883,
+        "lng": -121.7714
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.4883,-121.7714"
+    },
+    {
+      "id": "car-020",
+      "name": "Galante Vineyards",
+      "region": "Carmel",
+      "subregion": "Carmel Valley",
+      "address": "18181 Cachagua Rd, Carmel Valley, CA 93924",
+      "description": "700-acre historic cattle ranch and premium Cabernet Sauvignon vineyard.",
+      "capacity": {
+        "min": 50,
+        "max": 200
+      },
+      "price_range": {
+        "min": 5000,
+        "max": 15000,
+        "unit": "venue_fee"
+      },
+      "venue_type": [
+        "Winery",
+        "Ranch"
+      ],
+      "setting": [
+        "Outdoor"
+      ],
+      "website": "https://www.galantewine.com/",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/galantevineyardswedding/",
+        "google": "https://www.google.com/search?q=Galante+Vineyards+wedding&tbm=isch"
+      },
+      "videos": [],
+      "reviews": {
+        "summary": "",
+        "pros": [],
+        "cons": []
+      },
+      "location": {
+        "lat": 36.3639,
+        "lng": -121.5181
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=36.3639,-121.5181"
+    }
+  ]
+}
