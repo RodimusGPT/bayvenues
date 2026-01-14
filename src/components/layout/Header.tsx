@@ -1,5 +1,6 @@
 import { useFilterStore } from '../../stores/filterStore';
 import { useFavoriteStore } from '../../stores/favoriteStore';
+import { useHiddenStore } from '../../stores/hiddenStore';
 
 interface HeaderProps {
   totalVenues: number;
@@ -12,9 +13,11 @@ interface HeaderProps {
 
 export function Header({ totalVenues, filteredCount, showFilters, onToggleFilters, onToggleFavorites, showFavorites }: HeaderProps) {
   const { searchQuery, setSearchQuery, resetFilters } = useFilterStore();
-  const { getFavoriteCount } = useFavoriteStore();
-  const hasActiveFilters = filteredCount < totalVenues;
+  const { getFavoriteCount, showFavoritesOnly } = useFavoriteStore();
+  const { getHiddenCount } = useHiddenStore();
   const favoriteCount = getFavoriteCount();
+  const hiddenCount = getHiddenCount();
+  const hasActiveFilters = filteredCount < totalVenues;
 
   return (
     <header className="bg-white border-b border-gray-200 px-4 py-3 flex-shrink-0">
@@ -105,24 +108,37 @@ export function Header({ totalVenues, filteredCount, showFilters, onToggleFilter
           )}
         </button>
 
-        {/* Results Count */}
-        <div className="text-sm text-gray-600">
-          <span className="font-semibold text-primary-600">{filteredCount}</span>
-          {hasActiveFilters && (
-            <span className="text-gray-400"> of {totalVenues}</span>
+        {/* Results Count - Clear explanation of what's shown */}
+        <div className="text-sm text-gray-600 flex items-center gap-2">
+          {!hasActiveFilters ? (
+            // No filters - show simple count
+            <span>
+              <span className="font-semibold text-primary-600">{totalVenues}</span>
+              <span className="hidden sm:inline"> venues</span>
+            </span>
+          ) : (
+            // Filters active - explain why count differs
+            <div className="flex items-center gap-1.5">
+              <span className="font-semibold text-primary-600">{filteredCount}</span>
+              <span className="hidden sm:inline">shown</span>
+              <span className="text-gray-400 text-xs hidden sm:inline">
+                {showFavoritesOnly && `(favorites only)`}
+                {!showFavoritesOnly && hiddenCount > 0 && `(${hiddenCount} hidden)`}
+                {!showFavoritesOnly && hiddenCount === 0 && `(filtered)`}
+              </span>
+            </div>
           )}
-          <span className="hidden sm:inline"> venues</span>
-        </div>
 
-        {/* Reset Filters */}
-        {hasActiveFilters && (
-          <button
-            onClick={resetFilters}
-            className="text-sm text-primary-600 hover:text-primary-700 font-medium"
-          >
-            Reset
-          </button>
-        )}
+          {/* Reset button */}
+          {hasActiveFilters && (
+            <button
+              onClick={resetFilters}
+              className="text-xs text-primary-600 hover:text-primary-700 font-medium px-2 py-0.5 bg-primary-50 rounded-full"
+            >
+              Reset
+            </button>
+          )}
+        </div>
       </div>
     </header>
   );

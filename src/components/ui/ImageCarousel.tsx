@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import type { GalleryImage, HeaderImage } from '../../types/venue';
+import { ImageModal } from './ImageModal';
 
 interface ImageCarouselProps {
   images: GalleryImage[];
@@ -12,6 +13,7 @@ export function ImageCarousel({ images, fallbackImage, venueName, onImageError }
   const [currentIndex, setCurrentIndex] = useState(0);
   const [failedImages, setFailedImages] = useState<Set<number>>(new Set());
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
 
@@ -123,7 +125,11 @@ export function ImageCarousel({ images, fallbackImage, venueName, onImageError }
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {displayImages.map((image, index) => (
-          <div key={`${image.url}-${index}`} className="min-w-full h-full flex-shrink-0">
+          <div
+            key={`${image.url}-${index}`}
+            className="min-w-full h-full flex-shrink-0 cursor-zoom-in"
+            onClick={() => setIsModalOpen(true)}
+          >
             <img
               src={image.url}
               alt={`${venueName} - Image ${index + 1}`}
@@ -186,6 +192,22 @@ export function ImageCarousel({ images, fallbackImage, venueName, onImageError }
           {currentIndex + 1} / {displayImages.length}
         </span>
       )}
+
+      {/* Expand hint icon */}
+      <div className="absolute top-3 right-12 p-1.5 bg-black/40 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+        </svg>
+      </div>
+
+      {/* Image Modal */}
+      <ImageModal
+        images={displayImages}
+        initialIndex={currentIndex}
+        venueName={venueName}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 }
