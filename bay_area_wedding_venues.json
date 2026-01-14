@@ -3,7 +3,7 @@
     "title": "Bay Area Wedding Venues Guide",
     "description": "Comprehensive list of wedding venues in Bay Area (California) and Europe (Portugal, Italy, Greece, Spain, Switzerland, France)",
     "last_updated": "2026-01-14",
-    "total_venues": 407,
+    "total_venues": 408,
     "regions": [
       "North Bay",
       "Peninsula",
@@ -16057,6 +16057,45 @@
       },
       "id": "fr-046",
       "google_maps_url": "https://www.google.com/maps/search/?api=1&query=43.7833,4.85"
+    },
+    {
+      "id": "es-047",
+      "name": "Bell Rec\u00f3",
+      "country": "Spain",
+      "region": "Catalonia",
+      "subregion": "Barcelona/Maresme",
+      "address": "Argentona, Barcelona, Catalonia, Spain",
+      "description": "A stunning 1940s stately home belonging to the Catalan bourgeoisie, now one of the most renowned luxury wedding venues in Barcelona. This home-cum-museum of extremely high artistic value features gardens designed on three levels with fountains, pergolas, and a pond. Indoor spaces include the main hall and garden dining room. Located in Argentona, just 20-30 minutes from Barcelona. Exclusive use ensures complete privacy for your celebration.",
+      "capacity": {
+        "min": 50,
+        "max": 250
+      },
+      "price_range": {
+        "min": null,
+        "max": null,
+        "currency": "EUR"
+      },
+      "venue_type": [
+        "Estate",
+        "Historic",
+        "Mansion",
+        "Garden"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor",
+        "Garden",
+        "Historic"
+      ],
+      "website": "https://bellreco.es/en/",
+      "photos": {
+        "instagram": "https://www.instagram.com/bellreco/"
+      },
+      "location": {
+        "lat": 41.5536,
+        "lng": 2.4022
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=41.5536,2.4022"
     }
   ]
 }

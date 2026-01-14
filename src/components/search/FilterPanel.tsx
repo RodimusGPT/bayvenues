@@ -82,23 +82,33 @@ export function FilterPanel({ venueTypes }: FilterPanelProps) {
         </div>
       </div>
 
-      {/* Venue Types */}
+      {/* Guest Capacity */}
       <div>
-        <h3 className="text-sm font-semibold text-gray-900 mb-3">Venue Type</h3>
-        <div className="flex flex-wrap gap-2">
-          {venueTypes.map((type) => (
-            <button
-              key={type}
-              onClick={() => toggleVenueType(type)}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
-                selectedVenueTypes.includes(type)
-                  ? 'bg-primary-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              {type}
-            </button>
-          ))}
+        <h3 className="text-sm font-semibold text-gray-900 mb-3">
+          Guest Capacity
+          <span className="font-normal text-gray-500 ml-2">
+            {capacityRange[0]} - {capacityRange[1]} guests
+          </span>
+        </h3>
+        <div className="space-y-3">
+          <input
+            type="range"
+            min={0}
+            max={1000}
+            step={10}
+            value={capacityRange[0]}
+            onChange={(e) => setCapacityRange([Number(e.target.value), capacityRange[1]])}
+            className="w-full accent-primary-600"
+          />
+          <input
+            type="range"
+            min={0}
+            max={1000}
+            step={10}
+            value={capacityRange[1]}
+            onChange={(e) => setCapacityRange([capacityRange[0], Number(e.target.value)])}
+            className="w-full accent-primary-600"
+          />
         </div>
       </div>
 
@@ -132,33 +142,23 @@ export function FilterPanel({ venueTypes }: FilterPanelProps) {
         </div>
       </div>
 
-      {/* Capacity Range */}
+      {/* Venue Types */}
       <div>
-        <h3 className="text-sm font-semibold text-gray-900 mb-3">
-          Guest Capacity
-          <span className="font-normal text-gray-500 ml-2">
-            {capacityRange[0]} - {capacityRange[1]} guests
-          </span>
-        </h3>
-        <div className="space-y-3">
-          <input
-            type="range"
-            min={0}
-            max={1000}
-            step={10}
-            value={capacityRange[0]}
-            onChange={(e) => setCapacityRange([Number(e.target.value), capacityRange[1]])}
-            className="w-full accent-primary-600"
-          />
-          <input
-            type="range"
-            min={0}
-            max={1000}
-            step={10}
-            value={capacityRange[1]}
-            onChange={(e) => setCapacityRange([capacityRange[0], Number(e.target.value)])}
-            className="w-full accent-primary-600"
-          />
+        <h3 className="text-sm font-semibold text-gray-900 mb-3">Venue Type</h3>
+        <div className="flex flex-wrap gap-2">
+          {venueTypes.map((type) => (
+            <button
+              key={type}
+              onClick={() => toggleVenueType(type)}
+              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
+                selectedVenueTypes.includes(type)
+                  ? 'bg-primary-600 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              {type}
+            </button>
+          ))}
         </div>
       </div>
     </div>
