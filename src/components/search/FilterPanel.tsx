@@ -1,19 +1,31 @@
 import { useFilterStore } from '../../stores/filterStore';
-import { REGIONS, SETTINGS, REGION_COLORS } from '../../types/venue';
+import { COUNTRIES, SETTINGS, COUNTRY_COLORS } from '../../types/venue';
+import type { Country } from '../../types/venue';
 import { formatPrice } from '../../utils/formatters';
 
 interface FilterPanelProps {
   venueTypes: string[];
 }
 
+// Country flag emojis
+const COUNTRY_FLAGS: Record<Country, string> = {
+  'USA': '🇺🇸',
+  'Portugal': '🇵🇹',
+  'Italy': '🇮🇹',
+  'Greece': '🇬🇷',
+  'Spain': '🇪🇸',
+  'Switzerland': '🇨🇭',
+  'France': '🇫🇷',
+};
+
 export function FilterPanel({ venueTypes }: FilterPanelProps) {
   const {
-    selectedRegions,
+    selectedCountries,
     selectedVenueTypes,
     selectedSettings,
     priceRange,
     capacityRange,
-    toggleRegion,
+    toggleCountry,
     toggleVenueType,
     toggleSetting,
     setPriceRange,
@@ -22,27 +34,28 @@ export function FilterPanel({ venueTypes }: FilterPanelProps) {
 
   return (
     <div className="p-4 space-y-6">
-      {/* Regions */}
+      {/* Countries */}
       <div>
-        <h3 className="text-sm font-semibold text-gray-900 mb-3">Region</h3>
+        <h3 className="text-sm font-semibold text-gray-900 mb-3">Country</h3>
         <div className="space-y-2">
-          {REGIONS.map((region) => (
+          {COUNTRIES.map((country) => (
             <label
-              key={region}
+              key={country}
               className="flex items-center gap-3 cursor-pointer group"
             >
               <input
                 type="checkbox"
-                checked={selectedRegions.includes(region)}
-                onChange={() => toggleRegion(region)}
+                checked={selectedCountries.includes(country)}
+                onChange={() => toggleCountry(country)}
                 className="w-4 h-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
               />
               <span
-                className="w-3 h-3 rounded-full"
-                style={{ backgroundColor: REGION_COLORS[region] }}
+                className="w-3 h-3 rounded-full flex-shrink-0"
+                style={{ backgroundColor: COUNTRY_COLORS[country] }}
               />
+              <span className="text-base mr-1">{COUNTRY_FLAGS[country]}</span>
               <span className="text-sm text-gray-700 group-hover:text-gray-900">
-                {region}
+                {country}
               </span>
             </label>
           ))}

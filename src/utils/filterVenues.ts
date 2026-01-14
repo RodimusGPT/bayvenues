@@ -1,12 +1,14 @@
 import type { Venue, FilterState } from '../types/venue';
+import { getCountryForRegion } from '../types/venue';
 
 export function filterVenues(venues: Venue[], filters: FilterState): Venue[] {
   return venues.filter((venue) => {
-    // Text search (name, subregion, description, address)
+    // Text search (name, subregion, description, address, region)
     if (filters.searchQuery) {
       const query = filters.searchQuery.toLowerCase();
       const searchableText = [
         venue.name,
+        venue.region,
         venue.subregion,
         venue.description,
         venue.address,
@@ -15,6 +17,12 @@ export function filterVenues(venues: Venue[], filters: FilterState): Venue[] {
         .toLowerCase();
 
       if (!searchableText.includes(query)) return false;
+    }
+
+    // Country filter
+    if (filters.selectedCountries.length > 0) {
+      const venueCountry = getCountryForRegion(venue.region);
+      if (!filters.selectedCountries.includes(venueCountry)) return false;
     }
 
     // Region filter
@@ -58,6 +66,14 @@ export function getUniqueVenueTypes(venues: Venue[]): string[] {
     venue.venue_type.forEach((type) => types.add(type));
   });
   return Array.from(types).sort();
+}
+
+export function getUniqueRegions(venues: Venue[]): string[] {
+  const regions = new Set<string>();
+  venues.forEach((venue) => {
+    regions.add(venue.region);
+  });
+  return Array.from(regions).sort();
 }
 
 export function getPriceBounds(venues: Venue[]): [number, number] {

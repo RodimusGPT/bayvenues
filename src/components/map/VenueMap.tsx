@@ -2,7 +2,7 @@ import { useCallback, useRef, useEffect } from 'react';
 import { GoogleMap } from '@react-google-maps/api';
 import { MarkerClusterer } from '@googlemaps/markerclusterer';
 import type { Venue } from '../../types/venue';
-import { REGION_COLORS } from '../../types/venue';
+import { COUNTRY_COLORS, getCountryForRegion } from '../../types/venue';
 import { useVenueStore } from '../../stores/venueStore';
 
 interface VenueMapProps {
@@ -10,8 +10,9 @@ interface VenueMapProps {
   onVenueSelect: (venue: Venue) => void;
 }
 
-const BAY_AREA_CENTER = { lat: 37.5, lng: -122.2 };
-const DEFAULT_ZOOM = 9;
+// Default to world view
+const WORLD_CENTER = { lat: 40, lng: -20 };
+const DEFAULT_ZOOM = 3;
 
 const mapOptions: google.maps.MapOptions = {
   disableDefaultUI: false,
@@ -90,7 +91,8 @@ export function VenueMap({ venues, onVenueSelect }: VenueMapProps) {
 
     // Create new markers
     const markers = venues.map((venue) => {
-      const color = REGION_COLORS[venue.region];
+      const country = getCountryForRegion(venue.region);
+      const color = COUNTRY_COLORS[country];
 
       const marker = new google.maps.Marker({
         position: { lat: venue.location.lat, lng: venue.location.lng },
@@ -158,7 +160,7 @@ export function VenueMap({ venues, onVenueSelect }: VenueMapProps) {
   return (
     <GoogleMap
       mapContainerStyle={containerStyle}
-      center={BAY_AREA_CENTER}
+      center={WORLD_CENTER}
       zoom={DEFAULT_ZOOM}
       onLoad={onLoad}
       onUnmount={onUnmount}

@@ -1,9 +1,10 @@
 import { create } from 'zustand';
-import type { Region, Setting, FilterState } from '../types/venue';
+import type { Country, Setting, FilterState } from '../types/venue';
 
 interface FilterStore extends FilterState {
   setSearchQuery: (query: string) => void;
-  toggleRegion: (region: Region) => void;
+  toggleCountry: (country: Country) => void;
+  toggleRegion: (region: string) => void;
   toggleVenueType: (type: string) => void;
   toggleSetting: (setting: Setting) => void;
   setPriceRange: (range: [number, number]) => void;
@@ -13,6 +14,7 @@ interface FilterStore extends FilterState {
 
 const initialState: FilterState = {
   searchQuery: '',
+  selectedCountries: [],
   selectedRegions: [],
   selectedVenueTypes: [],
   selectedSettings: [],
@@ -24,6 +26,13 @@ export const useFilterStore = create<FilterStore>((set) => ({
   ...initialState,
 
   setSearchQuery: (query) => set({ searchQuery: query }),
+
+  toggleCountry: (country) =>
+    set((state) => ({
+      selectedCountries: state.selectedCountries.includes(country)
+        ? state.selectedCountries.filter((c) => c !== country)
+        : [...state.selectedCountries, country],
+    })),
 
   toggleRegion: (region) =>
     set((state) => ({

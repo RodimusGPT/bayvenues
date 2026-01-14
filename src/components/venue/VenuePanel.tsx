@@ -1,5 +1,5 @@
-import type { Venue } from '../../types/venue';
-import { REGION_COLORS } from '../../types/venue';
+import type { Venue, Country } from '../../types/venue';
+import { COUNTRY_COLORS, getCountryForRegion } from '../../types/venue';
 import { formatPriceRange, formatCapacity } from '../../utils/formatters';
 import { VenuePhotos } from './VenuePhotos';
 import { VenueVideos } from './VenueVideos';
@@ -10,7 +10,21 @@ interface VenuePanelProps {
   onClose: () => void;
 }
 
+// Country flag emojis
+const COUNTRY_FLAGS: Record<Country, string> = {
+  'USA': '🇺🇸',
+  'Portugal': '🇵🇹',
+  'Italy': '🇮🇹',
+  'Greece': '🇬🇷',
+  'Spain': '🇪🇸',
+  'Switzerland': '🇨🇭',
+  'France': '🇫🇷',
+};
+
 export function VenuePanel({ venue, onClose }: VenuePanelProps) {
+  const country = getCountryForRegion(venue.region);
+  const countryColor = COUNTRY_COLORS[country];
+
   return (
     <aside className="fixed right-0 top-[57px] bottom-0 w-full sm:w-[420px] bg-white shadow-2xl overflow-y-auto z-40 animate-slide-in-right venue-panel">
       {/* Mobile back bar - tap anywhere to close */}
@@ -57,9 +71,10 @@ export function VenuePanel({ venue, onClose }: VenuePanelProps) {
             <div className="flex items-center gap-2 mb-1">
               <span
                 className="w-3 h-3 rounded-full flex-shrink-0"
-                style={{ backgroundColor: REGION_COLORS[venue.region] }}
+                style={{ backgroundColor: countryColor }}
               />
-              <span className="text-sm text-white/90">{venue.subregion}</span>
+              <span className="text-base">{COUNTRY_FLAGS[country]}</span>
+              <span className="text-sm text-white/90">{venue.region} · {venue.subregion}</span>
             </div>
             <h2 className="text-xl font-bold text-white leading-tight drop-shadow-md">
               {venue.name}
@@ -74,9 +89,10 @@ export function VenuePanel({ venue, onClose }: VenuePanelProps) {
               <div className="flex items-center gap-2 mb-1">
                 <span
                   className="w-3 h-3 rounded-full flex-shrink-0"
-                  style={{ backgroundColor: REGION_COLORS[venue.region] }}
+                  style={{ backgroundColor: countryColor }}
                 />
-                <span className="text-sm text-gray-500">{venue.subregion}</span>
+                <span className="text-base">{COUNTRY_FLAGS[country]}</span>
+                <span className="text-sm text-gray-500">{venue.region} · {venue.subregion}</span>
               </div>
               <h2 className="text-xl font-bold text-gray-900 leading-tight">
                 {venue.name}
