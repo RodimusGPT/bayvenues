@@ -157,7 +157,7 @@ export function VenuePanel({ venue, onClose }: VenuePanelProps) {
         <VenuePhotos venue={venue} />
 
         {/* Videos */}
-        {venue.videos && venue.videos.length > 0 && <VenueVideos videos={venue.videos} />}
+        <VenueVideos videos={venue.videos} youtubeSearch={venue.youtubeSearch} />
 
         {/* Reviews */}
         {venue.reviews && <VenueReviews reviews={venue.reviews} />}

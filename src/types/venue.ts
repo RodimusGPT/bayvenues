@@ -55,6 +55,7 @@ export interface Venue {
   };
   google_maps_url: string;
   headerImage?: HeaderImage;
+  youtubeSearch?: string;
 }
 
 export interface VenueData {
