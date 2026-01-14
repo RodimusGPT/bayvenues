@@ -1,10 +1,12 @@
 import { useFilterStore } from '../../stores/filterStore';
+import { useFavoriteStore } from '../../stores/favoriteStore';
 import { COUNTRIES, SETTINGS, COUNTRY_COLORS } from '../../types/venue';
 import type { Country } from '../../types/venue';
 import { formatPrice } from '../../utils/formatters';
 
 interface FilterPanelProps {
   venueTypes: string[];
+  onShowFavoritesPanel?: () => void;
 }
 
 // Country flag emojis
@@ -18,7 +20,7 @@ const COUNTRY_FLAGS: Record<Country, string> = {
   'France': '🇫🇷',
 };
 
-export function FilterPanel({ venueTypes }: FilterPanelProps) {
+export function FilterPanel({ venueTypes, onShowFavoritesPanel }: FilterPanelProps) {
   const {
     selectedCountries,
     selectedVenueTypes,
@@ -32,8 +34,54 @@ export function FilterPanel({ venueTypes }: FilterPanelProps) {
     setCapacityRange,
   } = useFilterStore();
 
+  const { showFavoritesOnly, setShowFavoritesOnly, getFavoriteCount } = useFavoriteStore();
+  const favoriteCount = getFavoriteCount();
+
   return (
     <div className="p-4 space-y-6">
+      {/* Favorites Toggle */}
+      <div>
+        <button
+          onClick={() => {
+            const newValue = !showFavoritesOnly;
+            setShowFavoritesOnly(newValue);
+            // Open favorites panel when enabling the filter
+            if (newValue && onShowFavoritesPanel) {
+              onShowFavoritesPanel();
+            }
+          }}
+          className={`w-full flex items-center justify-between px-4 py-3 rounded-lg transition-colors ${
+            showFavoritesOnly
+              ? 'bg-red-50 border-2 border-red-200'
+              : 'bg-gray-50 border-2 border-transparent hover:bg-gray-100'
+          }`}
+        >
+          <div className="flex items-center gap-3">
+            <svg
+              className={`w-5 h-5 ${showFavoritesOnly ? 'text-red-500' : 'text-gray-400'}`}
+              fill={showFavoritesOnly ? 'currentColor' : 'none'}
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              strokeWidth={showFavoritesOnly ? 0 : 2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+              />
+            </svg>
+            <span className={`text-sm font-medium ${showFavoritesOnly ? 'text-red-700' : 'text-gray-700'}`}>
+              Show Favorites Only
+            </span>
+          </div>
+          <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
+            showFavoritesOnly ? 'bg-red-200 text-red-700' : 'bg-gray-200 text-gray-600'
+          }`}>
+            {favoriteCount}
+          </span>
+        </button>
+      </div>
+
       {/* Countries */}
       <div>
         <h3 className="text-sm font-semibold text-gray-900 mb-3">Country</h3>

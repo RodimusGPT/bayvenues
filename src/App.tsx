@@ -4,9 +4,11 @@ import venueData from './data/venues.json';
 import type { Venue, VenueData } from './types/venue';
 import { useFilterStore } from './stores/filterStore';
 import { useVenueStore } from './stores/venueStore';
+import { useFavoriteStore } from './stores/favoriteStore';
 import { filterVenues, getUniqueVenueTypes } from './utils/filterVenues';
 import { Header } from './components/layout/Header';
 import { FilterPanel } from './components/search/FilterPanel';
+import { FavoritesPanel } from './components/layout/FavoritesPanel';
 import { VenueMap } from './components/map/VenueMap';
 import { VenuePanel } from './components/venue/VenuePanel';
 
@@ -15,6 +17,7 @@ const LIBRARIES: ('places' | 'marker')[] = ['places', 'marker'];
 
 function App() {
   const [showFilters, setShowFilters] = useState(true);
+  const [showFavorites, setShowFavorites] = useState(false);
 
   const { isLoaded, loadError } = useJsApiLoader({
     id: 'google-map-script',
@@ -29,12 +32,19 @@ function App() {
   // Get filter state
   const filters = useFilterStore();
   const { selectedVenue, setSelectedVenue } = useVenueStore();
+  const { showFavoritesOnly, favorites } = useFavoriteStore();
 
   // Apply filters
-  const filteredVenues = useMemo(
-    () => filterVenues(venues, filters),
-    [venues, filters]
-  );
+  const filteredVenues = useMemo(() => {
+    let result = filterVenues(venues, filters);
+
+    // Apply favorites filter if enabled
+    if (showFavoritesOnly) {
+      result = result.filter((venue) => favorites.has(venue.id));
+    }
+
+    return result;
+  }, [venues, filters, showFavoritesOnly, favorites]);
 
   if (loadError) {
     return (
@@ -54,13 +64,15 @@ function App() {
         filteredCount={filteredVenues.length}
         showFilters={showFilters}
         onToggleFilters={() => setShowFilters(!showFilters)}
+        showFavorites={showFavorites}
+        onToggleFavorites={() => setShowFavorites(!showFavorites)}
       />
 
       <div className="flex-1 flex overflow-hidden">
         {/* Filter Panel - Left Side */}
         {showFilters && (
           <aside className="w-80 border-r border-gray-200 bg-white overflow-y-auto flex-shrink-0 hidden lg:block">
-            <FilterPanel venueTypes={venueTypes} />
+            <FilterPanel venueTypes={venueTypes} onShowFavoritesPanel={() => setShowFavorites(true)} />
           </aside>
         )}
 
@@ -83,6 +95,18 @@ function App() {
           <VenuePanel
             venue={selectedVenue}
             onClose={() => setSelectedVenue(null)}
+          />
+        )}
+
+        {/* Favorites Panel - Right Side (when no venue selected) */}
+        {showFavorites && !selectedVenue && (
+          <FavoritesPanel
+            venues={venues}
+            onVenueSelect={(venue) => {
+              setSelectedVenue(venue);
+              setShowFavorites(false);
+            }}
+            onClose={() => setShowFavorites(false)}
           />
         )}
       </div>
@@ -117,7 +141,13 @@ function App() {
                 </svg>
               </button>
             </div>
-            <FilterPanel venueTypes={venueTypes} />
+            <FilterPanel
+              venueTypes={venueTypes}
+              onShowFavoritesPanel={() => {
+                setShowFavorites(true);
+                setShowFilters(false); // Close mobile filter drawer
+              }}
+            />
           </aside>
         </div>
       )}

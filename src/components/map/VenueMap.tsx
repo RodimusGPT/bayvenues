@@ -54,6 +54,7 @@ export function VenueMap({ venues, onVenueSelect }: VenueMapProps) {
   const mapRef = useRef<google.maps.Map | null>(null);
   const markersRef = useRef<google.maps.Marker[]>([]);
   const clustererRef = useRef<MarkerClusterer | null>(null);
+  const prevVenueIdsRef = useRef<string>('');
   const { hoveredVenueId } = useVenueStore();
   const [mapType, setMapType] = useState<'roadmap' | 'satellite'>('roadmap');
 
@@ -145,13 +146,19 @@ export function VenueMap({ venues, onVenueSelect }: VenueMapProps) {
       },
     });
 
-    // Fit bounds to show all markers
-    if (venues.length > 0) {
-      const bounds = new google.maps.LatLngBounds();
-      venues.forEach((venue) => {
-        bounds.extend({ lat: venue.location.lat, lng: venue.location.lng });
-      });
-      mapRef.current.fitBounds(bounds, 50);
+    // Only fit bounds when the set of venue IDs actually changes
+    // This prevents zoom reset when toggling favorites or other state changes
+    const currentVenueIds = venues.map(v => v.id).sort().join(',');
+    if (currentVenueIds !== prevVenueIdsRef.current) {
+      prevVenueIdsRef.current = currentVenueIds;
+
+      if (venues.length > 0) {
+        const bounds = new google.maps.LatLngBounds();
+        venues.forEach((venue) => {
+          bounds.extend({ lat: venue.location.lat, lng: venue.location.lng });
+        });
+        mapRef.current.fitBounds(bounds, 50);
+      }
     }
   }, [venues, onVenueSelect]);
 

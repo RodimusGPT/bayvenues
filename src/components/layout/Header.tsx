@@ -1,15 +1,20 @@
 import { useFilterStore } from '../../stores/filterStore';
+import { useFavoriteStore } from '../../stores/favoriteStore';
 
 interface HeaderProps {
   totalVenues: number;
   filteredCount: number;
   showFilters: boolean;
   onToggleFilters: () => void;
+  onToggleFavorites: () => void;
+  showFavorites: boolean;
 }
 
-export function Header({ totalVenues, filteredCount, showFilters, onToggleFilters }: HeaderProps) {
+export function Header({ totalVenues, filteredCount, showFilters, onToggleFilters, onToggleFavorites, showFavorites }: HeaderProps) {
   const { searchQuery, setSearchQuery, resetFilters } = useFilterStore();
+  const { getFavoriteCount } = useFavoriteStore();
   const hasActiveFilters = filteredCount < totalVenues;
+  const favoriteCount = getFavoriteCount();
 
   return (
     <header className="bg-white border-b border-gray-200 px-4 py-3 flex-shrink-0">
@@ -66,6 +71,38 @@ export function Header({ totalVenues, filteredCount, showFilters, onToggleFilter
             />
           </svg>
           <span className="hidden xl:inline">Filters</span>
+        </button>
+
+        {/* Favorites Button */}
+        <button
+          onClick={onToggleFavorites}
+          className={`relative flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
+            showFavorites
+              ? 'bg-red-100 text-red-700'
+              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+          }`}
+          title="View favorites"
+        >
+          <svg
+            className="w-5 h-5"
+            fill={showFavorites || favoriteCount > 0 ? 'currentColor' : 'none'}
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            strokeWidth={showFavorites || favoriteCount > 0 ? 0 : 2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+            />
+          </svg>
+          {favoriteCount > 0 && (
+            <span className={`text-xs font-bold px-1.5 py-0.5 rounded-full ${
+              showFavorites ? 'bg-red-200 text-red-800' : 'bg-red-500 text-white'
+            }`}>
+              {favoriteCount}
+            </span>
+          )}
         </button>
 
         {/* Results Count */}

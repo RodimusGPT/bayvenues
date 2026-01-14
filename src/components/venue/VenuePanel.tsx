@@ -5,6 +5,7 @@ import { formatPriceRange, formatCapacity } from '../../utils/formatters';
 import { VenuePhotos } from './VenuePhotos';
 import { VenueVideos } from './VenueVideos';
 import { VenueReviews } from './VenueReviews';
+import { FavoriteButton } from '../ui/FavoriteButton';
 
 interface VenuePanelProps {
   venue: Venue;
@@ -56,16 +57,23 @@ export function VenuePanel({ venue, onClose }: VenuePanelProps) {
             onError={() => setImageError(true)}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          {/* Close button overlay */}
-          <button
-            onClick={onClose}
-            className="absolute top-3 right-3 p-2 bg-black/30 hover:bg-black/50 rounded-full transition-colors"
-            aria-label="Close panel"
-          >
-            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+          {/* Action buttons overlay */}
+          <div className="absolute top-3 right-3 flex items-center gap-2">
+            <FavoriteButton
+              venueId={venue.id}
+              size="md"
+              className="bg-black/30 hover:bg-black/50 text-white"
+            />
+            <button
+              onClick={onClose}
+              className="p-2 bg-black/30 hover:bg-black/50 rounded-full transition-colors"
+              aria-label="Close panel"
+            >
+              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
           {/* Image source badge */}
           <span className="absolute bottom-3 right-3 px-2 py-1 bg-black/40 text-white text-xs rounded-full">
             {venue.headerImage.source === 'youtube' ? 'Video' : venue.headerImage.source === 'og_image' ? 'Official' : venue.venue_type[0]}
@@ -102,15 +110,18 @@ export function VenuePanel({ venue, onClose }: VenuePanelProps) {
                 {venue.name}
               </h2>
             </div>
-            <button
-              onClick={onClose}
-              className="p-2 hover:bg-gray-100 rounded-full transition-colors flex-shrink-0"
-              aria-label="Close panel"
-            >
-              <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+            <div className="flex items-center gap-1 flex-shrink-0">
+              <FavoriteButton venueId={venue.id} size="md" />
+              <button
+                onClick={onClose}
+                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                aria-label="Close panel"
+              >
+                <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       )}
