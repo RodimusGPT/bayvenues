@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import type { Venue, Country } from '../../types/venue';
 import { COUNTRY_COLORS, getCountryForRegion } from '../../types/venue';
 import { formatPriceRange, formatCapacity } from '../../utils/formatters';
@@ -24,6 +25,12 @@ const COUNTRY_FLAGS: Record<Country, string> = {
 export function VenuePanel({ venue, onClose }: VenuePanelProps) {
   const country = getCountryForRegion(venue.region);
   const countryColor = COUNTRY_COLORS[country];
+  const [imageError, setImageError] = useState(false);
+
+  // Reset image error state when venue changes
+  useEffect(() => {
+    setImageError(false);
+  }, [venue.id]);
 
   return (
     <aside className="fixed right-0 top-[57px] bottom-0 w-full sm:w-[420px] bg-white shadow-2xl overflow-y-auto z-40 animate-slide-in-right venue-panel">
@@ -39,17 +46,14 @@ export function VenuePanel({ venue, onClose }: VenuePanelProps) {
         <span className="text-sm font-medium">Back to map</span>
       </button>
       {/* Header Image */}
-      {venue.headerImage ? (
+      {venue.headerImage && !imageError ? (
         <div className="relative h-48 sm:h-56 w-full overflow-hidden">
           <img
             src={venue.headerImage.url}
             alt={venue.name}
             className="w-full h-full object-cover"
             loading="eager"
-            onError={(e) => {
-              // Hide image on error
-              (e.target as HTMLImageElement).style.display = 'none';
-            }}
+            onError={() => setImageError(true)}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
           {/* Close button overlay */}
