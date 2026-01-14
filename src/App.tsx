@@ -5,12 +5,14 @@ import type { Venue, VenueData } from './types/venue';
 import { useFilterStore } from './stores/filterStore';
 import { useVenueStore } from './stores/venueStore';
 import { useFavoriteStore } from './stores/favoriteStore';
+import { useHiddenStore } from './stores/hiddenStore';
 import { filterVenues, getUniqueVenueTypes } from './utils/filterVenues';
 import { Header } from './components/layout/Header';
 import { FilterPanel } from './components/search/FilterPanel';
 import { FavoritesPanel } from './components/layout/FavoritesPanel';
 import { VenueMap } from './components/map/VenueMap';
 import { VenuePanel } from './components/venue/VenuePanel';
+import { LocalStorageNotice } from './components/ui/LocalStorageNotice';
 
 const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || '';
 const LIBRARIES: ('places' | 'marker')[] = ['places', 'marker'];
@@ -33,10 +35,14 @@ function App() {
   const filters = useFilterStore();
   const { selectedVenue, setSelectedVenue } = useVenueStore();
   const { showFavoritesOnly, favorites } = useFavoriteStore();
+  const { hidden } = useHiddenStore();
 
   // Apply filters
   const filteredVenues = useMemo(() => {
     let result = filterVenues(venues, filters);
+
+    // Filter out hidden venues
+    result = result.filter((venue) => !hidden.has(venue.id));
 
     // Apply favorites filter if enabled
     if (showFavoritesOnly) {
@@ -44,7 +50,7 @@ function App() {
     }
 
     return result;
-  }, [venues, filters, showFavoritesOnly, favorites]);
+  }, [venues, filters, showFavoritesOnly, favorites, hidden]);
 
   if (loadError) {
     return (
@@ -67,6 +73,7 @@ function App() {
         showFavorites={showFavorites}
         onToggleFavorites={() => setShowFavorites(!showFavorites)}
       />
+      <LocalStorageNotice />
 
       <div className="flex-1 flex overflow-hidden">
         {/* Filter Panel - Left Side */}

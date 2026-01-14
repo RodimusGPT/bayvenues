@@ -6,6 +6,7 @@ import { VenuePhotos } from './VenuePhotos';
 import { VenueVideos } from './VenueVideos';
 import { VenueReviews } from './VenueReviews';
 import { FavoriteButton } from '../ui/FavoriteButton';
+import { HideButton } from '../ui/HideButton';
 
 interface VenuePanelProps {
   venue: Venue;
@@ -64,6 +65,12 @@ export function VenuePanel({ venue, onClose }: VenuePanelProps) {
               size="md"
               className="bg-black/30 hover:bg-black/50 text-white"
             />
+            <HideButton
+              venueId={venue.id}
+              size="md"
+              className="bg-black/30 hover:bg-black/50 text-white"
+              onHide={onClose}
+            />
             <button
               onClick={onClose}
               className="p-2 bg-black/30 hover:bg-black/50 rounded-full transition-colors"
@@ -112,6 +119,7 @@ export function VenuePanel({ venue, onClose }: VenuePanelProps) {
             </div>
             <div className="flex items-center gap-1 flex-shrink-0">
               <FavoriteButton venueId={venue.id} size="md" />
+              <HideButton venueId={venue.id} size="md" onHide={onClose} />
               <button
                 onClick={onClose}
                 className="p-2 hover:bg-gray-100 rounded-full transition-colors"
