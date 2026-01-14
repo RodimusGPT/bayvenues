@@ -3,7 +3,7 @@
     "title": "Bay Area Wedding Venues Guide",
     "description": "Comprehensive list of wedding venues in Bay Area (California) and Europe (Portugal, Italy, Greece, Spain, Switzerland, France)",
     "last_updated": "2026-01-14",
-    "total_venues": 407,
+    "total_venues": 408,
     "regions": [
       "North Bay",
       "Peninsula",
@@ -18257,6 +18257,46 @@
         "source": "fallback"
       },
       "youtubeSearch": "https://www.youtube.com/results?search_query=Mas%20d'Arvieux%20Provence%20wedding"
+    },
+    {
+      "id": "es-047",
+      "name": "Bell Recó",
+      "country": "Spain",
+      "region": "Catalonia",
+      "subregion": "Barcelona",
+      "address": "Veïnat Pins, s/n, 08310 Argentona, Barcelona, Spain",
+      "description": "A stately home built in 1940 offering exclusive spaces for luxury weddings near Barcelona. Features over 5,000 m² of landscaped gardens with fountains, ponds, and terraces, alongside artistic interior rooms. One of the most renowned venues for luxury events in Barcelona with complete exclusivity for each celebration.",
+      "capacity": {
+        "min": 50,
+        "max": 500
+      },
+      "price_range": {
+        "min": 15000,
+        "max": 50000,
+        "currency": "EUR"
+      },
+      "venue_type": [
+        "Estate",
+        "Historic",
+        "Garden"
+      ],
+      "setting": [
+        "Outdoor",
+        "Indoor"
+      ],
+      "website": "https://bellreco.es/en/",
+      "phone": "+34 932 000 990",
+      "photos": {
+        "instagram": "https://www.instagram.com/explore/tags/bellreco/",
+        "google": "https://www.google.com/search?q=Bell%20Rec%C3%B3%20Barcelona%20wedding%20venue&tbm=isch"
+      },
+      "videos": [],
+      "location": {
+        "lat": 41.5547,
+        "lng": 2.4019
+      },
+      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Bell+Reco+Argentona+Barcelona",
+      "youtubeSearch": "https://www.youtube.com/results?search_query=Bell%20Rec%C3%B3%20Barcelona%20wedding"
     }
   ]
 }
