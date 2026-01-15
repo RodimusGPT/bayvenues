@@ -290,10 +290,17 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
   }, [hoveredVenueId]);
 
   // Highlight selected venue with a temporary marker (visible even when clustered)
+  const hiddenOriginalMarkerRef = useRef<google.maps.Marker | null>(null);
   useEffect(() => {
     // Clear any pending timeouts from previous selection
     highlightTimeoutsRef.current.forEach(clearTimeout);
     highlightTimeoutsRef.current = [];
+
+    // Restore previously hidden original marker
+    if (hiddenOriginalMarkerRef.current) {
+      hiddenOriginalMarkerRef.current.setVisible(true);
+      hiddenOriginalMarkerRef.current = null;
+    }
 
     // Clean up previous highlight marker immediately
     if (highlightMarkerRef.current) {
@@ -302,6 +309,15 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
     }
 
     if (!selectedVenue?.location || !mapRef.current) return;
+
+    // Hide the original marker so it doesn't show under the highlight
+    const originalMarker = markersRef.current.find(
+      (marker) => (marker as any).venueId === selectedVenue.id
+    );
+    if (originalMarker) {
+      originalMarker.setVisible(false);
+      hiddenOriginalMarkerRef.current = originalMarker;
+    }
 
     const country = getCountryForRegion(selectedVenue.region);
     const color = COUNTRY_COLORS[country];
@@ -318,11 +334,16 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
 
     highlightMarkerRef.current = highlightMarker;
 
-    // Remove highlight marker after 5 seconds (longer to enjoy the pulse effect)
+    // Remove highlight marker after 5 seconds and restore original
     const removeTimeout = setTimeout(() => {
       if (highlightMarkerRef.current === highlightMarker) {
         highlightMarker.setMap(null);
         highlightMarkerRef.current = null;
+        // Restore original marker visibility
+        if (hiddenOriginalMarkerRef.current === originalMarker && originalMarker) {
+          originalMarker.setVisible(true);
+          hiddenOriginalMarkerRef.current = null;
+        }
       }
     }, 5000);
 
