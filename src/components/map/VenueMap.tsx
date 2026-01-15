@@ -98,6 +98,7 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
   const { hoveredVenueId, selectedVenue } = useVenueStore();
   const [mapType, setMapType] = useState<'roadmap' | 'satellite'>('roadmap');
   const [isMapReady, setIsMapReady] = useState(false); // Track when map is loaded
+  const hasInitializedMarkersRef = useRef(false); // Track if initial markers/fitBounds done
 
   // Store initial position in ref so it doesn't change on re-renders
   // This prevents the map from continuously trying to re-center
@@ -112,9 +113,9 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
     }
   }, [mapType]);
 
-  // Report bounds changes
+  // Report bounds changes (only after markers have been initialized)
   const reportBounds = useCallback(() => {
-    if (!mapRef.current || !onBoundsChange) return;
+    if (!mapRef.current || !onBoundsChange || !hasInitializedMarkersRef.current) return;
     const bounds = mapRef.current.getBounds();
     const zoom = mapRef.current.getZoom();
     if (bounds && zoom !== undefined) {
@@ -228,6 +229,8 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
       // Skip fitBounds if we're restoring a saved position (e.g., returning from list view)
       if (isRestoringPositionRef.current) {
         isRestoringPositionRef.current = false;
+        // Mark as initialized so bounds are reported
+        hasInitializedMarkersRef.current = true;
         return;
       }
 
@@ -238,6 +241,8 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
         });
         mapRef.current.fitBounds(bounds, 50);
       }
+      // Mark as initialized - next idle event will report correct bounds
+      hasInitializedMarkersRef.current = true;
     }
   }, [venues, onVenueSelect, isMapReady]);
 
