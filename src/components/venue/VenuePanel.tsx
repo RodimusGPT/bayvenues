@@ -152,9 +152,11 @@ export function VenuePanel({ venue, onClose }: VenuePanelProps) {
             {formatPriceRange(venue.price_range.min, venue.price_range.max)}
           </span>
         )}
-        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-          {formatCapacity(venue.capacity.min, venue.capacity.max)}
-        </span>
+        {venue.capacity && (
+          <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+            {formatCapacity(venue.capacity.min, venue.capacity.max)}
+          </span>
+        )}
         {venue.setting.map((s) => (
           <span
             key={s}

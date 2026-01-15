@@ -53,8 +53,10 @@ export function filterVenues(venues: Venue[], filters: FilterState): Venue[] {
     }
 
     // Capacity filter
-    if (venue.capacity.max < filters.capacityRange[0]) return false;
-    if (venue.capacity.min > filters.capacityRange[1]) return false;
+    if (venue.capacity) {
+      if (venue.capacity.max < filters.capacityRange[0]) return false;
+      if (venue.capacity.min > filters.capacityRange[1]) return false;
+    }
 
     return true;
   });
@@ -95,8 +97,10 @@ export function getCapacityBounds(venues: Venue[]): [number, number] {
   let max = 0;
 
   venues.forEach((venue) => {
-    min = Math.min(min, venue.capacity.min);
-    max = Math.max(max, venue.capacity.max);
+    if (venue.capacity) {
+      min = Math.min(min, venue.capacity.min);
+      max = Math.max(max, venue.capacity.max);
+    }
   });
 
   return [min === Infinity ? 0 : min, max];

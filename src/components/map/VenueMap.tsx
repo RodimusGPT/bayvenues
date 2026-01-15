@@ -139,8 +139,11 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
       clustererRef.current.clearMarkers();
     }
 
+    // Filter venues with valid locations
+    const venuesWithLocation = venues.filter(v => v.location?.lat && v.location?.lng);
+
     // Create new markers
-    const markers = venues.map((venue) => {
+    const markers = venuesWithLocation.map((venue) => {
       const country = getCountryForRegion(venue.region);
       const color = COUNTRY_COLORS[country];
 
@@ -150,6 +153,9 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
         title: venue.name,
         optimized: true,
       });
+
+      // Store venue ID for hover matching
+      (marker as any).venueId = venue.id;
 
       marker.addListener('click', () => {
         onVenueSelect(venue);
@@ -198,9 +204,9 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
         return;
       }
 
-      if (venues.length > 0) {
+      if (venuesWithLocation.length > 0) {
         const bounds = new google.maps.LatLngBounds();
-        venues.forEach((venue) => {
+        venuesWithLocation.forEach((venue) => {
           bounds.extend({ lat: venue.location.lat, lng: venue.location.lng });
         });
         mapRef.current.fitBounds(bounds, 50);
@@ -210,14 +216,16 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
 
   // Highlight hovered marker
   useEffect(() => {
-    markersRef.current.forEach((marker, index) => {
-      const venue = venues[index];
-      if (venue?.id === hoveredVenueId) {
+    if (!hoveredVenueId) return;
+
+    markersRef.current.forEach((marker) => {
+      // Use venueId stored on marker instead of array index
+      if ((marker as any).venueId === hoveredVenueId) {
         marker.setAnimation(google.maps.Animation.BOUNCE);
         setTimeout(() => marker.setAnimation(null), 700);
       }
     });
-  }, [hoveredVenueId, venues]);
+  }, [hoveredVenueId]);
 
   return (
     <div className="relative w-full h-full">

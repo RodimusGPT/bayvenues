@@ -77,6 +77,7 @@ function App() {
     if (!mapBounds) return filteredVenues;
 
     return filteredVenues.filter((venue) => {
+      if (!venue.location) return false;
       const { lat, lng } = venue.location;
       return (
         lat >= mapBounds.south &&

@@ -123,9 +123,11 @@ export function FavoritesPanel({ venues, onVenueSelect, onClose }: FavoritesPane
                             {formatPriceRange(venue.price_range.min, venue.price_range.max)}
                           </span>
                         )}
-                        <span className="text-xs text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded">
-                          {formatCapacity(venue.capacity.min, venue.capacity.max)}
-                        </span>
+                        {venue.capacity && (
+                          <span className="text-xs text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded">
+                            {formatCapacity(venue.capacity.min, venue.capacity.max)}
+                          </span>
+                        )}
                       </div>
                     </div>
 

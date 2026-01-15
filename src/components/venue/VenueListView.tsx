@@ -86,9 +86,11 @@ function VenueCard({ venue, onSelect }: { venue: Venue; onSelect: () => void }) 
               {formatPriceRange(venue.price_range.min, venue.price_range.max)}
             </span>
           )}
-          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700">
-            {formatCapacity(venue.capacity.min, venue.capacity.max)}
-          </span>
+          {venue.capacity && (
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700">
+              {formatCapacity(venue.capacity.min, venue.capacity.max)}
+            </span>
+          )}
         </div>
       </div>
     </div>
