@@ -61,13 +61,17 @@ export function Header({ totalVenues, filteredCount, showFilters, onToggleFilter
   return (
     <header className="bg-white border-b border-gray-200 px-4 py-3 flex-shrink-0">
       <div className="flex items-center gap-4">
-        {/* Logo */}
-        <div className="flex items-center gap-2">
+        {/* Logo - click to reload */}
+        <button
+          onClick={() => window.location.reload()}
+          className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+          title="Reload page"
+        >
           <svg className="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <h1 className="text-lg font-bold text-gray-900 hidden sm:block">VenueFinder</h1>
-        </div>
+        </button>
 
         {/* Search Bar */}
         <div className="flex-1 max-w-md">
