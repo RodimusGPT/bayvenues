@@ -64,10 +64,35 @@ function createMarkerIcon(color: string): google.maps.Icon {
   };
 }
 
+// Create highlighted marker icon (larger, with glow effect)
+function createHighlightMarkerIcon(color: string): google.maps.Icon {
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="60" viewBox="0 0 48 60">
+      <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      <path filter="url(#glow)" fill="${color}" stroke="white" stroke-width="3" d="M24 2C12.402 2 3 11.402 3 23c0 15.75 21 34.5 21 34.5s21-18.75 21-34.5c0-11.598-9.402-21-21-21z"/>
+      <circle fill="white" cx="24" cy="21" r="7"/>
+    </svg>
+  `;
+  return {
+    url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg),
+    scaledSize: new google.maps.Size(48, 60),
+    anchor: new google.maps.Point(24, 60),
+  };
+}
+
 export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPosition }: VenueMapProps) {
   const mapRef = useRef<google.maps.Map | null>(null);
   const markersRef = useRef<google.maps.Marker[]>([]);
   const clustererRef = useRef<MarkerClusterer | null>(null);
+  const highlightMarkerRef = useRef<google.maps.Marker | null>(null);
   const prevVenueIdsRef = useRef<string>('');
   const isRestoringPositionRef = useRef(!!initialPosition); // Track if we're restoring a saved position
   const { hoveredVenueId, selectedVenue } = useVenueStore();
@@ -227,16 +252,45 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
     });
   }, [hoveredVenueId]);
 
-  // Highlight selected venue marker (no pan/zoom to keep list intact)
+  // Highlight selected venue with a temporary marker (visible even when clustered)
   useEffect(() => {
-    if (!selectedVenue) return;
+    // Clean up previous highlight marker
+    if (highlightMarkerRef.current) {
+      highlightMarkerRef.current.setMap(null);
+      highlightMarkerRef.current = null;
+    }
 
-    markersRef.current.forEach((marker) => {
-      if ((marker as any).venueId === selectedVenue.id) {
-        marker.setAnimation(google.maps.Animation.BOUNCE);
-        setTimeout(() => marker.setAnimation(null), 1400); // Longer bounce for visibility
-      }
+    if (!selectedVenue?.location || !mapRef.current) return;
+
+    const country = getCountryForRegion(selectedVenue.region);
+    const color = COUNTRY_COLORS[country];
+
+    // Create a highlighted marker directly on the map (bypasses clustering)
+    const highlightMarker = new google.maps.Marker({
+      position: { lat: selectedVenue.location.lat, lng: selectedVenue.location.lng },
+      map: mapRef.current,
+      icon: createHighlightMarkerIcon(color),
+      title: selectedVenue.name,
+      animation: google.maps.Animation.BOUNCE,
+      zIndex: 9999, // Ensure it's on top
     });
+
+    highlightMarkerRef.current = highlightMarker;
+
+    // Stop bouncing after a bit, then remove after longer delay
+    setTimeout(() => {
+      if (highlightMarkerRef.current) {
+        highlightMarkerRef.current.setAnimation(null);
+      }
+    }, 2100); // 3 bounces
+
+    // Remove highlight marker after 4 seconds
+    setTimeout(() => {
+      if (highlightMarkerRef.current) {
+        highlightMarkerRef.current.setMap(null);
+        highlightMarkerRef.current = null;
+      }
+    }, 4000);
   }, [selectedVenue]);
 
   return (
