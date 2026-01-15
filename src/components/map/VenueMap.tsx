@@ -97,6 +97,7 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
   const isRestoringPositionRef = useRef(!!initialPosition); // Track if we're restoring a saved position
   const { hoveredVenueId, selectedVenue } = useVenueStore();
   const [mapType, setMapType] = useState<'roadmap' | 'satellite'>('roadmap');
+  const [isMapReady, setIsMapReady] = useState(false); // Track when map is loaded
 
   // Store initial position in ref so it doesn't change on re-renders
   // This prevents the map from continuously trying to re-center
@@ -130,6 +131,7 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
 
   const onLoad = useCallback((map: google.maps.Map) => {
     mapRef.current = map;
+    setIsMapReady(true); // Signal that map is ready for markers
 
     // Listen for bounds changes
     map.addListener('idle', reportBounds);
@@ -150,9 +152,9 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
     mapRef.current = null;
   }, []);
 
-  // Update markers when venues change
+  // Update markers when venues change or map becomes ready
   useEffect(() => {
-    if (!mapRef.current) return;
+    if (!mapRef.current || !isMapReady) return;
 
     // Clear existing markers
     markersRef.current.forEach(marker => {
@@ -237,7 +239,7 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
         mapRef.current.fitBounds(bounds, 50);
       }
     }
-  }, [venues, onVenueSelect]);
+  }, [venues, onVenueSelect, isMapReady]);
 
   // Highlight hovered marker
   useEffect(() => {
