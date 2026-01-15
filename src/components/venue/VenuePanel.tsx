@@ -32,11 +32,22 @@ export function VenuePanel({ venue, onClose }: VenuePanelProps) {
   const hasImages = (venue.headerImages && venue.headerImages.length > 0) || venue.headerImage;
 
   return (
-    <aside className="fixed right-0 top-[57px] bottom-0 w-full sm:w-[420px] bg-white shadow-2xl overflow-y-auto z-40 animate-slide-in-right venue-panel">
+    <aside className="lg:relative lg:w-full lg:h-full lg:top-auto lg:right-auto lg:shadow-none lg:z-auto fixed right-0 top-[57px] bottom-0 w-full sm:w-[420px] bg-white shadow-2xl overflow-y-auto z-40 animate-slide-in-right venue-panel">
+      {/* Desktop back to list bar */}
+      <button
+        onClick={onClose}
+        className="hidden lg:flex w-full py-2.5 px-4 bg-gray-50 border-b items-center gap-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors"
+        aria-label="Back to list"
+      >
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </svg>
+        <span className="text-sm font-medium">Back to list</span>
+      </button>
       {/* Mobile back bar - tap anywhere to close */}
       <button
         onClick={onClose}
-        className="sm:hidden w-full py-4 bg-gray-100 border-b flex items-center justify-center gap-2 text-gray-700 active:bg-gray-200"
+        className="lg:hidden sm:hidden w-full py-4 bg-gray-100 border-b flex items-center justify-center gap-2 text-gray-700 active:bg-gray-200"
         aria-label="Go back"
       >
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

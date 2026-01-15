@@ -5,9 +5,23 @@ import type { Venue } from '../../types/venue';
 import { COUNTRY_COLORS, getCountryForRegion } from '../../types/venue';
 import { useVenueStore } from '../../stores/venueStore';
 
+export interface MapBounds {
+  north: number;
+  south: number;
+  east: number;
+  west: number;
+}
+
+export interface MapPosition {
+  center: { lat: number; lng: number };
+  zoom: number;
+}
+
 interface VenueMapProps {
   venues: Venue[];
   onVenueSelect: (venue: Venue) => void;
+  onBoundsChange?: (bounds: MapBounds, zoom: number) => void;
+  initialPosition?: MapPosition;
 }
 
 // Default to world view
@@ -50,13 +64,19 @@ function createMarkerIcon(color: string): google.maps.Icon {
   };
 }
 
-export function VenueMap({ venues, onVenueSelect }: VenueMapProps) {
+export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPosition }: VenueMapProps) {
   const mapRef = useRef<google.maps.Map | null>(null);
   const markersRef = useRef<google.maps.Marker[]>([]);
   const clustererRef = useRef<MarkerClusterer | null>(null);
   const prevVenueIdsRef = useRef<string>('');
+  const isRestoringPositionRef = useRef(!!initialPosition); // Track if we're restoring a saved position
   const { hoveredVenueId } = useVenueStore();
   const [mapType, setMapType] = useState<'roadmap' | 'satellite'>('roadmap');
+
+  // Store initial position in ref so it doesn't change on re-renders
+  // This prevents the map from continuously trying to re-center
+  const initialCenterRef = useRef(initialPosition?.center || WORLD_CENTER);
+  const initialZoomRef = useRef(initialPosition?.zoom || DEFAULT_ZOOM);
 
   const toggleMapType = useCallback(() => {
     const newType = mapType === 'roadmap' ? 'satellite' : 'roadmap';
@@ -66,9 +86,29 @@ export function VenueMap({ venues, onVenueSelect }: VenueMapProps) {
     }
   }, [mapType]);
 
+  // Report bounds changes
+  const reportBounds = useCallback(() => {
+    if (!mapRef.current || !onBoundsChange) return;
+    const bounds = mapRef.current.getBounds();
+    const zoom = mapRef.current.getZoom();
+    if (bounds && zoom !== undefined) {
+      const ne = bounds.getNorthEast();
+      const sw = bounds.getSouthWest();
+      onBoundsChange({
+        north: ne.lat(),
+        south: sw.lat(),
+        east: ne.lng(),
+        west: sw.lng(),
+      }, zoom);
+    }
+  }, [onBoundsChange]);
+
   const onLoad = useCallback((map: google.maps.Map) => {
     mapRef.current = map;
-  }, []);
+
+    // Listen for bounds changes
+    map.addListener('idle', reportBounds);
+  }, [reportBounds]);
 
   const onUnmount = useCallback(() => {
     // Clean up markers
@@ -152,6 +192,12 @@ export function VenueMap({ venues, onVenueSelect }: VenueMapProps) {
     if (currentVenueIds !== prevVenueIdsRef.current) {
       prevVenueIdsRef.current = currentVenueIds;
 
+      // Skip fitBounds if we're restoring a saved position (e.g., returning from list view)
+      if (isRestoringPositionRef.current) {
+        isRestoringPositionRef.current = false;
+        return;
+      }
+
       if (venues.length > 0) {
         const bounds = new google.maps.LatLngBounds();
         venues.forEach((venue) => {
@@ -177,8 +223,8 @@ export function VenueMap({ venues, onVenueSelect }: VenueMapProps) {
     <div className="relative w-full h-full">
       <GoogleMap
         mapContainerStyle={containerStyle}
-        center={WORLD_CENTER}
-        zoom={DEFAULT_ZOOM}
+        center={initialCenterRef.current}
+        zoom={initialZoomRef.current}
         onLoad={onLoad}
         onUnmount={onUnmount}
         options={mapOptions}

@@ -27,7 +27,7 @@ export function FavoritesPanel({ venues, onVenueSelect, onClose }: FavoritesPane
   const favoriteVenues = venues.filter((venue) => favorites.has(venue.id));
 
   return (
-    <aside className="fixed right-0 top-[57px] bottom-0 w-full sm:w-[380px] bg-white shadow-2xl overflow-hidden z-40 animate-slide-in-right flex flex-col">
+    <aside className="lg:relative lg:w-full lg:h-full lg:top-auto lg:right-auto lg:shadow-none lg:z-auto fixed right-0 top-[57px] bottom-0 w-full sm:w-[380px] bg-white shadow-2xl overflow-hidden z-40 animate-slide-in-right flex flex-col">
       {/* Header */}
       <div className="px-4 py-3 border-b bg-gradient-to-r from-red-50 to-pink-50 flex items-center justify-between flex-shrink-0">
         <div className="flex items-center gap-2">
