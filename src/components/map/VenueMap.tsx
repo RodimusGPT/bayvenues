@@ -64,27 +64,39 @@ function createMarkerIcon(color: string): google.maps.Icon {
   };
 }
 
-// Create highlighted marker icon (larger, with glow effect)
+// Create highlighted marker icon (larger, with pulsing ring effect)
 function createHighlightMarkerIcon(color: string): google.maps.Icon {
+  // Create a golden highlight color for better visibility
+  const highlightColor = '#FFD700'; // Gold
   const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="60" viewBox="0 0 48 60">
+    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="90" viewBox="0 0 80 90">
       <defs>
         <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
           <feMerge>
             <feMergeNode in="coloredBlur"/>
             <feMergeNode in="SourceGraphic"/>
           </feMerge>
         </filter>
       </defs>
-      <path filter="url(#glow)" fill="${color}" stroke="white" stroke-width="3" d="M24 2C12.402 2 3 11.402 3 23c0 15.75 21 34.5 21 34.5s21-18.75 21-34.5c0-11.598-9.402-21-21-21z"/>
-      <circle fill="white" cx="24" cy="21" r="7"/>
+      <!-- Pulsing rings -->
+      <circle cx="40" cy="30" r="20" fill="none" stroke="${highlightColor}" stroke-width="3" opacity="0">
+        <animate attributeName="r" from="15" to="35" dur="1.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" from="0.8" to="0" dur="1.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="40" cy="30" r="20" fill="none" stroke="${highlightColor}" stroke-width="2" opacity="0">
+        <animate attributeName="r" from="15" to="35" dur="1.5s" begin="0.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" from="0.6" to="0" dur="1.5s" begin="0.5s" repeatCount="indefinite"/>
+      </circle>
+      <!-- Main marker pin -->
+      <path filter="url(#glow)" fill="${color}" stroke="${highlightColor}" stroke-width="3" d="M40 5C26.745 5 16 15.745 16 29c0 18.375 24 40.25 24 40.25s24-21.875 24-40.25c0-13.255-10.745-24-24-24z"/>
+      <circle fill="white" cx="40" cy="27" r="8"/>
     </svg>
   `;
   return {
     url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg),
-    scaledSize: new google.maps.Size(48, 60),
-    anchor: new google.maps.Point(24, 60),
+    scaledSize: new google.maps.Size(80, 90),
+    anchor: new google.maps.Point(40, 90),
   };
 }
 
@@ -295,33 +307,26 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
     const color = COUNTRY_COLORS[country];
 
     // Create a highlighted marker directly on the map (bypasses clustering)
+    // Uses animated SVG with pulsing rings instead of bounce animation
     const highlightMarker = new google.maps.Marker({
       position: { lat: selectedVenue.location.lat, lng: selectedVenue.location.lng },
       map: mapRef.current,
       icon: createHighlightMarkerIcon(color),
       title: selectedVenue.name,
-      animation: google.maps.Animation.BOUNCE,
       zIndex: 9999, // Ensure it's on top
     });
 
     highlightMarkerRef.current = highlightMarker;
 
-    // Stop bouncing after 3 bounces (~2.1s)
-    const stopBounceTimeout = setTimeout(() => {
-      if (highlightMarkerRef.current === highlightMarker) {
-        highlightMarker.setAnimation(null);
-      }
-    }, 2100);
-
-    // Remove highlight marker after 4 seconds
+    // Remove highlight marker after 5 seconds (longer to enjoy the pulse effect)
     const removeTimeout = setTimeout(() => {
       if (highlightMarkerRef.current === highlightMarker) {
         highlightMarker.setMap(null);
         highlightMarkerRef.current = null;
       }
-    }, 4000);
+    }, 5000);
 
-    highlightTimeoutsRef.current = [stopBounceTimeout, removeTimeout];
+    highlightTimeoutsRef.current = [removeTimeout];
   }, [selectedVenue]);
 
   return (
