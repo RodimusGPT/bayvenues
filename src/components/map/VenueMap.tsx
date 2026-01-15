@@ -242,18 +242,13 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
           bounds.extend({ lat: venue.location.lat, lng: venue.location.lng });
         });
         mapRef.current.fitBounds(bounds, 50);
-
-        // Wait for fitBounds animation to complete, then report bounds
-        google.maps.event.addListenerOnce(mapRef.current, 'idle', () => {
-          hasInitializedMarkersRef.current = true;
-          reportBounds();
-        });
-      } else {
-        // No venues with location - mark as initialized anyway
-        hasInitializedMarkersRef.current = true;
       }
+      // Mark as initialized after a delay to let fitBounds complete
+      setTimeout(() => {
+        hasInitializedMarkersRef.current = true;
+      }, 500);
     }
-  }, [venues, onVenueSelect, isMapReady, reportBounds]);
+  }, [venues, onVenueSelect, isMapReady]);
 
   // Highlight hovered marker
   useEffect(() => {
