@@ -93,6 +93,8 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
   const markersRef = useRef<google.maps.Marker[]>([]);
   const clustererRef = useRef<MarkerClusterer | null>(null);
   const highlightMarkerRef = useRef<google.maps.Marker | null>(null);
+  const highlightTimeoutsRef = useRef<NodeJS.Timeout[]>([]); // Track timeouts for cleanup
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null); // Track hover animation timeout
   const prevVenueIdsRef = useRef<string>('');
   const isRestoringPositionRef = useRef(!!initialPosition); // Track if we're restoring a saved position
   const { hoveredVenueId, selectedVenue } = useVenueStore();
@@ -248,20 +250,40 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
 
   // Highlight hovered marker
   useEffect(() => {
-    if (!hoveredVenueId) return;
+    // Clear previous hover animation timeout
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
+    }
 
+    // Stop any currently bouncing markers
     markersRef.current.forEach((marker) => {
-      // Use venueId stored on marker instead of array index
-      if ((marker as any).venueId === hoveredVenueId) {
-        marker.setAnimation(google.maps.Animation.BOUNCE);
-        setTimeout(() => marker.setAnimation(null), 700);
+      if (marker.getAnimation()) {
+        marker.setAnimation(null);
       }
     });
+
+    if (!hoveredVenueId) return;
+
+    const hoveredMarker = markersRef.current.find(
+      (marker) => (marker as any).venueId === hoveredVenueId
+    );
+
+    if (hoveredMarker) {
+      hoveredMarker.setAnimation(google.maps.Animation.BOUNCE);
+      hoverTimeoutRef.current = setTimeout(() => {
+        hoveredMarker.setAnimation(null);
+      }, 700);
+    }
   }, [hoveredVenueId]);
 
   // Highlight selected venue with a temporary marker (visible even when clustered)
   useEffect(() => {
-    // Clean up previous highlight marker
+    // Clear any pending timeouts from previous selection
+    highlightTimeoutsRef.current.forEach(clearTimeout);
+    highlightTimeoutsRef.current = [];
+
+    // Clean up previous highlight marker immediately
     if (highlightMarkerRef.current) {
       highlightMarkerRef.current.setMap(null);
       highlightMarkerRef.current = null;
@@ -284,20 +306,22 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
 
     highlightMarkerRef.current = highlightMarker;
 
-    // Stop bouncing after a bit, then remove after longer delay
-    setTimeout(() => {
-      if (highlightMarkerRef.current) {
-        highlightMarkerRef.current.setAnimation(null);
+    // Stop bouncing after 3 bounces (~2.1s)
+    const stopBounceTimeout = setTimeout(() => {
+      if (highlightMarkerRef.current === highlightMarker) {
+        highlightMarker.setAnimation(null);
       }
-    }, 2100); // 3 bounces
+    }, 2100);
 
     // Remove highlight marker after 4 seconds
-    setTimeout(() => {
-      if (highlightMarkerRef.current) {
-        highlightMarkerRef.current.setMap(null);
+    const removeTimeout = setTimeout(() => {
+      if (highlightMarkerRef.current === highlightMarker) {
+        highlightMarker.setMap(null);
         highlightMarkerRef.current = null;
       }
     }, 4000);
+
+    highlightTimeoutsRef.current = [stopBounceTimeout, removeTimeout];
   }, [selectedVenue]);
 
   return (
