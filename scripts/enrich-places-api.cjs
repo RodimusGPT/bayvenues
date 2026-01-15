@@ -12,7 +12,12 @@
 const fs = require('fs');
 const path = require('path');
 
-const GOOGLE_API_KEY = 'AIzaSyDDASjX3hyO8UvEI_YyE0Hn6fd1euISXMo';
+const GOOGLE_API_KEY = process.env.GOOGLE_PLACES_API_KEY;
+if (!GOOGLE_API_KEY) {
+  console.error('Error: GOOGLE_PLACES_API_KEY environment variable is required');
+  console.error('Set it with: export GOOGLE_PLACES_API_KEY=your_key_here');
+  process.exit(1);
+}
 const VENUES_PATH = path.join(__dirname, '../src/data/venues.json');
 
 // Rate limiting - Google allows 100 QPS but let's be conservative

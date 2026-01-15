@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Video } from '../../types/venue';
-import { extractVideoId, getYouTubeThumbnail } from '../../utils/formatters';
+import { extractVideoId, getYouTubeThumbnail, sanitizeUrl } from '../../utils/formatters';
 
 interface VenueVideosProps {
   videos?: Video[];
@@ -9,9 +9,10 @@ interface VenueVideosProps {
 
 export function VenueVideos({ videos, youtubeSearch }: VenueVideosProps) {
   const hasVideos = videos && videos.length > 0;
+  const safeYoutubeSearch = sanitizeUrl(youtubeSearch);
 
   // If no videos and no search URL, don't render anything
-  if (!hasVideos && !youtubeSearch) {
+  if (!hasVideos && !safeYoutubeSearch) {
     return null;
   }
 
@@ -23,9 +24,9 @@ export function VenueVideos({ videos, youtubeSearch }: VenueVideosProps) {
           videos.map((video, index) => (
             <LazyYouTubeEmbed key={index} video={video} />
           ))
-        ) : youtubeSearch ? (
+        ) : safeYoutubeSearch ? (
           <a
-            href={youtubeSearch}
+            href={safeYoutubeSearch}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 p-4 bg-gradient-to-br from-red-500 to-red-600 rounded-xl text-white hover:opacity-90 transition-opacity"
@@ -52,11 +53,15 @@ export function VenueVideos({ videos, youtubeSearch }: VenueVideosProps) {
 function LazyYouTubeEmbed({ video }: { video: Video }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const videoId = extractVideoId(video.url);
+  const safeVideoUrl = sanitizeUrl(video.url);
 
   if (!videoId) {
+    // Don't render external links with unsafe URLs
+    if (!safeVideoUrl) return null;
+
     return (
       <a
-        href={video.url}
+        href={safeVideoUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="block p-3 bg-gray-100 rounded-lg text-sm text-gray-600 hover:bg-gray-200"

@@ -1,24 +1,25 @@
 import type { Venue } from '../../types/venue';
+import { sanitizeUrl } from '../../utils/formatters';
 
 interface VenuePhotosProps {
   venue: Venue;
 }
 
 export function VenuePhotos({ venue }: VenuePhotosProps) {
-  const hasInstagram = venue.photos?.instagram;
-  const hasGoogle = venue.photos?.google;
+  const instagramUrl = sanitizeUrl(venue.photos?.instagram);
+  const googleUrl = sanitizeUrl(venue.photos?.google);
 
-  if (!hasInstagram && !hasGoogle) {
+  if (!instagramUrl && !googleUrl) {
     return null;
   }
 
   return (
     <div>
       <h3 className="text-sm font-semibold text-gray-900 mb-3">Photos</h3>
-      <div className={`grid gap-3 ${hasInstagram && hasGoogle ? 'grid-cols-2' : 'grid-cols-1'}`}>
-        {hasInstagram && (
+      <div className={`grid gap-3 ${instagramUrl && googleUrl ? 'grid-cols-2' : 'grid-cols-1'}`}>
+        {instagramUrl && (
           <a
-            href={venue.photos.instagram}
+            href={instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="flex flex-col items-center gap-2 p-4 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl text-white hover:opacity-90 transition-opacity"
@@ -30,9 +31,9 @@ export function VenuePhotos({ venue }: VenuePhotosProps) {
             <span className="text-xs opacity-80">View tagged photos</span>
           </a>
         )}
-        {hasGoogle && (
+        {googleUrl && (
           <a
-            href={venue.photos.google}
+            href={googleUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="flex flex-col items-center gap-2 p-4 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl text-white hover:opacity-90 transition-opacity"

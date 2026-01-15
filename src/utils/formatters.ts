@@ -30,3 +30,28 @@ export function extractVideoId(url: string): string {
 export function getYouTubeThumbnail(videoId: string): string {
   return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
 }
+
+/**
+ * Sanitize URL to prevent XSS attacks from javascript: or data: schemes.
+ * Returns undefined for invalid/unsafe URLs.
+ */
+const SAFE_URL_SCHEMES = ['http:', 'https:', 'tel:', 'mailto:'];
+
+export function sanitizeUrl(url: string | null | undefined): string | undefined {
+  if (!url || typeof url !== 'string') return undefined;
+
+  try {
+    const parsed = new URL(url, 'https://example.com'); // Base URL for relative paths
+    if (SAFE_URL_SCHEMES.includes(parsed.protocol)) {
+      return url;
+    }
+    return undefined;
+  } catch {
+    // URL parsing failed - could be a relative path or invalid
+    // Only allow if it starts with / or is clearly a relative path
+    if (url.startsWith('/') || url.startsWith('./') || url.startsWith('../')) {
+      return url;
+    }
+    return undefined;
+  }
+}

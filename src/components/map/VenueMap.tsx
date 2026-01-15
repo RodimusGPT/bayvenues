@@ -70,7 +70,7 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
   const clustererRef = useRef<MarkerClusterer | null>(null);
   const prevVenueIdsRef = useRef<string>('');
   const isRestoringPositionRef = useRef(!!initialPosition); // Track if we're restoring a saved position
-  const { hoveredVenueId } = useVenueStore();
+  const { hoveredVenueId, selectedVenue } = useVenueStore();
   const [mapType, setMapType] = useState<'roadmap' | 'satellite'>('roadmap');
 
   // Store initial position in ref so it doesn't change on re-renders
@@ -139,8 +139,8 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
       clustererRef.current.clearMarkers();
     }
 
-    // Filter venues with valid locations
-    const venuesWithLocation = venues.filter(v => v.location?.lat && v.location?.lng);
+    // Filter venues with valid locations (use != null to allow lat/lng of 0)
+    const venuesWithLocation = venues.filter(v => v.location?.lat != null && v.location?.lng != null);
 
     // Create new markers
     const markers = venuesWithLocation.map((venue) => {
@@ -226,6 +226,18 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
       }
     });
   }, [hoveredVenueId]);
+
+  // Highlight selected venue marker (no pan/zoom to keep list intact)
+  useEffect(() => {
+    if (!selectedVenue) return;
+
+    markersRef.current.forEach((marker) => {
+      if ((marker as any).venueId === selectedVenue.id) {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+        setTimeout(() => marker.setAnimation(null), 1400); // Longer bounce for visibility
+      }
+    });
+  }, [selectedVenue]);
 
   return (
     <div className="relative w-full h-full">

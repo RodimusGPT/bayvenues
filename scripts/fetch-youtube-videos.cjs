@@ -1,7 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 
-const API_KEY = 'AIzaSyD7Kc2t8QNqvmndzkqj-pmk9AkEuSAFp5M';
+const API_KEY = process.env.YOUTUBE_API_KEY;
+if (!API_KEY) {
+  console.error('Error: YOUTUBE_API_KEY environment variable is required');
+  console.error('Set it with: export YOUTUBE_API_KEY=your_key_here');
+  process.exit(1);
+}
 const VENUES_PATH = path.join(__dirname, '../src/data/venues.json');
 const BATCH_SIZE = 50; // Process 50 at a time to stay within quota
 

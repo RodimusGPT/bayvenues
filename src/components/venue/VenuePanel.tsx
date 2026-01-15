@@ -1,6 +1,6 @@
 import type { Venue, Country } from '../../types/venue';
 import { COUNTRY_COLORS, getCountryForRegion } from '../../types/venue';
-import { formatPriceRange, formatCapacity } from '../../utils/formatters';
+import { formatPriceRange, formatCapacity, sanitizeUrl } from '../../utils/formatters';
 import { VenuePhotos } from './VenuePhotos';
 import { VenueVideos } from './VenueVideos';
 import { VenueReviews } from './VenueReviews';
@@ -213,32 +213,36 @@ export function VenuePanel({ venue, onClose }: VenuePanelProps) {
                 <span className="text-sm text-gray-700">{venue.phone}</span>
               </a>
             )}
-            <a
-              href={venue.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
-            >
-              <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-              </svg>
-              <span className="text-sm text-gray-700">Visit Website</span>
-            </a>
-            <a
-              href={venue.google_maps_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
-            >
-              <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              <div>
-                <span className="text-sm text-gray-700 block">Get Directions</span>
-                <span className="text-xs text-gray-500">{venue.address}</span>
-              </div>
-            </a>
+            {sanitizeUrl(venue.website) && (
+              <a
+                href={sanitizeUrl(venue.website)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                </svg>
+                <span className="text-sm text-gray-700">Visit Website</span>
+              </a>
+            )}
+            {sanitizeUrl(venue.google_maps_url) && (
+              <a
+                href={sanitizeUrl(venue.google_maps_url)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <div>
+                  <span className="text-sm text-gray-700 block">Get Directions</span>
+                  <span className="text-xs text-gray-500">{venue.address}</span>
+                </div>
+              </a>
+            )}
           </div>
         </div>
       </div>

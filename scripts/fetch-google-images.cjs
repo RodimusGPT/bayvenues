@@ -3,7 +3,13 @@ const path = require('path');
 
 // Serper API for Google Image Search
 // Get your API key at https://serper.dev
-const SERPER_API_KEY = process.env.SERPER_API_KEY || '806b881ba7599d5e6a0684f9e0e1a3f1714fb88a';
+const SERPER_API_KEY = process.env.SERPER_API_KEY;
+if (!SERPER_API_KEY) {
+  console.error('Error: SERPER_API_KEY environment variable is required');
+  console.error('Get your API key at https://serper.dev');
+  console.error('Set it with: export SERPER_API_KEY=your_key_here');
+  process.exit(1);
+}
 
 const VENUES_PATH = path.join(__dirname, '../src/data/venues.json');
 const BATCH_SIZE = 50; // Serper has 2,500 free queries
