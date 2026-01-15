@@ -115,9 +115,13 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
 
   const onLoad = useCallback((map: google.maps.Map) => {
     mapRef.current = map;
-    setIsMapReady(true); // Signal that map is ready for markers
 
-    // Listen for bounds changes - use function call to always get latest reportBounds
+    // Wait for tiles to load before signaling ready - this ensures map is fully rendered
+    google.maps.event.addListenerOnce(map, 'tilesloaded', () => {
+      setIsMapReady(true);
+    });
+
+    // Listen for bounds changes
     map.addListener('idle', () => {
       if (!mapRef.current || !onBoundsChange) return;
       const bounds = mapRef.current.getBounds();
