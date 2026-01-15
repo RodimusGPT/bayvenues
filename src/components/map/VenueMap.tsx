@@ -98,6 +98,7 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
   const { hoveredVenueId, selectedVenue } = useVenueStore();
   const [mapType, setMapType] = useState<'roadmap' | 'satellite'>('roadmap');
   const [isMapReady, setIsMapReady] = useState(false); // Track when map is loaded
+  const [markersReady, setMarkersReady] = useState(false); // Track when markers are created
 
   // Store initial position in ref so it doesn't change on re-renders
   // This prevents the map from continuously trying to re-center
@@ -216,6 +217,9 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
       },
     });
 
+    // Signal that markers are ready
+    setMarkersReady(true);
+
     // Only fit bounds when the set of venue IDs actually changes
     // This prevents zoom reset when toggling favorites or other state changes
     const currentVenueIds = venues.map(v => v.id).sort().join(',');
@@ -302,6 +306,15 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
         onUnmount={onUnmount}
         options={mapOptions}
       />
+      {/* Loading indicator while markers are being created */}
+      {!markersReady && (
+        <div className="absolute inset-0 flex items-center justify-center bg-white/70 z-20 pointer-events-none">
+          <div className="flex flex-col items-center gap-3">
+            <div className="animate-spin rounded-full h-10 w-10 border-3 border-primary-600 border-t-transparent"></div>
+            <span className="text-sm text-gray-600 font-medium">Loading venues...</span>
+          </div>
+        </div>
+      )}
       {/* Map Type Toggle Button */}
       <button
         onClick={toggleMapType}
