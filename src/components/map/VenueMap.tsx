@@ -229,8 +229,10 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
       // Skip fitBounds if we're restoring a saved position (e.g., returning from list view)
       if (isRestoringPositionRef.current) {
         isRestoringPositionRef.current = false;
-        // Mark as initialized so bounds are reported
+        // Mark as initialized and report current bounds
         hasInitializedMarkersRef.current = true;
+        // Small delay to ensure map is settled
+        setTimeout(() => reportBounds(), 100);
         return;
       }
 
@@ -240,11 +242,18 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
           bounds.extend({ lat: venue.location.lat, lng: venue.location.lng });
         });
         mapRef.current.fitBounds(bounds, 50);
+
+        // Wait for fitBounds animation to complete, then report bounds
+        google.maps.event.addListenerOnce(mapRef.current, 'idle', () => {
+          hasInitializedMarkersRef.current = true;
+          reportBounds();
+        });
+      } else {
+        // No venues with location - mark as initialized anyway
+        hasInitializedMarkersRef.current = true;
       }
-      // Mark as initialized - next idle event will report correct bounds
-      hasInitializedMarkersRef.current = true;
     }
-  }, [venues, onVenueSelect, isMapReady]);
+  }, [venues, onVenueSelect, isMapReady, reportBounds]);
 
   // Highlight hovered marker
   useEffect(() => {
