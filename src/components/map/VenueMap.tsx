@@ -112,30 +112,27 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
     }
   }, [mapType]);
 
-  // Report bounds changes
-  const reportBounds = useCallback(() => {
-    if (!mapRef.current || !onBoundsChange) return;
-    const bounds = mapRef.current.getBounds();
-    const zoom = mapRef.current.getZoom();
-    if (bounds && zoom !== undefined) {
-      const ne = bounds.getNorthEast();
-      const sw = bounds.getSouthWest();
-      onBoundsChange({
-        north: ne.lat(),
-        south: sw.lat(),
-        east: ne.lng(),
-        west: sw.lng(),
-      }, zoom);
-    }
-  }, [onBoundsChange]);
-
   const onLoad = useCallback((map: google.maps.Map) => {
     mapRef.current = map;
     setIsMapReady(true); // Signal that map is ready for markers
 
-    // Listen for bounds changes
-    map.addListener('idle', reportBounds);
-  }, [reportBounds]);
+    // Listen for bounds changes - use function call to always get latest reportBounds
+    map.addListener('idle', () => {
+      if (!mapRef.current || !onBoundsChange) return;
+      const bounds = mapRef.current.getBounds();
+      const zoom = mapRef.current.getZoom();
+      if (bounds && zoom !== undefined) {
+        const ne = bounds.getNorthEast();
+        const sw = bounds.getSouthWest();
+        onBoundsChange({
+          north: ne.lat(),
+          south: sw.lat(),
+          east: ne.lng(),
+          west: sw.lng(),
+        }, zoom);
+      }
+    });
+  }, [onBoundsChange]);
 
   const onUnmount = useCallback(() => {
     // Clean up markers
