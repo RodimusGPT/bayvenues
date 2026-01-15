@@ -1,0 +1,2019 @@
+{
+  "scraped_at": "2026-01-15T16:30:37.856Z",
+  "found": [
+    {
+      "venue_id": "nb-001",
+      "venue_name": "Charles Krug Winery",
+      "breezit_url": "https://breezit.com/charles-krug-winery",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "nb-002",
+      "venue_name": "V. Sattui Winery",
+      "breezit_url": "https://breezit.com/v-sattui-winery",
+      "breezit_data": {
+        "name": "V. Sattui Winery",
+        "breezit_rating": 4.14,
+        "breezit_reviews": 6697,
+        "capacity_mentions": [
+          200,
+          70,
+          100,
+          150,
+          200,
+          200
+        ],
+        "max_capacity": 200,
+        "pricing_text": "$28,591 - $71,643",
+        "venue_type": "Winery",
+        "address": "White Lane 1111, St. Helena, Napa County, CA",
+        "price_from": "$23,991"
+      }
+    },
+    {
+      "venue_id": "nb-003",
+      "venue_name": "Viansa Sonoma Winery",
+      "breezit_url": "https://breezit.com/viansa-sonoma-winery",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "nb-004",
+      "venue_name": "Beringer Vineyards",
+      "breezit_url": "https://breezit.com/beringer-vineyards",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "nb-005",
+      "venue_name": "Carneros Resort and Spa",
+      "breezit_url": "https://breezit.com/carneros-resort",
+      "breezit_data": {
+        "name": "Carneros Resort",
+        "breezit_rating": 4.42,
+        "breezit_reviews": 1592,
+        "capacity_mentions": [
+          210,
+          210,
+          70,
+          100,
+          150,
+          210,
+          210
+        ],
+        "max_capacity": 210,
+        "pricing_text": "$45,255 - $71,050",
+        "venue_type": "Hotel",
+        "price_from": "$45,255"
+      }
+    },
+    {
+      "venue_id": "nb-006",
+      "venue_name": "Mountain House Estate",
+      "breezit_url": "https://breezit.com/mountain-house-estate",
+      "breezit_data": {
+        "name": "Mountain House Estate",
+        "breezit_rating": 4.85,
+        "breezit_reviews": 134,
+        "capacity_mentions": [
+          250,
+          70,
+          100,
+          150,
+          250,
+          250,
+          32,
+          150
+        ],
+        "max_capacity": 250,
+        "pricing_text": "$8,500 - $11,500",
+        "venue_type": "Estate",
+        "price_from": "$7,500"
+      }
+    },
+    {
+      "venue_id": "nb-007",
+      "venue_name": "Chateau St. Jean",
+      "breezit_url": "https://breezit.com/chateau-st-jean",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "nb-008",
+      "venue_name": "Garden Valley Ranch",
+      "breezit_url": "https://breezit.com/garden-valley-ranch",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "nb-009",
+      "venue_name": "Marin Art & Garden Center",
+      "breezit_url": "https://breezit.com/marin-art-and-garden-center",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "nb-010",
+      "venue_name": "Deer Park Villa",
+      "breezit_url": "https://breezit.com/deer-park-villa",
+      "breezit_data": {
+        "name": "Deer Park Villa",
+        "breezit_rating": 4.45,
+        "breezit_reviews": 259,
+        "capacity_mentions": [
+          50,
+          350,
+          350,
+          70,
+          100,
+          150,
+          350,
+          200
+        ],
+        "max_capacity": 350,
+        "pricing_text": "$158 per person",
+        "venue_type": "Villa",
+        "price_from": "$11,042"
+      }
+    },
+    {
+      "venue_id": "pen-001",
+      "venue_name": "Filoli Historic House & Garden",
+      "breezit_url": "https://breezit.com/filoli-historic-house-and-garden",
+      "breezit_data": {
+        "name": "Filoli Historic House & Garden",
+        "breezit_rating": 4.7,
+        "breezit_reviews": 4538,
+        "capacity_mentions": [
+          300,
+          70,
+          100,
+          150,
+          300,
+          220
+        ],
+        "max_capacity": 300,
+        "pricing_text": "$19,688 - $85,313",
+        "venue_type": "Estate",
+        "address": "Carmel-by-the-Sea, Monterey County",
+        "price_from": "$85,313"
+      }
+    },
+    {
+      "venue_id": "pen-002",
+      "venue_name": "Kohl Mansion",
+      "breezit_url": "https://breezit.com/kohl-mansion",
+      "breezit_data": {
+        "name": "Kohl Mansion",
+        "breezit_rating": 4.3,
+        "breezit_reviews": 205,
+        "capacity_mentions": [
+          300,
+          300,
+          70,
+          100,
+          150,
+          300,
+          300,
+          300
+        ],
+        "max_capacity": 300,
+        "pricing_text": "$14,471 - $17,102",
+        "venue_type": "Mansion",
+        "price_from": "$14,471"
+      }
+    },
+    {
+      "venue_id": "pen-003",
+      "venue_name": "Thomas Fogarty Winery",
+      "breezit_url": "https://breezit.com/thomas-fogarty-winery",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "pen-004",
+      "venue_name": "The Mountain Terrace",
+      "breezit_url": "https://breezit.com/the-mountain-terrace",
+      "breezit_data": {
+        "name": "The Mountain Terrace",
+        "breezit_rating": 4.58,
+        "breezit_reviews": 372,
+        "capacity_mentions": [
+          400,
+          400,
+          70,
+          100,
+          150,
+          400,
+          250,
+          10
+        ],
+        "max_capacity": 400,
+        "pricing_text": "$16,719 - $35,664",
+        "venue_type": "Outdoor Venue",
+        "address": "Carmel-by-the-Sea, Monterey County",
+        "price_from": "$16,719"
+      }
+    },
+    {
+      "venue_id": "pen-005",
+      "venue_name": "The Ritz-Carlton Half Moon Bay",
+      "breezit_url": "https://breezit.com/the-ritz-carlton-half-moon-bay",
+      "breezit_data": {
+        "name": "The Ritz-Carlton, Half Moon Bay",
+        "breezit_rating": 4.44,
+        "breezit_reviews": 5131,
+        "capacity_mentions": [
+          300,
+          150,
+          300,
+          70,
+          100,
+          150,
+          300,
+          300
+        ],
+        "max_capacity": 300,
+        "pricing_text": "$48,234 - $206,719",
+        "venue_type": "Hotel",
+        "address": "Carmel-by-the-Sea, Monterey County",
+        "price_from": "$34,453"
+      }
+    },
+    {
+      "venue_id": "pen-006",
+      "venue_name": "Rosewood Sand Hill",
+      "breezit_url": "https://breezit.com/rosewood-sand-hill",
+      "breezit_data": {
+        "name": "Rosewood Sand Hill",
+        "breezit_rating": 4.53,
+        "breezit_reviews": 2328,
+        "capacity_mentions": [
+          250,
+          250,
+          70,
+          100,
+          150,
+          250,
+          250
+        ],
+        "max_capacity": 250,
+        "pricing_text": "$27,563 - $96,469",
+        "venue_type": "Hotel",
+        "address": "An enchanting sanctuary of grace and refinement, Rosewood Sand Hill Wedding Venue is located in the serene settings of Silicon Valley, Northern California. Here, couples may enjoy a picture-perfect setting that expertly combines modern luxury with pristine natural beauty—the very definition of classic elegance. For a wedding that will be remembered forever, this lovely site is perfect. Surrounded by lush gardens and the stunning Santa Cruz Mountains, it is the perfect setting.",
+        "price_from": "$27,563"
+      }
+    },
+    {
+      "venue_id": "pen-007",
+      "venue_name": "Domenico Winery",
+      "breezit_url": "https://breezit.com/domenico-winery",
+      "breezit_data": {
+        "name": "Domenico Winery",
+        "breezit_rating": 4.63,
+        "breezit_reviews": 527,
+        "capacity_mentions": [
+          300,
+          600,
+          70,
+          100,
+          150,
+          600,
+          270
+        ],
+        "max_capacity": 600,
+        "pricing_text": "$10,008 - $136,507",
+        "venue_type": "Winery",
+        "price_from": "$10,008"
+      }
+    },
+    {
+      "venue_id": "pen-008",
+      "venue_name": "Sam's Chowder House",
+      "breezit_url": "https://breezit.com/sams-chowder-house",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "sb-001",
+      "venue_name": "Nestldown",
+      "breezit_url": "https://breezit.com/nestldown",
+      "breezit_data": {
+        "name": "Nestldown",
+        "breezit_rating": 4.43,
+        "breezit_reviews": 507,
+        "capacity_mentions": [
+          200,
+          70,
+          100,
+          150,
+          200,
+          150
+        ],
+        "max_capacity": 200,
+        "pricing_text": "$187 per person",
+        "venue_type": "Outdoor Venue",
+        "address": "Old Santa Cruz Highway 22420, Los Gatos, Santa Clara County, CA",
+        "price_from": "$13,055"
+      }
+    },
+    {
+      "venue_id": "sb-002",
+      "venue_name": "Villa Montalvo at Montalvo Arts Center",
+      "breezit_url": "https://breezit.com/villa-montalvo-at-montalvo-arts-center",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "sb-003",
+      "venue_name": "Hakone Estate and Gardens",
+      "breezit_url": "https://breezit.com/hakone-estate-and-gardens",
+      "breezit_data": {
+        "name": "Hakone Estate and Gardens",
+        "breezit_rating": 4.3,
+        "breezit_reviews": 2279,
+        "capacity_mentions": [
+          180,
+          180,
+          70,
+          100,
+          150,
+          180,
+          180
+        ],
+        "max_capacity": 180,
+        "pricing_text": "$4,911 - $5,457",
+        "venue_type": "Botanical Garden",
+        "price_from": "$4,911"
+      }
+    },
+    {
+      "venue_id": "sb-004",
+      "venue_name": "The Mountain Winery",
+      "breezit_url": "https://breezit.com/the-mountain-winery",
+      "breezit_data": {
+        "name": "The Mountain Winery",
+        "breezit_rating": 4.41,
+        "breezit_reviews": 954,
+        "capacity_mentions": [
+          400,
+          70,
+          100,
+          150,
+          400,
+          400
+        ],
+        "max_capacity": 400,
+        "pricing_text": "$32,014 - $78,390",
+        "venue_type": "Winery",
+        "address": "Carmel-by-the-Sea, Monterey County",
+        "price_from": "$30,537"
+      }
+    },
+    {
+      "venue_id": "sb-005",
+      "venue_name": "Saratoga Springs",
+      "breezit_url": "https://breezit.com/saratoga-springs",
+      "breezit_data": {
+        "name": "Saratoga Springs",
+        "breezit_rating": 4.53,
+        "breezit_reviews": 882,
+        "capacity_mentions": [
+          500,
+          70,
+          100,
+          150,
+          500,
+          500
+        ],
+        "max_capacity": 500,
+        "pricing_text": "$4,583 - $71,928",
+        "venue_type": "Outdoor Venue",
+        "price_from": "$3,274"
+      }
+    },
+    {
+      "venue_id": "sb-006",
+      "venue_name": "Regale Winery and Vineyards",
+      "breezit_url": "https://breezit.com/regale-winery-and-vineyards",
+      "breezit_data": {
+        "name": "Regale Winery and Vineyards",
+        "breezit_rating": 4.2,
+        "breezit_reviews": 336,
+        "capacity_mentions": [
+          100,
+          100,
+          70,
+          100,
+          100,
+          100
+        ],
+        "max_capacity": 100,
+        "pricing_text": "$232 per person",
+        "venue_type": "Winery",
+        "address": "Summit Road 24040, Los Gatos, Santa Cruz County, CA",
+        "price_from": "$16,256"
+      }
+    },
+    {
+      "venue_id": "sb-007",
+      "venue_name": "Cinnabar Hills Golf Club",
+      "breezit_url": "https://breezit.com/cinnabar-hills-golf-club",
+      "breezit_data": {
+        "name": "Cinnabar Hills Golf Club",
+        "breezit_rating": 4.56,
+        "breezit_reviews": 1264,
+        "capacity_mentions": [
+          200,
+          200,
+          70,
+          100,
+          150,
+          200,
+          200
+        ],
+        "max_capacity": 200,
+        "pricing_text": "$2,297 - $25,070",
+        "venue_type": "Golf Club / Country Club",
+        "address": "McKean Road 23600, San Jose, Santa Clara County, CA",
+        "price_from": "$9,516"
+      }
+    },
+    {
+      "venue_id": "sb-008",
+      "venue_name": "Corinthian Grand Ballroom",
+      "breezit_url": "https://breezit.com/corinthian-grand-ballroom",
+      "breezit_data": {
+        "name": "Corinthian Grand Ballroom",
+        "breezit_rating": 4.16,
+        "breezit_reviews": 304,
+        "capacity_mentions": [
+          300,
+          70,
+          100,
+          150,
+          300,
+          300
+        ],
+        "max_capacity": 300,
+        "pricing_text": "$16,079 - $75,392",
+        "venue_type": "Banquet Hall",
+        "address": "North 3rd Street 196, San Jose, Santa Clara County, CA",
+        "price_from": "$13,010"
+      }
+    },
+    {
+      "venue_id": "sb-009",
+      "venue_name": "Willow Heights Mansion",
+      "breezit_url": "https://breezit.com/willow-heights-mansion",
+      "breezit_data": {
+        "name": "Willow Heights Mansion",
+        "breezit_rating": 4.72,
+        "breezit_reviews": 160,
+        "capacity_mentions": [
+          300,
+          300,
+          70,
+          100,
+          150,
+          300,
+          300
+        ],
+        "max_capacity": 300,
+        "pricing_text": "$137 per person",
+        "venue_type": "Mansion",
+        "price_from": "$9,610"
+      }
+    },
+    {
+      "venue_id": "sb-010",
+      "venue_name": "Guglielmo Winery - Villa Emile",
+      "breezit_url": "https://breezit.com/guglielmo-winery-villa-emile",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "mon-001",
+      "venue_name": "The Barns at Cooper Molera",
+      "breezit_url": "https://breezit.com/the-barns-at-cooper-molera",
+      "breezit_data": {
+        "name": "The Barns at Cooper Molera",
+        "breezit_rating": 4.87,
+        "breezit_reviews": 137,
+        "capacity_mentions": [
+          400,
+          400,
+          70,
+          100,
+          150,
+          400,
+          200
+        ],
+        "max_capacity": 400,
+        "pricing_text": "$17,993 - $67,842",
+        "venue_type": "Farm",
+        "address": "Polk Street 535, Monterey, Monterey County, CA",
+        "price_from": "$17,993"
+      }
+    },
+    {
+      "venue_id": "mon-002",
+      "venue_name": "Monterey Plaza Hotel & Spa",
+      "breezit_url": "https://breezit.com/monterey-plaza-hotel-and-spa",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "mon-003",
+      "venue_name": "Monterey Bay Aquarium",
+      "breezit_url": "https://breezit.com/monterey-bay-aquarium",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "mon-004",
+      "venue_name": "The Lodge at Pebble Beach",
+      "breezit_url": "https://breezit.com/the-lodge-at-pebble-beach",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "mon-005",
+      "venue_name": "The Inn at Spanish Bay",
+      "breezit_url": "https://breezit.com/the-inn-at-spanish-bay",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "mon-006",
+      "venue_name": "Post Ranch Inn",
+      "breezit_url": "https://breezit.com/post-ranch-inn",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "mon-007",
+      "venue_name": "Ventana Big Sur",
+      "breezit_url": "https://breezit.com/ventana-big-sur",
+      "breezit_data": {
+        "name": "Alila Ventana Big Sur",
+        "breezit_rating": 4.59,
+        "breezit_reviews": 896,
+        "capacity_mentions": [
+          40,
+          200,
+          70,
+          100,
+          150,
+          200,
+          200,
+          108
+        ],
+        "max_capacity": 200,
+        "pricing_text": "$8,763 - $94,369",
+        "venue_type": "Hotel",
+        "address": "California 1 48123, Big Sur, Monterey County, CA",
+        "price_from": "$10,515"
+      }
+    },
+    {
+      "venue_id": "sc-001",
+      "venue_name": "Dream Inn Santa Cruz",
+      "breezit_url": "https://breezit.com/dream-inn-santa-cruz",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "sc-002",
+      "venue_name": "Seascape Beach Resort",
+      "breezit_url": "https://breezit.com/seascape-beach-resort",
+      "breezit_data": {
+        "name": "Seascape Beach Resort",
+        "breezit_rating": 4.28,
+        "breezit_reviews": 2555,
+        "capacity_mentions": [
+          250,
+          250,
+          70,
+          100,
+          150,
+          250,
+          250
+        ],
+        "max_capacity": 250,
+        "pricing_text": "$45,883 - $72,649",
+        "venue_type": "Hotel",
+        "address": "Seascape Resort Drive 1, Aptos, Santa Cruz County, CA",
+        "price_from": "$45,493"
+      }
+    },
+    {
+      "venue_id": "sc-003",
+      "venue_name": "Roaring Camp Railroads",
+      "breezit_url": "https://breezit.com/roaring-camp-railroads",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "sc-004",
+      "venue_name": "Kennolyn Hilltop Hacienda",
+      "breezit_url": "https://breezit.com/kennolyn-hilltop-hacienda",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "sc-005",
+      "venue_name": "Chaminade Resort & Spa",
+      "breezit_url": "https://breezit.com/chaminade-resort",
+      "breezit_data": {
+        "name": "Chaminade Resort",
+        "breezit_rating": 3.63,
+        "breezit_reviews": 2851,
+        "capacity_mentions": [
+          200,
+          70,
+          100,
+          150,
+          200,
+          200,
+          312
+        ],
+        "max_capacity": 312,
+        "pricing_text": "$22,481 - $55,863",
+        "venue_type": "Hotel",
+        "price_from": "$22,481"
+      }
+    },
+    {
+      "venue_id": "sc-006",
+      "venue_name": "Fern River Resort",
+      "breezit_url": "https://breezit.com/fern-river-resort",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "sc-007",
+      "venue_name": "Felton Guild",
+      "breezit_url": "https://breezit.com/felton-guild",
+      "breezit_data": {
+        "name": "Felton Guild",
+        "breezit_rating": 4.24,
+        "breezit_reviews": 74,
+        "capacity_mentions": [
+          150,
+          70,
+          100,
+          150,
+          150,
+          150,
+          130
+        ],
+        "max_capacity": 150,
+        "pricing_text": "$4,360 - $8,175",
+        "venue_type": "Outdoor Venue",
+        "address": "California 9 5449, Felton, Santa Cruz County, CA",
+        "price_from": "$8,175"
+      }
+    },
+    {
+      "venue_id": "car-001",
+      "venue_name": "Holman Ranch",
+      "breezit_url": "https://breezit.com/holman-ranch",
+      "breezit_data": {
+        "name": "Holman Ranch",
+        "breezit_rating": 4.81,
+        "breezit_reviews": 173,
+        "capacity_mentions": [
+          300,
+          70,
+          100,
+          150,
+          300,
+          300,
+          46
+        ],
+        "max_capacity": 300,
+        "pricing_text": "$65,550 - $67,735",
+        "venue_type": "Ranch",
+        "address": "Holman Road 60, Carmel Valley, Monterey County, CA",
+        "price_from": "$65,550"
+      }
+    },
+    {
+      "venue_id": "car-002",
+      "venue_name": "Folktale Winery & Vineyards",
+      "breezit_url": "https://breezit.com/folktale-winery-and-vineyards",
+      "breezit_data": {
+        "name": "Folktale Winery & Vineyards",
+        "breezit_rating": 4.34,
+        "breezit_reviews": 1002,
+        "capacity_mentions": [
+          350,
+          70,
+          100,
+          150,
+          350,
+          200
+        ],
+        "max_capacity": 350,
+        "pricing_text": "$33,818 - $71,367",
+        "venue_type": "Vineyard",
+        "address": "Carmel Valley Road 8940, Carmel-by-the-Sea, Monterey County, CA",
+        "price_from": "$33,803"
+      }
+    },
+    {
+      "venue_id": "car-003",
+      "venue_name": "Mission Ranch",
+      "breezit_url": "https://breezit.com/mission-ranch",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "car-004",
+      "venue_name": "Carmel Valley Ranch",
+      "breezit_url": "https://breezit.com/carmel-valley-ranch",
+      "breezit_data": {
+        "name": "Carmel Valley Ranch",
+        "breezit_rating": 4.41,
+        "breezit_reviews": 1813,
+        "capacity_mentions": [
+          250,
+          350,
+          70,
+          100,
+          150,
+          350,
+          300,
+          180,
+          220,
+          80,
+          100,
+          120,
+          150,
+          70,
+          150,
+          220,
+          250,
+          90,
+          100,
+          300,
+          350,
+          300,
+          350,
+          250,
+          300,
+          250,
+          300,
+          80,
+          99,
+          350
+        ],
+        "max_capacity": 350,
+        "pricing_text": "$20,203 - $86,873",
+        "venue_type": "Hotel",
+        "address": "Carmel Valley Ranch",
+        "price_from": "$20,203"
+      }
+    },
+    {
+      "venue_id": "car-005",
+      "venue_name": "Bernardus Lodge & Spa",
+      "breezit_url": "https://breezit.com/bernardus-lodge-and-spa",
+      "breezit_data": {
+        "name": "Bernardus Lodge and Spa",
+        "breezit_rating": 4.63,
+        "breezit_reviews": 1138,
+        "capacity_mentions": [
+          150,
+          150,
+          70,
+          100,
+          150,
+          150,
+          150
+        ],
+        "max_capacity": 150,
+        "pricing_text": "$32,775 - $42,280",
+        "venue_type": "Hotel",
+        "address": "West Carmel Valley Road 415, Carmel Valley, Monterey County, CA",
+        "price_from": "$32,775"
+      }
+    },
+    {
+      "venue_id": "car-006",
+      "venue_name": "Hyatt Carmel Highlands",
+      "breezit_url": "https://breezit.com/hyatt-carmel-highlands",
+      "breezit_data": {
+        "name": "Hyatt Carmel Highlands",
+        "breezit_rating": 4.4,
+        "breezit_reviews": 1250,
+        "capacity_mentions": [
+          150,
+          70,
+          100,
+          150,
+          150,
+          150
+        ],
+        "max_capacity": 150,
+        "pricing_text": "$18,926 - $50,982",
+        "venue_type": "Hotel",
+        "address": "Hyatt Carmel Highlands",
+        "price_from": "$27,990"
+      }
+    },
+    {
+      "venue_id": "car-007",
+      "venue_name": "Stonepine Estate",
+      "breezit_url": "https://breezit.com/stonepine-estate",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "car-008",
+      "venue_name": "La Playa Hotel",
+      "breezit_url": "https://breezit.com/la-playa-hotel",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "car-009",
+      "venue_name": "Quail Lodge & Golf Club",
+      "breezit_url": "https://breezit.com/quail-lodge-and-golf-club",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "car-010",
+      "venue_name": "Carmel Fields by Wedgewood",
+      "breezit_url": "https://breezit.com/carmel-fields-by-wedgewood",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "nb-011",
+      "venue_name": "Four Seasons Resort Napa Valley",
+      "breezit_url": "https://breezit.com/four-seasons-resort-napa-valley",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "nb-012",
+      "venue_name": "Solage, Auberge Resorts Collection",
+      "breezit_url": "https://breezit.com/solage-auberge-resorts-collection",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "nb-013",
+      "venue_name": "Auberge du Soleil",
+      "breezit_url": "https://breezit.com/auberge-du-soleil",
+      "breezit_data": {
+        "name": "Auberge du Soleil",
+        "breezit_rating": 4.7,
+        "breezit_reviews": 1686,
+        "capacity_mentions": [
+          150,
+          70,
+          100,
+          150,
+          150,
+          150,
+          100
+        ],
+        "max_capacity": 150,
+        "pricing_text": "$3,634 per person",
+        "venue_type": "Mansion",
+        "address": "Rutherford Hill Road 180, Rutherford, Napa County, CA",
+        "price_from": "$254,360"
+      }
+    },
+    {
+      "venue_id": "nb-014",
+      "venue_name": "Churchill Manor",
+      "breezit_url": "https://breezit.com/churchill-manor",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "nb-015",
+      "venue_name": "CIA at Greystone",
+      "breezit_url": "https://breezit.com/cia-at-greystone",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "nb-016",
+      "venue_name": "Gundlach Bundschu Winery",
+      "breezit_url": "https://breezit.com/gundlach-bundschu-winery",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "nb-017",
+      "venue_name": "Kunde Family Winery",
+      "breezit_url": "https://breezit.com/kunde-family-winery",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "nb-018",
+      "venue_name": "Jacuzzi Family Vineyards",
+      "breezit_url": "https://breezit.com/jacuzzi-family-vineyards",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "nb-019",
+      "venue_name": "Vintners Resort",
+      "breezit_url": "https://breezit.com/vintners-resort",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "nb-020",
+      "venue_name": "Cavallo Point Lodge",
+      "breezit_url": "https://breezit.com/cavallo-point",
+      "breezit_data": {
+        "name": "Cavallo Point",
+        "breezit_rating": 4.35,
+        "breezit_reviews": 1715,
+        "capacity_mentions": [
+          250,
+          70,
+          100,
+          150,
+          250,
+          250,
+          284
+        ],
+        "max_capacity": 284,
+        "pricing_text": "$33,144 - $119,346",
+        "venue_type": "Hotel",
+        "price_from": "$32,735"
+      }
+    },
+    {
+      "venue_id": "nb-021",
+      "venue_name": "Nick's Cove",
+      "breezit_url": "https://breezit.com/nicks-cove",
+      "breezit_data": {
+        "name": "Nick's Cove",
+        "breezit_rating": 3.92,
+        "breezit_reviews": 2649,
+        "capacity_mentions": [
+          120,
+          70,
+          100,
+          120,
+          120
+        ],
+        "max_capacity": 120,
+        "pricing_text": "$33,965 - $39,272",
+        "venue_type": "Restaurant",
+        "price_from": "$31,842"
+      }
+    },
+    {
+      "venue_id": "nb-022",
+      "venue_name": "Old St. Hillary's",
+      "breezit_url": "https://breezit.com/old-st-hillarys",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "pen-009",
+      "venue_name": "Peninsula Golf & Country Club",
+      "breezit_url": "https://breezit.com/peninsula-golf-and-country-club",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "pen-010",
+      "venue_name": "Half Moon Bay Golf Links",
+      "breezit_url": "https://breezit.com/half-moon-bay-golf-links",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "pen-011",
+      "venue_name": "Hotel Nia",
+      "breezit_url": "https://breezit.com/hotel-nia",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "pen-012",
+      "venue_name": "El Prado Hotel",
+      "breezit_url": "https://breezit.com/el-prado",
+      "breezit_data": {
+        "name": "el PRADO",
+        "breezit_rating": 4.47,
+        "breezit_reviews": 608,
+        "capacity_mentions": [
+          250,
+          70,
+          100,
+          150,
+          250,
+          250,
+          62
+        ],
+        "max_capacity": 250,
+        "pricing_text": "$20,297 - $63,936",
+        "venue_type": "Hotel",
+        "price_from": "$20,297"
+      }
+    },
+    {
+      "venue_id": "pen-013",
+      "venue_name": "Crowne Plaza Foster City",
+      "breezit_url": "https://breezit.com/crowne-plaza-foster-city",
+      "breezit_data": {
+        "name": "Crowne Plaza Foster City",
+        "breezit_rating": 4.2,
+        "breezit_reviews": 1726,
+        "capacity_mentions": [
+          1000,
+          70,
+          100,
+          150,
+          1000,
+          700
+        ],
+        "max_capacity": 1000,
+        "pricing_text": "$9,092 - $114,849",
+        "venue_type": "Hotel",
+        "address": "Crowne Plaza Foster City-San Mateo, tucked away in Foster City, California, is a modern and sophisticated backdrop for weddings. The site has a remarkable five-story garden atrium with a flowing waterfall that lends a calmness. Perfectly situated close to San Francisco International Airport, it gives visitors from nearby areas as well as from elsewhere simple access. Having hosted weddings for decades, Crowne Plaza Foster City is well-known for its mix of elegance, comfort, and first-rate service, therefore guaranteeing a flawless celebration for couples.",
+        "price_from": "$6,494"
+      }
+    },
+    {
+      "venue_id": "pen-014",
+      "venue_name": "Oceano Hotel & Spa",
+      "breezit_url": "https://breezit.com/oceano-hotel-and-spa",
+      "breezit_data": {
+        "name": "Oceano Hotel & Spa",
+        "breezit_rating": 4.29,
+        "breezit_reviews": 1379,
+        "capacity_mentions": [
+          250,
+          250,
+          70,
+          100,
+          150,
+          250,
+          250
+        ],
+        "max_capacity": 250,
+        "pricing_text": "$15,842 - $49,334",
+        "venue_type": "Hotel",
+        "address": "Carmel-by-the-Sea, Monterey County",
+        "price_from": "$12,882"
+      }
+    },
+    {
+      "venue_id": "pen-015",
+      "venue_name": "Mavericks House",
+      "breezit_url": "https://breezit.com/mavericks-house",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "pen-016",
+      "venue_name": "Mill Rose Inn",
+      "breezit_url": "https://breezit.com/mill-rose-inn",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "pen-017",
+      "venue_name": "Allied Arts Guild",
+      "breezit_url": "https://breezit.com/allied-arts-guild",
+      "breezit_data": {
+        "name": "Allied Arts Guild",
+        "breezit_rating": 4.66,
+        "breezit_reviews": 531,
+        "capacity_mentions": [
+          200,
+          140,
+          140,
+          70,
+          100,
+          140,
+          140
+        ],
+        "max_capacity": 200,
+        "pricing_text": "$17,774 - $37,873",
+        "venue_type": "Estate",
+        "price_from": "$13,673"
+      }
+    },
+    {
+      "venue_id": "pen-018",
+      "venue_name": "San Mateo County History Museum",
+      "breezit_url": "https://breezit.com/san-mateo-county-history-museum",
+      "breezit_data": {
+        "name": "San Mateo County History Museum",
+        "breezit_rating": 4.58,
+        "breezit_reviews": 467,
+        "capacity_mentions": [
+          150,
+          70,
+          100,
+          150,
+          150,
+          150
+        ],
+        "max_capacity": 150,
+        "pricing_text": "$78 per person",
+        "venue_type": "Museum",
+        "price_from": "$5,463"
+      }
+    },
+    {
+      "venue_id": "pen-019",
+      "venue_name": "Hiller Aviation Museum",
+      "breezit_url": "https://breezit.com/hiller-aviation-museum",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "pen-020",
+      "venue_name": "CuriOdyssey",
+      "breezit_url": "https://breezit.com/curiodyssey",
+      "breezit_data": {
+        "name": "CuriOdyssey",
+        "breezit_rating": 4.54,
+        "breezit_reviews": 2064,
+        "capacity_mentions": [
+          450,
+          70,
+          100,
+          150,
+          450,
+          350
+        ],
+        "max_capacity": 450,
+        "pricing_text": "$4,500 - $9,000",
+        "venue_type": "Museum",
+        "address": "A one-of-a-kind wedding venue in San Mateo, California, CuriOdyssey combines breathtaking scenery with an emphasis on eco-friendliness and preservation. By choosing this location for your big day, you are not only helping to support causes related to animal protection and early childhood education, but you are also providing an exquisite backdrop of the San Francisco Bay and California's rustic flora.",
+        "price_from": "$9,000"
+      }
+    },
+    {
+      "venue_id": "pen-021",
+      "venue_name": "Pearson Ranch",
+      "breezit_url": "https://breezit.com/pearson-ranch",
+      "breezit_data": {
+        "name": "Pearson Ranch",
+        "breezit_rating": 3.84,
+        "breezit_reviews": 352,
+        "capacity_mentions": [
+          150,
+          70,
+          100,
+          150,
+          150,
+          150
+        ],
+        "max_capacity": 150,
+        "pricing_text": "$131 per person",
+        "venue_type": "Ranch",
+        "price_from": "$9,188"
+      }
+    },
+    {
+      "venue_id": "sb-011",
+      "venue_name": "Fairmont San Jose",
+      "breezit_url": "https://breezit.com/fairmont-san-jose",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "sb-012",
+      "venue_name": "Hayes Mansion",
+      "breezit_url": "https://breezit.com/hayes-mansion",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "sb-013",
+      "venue_name": "San Jose Marriott",
+      "breezit_url": "https://breezit.com/san-jose-marriott",
+      "breezit_data": {
+        "name": "San Jose Marriott",
+        "breezit_rating": 4.18,
+        "breezit_reviews": 3388,
+        "capacity_mentions": [
+          700,
+          60,
+          700,
+          70,
+          100,
+          150,
+          700,
+          700
+        ],
+        "max_capacity": 700,
+        "pricing_text": "$19,119 - $152,950",
+        "venue_type": "Hotel",
+        "address": "South Market Street 301, San Jose, Santa Clara County, CA",
+        "price_from": "$19,119"
+      }
+    },
+    {
+      "venue_id": "sb-014",
+      "venue_name": "Testarossa Winery",
+      "breezit_url": "https://breezit.com/testarossa-winery",
+      "breezit_data": {
+        "name": "Testarossa Winery",
+        "breezit_rating": 4.24,
+        "breezit_reviews": 1026,
+        "capacity_mentions": [
+          130,
+          70,
+          100,
+          130,
+          130
+        ],
+        "max_capacity": 130,
+        "pricing_text": "$20,023 - $33,230",
+        "venue_type": "Winery",
+        "address": "Testarossa Winery, a lovely and historic wedding location in the foothills of the Santa Cruz Mountains. This vineyard opened in 1888 and created a lovely setting for visitors and couples. Perfect for a lovely gathering is Testarossa Winery, minutes from Los Gatos, downtown.",
+        "price_from": "$16,775"
+      }
+    },
+    {
+      "venue_id": "sb-015",
+      "venue_name": "Clos LaChance Winery",
+      "breezit_url": "https://breezit.com/clos-lachance-winery",
+      "breezit_data": {
+        "name": "Clos LaChance Winery",
+        "breezit_rating": 3.9,
+        "breezit_reviews": 672,
+        "capacity_mentions": [
+          200,
+          70,
+          100,
+          150,
+          200,
+          200
+        ],
+        "max_capacity": 200,
+        "pricing_text": "$14,539 - $33,400",
+        "venue_type": "Winery",
+        "address": "Perhaps the secret Clos LaChance Winery in the charming Santa Cruz Mountains is the ideal location for your fantasy wedding. Our picturesque vineyard provides a calm and beautiful atmosphere, making your special day picture-perfect. We guarantee that every little detail has been painstakingly chosen with excellence in mind, making your event one that you and your guests will never forget.",
+        "price_from": "$12,443"
+      }
+    },
+    {
+      "venue_id": "sb-016",
+      "venue_name": "Kirigin Cellars",
+      "breezit_url": "https://breezit.com/kirigin-cellars",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "sb-017",
+      "venue_name": "Boulder Ridge by Wedgewood",
+      "breezit_url": "https://breezit.com/boulder-ridge",
+      "breezit_data": {
+        "name": "Boulder Ridge by Wedgewood Weddings",
+        "breezit_rating": 4.8,
+        "breezit_reviews": 92,
+        "capacity_mentions": [
+          200,
+          70,
+          100,
+          150,
+          200,
+          200
+        ],
+        "max_capacity": 200,
+        "pricing_text": "$10,295 - $45,631",
+        "venue_type": "Golf Club / Country Club",
+        "price_from": "$7,733"
+      }
+    },
+    {
+      "venue_id": "sb-018",
+      "venue_name": "Silver Creek Valley Country Club",
+      "breezit_url": "https://breezit.com/silver-creek-valley-country-club",
+      "breezit_data": {
+        "name": "Silver Creek Valley Country Club",
+        "breezit_rating": 4.48,
+        "breezit_reviews": 519,
+        "capacity_mentions": [
+          500,
+          70,
+          100,
+          150,
+          500,
+          300
+        ],
+        "max_capacity": 500,
+        "pricing_text": "$5,250 - $95,156",
+        "venue_type": "Golf Club / Country Club",
+        "address": "Country Club Parkway 5460, San Jose, Santa Clara County, CA",
+        "price_from": "$5,250"
+      }
+    },
+    {
+      "venue_id": "sb-019",
+      "venue_name": "Villa Ragusa",
+      "breezit_url": "https://breezit.com/villa-ragusa",
+      "breezit_data": {
+        "name": "Villa Ragusa",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 278,
+        "capacity_mentions": [
+          600,
+          600,
+          800,
+          70,
+          100,
+          150,
+          800,
+          600
+        ],
+        "max_capacity": 800,
+        "pricing_text": "$20,017 - $106,755",
+        "venue_type": "Banquet Hall",
+        "address": "Carmel-by-the-Sea, Monterey County",
+        "price_from": "$20,017"
+      }
+    },
+    {
+      "venue_id": "sb-020",
+      "venue_name": "Club Auto Sport",
+      "breezit_url": "https://breezit.com/club-auto-sport",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "sb-021",
+      "venue_name": "Computer History Museum",
+      "breezit_url": "https://breezit.com/computer-history-museum",
+      "breezit_data": {
+        "name": "Computer History Museum",
+        "breezit_rating": 4.68,
+        "breezit_reviews": 7354,
+        "capacity_mentions": [
+          400,
+          400,
+          70,
+          100,
+          150,
+          400,
+          400
+        ],
+        "max_capacity": 400,
+        "pricing_text": "$10,886 - $38,386",
+        "venue_type": "Museum",
+        "address": "Carmel-by-the-Sea, Monterey County",
+        "price_from": "$25,209"
+      }
+    },
+    {
+      "venue_id": "sb-022",
+      "venue_name": "The Ameswell Hotel",
+      "breezit_url": "https://breezit.com/the-ameswell-hotel",
+      "breezit_data": {
+        "name": "The Ameswell Hotel",
+        "breezit_rating": 4.58,
+        "breezit_reviews": 341,
+        "capacity_mentions": [
+          440,
+          440,
+          70,
+          100,
+          150,
+          440,
+          250
+        ],
+        "max_capacity": 440,
+        "pricing_text": "$26,845 - $36,912",
+        "venue_type": "Hotel",
+        "price_from": "$26,845"
+      }
+    },
+    {
+      "venue_id": "sb-023",
+      "venue_name": "La Foret Restaurant",
+      "breezit_url": "https://breezit.com/la-foret",
+      "breezit_data": {
+        "name": "La Foret",
+        "breezit_rating": 4.25,
+        "breezit_reviews": 1383,
+        "capacity_mentions": [
+          150,
+          70,
+          100,
+          150,
+          150,
+          150
+        ],
+        "max_capacity": 150,
+        "pricing_text": "$22,003 - $34,670",
+        "venue_type": "Restaurant",
+        "price_from": "$22,006"
+      }
+    },
+    {
+      "venue_id": "mon-008",
+      "venue_name": "The Sanctuary Beach Resort",
+      "breezit_url": "https://breezit.com/sanctuary-beach-resort",
+      "breezit_data": {
+        "name": "Sanctuary Beach Resort",
+        "breezit_rating": 4.18,
+        "breezit_reviews": 1615,
+        "capacity_mentions": [
+          100,
+          100,
+          70,
+          100,
+          100,
+          100,
+          100
+        ],
+        "max_capacity": 100,
+        "pricing_text": "$11,949 - $31,409",
+        "venue_type": "Hotel",
+        "price_from": "$9,901"
+      }
+    },
+    {
+      "venue_id": "mon-009",
+      "venue_name": "Portola Hotel & Spa",
+      "breezit_url": "https://breezit.com/portola-hotel-and-spa",
+      "breezit_data": {
+        "name": "Portola Hotel & Spa",
+        "breezit_rating": 4.3,
+        "breezit_reviews": 3327,
+        "capacity_mentions": [
+          500,
+          70,
+          100,
+          150,
+          500,
+          500,
+          758
+        ],
+        "max_capacity": 758,
+        "pricing_text": "$11,854 - $126,320",
+        "venue_type": "Hotel",
+        "address": "Portola Plaza Two, Monterey, Monterey County, CA",
+        "price_from": "$8,467"
+      }
+    },
+    {
+      "venue_id": "mon-010",
+      "venue_name": "Asilomar Conference Grounds",
+      "breezit_url": "https://breezit.com/asilomar-conference-grounds",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "mon-011",
+      "venue_name": "TPC Monterey at Pasadera",
+      "breezit_url": "https://breezit.com/tpc-monterey-at-pasadera",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "mon-012",
+      "venue_name": "Carmel Mission Basilica",
+      "breezit_url": "https://breezit.com/carmel-mission-basilica",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "mon-013",
+      "venue_name": "Memory Garden at Monterey State Historic Park",
+      "breezit_url": "https://breezit.com/memory-garden-at-monterey-state-historic-park",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "mon-014",
+      "venue_name": "Pacific Grove Museum of Natural History",
+      "breezit_url": "https://breezit.com/pacific-grove-museum-of-natural-history",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "mon-015",
+      "venue_name": "Carmel Fields by Wedgewood",
+      "breezit_url": "https://breezit.com/carmel-fields-by-wedgewood",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "mon-016",
+      "venue_name": "The Holly Farm",
+      "breezit_url": "https://breezit.com/the-holly-farm",
+      "breezit_data": {
+        "name": "The Holly Farm",
+        "breezit_rating": 4.93,
+        "breezit_reviews": 254,
+        "capacity_mentions": [
+          200,
+          70,
+          100,
+          150,
+          200,
+          200
+        ],
+        "max_capacity": 200,
+        "pricing_text": "$25,674 - $70,500",
+        "venue_type": "Farm",
+        "address": "Carmel Valley Road 9200, Carmel-by-the-Sea, Monterey County, CA",
+        "price_from": "$61,000"
+      }
+    },
+    {
+      "venue_id": "mon-017",
+      "venue_name": "Joullian Vineyards",
+      "breezit_url": "https://breezit.com/joullian-vineyards",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "sc-008",
+      "venue_name": "Waterfall Lodge & Retreat",
+      "breezit_url": "https://breezit.com/waterfall-lodge-and-retreat",
+      "breezit_data": {
+        "name": "Waterfall Lodge and Retreat",
+        "breezit_rating": 4.8,
+        "breezit_reviews": 104,
+        "capacity_mentions": [
+          200,
+          150,
+          70,
+          100,
+          150,
+          150,
+          150,
+          32
+        ],
+        "max_capacity": 200,
+        "pricing_text": "$11,668 - $14,028",
+        "venue_type": "Outdoor Venue",
+        "address": "Hidden Falls Trail 325, Ben Lomond, Santa Cruz County, CA",
+        "price_from": "$14,028"
+      }
+    },
+    {
+      "venue_id": "sc-009",
+      "venue_name": "The Sequoia Retreat Center",
+      "breezit_url": "https://breezit.com/the-sequoia-retreat-center",
+      "breezit_data": {
+        "name": "The Sequoia Retreat Center",
+        "breezit_rating": 4.22,
+        "breezit_reviews": 107,
+        "capacity_mentions": [
+          150,
+          70,
+          100,
+          150,
+          150,
+          150,
+          23
+        ],
+        "max_capacity": 150,
+        "pricing_text": "$177 per person",
+        "venue_type": "Outdoor Venue",
+        "address": "Hidden Falls Trail 101, Ben Lomond, Santa Cruz County, CA",
+        "price_from": "$12,397"
+      }
+    },
+    {
+      "venue_id": "sc-010",
+      "venue_name": "Amphitheater of the Redwoods at Pema Osel Ling",
+      "breezit_url": "https://breezit.com/amphitheater-of-the-redwoods-at-pema-osel-ling",
+      "breezit_data": {
+        "name": "Amphitheater of the Redwoods at Pema Osel Ling",
+        "breezit_rating": 4.7,
+        "breezit_reviews": 111,
+        "capacity_mentions": [
+          300,
+          70,
+          100,
+          150,
+          300,
+          300,
+          69
+        ],
+        "max_capacity": 300,
+        "pricing_text": "$12,935 - $39,860",
+        "venue_type": "Outdoor Venue",
+        "address": "Eureka Canyon Road 2013, Corralitos, Santa Cruz County, CA",
+        "price_from": "$10,593"
+      }
+    },
+    {
+      "venue_id": "sc-011",
+      "venue_name": "The Grove (Cocoanut Grove)",
+      "breezit_url": "https://breezit.com/the-grove-cocoanut-grove",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "sc-012",
+      "venue_name": "Seymour Marine Discovery Center",
+      "breezit_url": "https://breezit.com/seymour-marine-discovery-center",
+      "breezit_data": {
+        "name": "Seymour Marine Discovery Center",
+        "breezit_rating": 4.68,
+        "breezit_reviews": 1418,
+        "capacity_mentions": [
+          140,
+          235,
+          70,
+          100,
+          150,
+          235,
+          120,
+          120
+        ],
+        "max_capacity": 235,
+        "pricing_text": "$6,162 - $10,138",
+        "venue_type": "Museum",
+        "address": "McAllister Way 100, Santa Cruz, Santa Cruz County, CA",
+        "price_from": "$6,162"
+      }
+    },
+    {
+      "venue_id": "sc-013",
+      "venue_name": "UCSC Cowell Ranch Hay Barn",
+      "breezit_url": "https://breezit.com/ucsc-cowell-ranch-hay-barn",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "sc-014",
+      "venue_name": "The Hollins House",
+      "breezit_url": "https://breezit.com/the-hollins-house",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "sc-015",
+      "venue_name": "Highlands House & Park",
+      "breezit_url": "https://breezit.com/highlands-house-and-park",
+      "breezit_data": {
+        "name": "Highlands House & Park",
+        "breezit_rating": 4.04,
+        "breezit_reviews": 330,
+        "capacity_mentions": [
+          200,
+          200,
+          70,
+          100,
+          150,
+          200,
+          200,
+          125
+        ],
+        "max_capacity": 200,
+        "pricing_text": "$29 per person",
+        "venue_type": "Estate",
+        "address": "California 9 8500, Ben Lomond, Santa Cruz County, CA",
+        "price_from": "$2,021"
+      }
+    },
+    {
+      "venue_id": "sc-016",
+      "venue_name": "Quail Hollow Ranch County Park",
+      "breezit_url": "https://breezit.com/quail-hollow-ranch-county-park",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "sc-017",
+      "venue_name": "Shadowbrook Restaurant",
+      "breezit_url": "https://breezit.com/shadowbrook",
+      "breezit_data": {
+        "name": "Shadowbrook",
+        "breezit_rating": 4.48,
+        "breezit_reviews": 8191,
+        "capacity_mentions": [
+          100,
+          70,
+          100,
+          100,
+          100
+        ],
+        "max_capacity": 100,
+        "pricing_text": "$7,173 - $14,741",
+        "venue_type": "Restaurant",
+        "price_from": "$5,698"
+      }
+    },
+    {
+      "venue_id": "sc-018",
+      "venue_name": "Aveline",
+      "breezit_url": "https://breezit.com/aveline",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "car-011",
+      "venue_name": "Albatross Ridge",
+      "breezit_url": "https://breezit.com/albatross-ridge",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "car-012",
+      "venue_name": "L'Auberge Carmel",
+      "breezit_url": "https://breezit.com/lauberge-carmel",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "car-013",
+      "venue_name": "Carmel Mission Inn",
+      "breezit_url": "https://breezit.com/carmel-mission-inn",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "car-014",
+      "venue_name": "Tickle Pink Inn",
+      "breezit_url": "https://breezit.com/tickle-pink-inn",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "car-015",
+      "venue_name": "Cypress Inn",
+      "breezit_url": "https://breezit.com/cypress-inn",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "car-016",
+      "venue_name": "Villa Sopra Vista",
+      "breezit_url": "https://breezit.com/villa-sopra-vista",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "car-017",
+      "venue_name": "Santa Lucia Preserve",
+      "breezit_url": "https://breezit.com/santa-lucia-preserve",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    },
+    {
+      "venue_id": "car-018",
+      "venue_name": "Gardener Ranch",
+      "breezit_url": "https://breezit.com/gardener-ranch",
+      "breezit_data": {
+        "name": "Gardener Ranch",
+        "breezit_rating": 4.39,
+        "breezit_reviews": 118,
+        "capacity_mentions": [
+          250,
+          70,
+          100,
+          150,
+          250,
+          250
+        ],
+        "max_capacity": 250,
+        "pricing_text": "$375 per person",
+        "venue_type": "Ranch",
+        "address": "West Carmel Valley Road 114, Carmel Valley, Monterey County, CA",
+        "price_from": "$26,220"
+      }
+    },
+    {
+      "venue_id": "car-019",
+      "venue_name": "Tehama Golf Club",
+      "breezit_url": "https://breezit.com/tehama-golf-club",
+      "breezit_data": {
+        "name": "Tehama Golf Club",
+        "breezit_rating": 4.67,
+        "breezit_reviews": 128,
+        "capacity_mentions": [
+          180,
+          70,
+          100,
+          150,
+          180,
+          180
+        ],
+        "max_capacity": 180,
+        "pricing_text": "$19,718 - $42,723",
+        "venue_type": "Golf Club / Country Club",
+        "address": "Vía Malpaso 25000, Carmel-by-the-Sea, Monterey County, CA",
+        "price_from": "$19,718"
+      }
+    },
+    {
+      "venue_id": "car-020",
+      "venue_name": "Galante Vineyards",
+      "breezit_url": "https://breezit.com/galante-vineyards",
+      "breezit_data": {
+        "name": "Featured vendors",
+        "breezit_rating": 4.5,
+        "breezit_reviews": 69
+      }
+    }
+  ],
+  "not_found": [],
+  "errors": [],
+  "retry_at": "2026-01-15T17:03:03.358Z",
+  "retry_found": 8
+}

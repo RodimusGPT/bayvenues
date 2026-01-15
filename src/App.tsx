@@ -152,7 +152,7 @@ function App() {
         </main>
 
         {/* Right Panel - Desktop: List / Venue / Favorites */}
-        <aside className="hidden lg:flex flex-col w-96 border-l border-gray-200 bg-white flex-shrink-0">
+        <aside className="hidden lg:flex flex-col w-[480px] border-l border-gray-200 bg-white flex-shrink-0">
           {selectedVenue ? (
             <VenuePanel
               venue={selectedVenue}

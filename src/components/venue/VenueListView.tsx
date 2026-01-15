@@ -35,7 +35,7 @@ function VenueCard({ venue, onSelect }: { venue: Venue; onSelect: () => void }) 
       className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden cursor-pointer hover:shadow-md hover:border-gray-200 transition-all group"
     >
       {/* Image */}
-      <div className="relative h-36 sm:h-40 bg-gray-100">
+      <div className="relative h-48 sm:h-52 bg-gray-100">
         {thumbnailUrl ? (
           <img
             src={thumbnailUrl}

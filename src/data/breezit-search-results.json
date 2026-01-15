@@ -1,0 +1,1378 @@
+{
+  "scraped_at": "2026-01-15T17:18:37.562Z",
+  "total_venues": 176,
+  "venues": [
+    {
+      "price": "$8,467",
+      "capacity": 400,
+      "location": "Cloverdale, Mendocino County",
+      "rating": 4.85,
+      "reviews": 134,
+      "name": "Wildwood Acres Resort"
+    },
+    {
+      "price": "$6,822",
+      "capacity": 200,
+      "location": "Moraga, Contra Costa County",
+      "rating": 4.52,
+      "reviews": 172,
+      "name": "Hacienda De Las Flores by Wedgewood Weddings"
+    },
+    {
+      "price": "$2,731",
+      "capacity": 150,
+      "location": "Pacific Grove, Monterey County",
+      "rating": 4.05,
+      "reviews": 226,
+      "name": "California Seltzer Co."
+    },
+    {
+      "price": "$15,624",
+      "capacity": 300,
+      "rating": 4.51,
+      "reviews": 557,
+      "name": "Charles Krug Winery"
+    },
+    {
+      "price": "$4,500",
+      "capacity": 200,
+      "location": "Novato, Marin County",
+      "rating": 4.4,
+      "reviews": 13,
+      "name": "Pacheco Ranch Winery"
+    },
+    {
+      "price": "$8,657",
+      "capacity": 250,
+      "location": "Carmel-by-the-Sea, Monterey County",
+      "rating": 4.53,
+      "reviews": 335,
+      "name": "Carmel Fields by Wedgewood Weddings"
+    },
+    {
+      "price": "$4,950",
+      "capacity": 400,
+      "location": "Kings Beach, Placer County",
+      "rating": 4.65,
+      "reviews": 75,
+      "name": "North Tahoe Event Center"
+    },
+    {
+      "price": "$2,000",
+      "capacity": 300,
+      "location": "Mariposa, Mariposa County",
+      "rating": 4.86,
+      "reviews": 45,
+      "name": "Sierra Cider"
+    },
+    {
+      "price": "$10,515",
+      "capacity": 200,
+      "location": "Big Sur, Monterey County",
+      "rating": 4.59,
+      "reviews": 896,
+      "name": "Alila Ventana Big Sur"
+    },
+    {
+      "price": "$7,000",
+      "capacity": 200,
+      "location": "Santa Rosa, Sonoma County",
+      "rating": 4.86,
+      "reviews": 17,
+      "name": "St. Francis Winery"
+    },
+    {
+      "price": "$7,489",
+      "capacity": 250,
+      "location": "San Miguel, Monterey County",
+      "rating": 4.99,
+      "reviews": 21,
+      "name": "Up to 200"
+    },
+    {
+      "price": "$17,944",
+      "capacity": 100,
+      "rating": 4.16,
+      "reviews": 446,
+      "name": "Merryvale Vineyards"
+    },
+    {
+      "price": "$14,240",
+      "capacity": 220,
+      "location": "San Francisco, San Francisco County",
+      "rating": 4.49,
+      "reviews": 310,
+      "name": "Golden Gate Club at The Presidio"
+    },
+    {
+      "price": "$6,800",
+      "capacity": 150,
+      "location": "Pescadero, San Mateo County",
+      "rating": 4.05,
+      "reviews": 22,
+      "name": "Venture Retreat Center"
+    },
+    {
+      "price": "$45,773",
+      "capacity": 110,
+      "location": "Sea Ranch, Sonoma County",
+      "rating": 4.08,
+      "reviews": 319,
+      "name": "Sea Ranch Lodge"
+    },
+    {
+      "price": "$4,000",
+      "capacity": 100,
+      "location": "Bodega, Sonoma County",
+      "rating": 4.29,
+      "reviews": 374,
+      "name": "Sonoma Coast Villa"
+    },
+    {
+      "price": "$41,712",
+      "capacity": 750,
+      "location": "San Francisco, San Francisco County",
+      "rating": 4.56,
+      "reviews": 166,
+      "name": "The Hibernia"
+    },
+    {
+      "price": "$7,713",
+      "capacity": 150,
+      "location": "Meadow Vista, Placer County",
+      "name": "Winchester Estate by Wedgewood Weddings"
+    },
+    {
+      "price": "$8,000",
+      "capacity": 300,
+      "location": "Plymouth, Amador County",
+      "rating": 4.6,
+      "reviews": 30,
+      "name": "Up to 150"
+    },
+    {
+      "price": "$6,826",
+      "capacity": 200,
+      "location": "Sacramento, Sacramento County",
+      "rating": 4.55,
+      "reviews": 220,
+      "name": "Sterling Hotel by Wedgewood Weddings"
+    },
+    {
+      "price": "$6,760",
+      "capacity": 250,
+      "location": "San Ramon, Contra Costa County",
+      "rating": 4.48,
+      "reviews": 430,
+      "name": "San Ramon Waters by Wedgewood Weddings"
+    },
+    {
+      "price": "$6,604",
+      "capacity": 200,
+      "location": "Benicia, Solano County",
+      "rating": 4.54,
+      "reviews": 280,
+      "name": "Jefferson Street Mansion by Wedgewood Weddings"
+    },
+    {
+      "price": "$8,664",
+      "capacity": 200,
+      "location": "Novato, Marin County",
+      "rating": 4.73,
+      "reviews": 186,
+      "name": "Stonetree Estate by Wedgewood Weddings"
+    },
+    {
+      "price": "$7,500",
+      "capacity": 250,
+      "location": "Cloverdale, Mendocino County",
+      "rating": 4.85,
+      "reviews": 134,
+      "name": "Mountain House Estate"
+    },
+    {
+      "price": "$9,503",
+      "capacity": 480,
+      "location": "San Francisco, San Francisco County",
+      "rating": 4.61,
+      "reviews": 253,
+      "name": "The Pearl"
+    },
+    {
+      "price": "$10,927",
+      "capacity": 120,
+      "location": "San Francisco, San Francisco County",
+      "rating": 4.64,
+      "reviews": 123,
+      "name": "Log Cabin at the Presidio"
+    },
+    {
+      "price": "$26,070",
+      "capacity": 150,
+      "location": "San Francisco, San Francisco County",
+      "rating": 4.1,
+      "reviews": 1477,
+      "name": "Chambers eat + drink"
+    },
+    {
+      "price": "$22,226",
+      "capacity": 200,
+      "location": "San Francisco, San Francisco County",
+      "rating": 4.74,
+      "reviews": 20,
+      "name": "Beacon Grand, A Union Square Hotel"
+    },
+    {
+      "price": "$8,581",
+      "capacity": 49,
+      "location": "San Francisco, San Francisco County",
+      "name": "Bay Lights Charters"
+    },
+    {
+      "price": "$16,019",
+      "capacity": 165,
+      "location": "San Francisco, San Francisco County",
+      "rating": 4.5,
+      "reviews": 67,
+      "name": "James Leary Flood Mansion"
+    },
+    {
+      "price": "$10,863",
+      "capacity": 3000,
+      "location": "San Francisco, San Francisco County",
+      "rating": 4.5,
+      "reviews": 1502,
+      "name": "San Francisco City Hall"
+    },
+    {
+      "price": "$12,763",
+      "capacity": 300,
+      "location": "San Francisco, San Francisco County",
+      "name": "The Olympic Club"
+    },
+    {
+      "price": "$10,523",
+      "capacity": 350,
+      "location": "San Francisco, San Francisco County",
+      "rating": 4.32,
+      "reviews": 7450,
+      "name": "Fairmont San Francisco"
+    },
+    {
+      "price": "$8,690",
+      "capacity": 600,
+      "location": "San Francisco, San Francisco County",
+      "rating": 4.58,
+      "reviews": 15178,
+      "name": "SF Museum of Modern Art"
+    },
+    {
+      "price": "$17,360",
+      "capacity": 150,
+      "location": "San Francisco, San Francisco County",
+      "rating": 4.48,
+      "reviews": 438,
+      "name": "The University Club of San Francisco"
+    },
+    {
+      "price": "$21,725",
+      "capacity": 750,
+      "location": "San Francisco, San Francisco County",
+      "rating": 4.09,
+      "reviews": 7128,
+      "name": "The Westin St. Francis"
+    },
+    {
+      "price": "$58,660",
+      "capacity": 550,
+      "location": "San Francisco, San Francisco County",
+      "rating": 4.28,
+      "reviews": 6038,
+      "name": "Palace Hotel"
+    },
+    {
+      "price": "$10,933",
+      "capacity": 270,
+      "location": "San Francisco, San Francisco County",
+      "rating": 4.5,
+      "reviews": 1610,
+      "name": "Marines Memorial Club & Hotel"
+    },
+    {
+      "price": "$36,777",
+      "capacity": 450,
+      "location": "San Francisco, San Francisco County",
+      "rating": 4.29,
+      "reviews": 934,
+      "name": "Bimbo's 365 Club"
+    },
+    {
+      "price": "$12,460",
+      "capacity": 200,
+      "location": "San Francisco, San Francisco County",
+      "rating": 4.1,
+      "reviews": 1617,
+      "name": "The Marker San Francisco"
+    },
+    {
+      "price": "$24,782",
+      "capacity": 500,
+      "location": "San Francisco, San Francisco County",
+      "rating": 4.31,
+      "reviews": 76,
+      "name": "City View At Metreon"
+    },
+    {
+      "price": "$33,131",
+      "capacity": 50,
+      "location": "San Francisco, San Francisco County",
+      "rating": 4.18,
+      "reviews": 6925,
+      "name": "Wayfare Tavern"
+    },
+    {
+      "price": "$32,589",
+      "capacity": 500,
+      "location": "San Francisco, San Francisco County",
+      "rating": 4.53,
+      "reviews": 197,
+      "name": "Julia Morgan Ballroom at the Merchants Exchange"
+    },
+    {
+      "price": "$13,246",
+      "capacity": 150,
+      "location": "San Francisco, San Francisco County",
+      "rating": 4.6,
+      "reviews": 37,
+      "name": "Presidio Chapel by Wedgewood Weddings"
+    },
+    {
+      "price": "$8,690",
+      "capacity": 130,
+      "location": "San Francisco, San Francisco County",
+      "rating": 4.58,
+      "reviews": 4754,
+      "name": "The Walt Disney Family Museum"
+    },
+    {
+      "price": "$10,863",
+      "capacity": 430,
+      "location": "San Francisco, San Francisco County",
+      "rating": 4.7,
+      "reviews": 3779,
+      "name": "Legion of Honor"
+    },
+    {
+      "price": "$1,052",
+      "capacity": 50,
+      "location": "Palm Springs, Riverside County",
+      "rating": 4.5,
+      "reviews": 69,
+      "name": "Palm Springs Club"
+    },
+    {
+      "price": "$8,044",
+      "capacity": 220,
+      "location": "Foresthill, Placer County",
+      "rating": 4.57,
+      "reviews": 241,
+      "name": "Monte Verde Inn"
+    },
+    {
+      "price": "$474",
+      "capacity": 200,
+      "location": "Ventura, Ventura County",
+      "rating": 4.6,
+      "reviews": 261,
+      "name": "Olivas Adobe"
+    },
+    {
+      "price": "$2,155",
+      "capacity": 100,
+      "location": "Yermo, San Bernardino County",
+      "rating": 4.11,
+      "reviews": 1110,
+      "name": "Calico Ghost Town"
+    },
+    {
+      "price": "$644",
+      "capacity": 300,
+      "location": "Ventura, Ventura County",
+      "rating": 4.8,
+      "reviews": 980,
+      "name": "Serra Cross Park"
+    },
+    {
+      "price": "$6,221",
+      "capacity": 300,
+      "location": "Ventura, Ventura County",
+      "rating": 4.65,
+      "reviews": 1396,
+      "name": "Mission Basilica San Buenaventura"
+    },
+    {
+      "price": "$371",
+      "capacity": 400,
+      "location": "Mount Hamilton, Santa Clara County",
+      "rating": 4.6,
+      "reviews": 1066,
+      "name": "Joseph D. Grant County Park"
+    },
+    {
+      "price": "$514",
+      "capacity": 150,
+      "location": "Watsonville, Santa Clara County",
+      "rating": 4.8,
+      "reviews": 743,
+      "name": "Mt. Madonna County Park"
+    },
+    {
+      "price": "$513",
+      "capacity": 200,
+      "location": "Saratoga, Santa Clara County",
+      "rating": 4.7,
+      "reviews": 2319,
+      "name": "Sanborn County Park"
+    },
+    {
+      "price": "$11,448",
+      "capacity": 210,
+      "location": "San Diego, San Diego County",
+      "rating": 4.4,
+      "reviews": 2729,
+      "name": "Rustic Root - Gaslamp"
+    },
+    {
+      "price": "$1,628",
+      "capacity": 50,
+      "location": "Santa Rosa, Sonoma County",
+      "rating": 4.6,
+      "reviews": 139,
+      "name": "The Gables Wine Country Inn"
+    },
+    {
+      "price": "$19,673",
+      "capacity": 100,
+      "location": "Santa Rosa, Sonoma County",
+      "name": "ST Helena French Farmhouse"
+    },
+    {
+      "price": "$627",
+      "capacity": 150,
+      "location": "Los Angeles, Los Angeles County",
+      "rating": 4.79,
+      "reviews": 7200,
+      "name": "Korean Bell"
+    },
+    {
+      "price": "$10,100",
+      "capacity": 250,
+      "location": "Bakersfield, Kern County",
+      "rating": 3.38,
+      "reviews": 14,
+      "name": "JEH Ranch"
+    },
+    {
+      "price": "$6,961",
+      "capacity": 100,
+      "location": "Burlingame, San Mateo County",
+      "rating": 4.15,
+      "reviews": 5407,
+      "name": "Hyatt Regency San Francisco Airport"
+    },
+    {
+      "price": "$16,275",
+      "capacity": 110,
+      "location": "Sebastopol, Sonoma County",
+      "name": "The Dalya Estate"
+    },
+    {
+      "price": "$4,290",
+      "capacity": 75,
+      "location": "Lower Lake, Lake County",
+      "rating": 4.48,
+      "reviews": 67,
+      "name": "Thorn Hill Vineyards"
+    },
+    {
+      "price": "$688",
+      "capacity": 80,
+      "location": "Aptos, Santa Cruz County",
+      "rating": 4.81,
+      "reviews": 27,
+      "name": "Valencia Hall"
+    },
+    {
+      "price": "$1,062",
+      "capacity": 100,
+      "location": "Felton, Santa Cruz County",
+      "rating": 4.7,
+      "reviews": 261,
+      "name": "Quail Hollow Ranch and Full Lawn"
+    },
+    {
+      "price": "$1,934",
+      "capacity": 200,
+      "location": "Aptos, Santa Cruz County",
+      "rating": 4.52,
+      "reviews": 173,
+      "name": "Aptos Village Park Clubhouse and 1⁄3 Lawn"
+    },
+    {
+      "price": "$13,361",
+      "capacity": 200,
+      "location": "Escondido, San Diego County",
+      "rating": 4.12,
+      "reviews": 1359,
+      "name": "Orfila Vineyards & Winery"
+    },
+    {
+      "price": "$7,758",
+      "capacity": 150,
+      "location": "Twentynine Palms, San Bernardino County",
+      "rating": 4.5,
+      "reviews": 854,
+      "name": "29 Palms Inn"
+    },
+    {
+      "price": "$5,463",
+      "capacity": 250,
+      "location": "Sonoma, Sonoma County",
+      "name": "Robledo Barn"
+    },
+    {
+      "price": "$11,636",
+      "capacity": 100,
+      "location": "Thermal, Riverside County",
+      "name": "ABC Ranch"
+    },
+    {
+      "price": "$10,802",
+      "capacity": 300,
+      "location": "San Jose, Santa Clara County",
+      "rating": 4.2,
+      "reviews": 59,
+      "name": "The Ranch at Silver Creek by Wedgewood Weddings"
+    },
+    {
+      "price": "$13,672",
+      "capacity": 500,
+      "location": "San Jose, Santa Clara County",
+      "rating": 4.22,
+      "reviews": 2299,
+      "name": "Hayes Mansion San Jose, Curio Collection by Hilton"
+    },
+    {
+      "price": "$8,007",
+      "capacity": 230,
+      "location": "San Jose, Santa Clara County",
+      "rating": 4.74,
+      "reviews": 56,
+      "name": "Blanco Urban Venue"
+    },
+    {
+      "price": "$2,198",
+      "capacity": 300,
+      "location": "San Jose, Santa Clara County",
+      "rating": 4.7,
+      "reviews": 937,
+      "name": "Cathedral Basilica of St. Joseph"
+    },
+    {
+      "price": "$13,344",
+      "capacity": 280,
+      "location": "San Jose, Santa Clara County",
+      "name": "California Theater"
+    },
+    {
+      "price": "$5,250",
+      "capacity": 300,
+      "location": "San Jose, Santa Clara County",
+      "rating": 4.48,
+      "reviews": 519,
+      "name": "Silver Creek Valley Country Club"
+    },
+    {
+      "price": "$9,516",
+      "capacity": 200,
+      "location": "San Jose, Santa Clara County",
+      "rating": 4.56,
+      "reviews": 1264,
+      "name": "Cinnabar Hills Golf Club"
+    },
+    {
+      "price": "$20,636",
+      "capacity": 200,
+      "location": "San Jose, Santa Clara County",
+      "rating": 4.07,
+      "reviews": 3734,
+      "name": "GrandView San Jose"
+    },
+    {
+      "price": "$6,876",
+      "capacity": 1200,
+      "location": "San Jose, Santa Clara County",
+      "rating": 4.01,
+      "reviews": 450,
+      "name": "Signia by Hilton San Jose"
+    },
+    {
+      "price": "$7,733",
+      "capacity": 200,
+      "location": "San Jose, Santa Clara County",
+      "rating": 4.8,
+      "reviews": 92,
+      "name": "Boulder Ridge by Wedgewood Weddings"
+    },
+    {
+      "price": "$3,938",
+      "capacity": 150,
+      "location": "San Jose, Santa Clara County",
+      "rating": 4.32,
+      "reviews": 719,
+      "name": "Courtyard by Marriott San Jose/Silicon Valley"
+    },
+    {
+      "price": "$2,357",
+      "capacity": 130,
+      "location": "San Jose, Santa Clara County",
+      "rating": 3.95,
+      "reviews": 445,
+      "name": "Santa Teresa Golf Club"
+    },
+    {
+      "price": "$8,750",
+      "capacity": 350,
+      "location": "San Jose, Santa Clara County",
+      "rating": 4.1,
+      "reviews": 137,
+      "name": "Napredak Hall"
+    },
+    {
+      "price": "$2,734",
+      "capacity": 200,
+      "location": "San Jose, Santa Clara County",
+      "rating": 4.39,
+      "reviews": 145,
+      "name": "San Jose Woman's Club"
+    },
+    {
+      "price": "$3,544",
+      "capacity": 200,
+      "location": "San Jose, Santa Clara County",
+      "name": "Wilcox Manor"
+    },
+    {
+      "price": "$56,440",
+      "capacity": 120,
+      "location": "San Jose, Santa Clara County",
+      "name": "SP2 Communal Bar + Restaurant"
+    },
+    {
+      "price": "$11,786",
+      "capacity": 200,
+      "location": "San Jose, Santa Clara County",
+      "rating": 4.36,
+      "reviews": 16008,
+      "name": "Winchester Mystery House"
+    },
+    {
+      "price": "$20,669",
+      "capacity": 200,
+      "location": "San Jose, Santa Clara County",
+      "rating": 4.07,
+      "reviews": 3708,
+      "name": "Mt Hamilton Grandview Restaurant and Venue"
+    },
+    {
+      "price": "$5,500",
+      "capacity": 600,
+      "location": "San Jose, Santa Clara County",
+      "name": "The Tech Interactive"
+    },
+    {
+      "price": "$13,313",
+      "capacity": 225,
+      "location": "San Jose, Santa Clara County",
+      "rating": 4.44,
+      "reviews": 239,
+      "name": "San Jose Country Club"
+    },
+    {
+      "price": "$22,006",
+      "capacity": 150,
+      "location": "San Jose, Santa Clara County",
+      "rating": 4.25,
+      "reviews": 1383,
+      "name": "La Foret"
+    },
+    {
+      "price": "$19,119",
+      "capacity": 700,
+      "location": "San Jose, Santa Clara County",
+      "rating": 4.18,
+      "reviews": 3388,
+      "name": "San Jose Marriott"
+    },
+    {
+      "price": "$23,408",
+      "capacity": 200,
+      "location": "San Jose, Santa Clara County",
+      "rating": 4.2,
+      "reviews": 59,
+      "name": "Friendship Banquet Hall"
+    },
+    {
+      "price": "$12,436",
+      "capacity": 225,
+      "location": "Berkeley, Alameda County",
+      "rating": 4.7,
+      "reviews": 12,
+      "name": "Fairview Metropolitan"
+    },
+    {
+      "price": "$20,672",
+      "capacity": 200,
+      "location": "Oakland, Alameda County",
+      "rating": 4.2,
+      "reviews": 206,
+      "name": "Kissel Uptown Oakland"
+    },
+    {
+      "price": "$1,703",
+      "capacity": 200,
+      "location": "Oakland, Alameda County",
+      "rating": 4.5,
+      "reviews": 127,
+      "name": "Dunsmuir Hellman Historical Estate"
+    },
+    {
+      "price": "$2,431",
+      "capacity": 200,
+      "location": "Oakland, Alameda County",
+      "rating": 4.58,
+      "reviews": 62,
+      "name": "Skyline UCC Church"
+    },
+    {
+      "price": "$7,235",
+      "capacity": 125,
+      "location": "Oakland, Alameda County",
+      "rating": 4.6,
+      "reviews": 12901,
+      "name": "Oakland Zoo"
+    },
+    {
+      "price": "$8,864",
+      "capacity": 300,
+      "location": "Oakland, Alameda County",
+      "rating": 4.55,
+      "reviews": 332,
+      "name": "Sequoyah Country Club"
+    },
+    {
+      "price": "$6,284",
+      "capacity": 300,
+      "location": "Oakland, Alameda County",
+      "rating": 4.51,
+      "reviews": 287,
+      "name": "Preservation Park"
+    },
+    {
+      "price": "$9,426",
+      "capacity": 150,
+      "location": "Oakland, Alameda County",
+      "rating": 4.5,
+      "reviews": 1393,
+      "name": "Children's Fairyland"
+    },
+    {
+      "price": "$35,831",
+      "capacity": 90,
+      "location": "Oakland, Alameda County",
+      "rating": 4.5,
+      "reviews": 775,
+      "name": "Pizzaiolo"
+    },
+    {
+      "price": "$10,474",
+      "capacity": 350,
+      "location": "Oakland, Alameda County",
+      "rating": 4.4,
+      "reviews": 76,
+      "name": "Diamond Banquet Hall & Catering"
+    },
+    {
+      "price": "$13,230",
+      "capacity": 600,
+      "location": "Oakland, Alameda County",
+      "rating": 4.6,
+      "reviews": 344,
+      "name": "The Oakland Scottish Rite Center"
+    },
+    {
+      "price": "$7,814",
+      "capacity": 80,
+      "location": "Oakland, Alameda County",
+      "rating": 4.59,
+      "reviews": 106,
+      "name": "Temescal Beach House"
+    },
+    {
+      "price": "$1,323",
+      "capacity": 300,
+      "location": "Oakland, Alameda County",
+      "rating": 4.4,
+      "reviews": 86,
+      "name": "California Ballroom"
+    },
+    {
+      "price": "$2,756",
+      "capacity": 200,
+      "location": "Oakland, Alameda County",
+      "rating": 4.55,
+      "reviews": 115,
+      "name": "Forage Kitchen"
+    },
+    {
+      "price": "$10,700",
+      "capacity": 220,
+      "location": "Alameda, Alameda County",
+      "rating": 4.51,
+      "reviews": 37,
+      "name": "Luxe Cruises & Events"
+    },
+    {
+      "price": "$11,370",
+      "capacity": 312,
+      "location": "Berkeley, Alameda County",
+      "rating": 4.38,
+      "reviews": 2423,
+      "name": "Claremont Resort & Club"
+    },
+    {
+      "price": "$9,528",
+      "capacity": 400,
+      "location": "Berkeley, Alameda County",
+      "rating": 3.72,
+      "reviews": 3273,
+      "name": "DoubleTree by Hilton Berkeley Marina"
+    },
+    {
+      "price": "$6,760",
+      "capacity": 300,
+      "location": "Castro Valley, Alameda County",
+      "name": "Redwood Canyon by Wedgewood Weddings"
+    },
+    {
+      "price": "$5,366",
+      "capacity": 320,
+      "location": "Piedmont, Alameda County",
+      "name": "Piedmont Community Hall"
+    },
+    {
+      "price": "$10,260",
+      "capacity": 200,
+      "location": "Berkeley, Alameda County",
+      "rating": 4.37,
+      "reviews": 777,
+      "name": "Berkeley City Club"
+    },
+    {
+      "price": "$8,085",
+      "capacity": 72,
+      "location": "Berkeley, Alameda County",
+      "rating": 4.8,
+      "reviews": 1955,
+      "name": "UC Botanical Garden"
+    },
+    {
+      "price": "$5,816",
+      "capacity": 300,
+      "location": "Piedmont, Alameda County",
+      "name": "Piedmont Community church and Guild Hall"
+    },
+    {
+      "price": "$12,403",
+      "capacity": 75,
+      "location": "Berkeley, Alameda County",
+      "rating": 4.7,
+      "reviews": 12,
+      "name": "The Little Kitchen by Jessica Lasky"
+    },
+    {
+      "price": "$20,297",
+      "capacity": 250,
+      "location": "Cupertino, Santa Clara County",
+      "rating": 4.21,
+      "reviews": 1495,
+      "name": "el PRADO"
+    },
+    {
+      "price": "$27,064",
+      "capacity": 100,
+      "location": "Palo Alto, Santa Clara County",
+      "rating": 4.02,
+      "reviews": 127,
+      "name": "Graduate Palo Alto"
+    },
+    {
+      "price": "$4,911",
+      "capacity": 150,
+      "location": "Palo Alto, Santa Clara County",
+      "rating": 4.6,
+      "reviews": 77,
+      "name": "Woman's Club Palo Alto"
+    },
+    {
+      "price": "$26,628",
+      "capacity": 100,
+      "location": "Palo Alto, Santa Clara County",
+      "rating": 4.55,
+      "reviews": 293,
+      "name": "Palo Alto Hills Golf And Country Club"
+    },
+    {
+      "price": "$13,325",
+      "capacity": 150,
+      "location": "Palo Alto, Santa Clara County",
+      "rating": 3.94,
+      "reviews": 2304,
+      "name": "Sheraton Palo Alto"
+    },
+    {
+      "price": "$10,518",
+      "capacity": 600,
+      "location": "Palo Alto, Santa Clara County",
+      "rating": 4.1,
+      "reviews": 1652,
+      "name": "Crowne Plaza - Palo Alto"
+    },
+    {
+      "price": "$6,384",
+      "capacity": 380,
+      "location": "Palo Alto, Santa Clara County",
+      "rating": 3.86,
+      "reviews": 342,
+      "name": "Oshman Family JCC"
+    },
+    {
+      "price": "$1,903",
+      "capacity": 250,
+      "location": "Palo Alto, Santa Clara County",
+      "rating": 4.6,
+      "reviews": 184,
+      "name": "Mitchell Park Community Center"
+    },
+    {
+      "price": "$18,792",
+      "capacity": 150,
+      "location": "Palo Alto, Santa Clara County",
+      "rating": 4.3,
+      "reviews": 2624,
+      "name": "The Sea by Alexander's Steakhouse"
+    },
+    {
+      "price": "$2,728",
+      "capacity": 230,
+      "location": "Palo Alto, Santa Clara County",
+      "name": "Harmony Hall & Courtyard"
+    },
+    {
+      "price": "$10,186",
+      "capacity": 200,
+      "location": "Los Gatos, Santa Clara County",
+      "rating": 4.15,
+      "reviews": 850,
+      "name": "Toll House Hotel"
+    },
+    {
+      "price": "$16,367",
+      "capacity": 100,
+      "location": "Mountain View, Santa Clara County",
+      "rating": 4.2,
+      "reviews": 1711,
+      "name": "Cucina Venti"
+    },
+    {
+      "price": "$13,055",
+      "capacity": 150,
+      "location": "Los Gatos, Santa Clara County",
+      "rating": 4.43,
+      "reviews": 507,
+      "name": "Nestldown"
+    },
+    {
+      "price": "$30,537",
+      "capacity": 400,
+      "location": "Saratoga, Santa Clara County",
+      "rating": 4.41,
+      "reviews": 954,
+      "name": "The Mountain Winery"
+    },
+    {
+      "price": "$39,285",
+      "capacity": 250,
+      "location": "Saratoga, Santa Clara County",
+      "rating": 4.77,
+      "reviews": 722,
+      "name": "Up to 280"
+    },
+    {
+      "price": "$7,843",
+      "capacity": 200,
+      "location": "Cupertino, Santa Clara County",
+      "rating": 4.21,
+      "reviews": 1495,
+      "name": "Juniper Cupertino, Curio Collection by Hilton"
+    },
+    {
+      "price": "$34,453",
+      "capacity": 300,
+      "location": "South San Francisco, San Mateo County",
+      "rating": 4.52,
+      "reviews": 201,
+      "name": "The Ritz-Carlton, Half Moon Bay"
+    },
+    {
+      "price": "$4,922",
+      "capacity": 50,
+      "location": "Half Moon Bay, San Mateo County",
+      "rating": 4.97,
+      "reviews": 112,
+      "name": "Hastings House Garden Weddings"
+    },
+    {
+      "price": "$6,563",
+      "capacity": 120,
+      "location": "Half Moon Bay, San Mateo County",
+      "rating": 4.4,
+      "reviews": 8153,
+      "name": "Sam's Chowder House Half Moon Bay"
+    },
+    {
+      "price": "$9,291",
+      "capacity": 100,
+      "location": "Half Moon Bay, San Mateo County",
+      "rating": 3.84,
+      "reviews": 352,
+      "name": "La Nebbia Winery"
+    },
+    {
+      "price": "$10,963",
+      "capacity": 300,
+      "location": "Half Moon Bay, San Mateo County",
+      "rating": 4.75,
+      "reviews": 84,
+      "name": "Long Branch Saloon and Farms"
+    },
+    {
+      "price": "$12,882",
+      "capacity": 250,
+      "location": "Half Moon Bay, San Mateo County",
+      "rating": 4.29,
+      "reviews": 1379,
+      "name": "Oceano Hotel & Spa"
+    },
+    {
+      "price": "$8,400",
+      "capacity": 200,
+      "location": "Half Moon Bay, San Mateo County",
+      "rating": 4.59,
+      "reviews": 468,
+      "name": "San Benito House"
+    },
+    {
+      "price": "$9,316",
+      "capacity": 100,
+      "location": "Half Moon Bay, San Mateo County",
+      "rating": 4.16,
+      "reviews": 730,
+      "name": "Fattoria E Mare"
+    },
+    {
+      "price": "$11,250",
+      "capacity": 250,
+      "location": "Half Moon Bay, San Mateo County",
+      "name": "Lisbeth Mozo"
+    },
+    {
+      "price": "$29,304",
+      "capacity": 250,
+      "location": "East Palo Alto, San Mateo County",
+      "rating": 4.58,
+      "reviews": 1835,
+      "name": "Four Seasons Hotel Silicon Valley"
+    },
+    {
+      "price": "$27,408",
+      "capacity": 400,
+      "location": "Redwood City, San Mateo County",
+      "rating": 4.08,
+      "reviews": 2141,
+      "name": "Grand Bay San Francisco"
+    },
+    {
+      "price": "$8,641",
+      "capacity": 430,
+      "location": "Pescadero, San Mateo County",
+      "rating": 4.28,
+      "reviews": 87,
+      "name": "Costanoa Coastal Lodge"
+    },
+    {
+      "price": "$85,313",
+      "capacity": 220,
+      "location": "Woodside, San Mateo County",
+      "rating": 4.7,
+      "reviews": 4538,
+      "name": "Filoli Historic House & Garden"
+    },
+    {
+      "price": "$14,471",
+      "capacity": 300,
+      "location": "Burlingame, San Mateo County",
+      "rating": 4.3,
+      "reviews": 205,
+      "name": "Kohl Mansion"
+    },
+    {
+      "price": "$10,938",
+      "capacity": 200,
+      "location": "Woodside, San Mateo County",
+      "rating": 4.26,
+      "reviews": 477,
+      "name": "Thomas Fogarty Winery and Vineyards"
+    },
+    {
+      "price": "$5,181",
+      "capacity": 1000,
+      "location": "Burlingame, San Mateo County",
+      "rating": 4.2,
+      "reviews": 4059,
+      "name": "San Francisco Airport Marriott Waterfront"
+    },
+    {
+      "price": "$16,719",
+      "capacity": 250,
+      "location": "Woodside, San Mateo County",
+      "rating": 4.58,
+      "reviews": 372,
+      "name": "The Mountain Terrace"
+    },
+    {
+      "price": "$6,487",
+      "capacity": 280,
+      "location": "Burlingame, San Mateo County",
+      "rating": 4.08,
+      "reviews": 143,
+      "name": "Fairview Crystal Springs"
+    },
+    {
+      "price": "$27,563",
+      "capacity": 250,
+      "location": "Menlo Park, San Mateo County",
+      "rating": 4.53,
+      "reviews": 2328,
+      "name": "Rosewood Sand Hill"
+    },
+    {
+      "price": "$19,182",
+      "capacity": 165,
+      "location": "Menlo Park, San Mateo County",
+      "rating": 4.23,
+      "reviews": 229,
+      "name": "Cafe Wisteria"
+    },
+    {
+      "price": "$20,509",
+      "capacity": 300,
+      "location": "San Carlos, San Mateo County",
+      "name": "The Alexandria at San Carlos"
+    },
+    {
+      "price": "$34,181",
+      "capacity": 400,
+      "location": "Menlo Park, San Mateo County",
+      "rating": 4.31,
+      "reviews": 1030,
+      "name": "Up to 300"
+    },
+    {
+      "price": "$5,245",
+      "capacity": 150,
+      "location": "South San Francisco, San Mateo County",
+      "rating": 4.52,
+      "reviews": 201,
+      "name": "Dominic’s at Oyster Point"
+    },
+    {
+      "price": "$7,111",
+      "capacity": 100,
+      "location": "Big Sur, Monterey County",
+      "rating": 4.2,
+      "reviews": 568,
+      "name": "Glen Oaks Big Sur"
+    },
+    {
+      "price": "$11,206",
+      "capacity": 50,
+      "location": "Big Sur, Monterey County",
+      "rating": 4.46,
+      "reviews": 728,
+      "name": "COAST Big Sur"
+    },
+    {
+      "price": "$19,136",
+      "capacity": 210,
+      "location": "Big Sur, Monterey County",
+      "rating": 4.71,
+      "reviews": 49,
+      "name": "Loma Vista Gardens"
+    },
+    {
+      "price": "$8,405",
+      "capacity": 24,
+      "location": "Big Sur, Monterey County",
+      "rating": 4.46,
+      "reviews": 728,
+      "name": "COAST Big Sur: Henry Miller Gallery"
+    },
+    {
+      "price": "$30,170",
+      "capacity": 150,
+      "location": "Big Sur, Monterey County",
+      "rating": 4.75,
+      "reviews": 65,
+      "name": "The Village Big Sur"
+    },
+    {
+      "price": "$20,203",
+      "capacity": 300,
+      "location": "Carmel-by-the-Sea, Monterey County",
+      "rating": 4.41,
+      "reviews": 1813,
+      "name": "Carmel Valley Ranch"
+    },
+    {
+      "price": "$16,794",
+      "capacity": 140,
+      "location": "Monterey, Monterey County",
+      "rating": 4.84,
+      "reviews": 290,
+      "name": "The Perry House"
+    },
+    {
+      "price": "$10,584",
+      "capacity": 320,
+      "location": "Monterey, Monterey County",
+      "rating": 4.59,
+      "reviews": 19,
+      "name": "Monterey Beach Hotel"
+    },
+    {
+      "price": "$58,995",
+      "capacity": 200,
+      "location": "Carmel-by-the-Sea, Monterey County",
+      "rating": 4.51,
+      "reviews": 48,
+      "name": "The Santa Lucia Preserve"
+    },
+    {
+      "price": "$32,775",
+      "capacity": 150,
+      "location": "Carmel Valley, Monterey County",
+      "rating": 4.63,
+      "reviews": 1138,
+      "name": "Bernardus Lodge and Spa"
+    },
+    {
+      "price": "$19,718",
+      "capacity": 180,
+      "location": "Carmel-by-the-Sea, Monterey County",
+      "rating": 4.67,
+      "reviews": 128,
+      "name": "Tehama Golf Club"
+    },
+    {
+      "price": "$39,803",
+      "capacity": 300,
+      "location": "Monterey, Monterey County",
+      "rating": 4.44,
+      "reviews": 227,
+      "name": "The Club at Pasadera"
+    },
+    {
+      "price": "$5,265",
+      "capacity": 70,
+      "location": "Monterey, Monterey County",
+      "rating": 4.5,
+      "reviews": 1876,
+      "name": "Tarpy's Roadhouse"
+    },
+    {
+      "price": "$65,550",
+      "capacity": 300,
+      "location": "Carmel Valley, Monterey County",
+      "rating": 4.81,
+      "reviews": 173,
+      "name": "Holman Ranch"
+    },
+    {
+      "price": "$18,026",
+      "capacity": 32,
+      "location": "Salinas, Monterey County",
+      "rating": 4.44,
+      "reviews": 16,
+      "name": "De Tierra Events"
+    },
+    {
+      "price": "$12,555",
+      "capacity": 100,
+      "location": "Pacific Grove, Monterey County",
+      "rating": 4.39,
+      "reviews": 453,
+      "name": "Point Pinos Grill"
+    },
+    {
+      "price": "$32,864",
+      "capacity": 200,
+      "location": "Monterey, Monterey County",
+      "rating": 4.34,
+      "reviews": 3324,
+      "name": "Intercontinental The Clement Monterey"
+    },
+    {
+      "price": "$27,990",
+      "capacity": 150,
+      "location": "Carmel-by-the-Sea, Monterey County",
+      "rating": 4.4,
+      "reviews": 1250,
+      "name": "Hyatt Carmel Highlands"
+    },
+    {
+      "price": "$7,150",
+      "capacity": 150,
+      "location": "Monterey, Monterey County",
+      "rating": 4.7,
+      "reviews": 81,
+      "name": "Wave Street Studios"
+    },
+    {
+      "price": "$13,929",
+      "capacity": 40,
+      "location": "Monterey, Monterey County",
+      "rating": 4.61,
+      "reviews": 286,
+      "name": "Old Monterey Inn"
+    },
+    {
+      "price": "$9,901",
+      "capacity": 100,
+      "location": "Marina, Monterey County",
+      "rating": 4.18,
+      "reviews": 1615,
+      "name": "Sanctuary Beach Resort"
+    }
+  ]
+}
