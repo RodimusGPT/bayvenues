@@ -79,7 +79,7 @@ function App() {
     // Before map is ready, show all filtered venues in the list
     if (!isMapReadyForBounds || !mapBounds) return filteredVenues;
 
-    return filteredVenues.filter((venue) => {
+    const inBounds = filteredVenues.filter((venue) => {
       const { lat, lng } = venue.location;
       if (lat == null || lng == null) return false;
       return (
@@ -89,6 +89,14 @@ function App() {
         lng <= mapBounds.east
       );
     });
+
+    // Fallback: if bounds filtering would show nothing but we have venues,
+    // show all venues. This handles edge cases where bounds are stale.
+    if (inBounds.length === 0 && filteredVenues.length > 0) {
+      return filteredVenues;
+    }
+
+    return inBounds;
   }, [filteredVenues, mapBounds, isMapReadyForBounds]);
 
   // Show list button on mobile when zoomed in enough
