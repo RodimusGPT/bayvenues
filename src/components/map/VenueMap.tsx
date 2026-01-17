@@ -36,6 +36,7 @@ const mapOptions: google.maps.MapOptions = {
   streetViewControl: false,
   fullscreenControl: true,
   gestureHandling: 'greedy',
+  backgroundColor: '#e6eef3', // primary-100 from color scheme
   styles: [
     {
       featureType: 'poi',

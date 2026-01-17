@@ -22,7 +22,7 @@ export function Header({ showFilters, onToggleFilters, onToggleFavorites, showFa
   const favoriteCount = getFavoriteCount();
 
   return (
-    <header className="bg-white border-b border-gray-200 px-4 py-3 flex-shrink-0">
+    <header className="bg-white border-b border-gray-200 px-4 py-3 flex-shrink-0 relative z-50">
       <div className="flex items-center gap-4">
         {/* Logo */}
         <div className="flex items-center gap-2">

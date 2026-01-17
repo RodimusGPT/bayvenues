@@ -247,7 +247,7 @@ function App() {
       {showFilters && (
         <div className="lg:hidden fixed inset-0 z-40 bg-black/50" onClick={() => setShowFilters(false)}>
           <aside
-            className="absolute left-0 top-0 bottom-0 w-80 max-w-[85vw] bg-white overflow-y-auto animate-slide-in-left"
+            className="absolute left-0 top-[60px] bottom-0 w-80 max-w-[85vw] bg-white overflow-y-auto animate-slide-in-left rounded-tr-xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-4 border-b flex justify-between items-center">

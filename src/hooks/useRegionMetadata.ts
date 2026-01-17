@@ -4,12 +4,20 @@ import { supabase } from '../lib/supabase';
 export interface RegionData {
   name: string;
   country: string;
+  state: string | null;
   venueCount: number;
+}
+
+export interface StateData {
+  name: string;
+  regions: RegionData[];
+  totalVenues: number;
 }
 
 export interface CountryData {
   name: string;
   regions: RegionData[];
+  states: StateData[];  // For USA, regions are grouped by state
   totalVenues: number;
 }
 
@@ -44,9 +52,10 @@ export function useRegionMetadata(): RegionMetadata {
         if (err) throw err;
 
         // Transform to RegionData format
-        const regions: RegionData[] = (regionCounts || []).map((r: { region_name: string; country_name: string; venue_count: number }) => ({
+        const regions: RegionData[] = (regionCounts || []).map((r: { region_name: string; country_name: string; state_name: string | null; venue_count: number }) => ({
           name: r.region_name,
           country: r.country_name,
+          state: r.state_name,
           venueCount: r.venue_count,
         }));
 
@@ -62,7 +71,7 @@ export function useRegionMetadata(): RegionMetadata {
     fetchMetadata();
   }, []);
 
-  // Group regions by country and sort
+  // Group regions by country, then by state for USA
   const countries = useMemo(() => {
     const grouped = data.reduce<Record<string, RegionData[]>>((acc, region) => {
       if (!acc[region.country]) {
@@ -74,11 +83,38 @@ export function useRegionMetadata(): RegionMetadata {
 
     // Convert to array and sort
     return Object.entries(grouped)
-      .map(([name, regions]) => ({
-        name,
-        regions: regions.sort((a, b) => b.venueCount - a.venueCount), // Sort regions by venue count
-        totalVenues: regions.reduce((sum, r) => sum + r.venueCount, 0),
-      }))
+      .map(([name, regions]) => {
+        // For USA, group regions by state
+        const stateGroups: Record<string, RegionData[]> = {};
+        const regionsWithoutState: RegionData[] = [];
+
+        regions.forEach(region => {
+          if (region.state) {
+            if (!stateGroups[region.state]) {
+              stateGroups[region.state] = [];
+            }
+            stateGroups[region.state].push(region);
+          } else {
+            regionsWithoutState.push(region);
+          }
+        });
+
+        // Convert state groups to StateData array
+        const states: StateData[] = Object.entries(stateGroups)
+          .map(([stateName, stateRegions]) => ({
+            name: stateName,
+            regions: stateRegions.sort((a, b) => b.venueCount - a.venueCount),
+            totalVenues: stateRegions.reduce((sum, r) => sum + r.venueCount, 0),
+          }))
+          .sort((a, b) => b.totalVenues - a.totalVenues); // Sort states by venue count
+
+        return {
+          name,
+          regions: regionsWithoutState.sort((a, b) => b.venueCount - a.venueCount),
+          states,
+          totalVenues: regions.reduce((sum, r) => sum + r.venueCount, 0),
+        };
+      })
       .sort((a, b) => {
         // Sort by predefined order, then alphabetically for new countries
         const orderA = COUNTRY_ORDER[a.name] ?? 999;

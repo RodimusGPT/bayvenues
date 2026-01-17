@@ -78,7 +78,11 @@ For each discovered venue, use WebFetch to extract details from their website.
 5. **Contact**: Phone numbers, email addresses
 6. **Address**: Full address, look in footer or contact page
 7. **Instagram**: Extract from `<a href="instagram.com/...">` links
-8. **Header Image**: Extract `og:image` meta tag or first hero image
+8. **Header Images (3-5 REQUIRED)**: Extract multiple images for the venue:
+   - `og:image` meta tag
+   - Hero/banner images from homepage
+   - Gallery images if available
+   - If insufficient images found, use appropriate Unsplash fallbacks based on venue type
 
 **Venue Type Detection** (based on name + description):
 ```
@@ -143,12 +147,16 @@ For each venue, search YouTube to find a relevant wedding video:
    "videos": [{"title": "Beautiful Wedding at Villa San Michele", "url": "https://www.youtube.com/watch?v=VIDEO_ID"}]
    ```
 
-6. **Use thumbnail as header image** (if no better image exists):
+6. **Add YouTube thumbnail to header_images** (supplement existing images):
    ```json
-   "header_image": {"url": "https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg", "source": "youtube"}
+   "header_images": [
+     {"url": "https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg", "source": "youtube"},
+     {"url": "https://venue-website.com/hero.jpg", "source": "og_image"},
+     {"url": "https://images.unsplash.com/photo-xxx?w=1200&h=800&fit=crop", "source": "unsplash"}
+   ]
    ```
 
-   Thumbnail URL formats:
+   YouTube thumbnail URL formats:
    - Max resolution: `https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg`
    - High quality: `https://img.youtube.com/vi/VIDEO_ID/hqdefault.jpg`
    - Medium: `https://img.youtube.com/vi/VIDEO_ID/mqdefault.jpg`
@@ -157,6 +165,26 @@ For each venue, search YouTube to find a relevant wedding video:
    ```sql
    youtube_search = '<venue name> wedding'
    ```
+
+**Unsplash Fallback Images by Venue Type** (use when scraped images < 3):
+```
+Resort:     https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&h=800&fit=crop
+Beach:      https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&h=800&fit=crop
+Winery:     https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1200&h=800&fit=crop
+Vineyard:   https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=1200&h=800&fit=crop
+Garden:     https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1200&h=800&fit=crop
+Estate:     https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&h=800&fit=crop
+Mansion:    https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=800&fit=crop
+Barn:       https://images.unsplash.com/photo-1510076857177-7470076d4098?w=1200&h=800&fit=crop
+Waterfront: https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=800&fit=crop
+Golf:       https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=1200&h=800&fit=crop
+Industrial: https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=800&fit=crop
+Farmhouse:  https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=1200&h=800&fit=crop
+Historic:   https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1200&h=800&fit=crop
+Castle:     https://images.unsplash.com/photo-1533154683836-84ea7a0bc310?w=1200&h=800&fit=crop
+Villa:      https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&h=800&fit=crop
+default:    https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&h=800&fit=crop
+```
 
 **Skip enrichment if**:
 - `--skip-enrichment` flag is set
@@ -501,13 +529,17 @@ Deduplication Summary:
 
 ### IMPORTANT NOTES
 
-1. **Rate Limiting**: Add 1-2 second delays between WebFetch calls to avoid being blocked
-2. **Supabase Project ID**: Always use `tpgruvfobcgzictihwrp` for all MCP calls
-3. **Respect robots.txt**: Skip sites that block scraping
-4. **Quality over quantity**: Better to have 10 well-scraped venues than 50 incomplete ones
-5. **Manual verification**: For venues where data couldn't be extracted, note them for manual review
-6. **Coordinates**: Try to extract lat/lng from venue website or use Google Maps search. If unavailable, use approximate region center.
-7. **Data validation**: Ensure capacity_min < capacity_max and price_min < price_max
+1. **HEADER IMAGES (3-5 REQUIRED)**: Every venue MUST have 3-5 header images stored in the `header_images` jsonb array. Sources in priority order:
+   - Scraped from venue website (og:image, hero images, gallery)
+   - YouTube video thumbnails
+   - Unsplash fallbacks based on venue type
+2. **Rate Limiting**: Add 1-2 second delays between WebFetch calls to avoid being blocked
+3. **Supabase Project ID**: Always use `tpgruvfobcgzictihwrp` for all MCP calls
+4. **Respect robots.txt**: Skip sites that block scraping
+5. **Quality over quantity**: Better to have 10 well-scraped venues than 50 incomplete ones
+6. **Manual verification**: For venues where data couldn't be extracted, note them for manual review
+7. **Coordinates**: Try to extract lat/lng from venue website or use Google Maps search. If unavailable, use approximate region center.
+8. **Data validation**: Ensure capacity_min < capacity_max and price_min < price_max
 
 ---
 
