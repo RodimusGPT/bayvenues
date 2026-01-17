@@ -1,4 +1,5 @@
 import { useHiddenStore } from '../../stores/hiddenStore';
+import { useAuth } from '../../contexts/AuthContext';
 
 interface HideButtonProps {
   venueId: string;
@@ -15,17 +16,24 @@ const sizeClasses = {
 
 export function HideButton({ venueId, size = 'md', className = '', onHide }: HideButtonProps) {
   const { toggleHidden, isHidden } = useHiddenStore();
-  const hidden = isHidden(venueId);
+  const { user, openAuthModal } = useAuth();
+  const hidden = user ? isHidden(venueId) : false;
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!user) {
+      openAuthModal();
+      return;
+    }
+    toggleHidden(venueId, user.id);
+    if (!hidden && onHide) {
+      onHide();
+    }
+  };
 
   return (
     <button
-      onClick={(e) => {
-        e.stopPropagation();
-        toggleHidden(venueId);
-        if (!hidden && onHide) {
-          onHide();
-        }
-      }}
+      onClick={handleClick}
       className={`p-2 rounded-full transition-all duration-200 ${
         hidden
           ? 'text-gray-500 hover:text-gray-600 bg-gray-100'

@@ -1,42 +1,54 @@
 import { useFilterStore } from '../../stores/filterStore';
 import { useFavoriteStore } from '../../stores/favoriteStore';
 import { useHiddenStore } from '../../stores/hiddenStore';
-import { COUNTRIES, SETTINGS, COUNTRY_COLORS } from '../../types/venue';
-import type { Country } from '../../types/venue';
+import { useAuth } from '../../contexts/AuthContext';
+import { SETTINGS, type Setting } from '../../types/venue';
 import { formatPrice } from '../../utils/formatters';
+import { CountryRegionFilter } from './CountryRegionFilter';
+import { RangeSlider } from '../ui/RangeSlider';
 
 interface FilterPanelProps {
   venueTypes: string[];
   onShowFavoritesPanel?: () => void;
 }
 
-// Country flag emojis
-const COUNTRY_FLAGS: Record<Country, string> = {
-  'USA': '🇺🇸',
-  'Portugal': '🇵🇹',
-  'Italy': '🇮🇹',
-  'Greece': '🇬🇷',
-  'Spain': '🇪🇸',
-  'Switzerland': '🇨🇭',
-  'France': '🇫🇷',
-};
-
 export function FilterPanel({ venueTypes, onShowFavoritesPanel }: FilterPanelProps) {
   const {
-    selectedCountries,
     selectedVenueTypes,
     selectedSettings,
     priceRange,
     capacityRange,
-    toggleCountry,
     toggleVenueType,
     toggleSetting,
     setPriceRange,
     setCapacityRange,
+    resetFilters,
   } = useFilterStore();
 
   const { showFavoritesOnly, setShowFavoritesOnly, getFavoriteCount } = useFavoriteStore();
+
+  // Wrap filter handlers to auto-disable favorites mode
+  const handleToggleVenueType = (type: string) => {
+    if (showFavoritesOnly) setShowFavoritesOnly(false);
+    toggleVenueType(type);
+  };
+
+  const handleToggleSetting = (setting: Setting) => {
+    if (showFavoritesOnly) setShowFavoritesOnly(false);
+    toggleSetting(setting);
+  };
+
+  const handlePriceRangeChange = (range: [number, number]) => {
+    if (showFavoritesOnly) setShowFavoritesOnly(false);
+    setPriceRange(range);
+  };
+
+  const handleCapacityRangeChange = (range: [number, number]) => {
+    if (showFavoritesOnly) setShowFavoritesOnly(false);
+    setCapacityRange(range);
+  };
   const { getHiddenCount, clearHidden } = useHiddenStore();
+  const { user } = useAuth();
   const favoriteCount = getFavoriteCount();
   const hiddenCount = getHiddenCount();
 
@@ -48,9 +60,10 @@ export function FilterPanel({ venueTypes, onShowFavoritesPanel }: FilterPanelPro
           onClick={() => {
             const newValue = !showFavoritesOnly;
             setShowFavoritesOnly(newValue);
-            // Open favorites panel when enabling the filter
-            if (newValue && onShowFavoritesPanel) {
-              onShowFavoritesPanel();
+            // When enabling favorites, clear other filters so user sees all their favorites
+            if (newValue) {
+              resetFilters();
+              if (onShowFavoritesPanel) onShowFavoritesPanel();
             }
           }}
           className={`w-full flex items-center justify-between px-4 py-3 rounded-lg transition-colors ${
@@ -107,7 +120,7 @@ export function FilterPanel({ venueTypes, onShowFavoritesPanel }: FilterPanelPro
             </span>
           </div>
           <button
-            onClick={clearHidden}
+            onClick={() => clearHidden(user?.id)}
             className="text-xs text-gray-500 hover:text-gray-700 font-medium"
           >
             Show all
@@ -115,42 +128,18 @@ export function FilterPanel({ venueTypes, onShowFavoritesPanel }: FilterPanelPro
         </div>
       )}
 
-      {/* Countries */}
-      <div>
-        <h3 className="text-sm font-semibold text-gray-900 mb-3">Country</h3>
-        <div className="space-y-2">
-          {COUNTRIES.map((country) => (
-            <label
-              key={country}
-              className="flex items-center gap-3 cursor-pointer group"
-            >
-              <input
-                type="checkbox"
-                checked={selectedCountries.includes(country)}
-                onChange={() => toggleCountry(country)}
-                className="w-4 h-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-              />
-              <span
-                className="w-3 h-3 rounded-full flex-shrink-0"
-                style={{ backgroundColor: COUNTRY_COLORS[country] }}
-              />
-              <span className="text-base mr-1">{COUNTRY_FLAGS[country]}</span>
-              <span className="text-sm text-gray-700 group-hover:text-gray-900">
-                {country}
-              </span>
-            </label>
-          ))}
-        </div>
-      </div>
+      {/* Location - Countries & Regions */}
+      <CountryRegionFilter />
 
       {/* Setting (Indoor/Outdoor) */}
       <div>
         <h3 className="text-sm font-semibold text-gray-900 mb-3">Setting</h3>
-        <div className="flex gap-2">
+        <div className="flex gap-2" role="group" aria-label="Venue setting filter">
           {SETTINGS.map((setting) => (
             <button
               key={setting}
-              onClick={() => toggleSetting(setting)}
+              onClick={() => handleToggleSetting(setting)}
+              aria-pressed={selectedSettings.includes(setting)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                 selectedSettings.includes(setting)
                   ? 'bg-primary-600 text-white'
@@ -165,62 +154,30 @@ export function FilterPanel({ venueTypes, onShowFavoritesPanel }: FilterPanelPro
 
       {/* Guest Capacity */}
       <div>
-        <h3 className="text-sm font-semibold text-gray-900 mb-3">
-          Guest Capacity
-          <span className="font-normal text-gray-500 ml-2">
-            {capacityRange[0]} - {capacityRange[1]} guests
-          </span>
-        </h3>
-        <div className="space-y-3">
-          <input
-            type="range"
-            min={0}
-            max={1000}
-            step={10}
-            value={capacityRange[0]}
-            onChange={(e) => setCapacityRange([Number(e.target.value), capacityRange[1]])}
-            className="w-full accent-primary-600"
-          />
-          <input
-            type="range"
-            min={0}
-            max={1000}
-            step={10}
-            value={capacityRange[1]}
-            onChange={(e) => setCapacityRange([capacityRange[0], Number(e.target.value)])}
-            className="w-full accent-primary-600"
-          />
-        </div>
+        <h3 className="text-sm font-semibold text-gray-900 mb-2">Guest Capacity</h3>
+        <RangeSlider
+          min={0}
+          max={1000}
+          step={10}
+          value={capacityRange}
+          onChange={handleCapacityRangeChange}
+          formatLabel={(v) => `${v} guests`}
+          label="guest capacity"
+        />
       </div>
 
       {/* Price Range */}
       <div>
-        <h3 className="text-sm font-semibold text-gray-900 mb-3">
-          Price Range
-          <span className="font-normal text-gray-500 ml-2">
-            {formatPrice(priceRange[0])} - {formatPrice(priceRange[1])}
-          </span>
-        </h3>
-        <div className="space-y-3">
-          <input
-            type="range"
-            min={0}
-            max={100000}
-            step={1000}
-            value={priceRange[0]}
-            onChange={(e) => setPriceRange([Number(e.target.value), priceRange[1]])}
-            className="w-full accent-primary-600"
-          />
-          <input
-            type="range"
-            min={0}
-            max={100000}
-            step={1000}
-            value={priceRange[1]}
-            onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
-            className="w-full accent-primary-600"
-          />
-        </div>
+        <h3 className="text-sm font-semibold text-gray-900 mb-2">Price Range</h3>
+        <RangeSlider
+          min={0}
+          max={100000}
+          step={1000}
+          value={priceRange}
+          onChange={handlePriceRangeChange}
+          formatLabel={formatPrice}
+          label="price"
+        />
       </div>
 
       {/* Venue Types */}
@@ -230,7 +187,7 @@ export function FilterPanel({ venueTypes, onShowFavoritesPanel }: FilterPanelPro
           {venueTypes.map((type) => (
             <button
               key={type}
-              onClick={() => toggleVenueType(type)}
+              onClick={() => handleToggleVenueType(type)}
               className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
                 selectedVenueTypes.includes(type)
                   ? 'bg-primary-600 text-white'

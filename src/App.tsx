@@ -1,19 +1,19 @@
 import { useMemo, useState, useCallback } from 'react';
 import { useJsApiLoader } from '@react-google-maps/api';
-import venueData from './data/venues.json';
-import type { Venue, VenueData } from './types/venue';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from './lib/queryClient';
 import { useFilterStore } from './stores/filterStore';
 import { useVenueStore } from './stores/venueStore';
-import { useFavoriteStore } from './stores/favoriteStore';
-import { useHiddenStore } from './stores/hiddenStore';
-import { filterVenues, getUniqueVenueTypes } from './utils/filterVenues';
+import { useSupabaseVenues, useVenueMetadata } from './hooks/useSupabaseVenues';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { useUserPreferences } from './hooks/useUserPreferences';
 import { Header } from './components/layout/Header';
 import { FilterPanel } from './components/search/FilterPanel';
 import { FavoritesPanel } from './components/layout/FavoritesPanel';
 import { VenueMap, type MapBounds, type MapPosition } from './components/map/VenueMap';
 import { VenueListView } from './components/venue/VenueListView';
 import { VenuePanel } from './components/venue/VenuePanel';
-import { LocalStorageNotice } from './components/ui/LocalStorageNotice';
+import { AuthModal } from './components/auth/AuthModal';
 
 const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || '';
 const LIBRARIES: ('places' | 'marker')[] = ['places', 'marker'];
@@ -29,36 +29,30 @@ function App() {
   const [mapZoom, setMapZoom] = useState(3);
   const [mapPosition, setMapPosition] = useState<MapPosition | null>(null);
 
+  // Auth state from context
+  const { authModalOpen, closeAuthModal } = useAuth();
+
+  // Sync user preferences between localStorage and database
+  useUserPreferences();
+
   const { isLoaded, loadError } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: GOOGLE_MAPS_API_KEY,
     libraries: LIBRARIES,
   });
 
-  const data = venueData as VenueData;
-  const venues: Venue[] = data.venues;
-  const venueTypes = useMemo(() => getUniqueVenueTypes(venues), [venues]);
-
-  // Get filter state
+  // Get filter state (using debounced filters for API calls)
   const filters = useFilterStore();
   const { selectedVenue, setSelectedVenue } = useVenueStore();
-  const { showFavoritesOnly, favorites } = useFavoriteStore();
-  const { hidden } = useHiddenStore();
 
-  // Apply filters
-  const filteredVenues = useMemo(() => {
-    let result = filterVenues(venues, filters);
+  // Fetch venues from Supabase with server-side filtering
+  const { data: filteredVenues = [], isLoading: isLoadingVenues } = useSupabaseVenues({
+    filters: filters.debouncedFilters,
+  });
 
-    // Filter out hidden venues
-    result = result.filter((venue) => !hidden.has(venue.id));
-
-    // Apply favorites filter if enabled
-    if (showFavoritesOnly) {
-      result = result.filter((venue) => favorites.has(venue.id));
-    }
-
-    return result;
-  }, [venues, filters, showFavoritesOnly, favorites, hidden]);
+  // Fetch metadata (venue types, regions, price/capacity bounds)
+  const { data: metadata } = useVenueMetadata();
+  const venueTypes = metadata?.venueTypes ?? [];
 
   // Handle map bounds changes
   const handleBoundsChange = useCallback((bounds: MapBounds, zoom: number) => {
@@ -77,8 +71,8 @@ function App() {
     if (!mapBounds) return filteredVenues;
 
     return filteredVenues.filter((venue) => {
-      if (!venue.location) return false;
       const { lat, lng } = venue.location;
+      if (lat == null || lng == null) return false;
       return (
         lat >= mapBounds.south &&
         lat <= mapBounds.north &&
@@ -105,14 +99,13 @@ function App() {
   return (
     <div className="h-screen flex flex-col bg-gray-50">
       <Header
-        totalVenues={venues.length}
         filteredCount={filteredVenues.length}
+        isLoading={isLoadingVenues}
         showFilters={showFilters}
         onToggleFilters={() => setShowFilters(!showFilters)}
         showFavorites={showFavorites}
         onToggleFavorites={() => setShowFavorites(!showFavorites)}
       />
-      <LocalStorageNotice />
 
       <div className="flex-1 flex overflow-hidden">
         {/* Filter Panel - Left Side (Desktop) */}
@@ -147,6 +140,7 @@ function App() {
                 venues={venuesInBounds}
                 onVenueSelect={setSelectedVenue}
                 onBackToMap={() => setViewMode('map')}
+                isLoading={isLoadingVenues}
               />
             </div>
           )}
@@ -157,11 +151,12 @@ function App() {
           {selectedVenue ? (
             <VenuePanel
               venue={selectedVenue}
+              venues={venuesInBounds}
               onClose={() => setSelectedVenue(null)}
+              onNavigate={setSelectedVenue}
             />
           ) : showFavorites ? (
             <FavoritesPanel
-              venues={venues}
               onVenueSelect={(venue) => {
                 setSelectedVenue(venue);
                 setShowFavorites(false);
@@ -172,6 +167,7 @@ function App() {
             <VenueListView
               venues={venuesInBounds}
               onVenueSelect={setSelectedVenue}
+              isLoading={isLoadingVenues}
             />
           )}
         </aside>
@@ -181,7 +177,9 @@ function App() {
           <div className="lg:hidden">
             <VenuePanel
               venue={selectedVenue}
+              venues={venuesInBounds}
               onClose={() => setSelectedVenue(null)}
+              onNavigate={setSelectedVenue}
             />
           </div>
         )}
@@ -190,7 +188,6 @@ function App() {
         {showFavorites && !selectedVenue && (
           <div className="lg:hidden">
             <FavoritesPanel
-              venues={venues}
               onVenueSelect={(venue) => {
                 setSelectedVenue(venue);
                 setShowFavorites(false);
@@ -255,8 +252,22 @@ function App() {
           </aside>
         </div>
       )}
+
+      {/* Auth Modal */}
+      <AuthModal isOpen={authModalOpen} onClose={closeAuthModal} />
     </div>
   );
 }
 
-export default App;
+// Wrap App with providers
+function AppWithProviders() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </QueryClientProvider>
+  );
+}
+
+export default AppWithProviders;

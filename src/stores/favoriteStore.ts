@@ -1,14 +1,17 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { addUserFavorite, removeUserFavorite, clearAllUserFavorites } from '../lib/userPreferencesApi';
 
 interface FavoriteStore {
   favorites: Set<string>;
   showFavoritesOnly: boolean;
-  toggleFavorite: (venueId: string) => void;
+  toggleFavorite: (venueId: string, userId?: string) => void;
   isFavorite: (venueId: string) => boolean;
-  clearFavorites: () => void;
+  clearFavorites: (userId?: string) => void;
   getFavoriteCount: () => number;
   setShowFavoritesOnly: (show: boolean) => void;
+  setFavorites: (ids: string[]) => void;
+  getFavoriteIds: () => string[];
 }
 
 export const useFavoriteStore = create<FavoriteStore>()(
@@ -17,24 +20,46 @@ export const useFavoriteStore = create<FavoriteStore>()(
       favorites: new Set<string>(),
       showFavoritesOnly: false,
 
-      toggleFavorite: (venueId) =>
+      toggleFavorite: (venueId, userId) =>
         set((state) => {
           const newFavorites = new Set(state.favorites);
-          if (newFavorites.has(venueId)) {
-            newFavorites.delete(venueId);
-          } else {
+          const wasAdded = !newFavorites.has(venueId);
+
+          if (wasAdded) {
             newFavorites.add(venueId);
+          } else {
+            newFavorites.delete(venueId);
           }
+
+          // Fire API call in background if user is logged in
+          if (userId) {
+            if (wasAdded) {
+              addUserFavorite(userId, venueId).catch(console.error);
+            } else {
+              removeUserFavorite(userId, venueId).catch(console.error);
+            }
+          }
+
           return { favorites: newFavorites };
         }),
 
       isFavorite: (venueId) => get().favorites.has(venueId),
 
-      clearFavorites: () => set({ favorites: new Set<string>() }),
+      clearFavorites: (userId) => {
+        set({ favorites: new Set<string>() });
+        // Clear server-side data if user is logged in
+        if (userId) {
+          clearAllUserFavorites(userId).catch(console.error);
+        }
+      },
 
       getFavoriteCount: () => get().favorites.size,
 
       setShowFavoritesOnly: (show) => set({ showFavoritesOnly: show }),
+
+      setFavorites: (ids) => set({ favorites: new Set(ids) }),
+
+      getFavoriteIds: () => Array.from(get().favorites),
     }),
     {
       name: 'venue-favorites',

@@ -1,12 +1,15 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { addUserHidden, removeUserHidden, clearAllUserHidden } from '../lib/userPreferencesApi';
 
 interface HiddenStore {
   hidden: Set<string>;
-  toggleHidden: (venueId: string) => void;
+  toggleHidden: (venueId: string, userId?: string) => void;
   isHidden: (venueId: string) => boolean;
-  clearHidden: () => void;
+  clearHidden: (userId?: string) => void;
   getHiddenCount: () => number;
+  setHidden: (ids: string[]) => void;
+  getHiddenIds: () => string[];
 }
 
 export const useHiddenStore = create<HiddenStore>()(
@@ -14,22 +17,44 @@ export const useHiddenStore = create<HiddenStore>()(
     (set, get) => ({
       hidden: new Set<string>(),
 
-      toggleHidden: (venueId) =>
+      toggleHidden: (venueId, userId) =>
         set((state) => {
           const newHidden = new Set(state.hidden);
-          if (newHidden.has(venueId)) {
-            newHidden.delete(venueId);
-          } else {
+          const wasAdded = !newHidden.has(venueId);
+
+          if (wasAdded) {
             newHidden.add(venueId);
+          } else {
+            newHidden.delete(venueId);
           }
+
+          // Fire API call in background if user is logged in
+          if (userId) {
+            if (wasAdded) {
+              addUserHidden(userId, venueId).catch(console.error);
+            } else {
+              removeUserHidden(userId, venueId).catch(console.error);
+            }
+          }
+
           return { hidden: newHidden };
         }),
 
       isHidden: (venueId) => get().hidden.has(venueId),
 
-      clearHidden: () => set({ hidden: new Set<string>() }),
+      clearHidden: (userId) => {
+        set({ hidden: new Set<string>() });
+        // Clear server-side data if user is logged in
+        if (userId) {
+          clearAllUserHidden(userId).catch(console.error);
+        }
+      },
 
       getHiddenCount: () => get().hidden.size,
+
+      setHidden: (ids) => set({ hidden: new Set(ids) }),
+
+      getHiddenIds: () => Array.from(get().hidden),
     }),
     {
       name: 'venue-hidden',

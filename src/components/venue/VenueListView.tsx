@@ -7,6 +7,7 @@ interface VenueListViewProps {
   venues: Venue[];
   onVenueSelect: (venue: Venue) => void;
   onBackToMap?: () => void;
+  isLoading?: boolean;
 }
 
 // Country flag emojis
@@ -29,10 +30,21 @@ function VenueCard({ venue, onSelect }: { venue: Venue; onSelect: () => void }) 
     || venue.headerImages?.[0]?.url
     || venue.headerImage?.url;
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onSelect();
+    }
+  };
+
   return (
     <div
+      role="button"
+      tabIndex={0}
       onClick={onSelect}
-      className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden cursor-pointer hover:shadow-md hover:border-gray-200 transition-all group"
+      onKeyDown={handleKeyDown}
+      className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden cursor-pointer hover:shadow-md hover:border-gray-200 transition-all group focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+      aria-label={`View details for ${venue.name}`}
     >
       {/* Image */}
       <div className="relative h-48 sm:h-52 bg-gray-100">
@@ -51,8 +63,8 @@ function VenueCard({ venue, onSelect }: { venue: Venue; onSelect: () => void }) 
           </div>
         )}
 
-        {/* Favorite button */}
-        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+        {/* Favorite button - always visible on touch, hover to show on desktop */}
+        <div className="absolute top-2 right-2 opacity-100 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity">
           <FavoriteButton
             venueId={venue.id}
             size="sm"
@@ -97,7 +109,19 @@ function VenueCard({ venue, onSelect }: { venue: Venue; onSelect: () => void }) 
   );
 }
 
-export function VenueListView({ venues, onVenueSelect, onBackToMap }: VenueListViewProps) {
+export function VenueListView({ venues, onVenueSelect, onBackToMap, isLoading }: VenueListViewProps) {
+  // Show loading state
+  if (isLoading) {
+    return (
+      <div className="h-full flex items-center justify-center p-8 bg-gray-50">
+        <div className="flex flex-col items-center gap-3">
+          <div className="animate-spin rounded-full h-10 w-10 border-3 border-primary-600 border-t-transparent"></div>
+          <span className="text-sm text-gray-600 font-medium">Loading venues...</span>
+        </div>
+      </div>
+    );
+  }
+
   if (venues.length === 0) {
     return (
       <div className="h-full flex items-center justify-center p-8 bg-gray-50">

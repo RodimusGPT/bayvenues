@@ -1,4 +1,5 @@
 import { useFavoriteStore } from '../../stores/favoriteStore';
+import { useAuth } from '../../contexts/AuthContext';
 
 interface FavoriteButtonProps {
   venueId: string;
@@ -14,14 +15,21 @@ const sizeClasses = {
 
 export function FavoriteButton({ venueId, size = 'md', className = '' }: FavoriteButtonProps) {
   const { toggleFavorite, isFavorite } = useFavoriteStore();
-  const favorited = isFavorite(venueId);
+  const { user, openAuthModal } = useAuth();
+  const favorited = user ? isFavorite(venueId) : false;
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!user) {
+      openAuthModal();
+      return;
+    }
+    toggleFavorite(venueId, user.id);
+  };
 
   return (
     <button
-      onClick={(e) => {
-        e.stopPropagation();
-        toggleFavorite(venueId);
-      }}
+      onClick={handleClick}
       className={`p-2 rounded-full transition-all duration-200 ${
         favorited
           ? 'text-red-500 hover:text-red-600'

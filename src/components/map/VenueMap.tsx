@@ -49,23 +49,35 @@ const containerStyle = {
   height: '100%',
 };
 
-// Create SVG marker icon with custom color
+// Cache for marker icons by color to avoid regenerating SVGs
+const markerIconCache = new Map<string, google.maps.Icon>();
+const highlightIconCache = new Map<string, google.maps.Icon>();
+
+// Create SVG marker icon with custom color (cached)
 function createMarkerIcon(color: string): google.maps.Icon {
+  const cached = markerIconCache.get(color);
+  if (cached) return cached;
+
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="40" viewBox="0 0 32 40">
       <path fill="${color}" stroke="white" stroke-width="2" d="M16 1C8.268 1 2 7.268 2 15c0 10.5 14 23 14 23s14-12.5 14-23c0-7.732-6.268-14-14-14z"/>
       <circle fill="white" cx="16" cy="14" r="5"/>
     </svg>
   `;
-  return {
+  const icon = {
     url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg),
     scaledSize: new google.maps.Size(32, 40),
     anchor: new google.maps.Point(16, 40),
   };
+  markerIconCache.set(color, icon);
+  return icon;
 }
 
-// Create highlighted marker icon (larger, with pulsing ring effect)
+// Create highlighted marker icon (larger, with pulsing ring effect) (cached)
 function createHighlightMarkerIcon(color: string): google.maps.Icon {
+  const cached = highlightIconCache.get(color);
+  if (cached) return cached;
+
   // Create a golden highlight color for better visibility
   const highlightColor = '#FFD700'; // Gold
   const svg = `
@@ -93,11 +105,13 @@ function createHighlightMarkerIcon(color: string): google.maps.Icon {
       <circle fill="white" cx="40" cy="27" r="8"/>
     </svg>
   `;
-  return {
+  const icon = {
     url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg),
     scaledSize: new google.maps.Size(80, 90),
     anchor: new google.maps.Point(40, 90),
   };
+  highlightIconCache.set(color, icon);
+  return icon;
 }
 
 export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPosition }: VenueMapProps) {
@@ -107,6 +121,7 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
   const highlightMarkerRef = useRef<google.maps.Marker | null>(null);
   const highlightTimeoutsRef = useRef<NodeJS.Timeout[]>([]); // Track timeouts for cleanup
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null); // Track hover animation timeout
+  const idleListenerRef = useRef<google.maps.MapsEventListener | null>(null); // Track idle listener
   const prevVenueIdsRef = useRef<string>('');
   const isRestoringPositionRef = useRef(!!initialPosition); // Track if we're restoring a saved position
   const { hoveredVenueId, selectedVenue } = useVenueStore();
@@ -135,8 +150,8 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
       setIsMapReady(true);
     });
 
-    // Listen for bounds changes
-    map.addListener('idle', () => {
+    // Listen for bounds changes (store reference for cleanup)
+    idleListenerRef.current = map.addListener('idle', () => {
       if (!mapRef.current || !onBoundsChange) return;
       const bounds = mapRef.current.getBounds();
       const zoom = mapRef.current.getZoom();
@@ -154,6 +169,26 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
   }, [onBoundsChange]);
 
   const onUnmount = useCallback(() => {
+    // Clean up idle listener
+    if (idleListenerRef.current) {
+      google.maps.event.removeListener(idleListenerRef.current);
+      idleListenerRef.current = null;
+    }
+
+    // Clean up all timeouts
+    highlightTimeoutsRef.current.forEach(clearTimeout);
+    highlightTimeoutsRef.current = [];
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
+    }
+
+    // Clean up highlight marker
+    if (highlightMarkerRef.current) {
+      highlightMarkerRef.current.setMap(null);
+      highlightMarkerRef.current = null;
+    }
+
     // Clean up markers
     markersRef.current.forEach(marker => {
       marker.setMap(null);
@@ -183,7 +218,11 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
     }
 
     // Filter venues with valid locations (use != null to allow lat/lng of 0)
-    const venuesWithLocation = venues.filter(v => v.location?.lat != null && v.location?.lng != null);
+    // Type guard ensures lat/lng are numbers after filtering
+    const venuesWithLocation = venues.filter(
+      (v): v is Venue & { location: { lat: number; lng: number } } =>
+        v.location?.lat != null && v.location?.lng != null
+    );
 
     // Create new markers
     const markers = venuesWithLocation.map((venue) => {
@@ -308,7 +347,7 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
       highlightMarkerRef.current = null;
     }
 
-    if (!selectedVenue?.location || !mapRef.current) return;
+    if (!selectedVenue?.location || selectedVenue.location.lat == null || selectedVenue.location.lng == null || !mapRef.current) return;
 
     // Hide the original marker so it doesn't show under the highlight
     const originalMarker = markersRef.current.find(

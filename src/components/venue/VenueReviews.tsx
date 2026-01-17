@@ -7,6 +7,15 @@ interface VenueReviewsProps {
 }
 
 export function VenueReviews({ reviews }: VenueReviewsProps) {
+  // Don't render if reviews are empty
+  const hasContent = reviews.summary?.trim() ||
+    (reviews.pros && reviews.pros.length > 0) ||
+    (reviews.cons && reviews.cons.length > 0);
+
+  if (!hasContent) {
+    return null;
+  }
+
   return (
     <div>
       <h3 className="text-sm font-semibold text-gray-900 mb-3">Reviews</h3>

@@ -12,6 +12,8 @@
   "dependencies": {
     "@googlemaps/markerclusterer": "^2.5.3",
     "@react-google-maps/api": "^2.20.3",
+    "@supabase/supabase-js": "^2.90.1",
+    "@tanstack/react-query": "^5.90.17",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "zustand": "^5.0.3"
@@ -24,6 +26,7 @@
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
     "cheerio": "^1.1.2",
+    "dotenv": "^17.2.3",
     "eslint": "^9.17.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",

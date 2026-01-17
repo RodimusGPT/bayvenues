@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import type { GalleryImage } from '../../types/venue';
+import { useFocusTrap } from '../../hooks/useFocusTrap';
 
 interface ImageModalProps {
   images: GalleryImage[];
@@ -15,6 +16,10 @@ export function ImageModal({ images, initialIndex, venueName, isOpen, onClose }:
   const [isLoading, setIsLoading] = useState(true);
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  // Focus trap for accessibility
+  useFocusTrap(modalRef, isOpen);
 
   // Reset to initial index when modal opens
   useEffect(() => {
@@ -92,6 +97,10 @@ export function ImageModal({ images, initialIndex, venueName, isOpen, onClose }:
 
   const modalContent = (
     <div
+      ref={modalRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Image gallery for ${venueName}`}
       className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center"
       onClick={onClose}
     >
@@ -169,10 +178,13 @@ export function ImageModal({ images, initialIndex, venueName, isOpen, onClose }:
 
       {/* Thumbnail strip at bottom */}
       {images.length > 1 && (
-        <div className="absolute bottom-16 left-0 right-0 flex justify-center gap-2 px-4 overflow-x-auto">
+        <div className="absolute bottom-16 left-0 right-0 flex justify-center gap-2 px-4 overflow-x-auto" role="tablist" aria-label="Image thumbnails">
           {images.map((img, index) => (
             <button
               key={index}
+              role="tab"
+              aria-selected={index === currentIndex}
+              aria-label={`View image ${index + 1} of ${images.length}`}
               onClick={(e) => {
                 e.stopPropagation();
                 setCurrentIndex(index);

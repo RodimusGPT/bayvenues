@@ -2,26 +2,39 @@ import { useState, useRef, useEffect } from 'react';
 import { useFilterStore } from '../../stores/filterStore';
 import { useFavoriteStore } from '../../stores/favoriteStore';
 import { useHiddenStore } from '../../stores/hiddenStore';
+import { useAuth } from '../../contexts/AuthContext';
+import { UserMenu } from '../auth/UserMenu';
 
 interface HeaderProps {
-  totalVenues: number;
   filteredCount: number;
+  isLoading?: boolean;
   showFilters: boolean;
   onToggleFilters: () => void;
   onToggleFavorites: () => void;
   showFavorites: boolean;
 }
 
-export function Header({ totalVenues, filteredCount, showFilters, onToggleFilters, onToggleFavorites, showFavorites }: HeaderProps) {
-  const { searchQuery, setSearchQuery, resetFilters } = useFilterStore();
+export function Header({ filteredCount, isLoading, showFilters, onToggleFilters, onToggleFavorites, showFavorites }: HeaderProps) {
+  const filters = useFilterStore();
+  const { searchQuery, setSearchQuery, resetFilters, selectedCountries, selectedRegions, selectedVenueTypes, selectedSettings } = filters;
   const { getFavoriteCount, showFavoritesOnly, setShowFavoritesOnly } = useFavoriteStore();
   const { getHiddenCount, clearHidden } = useHiddenStore();
+  const { user, loading: authLoading, openAuthModal } = useAuth();
   const [showResetMenu, setShowResetMenu] = useState(false);
   const resetMenuRef = useRef<HTMLDivElement>(null);
 
   const favoriteCount = getFavoriteCount();
   const hiddenCount = getHiddenCount();
-  const hasActiveFilters = filteredCount < totalVenues;
+
+  // Check if any filters are active (search, country, region, venue type, setting, hidden, or favorites)
+  const hasActiveFilters =
+    searchQuery !== '' ||
+    selectedCountries.length > 0 ||
+    selectedRegions.length > 0 ||
+    selectedVenueTypes.length > 0 ||
+    selectedSettings.length > 0 ||
+    hiddenCount > 0 ||
+    showFavoritesOnly;
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -66,6 +79,7 @@ export function Header({ totalVenues, filteredCount, showFilters, onToggleFilter
           onClick={() => window.location.reload()}
           className="flex items-center gap-2 hover:opacity-80 transition-opacity"
           title="Reload page"
+          aria-label="VenueFinder - Reload page"
         >
           <svg className="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -93,7 +107,11 @@ export function Header({ totalVenues, filteredCount, showFilters, onToggleFilter
               type="text"
               placeholder="Search venues, regions, countries..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => {
+                if (showFavoritesOnly && e.target.value) setShowFavoritesOnly(false);
+                setSearchQuery(e.target.value);
+              }}
+              aria-label="Search venues, regions, and countries"
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
             />
           </div>
@@ -102,6 +120,8 @@ export function Header({ totalVenues, filteredCount, showFilters, onToggleFilter
         {/* Filter Toggle (Desktop) */}
         <button
           onClick={onToggleFilters}
+          aria-expanded={showFilters}
+          aria-label={showFilters ? 'Hide filters' : 'Show filters'}
           className={`hidden lg:flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
             showFilters
               ? 'bg-primary-100 text-primary-700'
@@ -128,6 +148,8 @@ export function Header({ totalVenues, filteredCount, showFilters, onToggleFilter
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
           title="View favorites"
+          aria-label={`Favorites${favoriteCount > 0 ? ` (${favoriteCount})` : ''}`}
+          aria-expanded={showFavorites}
         >
           <svg
             className="w-5 h-5"
@@ -153,10 +175,15 @@ export function Header({ totalVenues, filteredCount, showFilters, onToggleFilter
 
         {/* Results Count - Clear explanation of what's shown */}
         <div className="text-sm text-gray-600 flex items-center gap-2">
-          {!hasActiveFilters ? (
+          {isLoading ? (
+            <span className="flex items-center gap-1.5">
+              <span className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary-600"></span>
+              <span className="hidden sm:inline text-gray-400">Loading...</span>
+            </span>
+          ) : !hasActiveFilters ? (
             // No filters - show simple count
             <span>
-              <span className="font-semibold text-primary-600">{totalVenues}</span>
+              <span className="font-semibold text-primary-600">{filteredCount}</span>
               <span className="hidden sm:inline"> venues</span>
             </span>
           ) : (
@@ -214,6 +241,25 @@ export function Header({ totalVenues, filteredCount, showFilters, onToggleFilter
             </div>
           )}
         </div>
+
+        {/* Auth: User Menu or Sign In button - right aligned */}
+        {!authLoading && (
+          user ? (
+            <div className="ml-auto">
+              <UserMenu />
+            </div>
+          ) : (
+            <button
+              onClick={openAuthModal}
+              className="ml-auto flex items-center gap-2 px-3 py-2 rounded-lg bg-primary-600 text-white hover:bg-primary-700 transition-colors text-sm font-medium"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              <span className="hidden sm:inline">Sign In</span>
+            </button>
+          )
+        )}
       </div>
     </header>
   );

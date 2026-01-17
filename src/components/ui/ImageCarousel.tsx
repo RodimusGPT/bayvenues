@@ -144,12 +144,12 @@ export function ImageCarousel({ images, fallbackImage, venueName, onImageError }
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
-      {/* Navigation arrows - only show if multiple images */}
+      {/* Navigation arrows - visible on touch, hover to show on desktop */}
       {displayImages.length > 1 && (
         <>
           <button
             onClick={(e) => { e.stopPropagation(); goToPrev(); }}
-            className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-black/40 hover:bg-black/60 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10"
+            className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-black/40 hover:bg-black/60 rounded-full text-white opacity-100 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity duration-200 z-10"
             aria-label="Previous image"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -158,7 +158,7 @@ export function ImageCarousel({ images, fallbackImage, venueName, onImageError }
           </button>
           <button
             onClick={(e) => { e.stopPropagation(); goToNext(); }}
-            className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-black/40 hover:bg-black/60 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10"
+            className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-black/40 hover:bg-black/60 rounded-full text-white opacity-100 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity duration-200 z-10"
             aria-label="Next image"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -193,8 +193,8 @@ export function ImageCarousel({ images, fallbackImage, venueName, onImageError }
         </span>
       )}
 
-      {/* Expand hint icon */}
-      <div className="absolute top-3 right-12 p-1.5 bg-black/40 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+      {/* Expand hint icon - visible on touch, hover to show on desktop */}
+      <div className="absolute top-3 right-12 p-1.5 bg-black/40 rounded-full text-white opacity-100 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
         </svg>

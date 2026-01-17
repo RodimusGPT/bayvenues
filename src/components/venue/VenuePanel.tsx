@@ -10,7 +10,9 @@ import { ImageCarousel } from '../ui/ImageCarousel';
 
 interface VenuePanelProps {
   venue: Venue;
+  venues?: Venue[];
   onClose: () => void;
+  onNavigate?: (venue: Venue) => void;
 }
 
 // Country flag emojis
@@ -24,37 +26,127 @@ const COUNTRY_FLAGS: Record<Country, string> = {
   'France': '🇫🇷',
 };
 
-export function VenuePanel({ venue, onClose }: VenuePanelProps) {
+export function VenuePanel({ venue, venues = [], onClose, onNavigate }: VenuePanelProps) {
   const country = getCountryForRegion(venue.region);
   const countryColor = COUNTRY_COLORS[country];
 
   // Check if we have any images to display
   const hasImages = (venue.headerImages && venue.headerImages.length > 0) || venue.headerImage;
 
+  // Navigation helpers
+  const currentIndex = venues.findIndex(v => v.id === venue.id);
+  const hasPrev = currentIndex > 0;
+  const hasNext = currentIndex < venues.length - 1 && currentIndex !== -1;
+  const showNavigation = venues.length > 1 && onNavigate && currentIndex !== -1;
+
+  const goToPrev = () => {
+    if (hasPrev && onNavigate) {
+      onNavigate(venues[currentIndex - 1]);
+    }
+  };
+
+  const goToNext = () => {
+    if (hasNext && onNavigate) {
+      onNavigate(venues[currentIndex + 1]);
+    }
+  };
+
   return (
     <aside className="lg:relative lg:w-full lg:h-full lg:top-auto lg:right-auto lg:shadow-none lg:z-auto fixed right-0 top-[57px] bottom-0 w-full sm:w-[420px] bg-white shadow-2xl overflow-y-auto z-40 animate-slide-in-right venue-panel">
-      {/* Desktop back to list bar */}
-      <button
-        onClick={onClose}
-        className="hidden lg:flex w-full py-2.5 px-4 bg-gray-50 border-b items-center gap-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors"
-        aria-label="Back to list"
-      >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-        <span className="text-sm font-medium">Back to list</span>
-      </button>
-      {/* Mobile back bar - tap anywhere to close */}
-      <button
-        onClick={onClose}
-        className="lg:hidden sm:hidden w-full py-4 bg-gray-100 border-b flex items-center justify-center gap-2 text-gray-700 active:bg-gray-200"
-        aria-label="Go back"
-      >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-        <span className="text-base font-semibold">Back to map</span>
-      </button>
+      {/* Desktop navigation bar */}
+      <div className="hidden lg:flex w-full py-2 px-3 bg-gray-50 border-b items-center justify-between gap-2">
+        <button
+          onClick={onClose}
+          className="flex items-center gap-1.5 px-2 py-1.5 text-gray-600 hover:bg-gray-200 hover:text-gray-900 rounded-md transition-colors"
+          aria-label="Back to list"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          <span className="text-sm font-medium">List</span>
+        </button>
+
+        {showNavigation && (
+          <div className="flex items-center gap-1">
+            <span className="text-xs text-gray-500 mr-2">
+              {currentIndex + 1} of {venues.length}
+            </span>
+            <button
+              onClick={goToPrev}
+              disabled={!hasPrev}
+              className={`p-1.5 rounded-md transition-colors ${
+                hasPrev
+                  ? 'text-gray-600 hover:bg-gray-200 hover:text-gray-900'
+                  : 'text-gray-300 cursor-not-allowed'
+              }`}
+              aria-label="Previous venue"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              onClick={goToNext}
+              disabled={!hasNext}
+              className={`p-1.5 rounded-md transition-colors ${
+                hasNext
+                  ? 'text-gray-600 hover:bg-gray-200 hover:text-gray-900'
+                  : 'text-gray-300 cursor-not-allowed'
+              }`}
+              aria-label="Next venue"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        )}
+      </div>
+      {/* Mobile navigation bar */}
+      <div className="lg:hidden sm:hidden w-full py-2 px-3 bg-gray-100 border-b flex items-center justify-between">
+        <button
+          onClick={onClose}
+          className="flex items-center gap-1.5 px-2 py-2 text-gray-700 active:bg-gray-200 rounded-md"
+          aria-label="Go back"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          <span className="text-sm font-semibold">Map</span>
+        </button>
+
+        {showNavigation && (
+          <div className="flex items-center gap-1">
+            <span className="text-xs text-gray-500 mr-2">
+              {currentIndex + 1}/{venues.length}
+            </span>
+            <button
+              onClick={goToPrev}
+              disabled={!hasPrev}
+              className={`p-2 rounded-md ${
+                hasPrev ? 'text-gray-700 active:bg-gray-200' : 'text-gray-300'
+              }`}
+              aria-label="Previous venue"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              onClick={goToNext}
+              disabled={!hasNext}
+              className={`p-2 rounded-md ${
+                hasNext ? 'text-gray-700 active:bg-gray-200' : 'text-gray-300'
+              }`}
+              aria-label="Next venue"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        )}
+      </div>
       {/* Header Image Carousel */}
       {hasImages ? (
         <div className="relative">
