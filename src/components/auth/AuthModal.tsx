@@ -121,7 +121,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
           // Form state
           <>
             <div className="text-center mb-6">
-              <h2 id="auth-modal-title" className="text-xl font-semibold text-gray-900 mb-2">Sign in to VenueFinder</h2>
+              <h2 id="auth-modal-title" className="text-xl font-semibold text-gray-900 mb-2">Sign in to venues.cool</h2>
               <p className="text-sm text-gray-500">
                 Enter your email and we'll send you a magic link to sign in.
               </p>

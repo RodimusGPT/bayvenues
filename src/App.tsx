@@ -99,8 +99,6 @@ function App() {
   return (
     <div className="h-screen flex flex-col bg-gray-50">
       <Header
-        filteredCount={filteredVenues.length}
-        isLoading={isLoadingVenues}
         showFilters={showFilters}
         onToggleFilters={() => setShowFilters(!showFilters)}
         showFavorites={showFavorites}
