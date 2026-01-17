@@ -17,7 +17,7 @@ export function Header({ showFilters, onToggleFilters, onToggleFavorites, showFa
   const { searchQuery, setSearchQuery } = useFilterStore();
   const { getFavoriteCount, showFavoritesOnly, setShowFavoritesOnly } = useFavoriteStore();
   const { user, loading: authLoading, openAuthModal } = useAuth();
-  const { variant: logoVariant, iconVariant, setIconVariant } = useLogoStore();
+  const { variant: logoVariant } = useLogoStore();
 
   const favoriteCount = getFavoriteCount();
 
@@ -32,11 +32,7 @@ export function Header({ showFilters, onToggleFilters, onToggleFavorites, showFa
             title="Reload page"
             aria-label="venues.cool - Reload page"
           >
-            <LogoIcon
-              variant={iconVariant}
-              showSwitcher
-              onVariantChange={setIconVariant}
-            />
+            <LogoIcon variant="castle" />
             <span className="hidden sm:block">
               <Logo variant={logoVariant} />
             </span>
