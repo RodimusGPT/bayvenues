@@ -28,6 +28,7 @@ function App() {
   const [mapBounds, setMapBounds] = useState<MapBounds | null>(null);
   const [mapZoom, setMapZoom] = useState(3);
   const [mapPosition, setMapPosition] = useState<MapPosition | null>(null);
+  const [isMapReadyForBounds, setIsMapReadyForBounds] = useState(false); // Wait for map to fitBounds before filtering
 
   // Auth state from context
   const { authModalOpen, closeAuthModal } = useAuth();
@@ -66,9 +67,17 @@ function App() {
     setMapPosition({ center, zoom });
   }, []);
 
+  // Called when map has finished initial setup (markers created, fitBounds complete)
+  const handleMapReady = useCallback(() => {
+    setIsMapReadyForBounds(true);
+  }, []);
+
   // Filter venues visible in current map bounds
+  // Only filter by bounds AFTER the map has finished initial setup (fitBounds complete)
+  // This prevents showing "No venues" before the map has zoomed to show all venues
   const venuesInBounds = useMemo(() => {
-    if (!mapBounds) return filteredVenues;
+    // Before map is ready, show all filtered venues in the list
+    if (!isMapReadyForBounds || !mapBounds) return filteredVenues;
 
     return filteredVenues.filter((venue) => {
       const { lat, lng } = venue.location;
@@ -80,7 +89,7 @@ function App() {
         lng <= mapBounds.east
       );
     });
-  }, [filteredVenues, mapBounds]);
+  }, [filteredVenues, mapBounds, isMapReadyForBounds]);
 
   // Show list button on mobile when zoomed in enough
   const showMobileListButton = mapZoom >= MOBILE_LIST_ZOOM_THRESHOLD && venuesInBounds.length > 0;
@@ -122,6 +131,7 @@ function App() {
                 venues={filteredVenues}
                 onVenueSelect={setSelectedVenue}
                 onBoundsChange={handleBoundsChange}
+                onMapReady={handleMapReady}
                 initialPosition={mapPosition || undefined}
               />
             ) : (

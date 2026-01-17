@@ -21,6 +21,7 @@ interface VenueMapProps {
   venues: Venue[];
   onVenueSelect: (venue: Venue) => void;
   onBoundsChange?: (bounds: MapBounds, zoom: number) => void;
+  onMapReady?: () => void; // Called when markers are created and fitBounds has run
   initialPosition?: MapPosition;
 }
 
@@ -123,7 +124,7 @@ function createHighlightMarkerIcon(flag: string): google.maps.Icon {
   return icon;
 }
 
-export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPosition }: VenueMapProps) {
+export function VenueMap({ venues, onVenueSelect, onBoundsChange, onMapReady, initialPosition }: VenueMapProps) {
   const mapRef = useRef<google.maps.Map | null>(null);
   const markersRef = useRef<google.maps.Marker[]>([]);
   const clustererRef = useRef<MarkerClusterer | null>(null);
@@ -133,6 +134,7 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
   const idleListenerRef = useRef<google.maps.MapsEventListener | null>(null); // Track idle listener
   const prevVenueIdsRef = useRef<string>('');
   const isRestoringPositionRef = useRef(!!initialPosition); // Track if we're restoring a saved position
+  const hasCalledMapReadyRef = useRef(false); // Track if we've signaled map ready
   const { hoveredVenueId, selectedVenue } = useVenueStore();
   const [mapType, setMapType] = useState<'roadmap' | 'satellite'>('roadmap');
   const [isMapReady, setIsMapReady] = useState(false); // Track when map is loaded
@@ -295,6 +297,11 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
       // Skip fitBounds if we're restoring a saved position (e.g., returning from list view)
       if (isRestoringPositionRef.current) {
         isRestoringPositionRef.current = false;
+        // Signal map is ready for bounds filtering
+        if (!hasCalledMapReadyRef.current && onMapReady) {
+          hasCalledMapReadyRef.current = true;
+          onMapReady();
+        }
         return;
       }
 
@@ -304,9 +311,26 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
           bounds.extend({ lat: venue.location.lat, lng: venue.location.lng });
         });
         mapRef.current.fitBounds(bounds, 50);
+
+        // Signal map is ready for bounds filtering after fitBounds
+        if (!hasCalledMapReadyRef.current && onMapReady) {
+          hasCalledMapReadyRef.current = true;
+          // Wait for the idle event to fire after fitBounds before signaling ready
+          google.maps.event.addListenerOnce(mapRef.current, 'idle', () => {
+            onMapReady();
+          });
+        }
+      } else if (!hasCalledMapReadyRef.current && onMapReady) {
+        // No venues with location, still signal ready
+        hasCalledMapReadyRef.current = true;
+        onMapReady();
       }
+    } else if (!hasCalledMapReadyRef.current && onMapReady && venuesWithLocation.length > 0) {
+      // Venue IDs haven't changed but this is first load with venues
+      hasCalledMapReadyRef.current = true;
+      onMapReady();
     }
-  }, [venues, onVenueSelect, isMapReady]);
+  }, [venues, onVenueSelect, isMapReady, onMapReady]);
 
   // Highlight hovered marker
   useEffect(() => {
