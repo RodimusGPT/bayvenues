@@ -4,6 +4,7 @@ import { useLogoStore } from '../../stores/logoStore';
 import { useAuth } from '../../contexts/AuthContext';
 import { UserMenu } from '../auth/UserMenu';
 import { Logo } from '../ui/Logo';
+import { LogoIcon } from '../ui/LogoIcon';
 
 interface HeaderProps {
   showFilters: boolean;
@@ -16,7 +17,7 @@ export function Header({ showFilters, onToggleFilters, onToggleFavorites, showFa
   const { searchQuery, setSearchQuery } = useFilterStore();
   const { getFavoriteCount, showFavoritesOnly, setShowFavoritesOnly } = useFavoriteStore();
   const { user, loading: authLoading, openAuthModal } = useAuth();
-  const { variant: logoVariant } = useLogoStore();
+  const { variant: logoVariant, iconVariant, setIconVariant } = useLogoStore();
 
   const favoriteCount = getFavoriteCount();
 
@@ -24,20 +25,23 @@ export function Header({ showFilters, onToggleFilters, onToggleFavorites, showFa
     <header className="bg-white border-b border-gray-200 px-4 py-3 flex-shrink-0">
       <div className="flex items-center gap-4">
         {/* Logo */}
-        <button
-          onClick={() => window.location.reload()}
-          className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-          title="Reload page"
-          aria-label="venues.cool - Reload page"
-        >
-          <svg className="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-          <span className="hidden sm:block">
-            <Logo variant={logoVariant} />
-          </span>
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => window.location.reload()}
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+            title="Reload page"
+            aria-label="venues.cool - Reload page"
+          >
+            <LogoIcon
+              variant={iconVariant}
+              showSwitcher
+              onVariantChange={setIconVariant}
+            />
+            <span className="hidden sm:block">
+              <Logo variant={logoVariant} />
+            </span>
+          </button>
+        </div>
 
         {/* Search Bar - Centered with flex-1 and mx-auto */}
         <div className="flex-1 flex justify-center">
