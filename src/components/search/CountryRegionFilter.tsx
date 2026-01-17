@@ -15,21 +15,6 @@ const COUNTRY_FLAGS: Record<string, string> = {
   // Add more as needed
 };
 
-// Country colors for visual distinction
-const COUNTRY_COLORS: Record<string, string> = {
-  'USA': '#3B82F6',
-  'Portugal': '#10B981',
-  'Italy': '#EF4444',
-  'Greece': '#06B6D4',
-  'Spain': '#F59E0B',
-  'Switzerland': '#8B5CF6',
-  'France': '#EC4899',
-  // Fallback handled in component
-};
-
-function getCountryColor(country: string): string {
-  return COUNTRY_COLORS[country] || '#6B7280';
-}
 
 function getCountryFlag(country: string): string {
   return COUNTRY_FLAGS[country] || '🌍';
@@ -42,7 +27,7 @@ interface CountryRowProps {
   selectedRegions: string[];
   onToggleExpand: () => void;
   onToggleCountry: () => void;
-  onToggleRegion: (region: string) => void;
+  onToggleRegion: (region: string, parentCountry: string) => void;
 }
 
 function CountryRow({
@@ -68,12 +53,6 @@ function CountryRow({
           checked={isSelected}
           onChange={onToggleCountry}
           className="w-4 h-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500 flex-shrink-0"
-        />
-
-        {/* Color dot */}
-        <span
-          className="w-2.5 h-2.5 rounded-full flex-shrink-0"
-          style={{ backgroundColor: getCountryColor(country.name) }}
         />
 
         {/* Flag and name - clickable to expand */}
@@ -123,7 +102,7 @@ function CountryRow({
               return (
                 <button
                   key={region.name}
-                  onClick={() => onToggleRegion(region.name)}
+                  onClick={() => onToggleRegion(region.name, country.name)}
                   className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${
                     isRegionSelected
                       ? 'bg-primary-600 text-white'
@@ -160,8 +139,15 @@ export function CountryRegionFilter() {
     toggleCountry(country);
   };
 
-  const handleToggleRegion = (region: string) => {
+  const handleToggleRegion = (region: string, parentCountry: string) => {
     if (showFavoritesOnly) setShowFavoritesOnly(false);
+
+    // If selecting a region (not deselecting), also select the parent country
+    const isCurrentlySelected = selectedRegions.includes(region);
+    if (!isCurrentlySelected && !selectedCountries.includes(parentCountry)) {
+      toggleCountry(parentCountry);
+    }
+
     toggleRegion(region);
   };
 

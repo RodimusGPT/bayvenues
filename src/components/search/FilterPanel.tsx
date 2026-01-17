@@ -171,8 +171,8 @@ export function FilterPanel({ venueTypes, onShowFavoritesPanel }: FilterPanelPro
         <h3 className="text-sm font-semibold text-gray-900 mb-2">Price Range</h3>
         <RangeSlider
           min={0}
-          max={100000}
-          step={1000}
+          max={500000}
+          step={5000}
           value={priceRange}
           onChange={handlePriceRangeChange}
           formatLabel={formatPrice}

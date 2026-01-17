@@ -26,7 +26,7 @@ const initialState: FilterState = {
   selectedRegions: [],
   selectedVenueTypes: [],
   selectedSettings: [],
-  priceRange: [0, 100000],
+  priceRange: [0, 500000],
   capacityRange: [0, 1000],
 };
 
