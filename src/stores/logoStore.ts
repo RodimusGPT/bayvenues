@@ -14,7 +14,7 @@ export const useLogoStore = create<LogoState>()(
   persist(
     (set) => ({
       variant: 'tech-forward',
-      iconVariant: 'rings',
+      iconVariant: 'heart',
       setVariant: (variant) => set({ variant }),
       setIconVariant: (iconVariant) => set({ iconVariant }),
     }),
