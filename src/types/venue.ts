@@ -151,19 +151,24 @@ export const REGION_TO_COUNTRY: Record<string, Country> = {
   'Beaujolais': 'France',
 };
 
-// Single marker color for all venues (warm terracotta - matches cluster style)
-export const MARKER_COLOR = '#c27555';
+// Primary color for clusters (matches UI primary-600)
+export const CLUSTER_COLOR = '#527291';
 
-// Country colors for map markers (unified for cleaner look)
-export const COUNTRY_COLORS: Record<Country, string> = {
-  'USA': MARKER_COLOR,
-  'Portugal': MARKER_COLOR,
-  'Italy': MARKER_COLOR,
-  'Greece': MARKER_COLOR,
-  'Spain': MARKER_COLOR,
-  'Switzerland': MARKER_COLOR,
-  'France': MARKER_COLOR,
+// Country flag emojis for map markers
+export const COUNTRY_FLAGS: Record<Country, string> = {
+  'USA': '🇺🇸',
+  'Portugal': '🇵🇹',
+  'Italy': '🇮🇹',
+  'Greece': '🇬🇷',
+  'Spain': '🇪🇸',
+  'Switzerland': '🇨🇭',
+  'France': '🇫🇷',
 };
+
+// Get flag emoji for a country (with fallback)
+export function getFlagForCountry(country: Country): string {
+  return COUNTRY_FLAGS[country] || '📍';
+}
 
 // Get country for a venue based on its region
 export function getCountryForRegion(region: string): Country {

@@ -1,5 +1,5 @@
-import type { Venue, Country } from '../../types/venue';
-import { COUNTRY_COLORS, getCountryForRegion } from '../../types/venue';
+import type { Venue } from '../../types/venue';
+import { COUNTRY_FLAGS, getCountryForRegion } from '../../types/venue';
 import { useFavoriteStore } from '../../stores/favoriteStore';
 import { useFavoriteVenues } from '../../hooks/useSupabaseVenues';
 import { useAuth } from '../../contexts/AuthContext';
@@ -9,17 +9,6 @@ interface FavoritesPanelProps {
   onVenueSelect: (venue: Venue) => void;
   onClose: () => void;
 }
-
-// Country flag emojis
-const COUNTRY_FLAGS: Record<Country, string> = {
-  'USA': '🇺🇸',
-  'Portugal': '🇵🇹',
-  'Italy': '🇮🇹',
-  'Greece': '🇬🇷',
-  'Spain': '🇪🇸',
-  'Switzerland': '🇨🇭',
-  'France': '🇫🇷',
-};
 
 export function FavoritesPanel({ onVenueSelect, onClose }: FavoritesPanelProps) {
   const { favorites, toggleFavorite, clearFavorites } = useFavoriteStore();
@@ -94,7 +83,7 @@ export function FavoritesPanel({ onVenueSelect, onClose }: FavoritesPanelProps) 
           <div className="divide-y divide-gray-100">
             {favoriteVenues.map((venue) => {
               const country = getCountryForRegion(venue.region);
-              const countryColor = COUNTRY_COLORS[country];
+              const flag = COUNTRY_FLAGS[country] || '📍';
 
               const handleKeyDown = (e: React.KeyboardEvent) => {
                 if (e.key === 'Enter' || e.key === ' ') {
@@ -138,11 +127,7 @@ export function FavoritesPanel({ onVenueSelect, onClose }: FavoritesPanelProps) 
                     {/* Content */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-1.5 mb-1">
-                        <span
-                          className="w-2 h-2 rounded-full flex-shrink-0"
-                          style={{ backgroundColor: countryColor }}
-                        />
-                        <span className="text-sm">{COUNTRY_FLAGS[country]}</span>
+                        <span className="text-sm">{flag}</span>
                         <span className="text-xs text-gray-500 truncate">{venue.region}</span>
                       </div>
                       <h3 className="font-medium text-gray-900 text-sm leading-tight mb-1 group-hover:text-primary-600 transition-colors">

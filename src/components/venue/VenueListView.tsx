@@ -1,5 +1,5 @@
-import type { Venue, Country } from '../../types/venue';
-import { COUNTRY_COLORS, getCountryForRegion } from '../../types/venue';
+import type { Venue } from '../../types/venue';
+import { COUNTRY_FLAGS, getCountryForRegion } from '../../types/venue';
 import { formatPriceRange, formatCapacity } from '../../utils/formatters';
 import { FavoriteButton } from '../ui/FavoriteButton';
 
@@ -10,20 +10,9 @@ interface VenueListViewProps {
   isLoading?: boolean;
 }
 
-// Country flag emojis
-const COUNTRY_FLAGS: Record<Country, string> = {
-  'USA': '🇺🇸',
-  'Portugal': '🇵🇹',
-  'Italy': '🇮🇹',
-  'Greece': '🇬🇷',
-  'Spain': '🇪🇸',
-  'Switzerland': '🇨🇭',
-  'France': '🇫🇷',
-};
-
 function VenueCard({ venue, onSelect }: { venue: Venue; onSelect: () => void }) {
   const country = getCountryForRegion(venue.region);
-  const countryColor = COUNTRY_COLORS[country];
+  const flag = COUNTRY_FLAGS[country] || '📍';
 
   // Get thumbnail image
   const thumbnailUrl = venue.headerImages?.[0]?.thumbnail
@@ -72,13 +61,9 @@ function VenueCard({ venue, onSelect }: { venue: Venue; onSelect: () => void }) 
           />
         </div>
 
-        {/* Country indicator */}
-        <div className="absolute bottom-2 left-2 flex items-center gap-1.5 px-2 py-1 bg-black/50 rounded-full">
-          <span
-            className="w-2 h-2 rounded-full"
-            style={{ backgroundColor: countryColor }}
-          />
-          <span className="text-xs text-white">{COUNTRY_FLAGS[country]}</span>
+        {/* Country flag */}
+        <div className="absolute bottom-2 left-2 flex items-center px-2 py-1 bg-black/50 rounded-full">
+          <span className="text-sm">{flag}</span>
         </div>
       </div>
 

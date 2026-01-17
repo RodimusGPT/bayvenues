@@ -2,7 +2,7 @@ import { useCallback, useRef, useEffect, useState } from 'react';
 import { GoogleMap } from '@react-google-maps/api';
 import { MarkerClusterer } from '@googlemaps/markerclusterer';
 import type { Venue } from '../../types/venue';
-import { COUNTRY_COLORS, getCountryForRegion } from '../../types/venue';
+import { COUNTRY_FLAGS, getCountryForRegion, CLUSTER_COLOR } from '../../types/venue';
 import { useVenueStore } from '../../stores/venueStore';
 
 export interface MapBounds {
@@ -49,68 +49,77 @@ const containerStyle = {
   height: '100%',
 };
 
-// Cache for marker icons by color to avoid regenerating SVGs
+// Cache for marker icons by flag to avoid regenerating SVGs
 const markerIconCache = new Map<string, google.maps.Icon>();
 const highlightIconCache = new Map<string, google.maps.Icon>();
 
-// Create SVG marker icon with custom color (cached)
-function createMarkerIcon(color: string): google.maps.Icon {
-  const cached = markerIconCache.get(color);
+// Create SVG marker icon with flag emoji inside teardrop (cached)
+function createMarkerIcon(flag: string): google.maps.Icon {
+  const cached = markerIconCache.get(flag);
   if (cached) return cached;
 
+  // Teardrop pin with flag emoji inside
   const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="40" viewBox="0 0 32 40">
-      <path fill="${color}" stroke="white" stroke-width="2" d="M16 1C8.268 1 2 7.268 2 15c0 10.5 14 23 14 23s14-12.5 14-23c0-7.732-6.268-14-14-14z"/>
-      <circle fill="white" cx="16" cy="14" r="5"/>
+    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="46" viewBox="0 0 36 46">
+      <defs>
+        <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path filter="url(#shadow)" fill="white" stroke="#9ca3af" stroke-width="1.5" d="M18 2C9.716 2 3 8.716 3 17c0 12 15 26 15 26s15-14 15-26c0-8.284-6.716-15-15-15z"/>
+      <text x="18" y="20" text-anchor="middle" font-size="16" dominant-baseline="central">${flag}</text>
     </svg>
   `;
   const icon = {
     url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg),
-    scaledSize: new google.maps.Size(32, 40),
-    anchor: new google.maps.Point(16, 40),
+    scaledSize: new google.maps.Size(36, 46),
+    anchor: new google.maps.Point(18, 46),
   };
-  markerIconCache.set(color, icon);
+  markerIconCache.set(flag, icon);
   return icon;
 }
 
-// Create highlighted marker icon (larger, with pulsing ring effect) (cached)
-function createHighlightMarkerIcon(color: string): google.maps.Icon {
-  const cached = highlightIconCache.get(color);
+// Create highlighted marker icon with flag (larger, with pulsing ring effect) (cached)
+function createHighlightMarkerIcon(flag: string): google.maps.Icon {
+  const cached = highlightIconCache.get(flag);
   if (cached) return cached;
 
-  // Create a golden highlight color for better visibility
+  // Golden highlight color for better visibility
   const highlightColor = '#FFD700'; // Gold
   const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="90" viewBox="0 0 80 90">
+    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="95" viewBox="0 0 80 95">
       <defs>
         <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
           <feMerge>
             <feMergeNode in="coloredBlur"/>
             <feMergeNode in="SourceGraphic"/>
           </feMerge>
         </filter>
+        <filter id="shadow2" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.4"/>
+        </filter>
       </defs>
       <!-- Pulsing rings -->
-      <circle cx="40" cy="30" r="20" fill="none" stroke="${highlightColor}" stroke-width="3" opacity="0">
-        <animate attributeName="r" from="15" to="35" dur="1.5s" repeatCount="indefinite"/>
+      <circle cx="40" cy="32" r="20" fill="none" stroke="${highlightColor}" stroke-width="3" opacity="0">
+        <animate attributeName="r" from="18" to="38" dur="1.5s" repeatCount="indefinite"/>
         <animate attributeName="opacity" from="0.8" to="0" dur="1.5s" repeatCount="indefinite"/>
       </circle>
-      <circle cx="40" cy="30" r="20" fill="none" stroke="${highlightColor}" stroke-width="2" opacity="0">
-        <animate attributeName="r" from="15" to="35" dur="1.5s" begin="0.5s" repeatCount="indefinite"/>
+      <circle cx="40" cy="32" r="20" fill="none" stroke="${highlightColor}" stroke-width="2" opacity="0">
+        <animate attributeName="r" from="18" to="38" dur="1.5s" begin="0.5s" repeatCount="indefinite"/>
         <animate attributeName="opacity" from="0.6" to="0" dur="1.5s" begin="0.5s" repeatCount="indefinite"/>
       </circle>
-      <!-- Main marker pin -->
-      <path filter="url(#glow)" fill="${color}" stroke="${highlightColor}" stroke-width="3" d="M40 5C26.745 5 16 15.745 16 29c0 18.375 24 40.25 24 40.25s24-21.875 24-40.25c0-13.255-10.745-24-24-24z"/>
-      <circle fill="white" cx="40" cy="27" r="8"/>
+      <!-- Main marker pin - larger teardrop with flag -->
+      <path filter="url(#shadow2)" fill="white" stroke="${highlightColor}" stroke-width="3" d="M40 6C27.85 6 18 15.85 18 28c0 16.5 22 38 22 38s22-21.5 22-38c0-12.15-9.85-22-22-22z"/>
+      <text x="40" y="32" text-anchor="middle" font-size="24" dominant-baseline="central">${flag}</text>
     </svg>
   `;
   const icon = {
     url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg),
-    scaledSize: new google.maps.Size(80, 90),
-    anchor: new google.maps.Point(40, 90),
+    scaledSize: new google.maps.Size(80, 95),
+    anchor: new google.maps.Point(40, 95),
   };
-  highlightIconCache.set(color, icon);
+  highlightIconCache.set(flag, icon);
   return icon;
 }
 
@@ -227,11 +236,11 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
     // Create new markers
     const markers = venuesWithLocation.map((venue) => {
       const country = getCountryForRegion(venue.region);
-      const color = COUNTRY_COLORS[country];
+      const flag = COUNTRY_FLAGS[country] || '📍';
 
       const marker = new google.maps.Marker({
         position: { lat: venue.location.lat, lng: venue.location.lng },
-        icon: createMarkerIcon(color),
+        icon: createMarkerIcon(flag),
         title: venue.name,
         optimized: true,
       });
@@ -257,7 +266,7 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
           const size = count < 10 ? 40 : count < 50 ? 50 : 60;
           const svg = `
             <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
-              <circle fill="#c27555" stroke="white" stroke-width="3" cx="${size/2}" cy="${size/2}" r="${size/2-2}"/>
+              <circle fill="${CLUSTER_COLOR}" stroke="white" stroke-width="3" cx="${size/2}" cy="${size/2}" r="${size/2-2}"/>
               <text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="white" font-family="Arial" font-weight="bold" font-size="${count < 10 ? 14 : 16}">${count}</text>
             </svg>
           `;
@@ -359,14 +368,14 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, initialPositio
     }
 
     const country = getCountryForRegion(selectedVenue.region);
-    const color = COUNTRY_COLORS[country];
+    const flag = COUNTRY_FLAGS[country] || '📍';
 
     // Create a highlighted marker directly on the map (bypasses clustering)
     // Uses animated SVG with pulsing rings instead of bounce animation
     const highlightMarker = new google.maps.Marker({
       position: { lat: selectedVenue.location.lat, lng: selectedVenue.location.lng },
       map: mapRef.current,
-      icon: createHighlightMarkerIcon(color),
+      icon: createHighlightMarkerIcon(flag),
       title: selectedVenue.name,
       zIndex: 9999, // Ensure it's on top
     });

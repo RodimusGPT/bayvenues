@@ -1,5 +1,5 @@
-import type { Venue, Country } from '../../types/venue';
-import { COUNTRY_COLORS, getCountryForRegion } from '../../types/venue';
+import type { Venue } from '../../types/venue';
+import { COUNTRY_FLAGS, getCountryForRegion } from '../../types/venue';
 import { formatPriceRange, formatCapacity, sanitizeUrl } from '../../utils/formatters';
 import { VenuePhotos } from './VenuePhotos';
 import { VenueVideos } from './VenueVideos';
@@ -15,20 +15,9 @@ interface VenuePanelProps {
   onNavigate?: (venue: Venue) => void;
 }
 
-// Country flag emojis
-const COUNTRY_FLAGS: Record<Country, string> = {
-  'USA': '🇺🇸',
-  'Portugal': '🇵🇹',
-  'Italy': '🇮🇹',
-  'Greece': '🇬🇷',
-  'Spain': '🇪🇸',
-  'Switzerland': '🇨🇭',
-  'France': '🇫🇷',
-};
-
 export function VenuePanel({ venue, venues = [], onClose, onNavigate }: VenuePanelProps) {
   const country = getCountryForRegion(venue.region);
-  const countryColor = COUNTRY_COLORS[country];
+  const flag = COUNTRY_FLAGS[country] || '📍';
 
   // Check if we have any images to display
   const hasImages = (venue.headerImages && venue.headerImages.length > 0) || venue.headerImage;
@@ -191,11 +180,7 @@ export function VenuePanel({ venue, venues = [], onClose, onNavigate }: VenuePan
           {/* Venue name overlay */}
           <div className="absolute bottom-0 left-0 right-0 p-4 z-10 pointer-events-none">
             <div className="flex items-center gap-2 mb-1">
-              <span
-                className="w-3 h-3 rounded-full flex-shrink-0"
-                style={{ backgroundColor: countryColor }}
-              />
-              <span className="text-base">{COUNTRY_FLAGS[country]}</span>
+              <span className="text-base">{flag}</span>
               <span className="text-sm text-white/90">{venue.region} · {venue.subregion}</span>
             </div>
             <h2 className="text-xl font-bold text-white leading-tight drop-shadow-md">
@@ -209,11 +194,7 @@ export function VenuePanel({ venue, venues = [], onClose, onNavigate }: VenuePan
           <div className="flex justify-between items-start gap-4">
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
-                <span
-                  className="w-3 h-3 rounded-full flex-shrink-0"
-                  style={{ backgroundColor: countryColor }}
-                />
-                <span className="text-base">{COUNTRY_FLAGS[country]}</span>
+                <span className="text-base">{flag}</span>
                 <span className="text-sm text-gray-500">{venue.region} · {venue.subregion}</span>
               </div>
               <h2 className="text-xl font-bold text-gray-900 leading-tight">
