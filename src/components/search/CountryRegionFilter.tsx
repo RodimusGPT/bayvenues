@@ -62,6 +62,7 @@ interface StateRowProps {
   selectedRegions: string[];
   onToggleExpand: () => void;
   onToggleRegion: (region: string, parentCountry: string) => void;
+  onToggleState: (state: StateData, parentCountry: string) => void;
 }
 
 function StateRow({
@@ -71,20 +72,35 @@ function StateRow({
   selectedRegions,
   onToggleExpand,
   onToggleRegion,
+  onToggleState,
 }: StateRowProps) {
   const selectedRegionCount = state.regions.filter(r =>
     selectedRegions.includes(r.name)
   ).length;
+  const allRegionsSelected = selectedRegionCount === state.regions.length;
+  const someRegionsSelected = selectedRegionCount > 0 && !allRegionsSelected;
 
   return (
     <div className="border-b border-gray-50 last:border-b-0">
       {/* State Header */}
       <div className="flex items-center gap-2 py-1.5">
+        {/* State checkbox */}
+        <input
+          type="checkbox"
+          checked={allRegionsSelected}
+          ref={(el) => {
+            if (el) el.indeterminate = someRegionsSelected;
+          }}
+          onChange={() => onToggleState(state, parentCountry)}
+          className="w-3.5 h-3.5 rounded border-gray-300 text-primary-600 focus:ring-primary-500 flex-shrink-0 ml-1"
+          aria-label={`Select all regions in ${state.name}`}
+        />
+
         <button
           onClick={onToggleExpand}
-          className="flex-1 flex items-center gap-2 text-left group pl-2"
+          className="flex-1 flex items-center gap-2 text-left group"
         >
-          <span className="text-xs text-gray-500 group-hover:text-gray-700 font-medium">
+          <span className="text-xs text-gray-600 group-hover:text-gray-800 font-medium">
             {state.name}
           </span>
           <span className="text-xs text-gray-400">
@@ -95,7 +111,7 @@ function StateRow({
         {/* Region selection indicator */}
         {selectedRegionCount > 0 && (
           <span className="text-xs bg-primary-100 text-primary-700 px-1.5 py-0.5 rounded-full">
-            {selectedRegionCount}
+            {selectedRegionCount}/{state.regions.length}
           </span>
         )}
 
@@ -118,7 +134,7 @@ function StateRow({
 
       {/* Regions within state - expandable */}
       {isExpanded && (
-        <div className="pl-4 pb-2">
+        <div className="pl-6 pb-2">
           <RegionPills
             regions={state.regions}
             selectedRegions={selectedRegions}
@@ -140,6 +156,7 @@ interface CountryRowProps {
   onToggleExpand: () => void;
   onToggleCountry: () => void;
   onToggleRegion: (region: string, parentCountry: string) => void;
+  onToggleState: (state: StateData, parentCountry: string) => void;
   onToggleStateExpand: (stateKey: string) => void;
 }
 
@@ -152,6 +169,7 @@ function CountryRow({
   onToggleExpand,
   onToggleCountry,
   onToggleRegion,
+  onToggleState,
   onToggleStateExpand,
 }: CountryRowProps) {
   // Count selected regions across both direct regions and state-grouped regions
@@ -230,6 +248,7 @@ function CountryRow({
                     selectedRegions={selectedRegions}
                     onToggleExpand={() => onToggleStateExpand(stateKey)}
                     onToggleRegion={onToggleRegion}
+                    onToggleState={onToggleState}
                   />
                 );
               })}
@@ -277,6 +296,30 @@ export function CountryRegionFilter() {
     }
 
     toggleRegion(region);
+  };
+
+  // Handle state-level toggle (select/deselect all regions in state)
+  const handleToggleState = (state: StateData, parentCountry: string) => {
+    if (showFavoritesOnly) setShowFavoritesOnly(false);
+
+    const stateRegionNames = state.regions.map(r => r.name);
+    const allSelected = stateRegionNames.every(name => selectedRegions.includes(name));
+
+    // Ensure country is selected when selecting state regions
+    if (!allSelected && !selectedCountries.includes(parentCountry)) {
+      toggleCountry(parentCountry);
+    }
+
+    // Toggle all regions in this state
+    stateRegionNames.forEach(regionName => {
+      const isCurrentlySelected = selectedRegions.includes(regionName);
+      // If all selected, deselect all. If not all selected, select all unselected ones.
+      if (allSelected && isCurrentlySelected) {
+        toggleRegion(regionName);
+      } else if (!allSelected && !isCurrentlySelected) {
+        toggleRegion(regionName);
+      }
+    });
   };
 
   // Track which countries are expanded
@@ -460,6 +503,7 @@ export function CountryRegionFilter() {
               onToggleExpand={() => toggleExpand(country.name)}
               onToggleCountry={() => handleToggleCountry(country.name)}
               onToggleRegion={handleToggleRegion}
+              onToggleState={handleToggleState}
               onToggleStateExpand={toggleStateExpand}
             />
           ))
