@@ -1,3 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#527291">
-  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#527291" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Towers -->
+  <path d="M4 21V11" />
+  <path d="M4 11V7l2-2v2h2V5l2 2v4" />
+  <path d="M20 21V11" />
+  <path d="M14 11V7l2-2v2h2V5l2 2v4" />
+  <!-- Main building -->
+  <path d="M4 11h16" />
+  <path d="M4 21h16" />
+  <path d="M10 21v-4a2 2 0 1 1 4 0v4" />
+  <!-- Center tower -->
+  <path d="M10 11V9l2-2 2 2v2" />
 </svg>
