@@ -8,6 +8,9 @@ Discover and add wedding venues from a specified location to the Supabase databa
 /scrape-venues <location> --limit <n>
 /scrape-venues <location> --dry-run
 /scrape-venues <location> --skip-enrichment
+/scrape-venues <location> --skip-image-validation
+/scrape-venues --audit-images              # Run image audit on all existing venues
+/scrape-venues --enrich-images             # Enrich venues with <3 images
 ```
 
 ## Arguments
@@ -15,6 +18,9 @@ Discover and add wedding venues from a specified location to the Supabase databa
 - `--limit <n>`: Maximum number of venues to discover (default: 20)
 - `--dry-run`: Preview discovered venues without saving to database
 - `--skip-enrichment`: Skip Google Places/YouTube enrichment phase
+- `--skip-image-validation`: Skip image validation and enrichment phase
+- `--audit-images`: Run broken image audit on ALL existing venues (standalone mode)
+- `--enrich-images`: Enrich ALL venues with <3 images (standalone mode)
 
 ## Tools Used
 - **WebSearch**: Discover venue candidates
@@ -26,7 +32,7 @@ Discover and add wedding venues from a specified location to the Supabase databa
 
 ## Execution Instructions
 
-When this command is invoked, follow this 4-phase pipeline:
+When this command is invoked, follow this 5-phase pipeline:
 
 ---
 
@@ -121,49 +127,81 @@ Use the Supabase MCP to check if venue already exists, then use WebSearch to fin
 - Search: `<venue name> <location> site:google.com/maps`
 - Extract: rating, review count from search snippet if visible
 
-**YouTube Video Search** (IMPORTANT):
-For each venue, search YouTube to find a relevant wedding video:
+**YouTube Video Search via Playwright** (PREFERRED METHOD):
+Use the Playwright-based script for reliable YouTube video discovery. This method searches YouTube directly and extracts video IDs without API limits.
 
-1. **Search Query**: `<venue name> wedding` (e.g., "Villa San Michele wedding")
-
-2. **Use WebSearch** to find the best YouTube video:
-   ```
-   WebSearch: "<venue name> wedding site:youtube.com"
+1. **Run the Playwright enrichment script** after venues are inserted:
+   ```bash
+   npx tsx scripts/enrich-youtube-simple.ts
    ```
 
-3. **Evaluate Results** - Pick the FIRST result that:
-   - Is an actual wedding video (not a tour/promo if possible)
-   - Shows the venue clearly
-   - Has decent quality (prefer videos with high view counts)
-   - Is from a reputable channel (wedding videographer, venue official)
+2. **How it works**:
+   - Launches headless Chromium browser
+   - Searches YouTube with multiple query strategies (in order):
+     1. `<venue name>` (just the name - works best!)
+     2. `<venue name> venue`
+     3. `<venue name> event`
+     4. `<venue name> <region>`
+   - Extracts up to 3 video IDs from search results
+   - Updates the `videos` jsonb column with video data
 
-4. **Extract Video Data**:
-   - `videoId`: Extract from URL (e.g., `dQw4w9WgXcQ` from `youtube.com/watch?v=dQw4w9WgXcQ`)
-   - `title`: Video title from search result
-   - `url`: Full YouTube URL
+3. **Search Strategy** (IMPORTANT - simpler is better!):
+   - Start with just the venue name: `"Villa San Michele"`
+   - Only add qualifiers if no results found
+   - Avoid adding "wedding venue" - it's too restrictive and misses many venues
 
-5. **Store in venue record**:
+4. **Video Data Stored**:
    ```json
-   "videos": [{"title": "Beautiful Wedding at Villa San Michele", "url": "https://www.youtube.com/watch?v=VIDEO_ID"}]
+   "videos": [
+     {"title": "Villa San Michele Tour", "url": "https://www.youtube.com/watch?v=VIDEO_ID"},
+     {"title": "Wedding at Villa San Michele", "url": "https://www.youtube.com/watch?v=VIDEO_ID2"}
+   ]
    ```
 
-6. **Add YouTube thumbnail to header_images** (supplement existing images):
+5. **YouTube Thumbnails for header_images**:
+   The script also adds YouTube thumbnails to `header_images` if empty:
    ```json
    "header_images": [
-     {"url": "https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg", "source": "youtube"},
-     {"url": "https://venue-website.com/hero.jpg", "source": "og_image"},
-     {"url": "https://images.unsplash.com/photo-xxx?w=1200&h=800&fit=crop", "source": "unsplash"}
+     {"url": "https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg", "source": "youtube"}
    ]
    ```
 
    YouTube thumbnail URL formats:
    - Max resolution: `https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg`
    - High quality: `https://img.youtube.com/vi/VIDEO_ID/hqdefault.jpg`
-   - Medium: `https://img.youtube.com/vi/VIDEO_ID/mqdefault.jpg`
 
-7. **Store search query for future updates**:
-   ```sql
-   youtube_search = '<venue name> wedding'
+6. **Manual Alternative** (if Playwright unavailable):
+   Use WebSearch as fallback:
+   ```
+   WebSearch: "<venue name> site:youtube.com"
+   ```
+   Extract video IDs from URLs in results.
+
+7. **Rate Limiting**:
+   - The script includes 2.5 second delays between searches
+   - Processes in batches of 20 venues
+   - Respects YouTube's rate limits
+
+**Google Images Enrichment** (for header_images):
+If venues need more/better header images, use the Serper API script:
+
+1. **Requires**: `SERPER_API_KEY` in `.env.local` (get free key at serper.dev - 2,500 queries)
+
+2. **Run the enrichment script**:
+   ```bash
+   node scripts/enrich-google-images.mjs
+   ```
+
+3. **How it works**:
+   - Searches Google Images for `<venue name> <region> wedding venue`
+   - Returns 5 high-quality images per venue
+   - Updates `header_images` jsonb array with source: "google"
+
+4. **Image Data Stored**:
+   ```json
+   "header_images": [
+     {"url": "https://example.com/venue-photo.jpg", "thumbnail": "https://...", "source": "google"}
+   ]
    ```
 
 **Unsplash Fallback Images by Venue Type** (use when scraped images < 3):
@@ -190,9 +228,68 @@ default:    https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&
 - `--skip-enrichment` flag is set
 - Venue already exists in database with videos
 
+**Skip image validation if**:
+- `--skip-image-validation` flag is set
+- Running in `--dry-run` mode
+
 ---
 
-### PHASE 4: STORAGE
+### PHASE 4: IMAGE VALIDATION & ENRICHMENT
+
+After enrichment, validate and enhance header images to ensure quality.
+
+**Image Validation** (detect broken images):
+Run the audit script to find venues with broken header images:
+```bash
+npx tsx scripts/audit-broken-images.ts
+```
+
+**What it checks**:
+- HTTP 403/404 errors (blocked hotlinks, deleted images)
+- Incomplete URLs (missing parameters like `?id=`)
+- Non-image content-types (video/mp4, text/html, application/octet-stream)
+- YouTube maxresdefault thumbnails that don't exist (fallback to hqdefault)
+- Homepage URLs instead of actual image files
+
+**Auto-fix broken images**:
+```bash
+npx tsx scripts/audit-broken-images.ts --fix
+```
+This fetches 5 replacement images from Google via Serper API.
+
+**Image Enrichment** (ensure 3-5 images per venue):
+For venues with fewer than 3 header images:
+```bash
+npx tsx scripts/enrich-low-image-venues.ts
+```
+
+**Options**:
+- `--limit N`: Process only N venues
+- `--start N`: Resume from index N
+- `--dry-run`: Preview without making changes
+
+**Priority Order for Images**:
+1. **Google Images** via Serper API (best quality, 5 per venue)
+2. **Website scraping** (og:image, hero images)
+3. **YouTube thumbnails** (use hqdefault.jpg, NOT maxresdefault.jpg)
+4. **Unsplash fallbacks** (LAST RESORT - looks generic)
+
+**YouTube Thumbnail Best Practices**:
+```
+✅ Use: https://img.youtube.com/vi/VIDEO_ID/hqdefault.jpg (always works)
+❌ Avoid: https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg (often 404s)
+```
+
+**Common Broken Image Sources to Avoid**:
+- `cdn0.weddingwire.com` - blocks hotlinking (403)
+- `lookaside.instagram.com` - returns HTML
+- `lookaside.fbsbx.com` - returns HTML
+- `www.fourseasons.com/etc/designs/` - returns logo instead of venue
+- `breezit.s3.eu-north-1.amazonaws.com` - often returns octet-stream
+
+---
+
+### PHASE 5: STORAGE
 
 **⚠️ PREREQUISITE: Run Stage 2 Deduplication BEFORE any inserts!**
 See the DEDUPLICATION section below for the full algorithm.
@@ -343,7 +440,7 @@ Display progress throughout execution:
  VENUE SCRAPER - Tuscany, Italy
 ════════════════════════════════════════════════════
 
-[PHASE 1/4] Discovery
+[PHASE 1/5] Discovery
   Searching: "best wedding venues Tuscany Italy"
   Searching: "luxury wedding venues Tuscany Italy"
   Searching: "destination wedding venues Tuscany Italy"
@@ -355,18 +452,38 @@ Display progress throughout execution:
     - "Il Borro" = "Il Borro Relais" (name match)
   After dedup: 28 unique candidates
 
-[PHASE 2/4] Scraping Websites
+[PHASE 2/5] Scraping Websites
   [1/28] Villa San Michele... ✓ (capacity: 80-150, type: Villa)
   [2/28] Castello di Vincigliata... ✓ (capacity: 100-200, type: Castle)
   [3/28] Borgo Santo Pietro... ✗ (timeout - will retry)
   ...
   Completed: 25/28, Failed: 3
 
-[PHASE 3/4] Enrichment
+[PHASE 3/5] Enrichment
   Google ratings: 22/25 found
   YouTube videos: 18/25 found
 
-[PHASE 4/4] Storage
+[PHASE 4/5] Image Validation & Enrichment
+  Checking header images...
+    ❌ Villa Rosa: HTTP 403 (weddingwire hotlink blocked)
+    ❌ Il Borro: Incomplete URL (missing ?id= parameter)
+    ✓ 23/25 images valid
+
+  Fixing broken images...
+    ✅ Villa Rosa: Fixed with 5 Google Images
+    ✅ Il Borro: Fixed with 5 Google Images
+
+  Enriching low-image venues...
+    [1/3] Castello Banfi: 1 → 5 images
+    [2/3] Borgo Santo Pietro: 1 → 5 images
+    [3/3] Villa Medicea: 1 → 5 images
+
+  Image Summary:
+    ├─ Broken images fixed: 2
+    ├─ Low-image venues enriched: 3
+    └─ All venues now have 5 images ✓
+
+[PHASE 5/5] Storage
   [DEDUP Stage 2] Checking against existing database...
   Existing Tuscany venues in DB: 15
 
@@ -384,6 +501,7 @@ Display progress throughout execution:
 ════════════════════════════════════════════════════
  COMPLETE
    Tuscany now has 33 venues (+18 new)
+   All venues have 5 header images ✓
    Dedup prevented 3 duplicates
 ════════════════════════════════════════════════════
 ```
@@ -530,16 +648,35 @@ Deduplication Summary:
 ### IMPORTANT NOTES
 
 1. **HEADER IMAGES (3-5 REQUIRED)**: Every venue MUST have 3-5 header images stored in the `header_images` jsonb array. Sources in priority order:
+   - **Google Images** via Serper API (best quality) - `node scripts/enrich-google-images.mjs`
    - Scraped from venue website (og:image, hero images, gallery)
    - YouTube video thumbnails
-   - Unsplash fallbacks based on venue type
-2. **Rate Limiting**: Add 1-2 second delays between WebFetch calls to avoid being blocked
-3. **Supabase Project ID**: Always use `tpgruvfobcgzictihwrp` for all MCP calls
-4. **Respect robots.txt**: Skip sites that block scraping
-5. **Quality over quantity**: Better to have 10 well-scraped venues than 50 incomplete ones
-6. **Manual verification**: For venues where data couldn't be extracted, note them for manual review
-7. **Coordinates**: Try to extract lat/lng from venue website or use Google Maps search. If unavailable, use approximate region center.
-8. **Data validation**: Ensure capacity_min < capacity_max and price_min < price_max
+   - Unsplash fallbacks (LAST RESORT ONLY - looks too generic)
+
+2. **YOUTUBE VIDEOS (REQUIRED)**: Every venue should have 1-3 YouTube videos. Use the Playwright script:
+   ```bash
+   npx tsx scripts/enrich-youtube-simple.ts
+   ```
+   Key insight: Simpler search queries work better (just venue name, not "venue name wedding venue")
+
+3. **Rate Limiting**: Add 1-2 second delays between WebFetch calls to avoid being blocked
+4. **Supabase Project ID**: Always use `tpgruvfobcgzictihwrp` for all MCP calls
+5. **Respect robots.txt**: Skip sites that block scraping
+6. **Quality over quantity**: Better to have 10 well-scraped venues than 50 incomplete ones
+7. **Manual verification**: For venues where data couldn't be extracted, note them for manual review
+8. **Coordinates**: Try to extract lat/lng from venue website or use Google Maps search. If unavailable, use approximate region center.
+9. **Data validation**: Ensure capacity_min < capacity_max and price_min < price_max
+
+### ENRICHMENT SCRIPTS REFERENCE
+
+| Script | Purpose | Requires |
+|--------|---------|----------|
+| `scripts/enrich-youtube-simple.ts` | Find YouTube videos via Playwright | Playwright (`npx playwright install chromium`) |
+| `scripts/enrich-google-images.mjs` | Get Google Images via Serper | `SERPER_API_KEY` in .env.local |
+| `scripts/enrich-header-images.ts` | Scrape og:image from websites | None |
+| `scripts/geocode-venues.mjs` | Geocode addresses to lat/lng | `VITE_GOOGLE_MAPS_API_KEY` |
+| `scripts/audit-broken-images.ts` | Find & fix broken header images | `SERPER_API_KEY` for --fix |
+| `scripts/enrich-low-image-venues.ts` | Add images to venues with <3 | `SERPER_API_KEY` in .env.local |
 
 ---
 
@@ -551,6 +688,39 @@ User: `/scrape-venues "Santorini, Greece" --limit 10`
 2. Find ~15 candidates, dedupe to 10
 3. Scrape each venue website for details
 4. Enrich with Google Places data
-5. Generate IDs: gr-xxx (check existing Santorini venues)
-6. Insert into Supabase
-7. Report: "10 venues added to Santorini"
+5. Validate and fix broken images
+6. Enrich venues with <3 images
+7. Generate IDs: gr-xxx (check existing Santorini venues)
+8. Insert into Supabase
+9. Report: "10 venues added to Santorini, all with 5 images"
+
+---
+
+### STANDALONE IMAGE MODES
+
+These modes operate on ALL existing venues, not just newly scraped ones.
+
+**Audit all images**:
+```
+/scrape-venues --audit-images
+```
+This runs the broken image audit across all 942+ venues:
+1. Checks each venue's header_image URL
+2. Detects 403/404 errors, non-image content types, incomplete URLs
+3. Reports broken images by region
+4. Optionally fixes with `--fix` flag
+
+**Enrich low-image venues**:
+```
+/scrape-venues --enrich-images
+```
+This enriches all venues with fewer than 3 header images:
+1. Queries venues where `jsonb_array_length(header_images) < 3`
+2. Fetches 5 Google Images per venue via Serper API
+3. Updates `header_images` and `header_image` columns
+
+**Combined audit + enrich**:
+```
+/scrape-venues --audit-images --enrich-images
+```
+First fixes broken images, then enriches any still-low venues.

@@ -139,8 +139,8 @@ function getFallbackImage(venueTypes: string[]): string {
   return FALLBACK_IMAGES['default'];
 }
 
-// Get header image for a venue
-async function getHeaderImage(venue: VenueRow): Promise<HeaderImage> {
+// Get header image for a venue - returns null if no real image found
+async function getHeaderImage(venue: VenueRow): Promise<HeaderImage | null> {
   // Strategy 1: YouTube thumbnail
   if (venue.videos && venue.videos.length > 0) {
     const videoId = extractVideoId(venue.videos[0].url);
@@ -163,17 +163,14 @@ async function getHeaderImage(venue: VenueRow): Promise<HeaderImage> {
     }
   }
 
-  // Strategy 3: Fallback by venue type
-  return {
-    url: getFallbackImage(venue.venue_types),
-    source: 'fallback',
-  };
+  // No fallback - return null if no real image found
+  return null;
 }
 
 async function main() {
   console.log('🖼️  Enriching header images for venues without images...\n');
 
-  // Step 1: Fetch venues without header_image
+  // Step 1: Fetch venues without header_images
   const { data: venues, error } = await supabase
     .from('venues')
     .select(`
@@ -181,10 +178,9 @@ async function main() {
       name,
       website,
       videos,
-      venue_venue_types!inner(venue_types!inner(name))
+      venue_venue_types(venue_types(name))
     `)
-    .is('header_image', null)
-    .is('header_images', null);
+    .or('header_images.is.null,header_images.eq.[]');
 
   if (error) {
     console.error('❌ Error fetching venues:', error.message);
@@ -228,10 +224,16 @@ async function main() {
       // Get header image
       const headerImage = await getHeaderImage(venue);
 
-      // Update database
+      if (!headerImage) {
+        stats.fallback++;
+        console.log(`${progress} ⏭️  ${venue.name} - No real image found, skipping`);
+        continue;
+      }
+
+      // Update database - store as array in header_images (plural)
       const { error: updateError } = await supabase
         .from('venues')
-        .update({ header_image: headerImage })
+        .update({ header_images: [headerImage] })
         .eq('id', venue.id);
 
       if (updateError) {
@@ -245,9 +247,6 @@ async function main() {
       } else if (headerImage.source === 'og_image') {
         stats.ogImage++;
         console.log(`${progress} ✅ ${venue.name} - og:image`);
-      } else {
-        stats.fallback++;
-        console.log(`${progress} 📦 ${venue.name} - Fallback (${venueTypes[0] || 'default'})`);
       }
     } catch (err) {
       stats.errors++;
@@ -263,11 +262,11 @@ async function main() {
   console.log('📊 Summary:');
   console.log(`   YouTube thumbnails: ${stats.youtube}`);
   console.log(`   og:image scraped:   ${stats.ogImage}`);
-  console.log(`   Fallback images:    ${stats.fallback}`);
+  console.log(`   Skipped (no image): ${stats.fallback}`);
   console.log(`   Errors:             ${stats.errors}`);
   console.log(`   Total processed:    ${venues.length}`);
   console.log('='.repeat(50));
-  console.log('\n✅ Done! Database updated with header images.');
+  console.log('\n✅ Done! Venues with real images have been updated.');
 }
 
 main().catch(console.error);

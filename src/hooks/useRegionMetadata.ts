@@ -4,6 +4,7 @@ import { supabase } from '../lib/supabase';
 export interface RegionData {
   name: string;
   country: string;
+  continent: string | null;
   state: string | null;
   venueCount: number;
 }
@@ -16,8 +17,9 @@ export interface StateData {
 
 export interface CountryData {
   name: string;
+  continent: string | null;
   regions: RegionData[];
-  states: StateData[];  // For USA, regions are grouped by state
+  states: StateData[];  // For USA/Mexico, regions are grouped by state
   totalVenues: number;
 }
 
@@ -27,15 +29,14 @@ export interface RegionMetadata {
   error: string | null;
 }
 
-// Country display order (can be extended as new countries are added)
-const COUNTRY_ORDER: Record<string, number> = {
-  'USA': 1,
-  'Italy': 2,
-  'France': 3,
-  'Spain': 4,
-  'Greece': 5,
-  'Portugal': 6,
-  'Switzerland': 7,
+// Continent display order
+const CONTINENT_ORDER: Record<string, number> = {
+  'North America': 1,
+  'Europe': 2,
+  'Asia': 3,
+  'South America': 4,
+  'Oceania': 5,
+  'Africa': 6,
 };
 
 export function useRegionMetadata(): RegionMetadata {
@@ -52,9 +53,10 @@ export function useRegionMetadata(): RegionMetadata {
         if (err) throw err;
 
         // Transform to RegionData format
-        const regions: RegionData[] = (regionCounts || []).map((r: { region_name: string; country_name: string; state_name: string | null; venue_count: number }) => ({
+        const regions: RegionData[] = (regionCounts || []).map((r: { region_name: string; country_name: string; continent_name: string | null; state_name: string | null; venue_count: number }) => ({
           name: r.region_name,
           country: r.country_name,
+          continent: r.continent_name,
           state: r.state_name,
           venueCount: r.venue_count,
         }));
@@ -71,20 +73,20 @@ export function useRegionMetadata(): RegionMetadata {
     fetchMetadata();
   }, []);
 
-  // Group regions by country, then by state for USA
+  // Group regions by country, then by state for countries with states
   const countries = useMemo(() => {
-    const grouped = data.reduce<Record<string, RegionData[]>>((acc, region) => {
+    const grouped = data.reduce<Record<string, { regions: RegionData[]; continent: string | null }>>((acc, region) => {
       if (!acc[region.country]) {
-        acc[region.country] = [];
+        acc[region.country] = { regions: [], continent: region.continent };
       }
-      acc[region.country].push(region);
+      acc[region.country].regions.push(region);
       return acc;
     }, {});
 
     // Convert to array and sort
     return Object.entries(grouped)
-      .map(([name, regions]) => {
-        // For USA, group regions by state
+      .map(([name, { regions, continent }]) => {
+        // Group regions by state (for USA, Mexico, etc.)
         const stateGroups: Record<string, RegionData[]> = {};
         const regionsWithoutState: RegionData[] = [];
 
@@ -110,16 +112,17 @@ export function useRegionMetadata(): RegionMetadata {
 
         return {
           name,
+          continent,
           regions: regionsWithoutState.sort((a, b) => b.venueCount - a.venueCount),
           states,
           totalVenues: regions.reduce((sum, r) => sum + r.venueCount, 0),
         };
       })
       .sort((a, b) => {
-        // Sort by predefined order, then alphabetically for new countries
-        const orderA = COUNTRY_ORDER[a.name] ?? 999;
-        const orderB = COUNTRY_ORDER[b.name] ?? 999;
-        if (orderA !== orderB) return orderA - orderB;
+        // Sort by continent order first, then alphabetically by country name
+        const continentA = CONTINENT_ORDER[a.continent ?? ''] ?? 999;
+        const continentB = CONTINENT_ORDER[b.continent ?? ''] ?? 999;
+        if (continentA !== continentB) return continentA - continentB;
         return a.name.localeCompare(b.name);
       });
   }, [data]);
