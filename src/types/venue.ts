@@ -7,7 +7,10 @@ export type Country =
   | 'Greece'
   | 'Spain'
   | 'Switzerland'
-  | 'France';
+  | 'France'
+  | 'Indonesia'
+  | 'Thailand'
+  | 'Mexico';
 
 export type Setting = 'Indoor' | 'Outdoor';
 
@@ -88,7 +91,7 @@ export interface FilterState {
   capacityRange: [number, number];
 }
 
-export const COUNTRIES: Country[] = ['USA', 'Portugal', 'Italy', 'Greece', 'Spain', 'Switzerland', 'France'];
+export const COUNTRIES: Country[] = ['USA', 'Portugal', 'Italy', 'Greece', 'Spain', 'Switzerland', 'France', 'Indonesia', 'Thailand', 'Mexico'];
 export const SETTINGS: Setting[] = ['Indoor', 'Outdoor'];
 
 // Map regions to countries
@@ -149,6 +152,63 @@ export const REGION_TO_COUNTRY: Record<string, Country> = {
   'Bordeaux': 'France',
   'Southwest France': 'France',
   'Beaujolais': 'France',
+  // Indonesia
+  'Bali': 'Indonesia',
+  'Komodo': 'Indonesia',
+  'Lombok': 'Indonesia',
+  // Thailand
+  'Chiang Mai': 'Thailand',
+  'Khao Lak': 'Thailand',
+  'Koh Kood': 'Thailand',
+  'Koh Samui': 'Thailand',
+  'Krabi': 'Thailand',
+  'Phuket': 'Thailand',
+  // Mexico
+  'Cancun, Mexico': 'Mexico',
+  'Los Cabos, Mexico': 'Mexico',
+  'Mexico City, Mexico': 'Mexico',
+  'Riviera Maya, Mexico': 'Mexico',
+  'Riviera Nayarit, Mexico': 'Mexico',
+  'San Miguel de Allende, Mexico': 'Mexico',
+  // USA - Additional regions
+  'Atlanta': 'USA',
+  'Bluffton': 'USA',
+  'Boston': 'USA',
+  'Cape Cod': 'USA',
+  'Central Coast': 'USA',
+  'Charleston': 'USA',
+  'Coastal Georgia': 'USA',
+  'Connecticut': 'USA',
+  'East Bay': 'USA',
+  'Florida Keys': 'USA',
+  'Greenville': 'USA',
+  'Hilton Head': 'USA',
+  'Hudson Valley': 'USA',
+  'Lake Tahoe': 'USA',
+  'Maine Coast': 'USA',
+  'Marin': 'USA',
+  'Marthas Vineyard': 'USA',
+  'Mendocino': 'USA',
+  'Miami': 'USA',
+  'Nantucket': 'USA',
+  'Napa Valley': 'USA',
+  'Naples': 'USA',
+  'Newport': 'USA',
+  'North Georgia': 'USA',
+  'Northern Virginia': 'USA',
+  'Orlando': 'USA',
+  'Palm Beach': 'USA',
+  'Philadelphia': 'USA',
+  'Richmond': 'USA',
+  'Sacramento': 'USA',
+  'San Francisco': 'USA',
+  'Savannah': 'USA',
+  'Shenandoah Valley': 'USA',
+  'Sonoma': 'USA',
+  'Tampa Bay': 'USA',
+  'The Hamptons': 'USA',
+  'Virginia Wine Country': 'USA',
+  'Washington DC': 'USA',
 };
 
 // Primary color for clusters (matches UI primary-600)
@@ -163,6 +223,9 @@ export const COUNTRY_FLAGS: Record<Country, string> = {
   'Spain': '🇪🇸',
   'Switzerland': '🇨🇭',
   'France': '🇫🇷',
+  'Indonesia': '🇮🇩',
+  'Thailand': '🇹🇭',
+  'Mexico': '🇲🇽',
 };
 
 // Get flag emoji for a country (with fallback)

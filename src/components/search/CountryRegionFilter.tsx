@@ -6,14 +6,24 @@ import { useRegionMetadata, type CountryData, type StateData, type RegionData } 
 // Country flag emojis - easily extensible
 const COUNTRY_FLAGS: Record<string, string> = {
   'USA': '🇺🇸',
+  'Mexico': '🇲🇽',
   'Portugal': '🇵🇹',
   'Italy': '🇮🇹',
   'Greece': '🇬🇷',
   'Spain': '🇪🇸',
   'Switzerland': '🇨🇭',
   'France': '🇫🇷',
-  // Add more as needed
+  'Indonesia': '🇮🇩',
+  'Thailand': '🇹🇭',
 };
+
+// Continent display configuration
+const CONTINENTS = [
+  { id: null, label: 'All', icon: '🌍' },
+  { id: 'North America', label: 'Americas', icon: '🌎' },
+  { id: 'Europe', label: 'Europe', icon: '🌍' },
+  { id: 'Asia', label: 'Asia', icon: '🌏' },
+] as const;
 
 
 function getCountryFlag(country: string): string {
@@ -331,12 +341,25 @@ export function CountryRegionFilter() {
   // Search within filter
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Filter countries, states, and regions based on search
+  // Continent filter
+  const [selectedContinent, setSelectedContinent] = useState<string | null>(null);
+
+  // Filter countries by continent first, then by search
   const filteredCountries = useMemo(() => {
-    if (!searchQuery.trim()) return countries;
+    // First filter by continent
+    let filtered = countries;
+    if (selectedContinent) {
+      filtered = countries.filter(c => c.continent === selectedContinent);
+    } else {
+      // When "All" is selected, sort countries alphabetically
+      filtered = [...countries].sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    // Then filter by search query
+    if (!searchQuery.trim()) return filtered;
 
     const query = searchQuery.toLowerCase();
-    return countries
+    return filtered
       .map(country => {
         // Check if country name matches
         const countryMatches = country.name.toLowerCase().includes(query);
@@ -375,7 +398,7 @@ export function CountryRegionFilter() {
         return null;
       })
       .filter((c): c is CountryData => c !== null);
-  }, [countries, searchQuery]);
+  }, [countries, searchQuery, selectedContinent]);
 
   // Auto-expand countries when searching
   const effectiveExpanded = useMemo(() => {
@@ -425,6 +448,13 @@ export function CountryRegionFilter() {
     });
   };
 
+  // Get available continents (only show tabs for continents with venues)
+  // Must be before early returns to maintain hooks order
+  const availableContinents = useMemo(() => {
+    const continentSet = new Set(countries.map(c => c.continent).filter(Boolean));
+    return CONTINENTS.filter(c => c.id === null || continentSet.has(c.id));
+  }, [countries]);
+
   if (isLoading) {
     return (
       <div className="p-4">
@@ -448,6 +478,26 @@ export function CountryRegionFilter() {
   return (
     <div>
       <h3 className="text-sm font-semibold text-gray-900 mb-3">Location</h3>
+
+      {/* Continent filter tabs */}
+      {availableContinents.length > 2 && (
+        <div className="flex flex-wrap gap-1.5 mb-3">
+          {availableContinents.map((continent) => (
+            <button
+              key={continent.label}
+              onClick={() => setSelectedContinent(continent.id)}
+              className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${
+                selectedContinent === continent.id
+                  ? 'bg-primary-600 text-white'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+            >
+              <span>{continent.icon}</span>
+              <span>{continent.label}</span>
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Search box - shown when there are many options */}
       {countries.length > 5 && (
