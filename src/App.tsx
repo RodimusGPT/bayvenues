@@ -30,6 +30,7 @@ function App() {
   const [mapZoom, setMapZoom] = useState(3);
   const [mapPosition, setMapPosition] = useState<MapPosition | null>(null);
   const [isMapReadyForBounds, setIsMapReadyForBounds] = useState(false); // Wait for map to fitBounds before filtering
+  const [searchAreaBounds, setSearchAreaBounds] = useState<MapBounds | null>(null); // Bounds set by "Search this area"
 
   // URL state handling for deep-linking
   const [pendingVenueId, setPendingVenueId] = useState<string | null>(null);
@@ -50,6 +51,19 @@ function App() {
   // Get filter state (using debounced filters for API calls)
   const filters = useFilterStore();
   const { selectedVenue, setSelectedVenue } = useVenueStore();
+
+  // Check if there are any active filters that might be hiding venues
+  const hasActiveFilters = Boolean(
+    filters.searchQuery ||
+    filters.selectedCountries.length > 0 ||
+    filters.selectedRegions.length > 0 ||
+    filters.selectedVenueTypes.length > 0 ||
+    filters.selectedSettings.length > 0 ||
+    filters.priceRange[0] > 0 ||
+    filters.priceRange[1] < 500000 ||
+    filters.capacityRange[0] > 0 ||
+    filters.capacityRange[1] < 1000
+  );
 
   // Parse URL on mount to extract venue ID for deep-linking
   useEffect(() => {
@@ -109,14 +123,46 @@ function App() {
     setIsMapReadyForBounds(true);
   }, []);
 
+  // Called when user clicks "Search this area" button on map
+  const handleSearchArea = useCallback((bounds: MapBounds) => {
+    // Save the bounds to filter venues by this area
+    setSearchAreaBounds(bounds);
+    // Reset all filters to show all venues in this area
+    filters.resetFilters();
+  }, [filters]);
+
+  // Clear search area bounds when user changes filters
+  useEffect(() => {
+    if (hasActiveFilters && searchAreaBounds) {
+      setSearchAreaBounds(null);
+    }
+  }, [hasActiveFilters, searchAreaBounds]);
+
+  // Venues to display on map - filtered by searchAreaBounds if set
+  // This is used when "Search this area" is clicked to show only venues within saved bounds
+  const venuesToDisplay = useMemo(() => {
+    if (!searchAreaBounds) return filteredVenues;
+
+    return filteredVenues.filter((venue) => {
+      const { lat, lng } = venue.location;
+      if (lat == null || lng == null) return false;
+      return (
+        lat >= searchAreaBounds.south &&
+        lat <= searchAreaBounds.north &&
+        lng >= searchAreaBounds.west &&
+        lng <= searchAreaBounds.east
+      );
+    });
+  }, [filteredVenues, searchAreaBounds]);
+
   // Filter venues visible in current map bounds
   // Only filter by bounds AFTER the map has finished initial setup (fitBounds complete)
   // This prevents showing "No venues" before the map has zoomed to show all venues
   const venuesInBounds = useMemo(() => {
     // Before map is ready, show all filtered venues in the list
-    if (!isMapReadyForBounds || !mapBounds) return filteredVenues;
+    if (!isMapReadyForBounds || !mapBounds) return venuesToDisplay;
 
-    const inBounds = filteredVenues.filter((venue) => {
+    const inBounds = venuesToDisplay.filter((venue) => {
       const { lat, lng } = venue.location;
       if (lat == null || lng == null) return false;
       return (
@@ -129,12 +175,12 @@ function App() {
 
     // Fallback: if bounds filtering would show nothing but we have venues,
     // show all venues. This handles edge cases where bounds are stale.
-    if (inBounds.length === 0 && filteredVenues.length > 0) {
-      return filteredVenues;
+    if (inBounds.length === 0 && venuesToDisplay.length > 0) {
+      return venuesToDisplay;
     }
 
     return inBounds;
-  }, [filteredVenues, mapBounds, isMapReadyForBounds]);
+  }, [venuesToDisplay, mapBounds, isMapReadyForBounds]);
 
   // Show list button on mobile when zoomed in enough
   const showMobileListButton = mapZoom >= MOBILE_LIST_ZOOM_THRESHOLD && venuesInBounds.length > 0;
@@ -173,10 +219,12 @@ function App() {
           <div className={`lg:block ${viewMode === 'map' ? 'block' : 'hidden'} h-full`}>
             {isLoaded ? (
               <VenueMap
-                venues={filteredVenues}
+                venues={venuesToDisplay}
+                hasActiveFilters={hasActiveFilters || searchAreaBounds !== null}
                 onVenueSelect={setSelectedVenue}
                 onBoundsChange={handleBoundsChange}
                 onMapReady={handleMapReady}
+                onSearchArea={handleSearchArea}
                 initialPosition={mapPosition || undefined}
               />
             ) : (

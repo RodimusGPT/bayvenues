@@ -7,6 +7,7 @@ import { VenueReviews } from './VenueReviews';
 import { FavoriteButton } from '../ui/FavoriteButton';
 import { HideButton } from '../ui/HideButton';
 import { ShareButton } from '../ui/ShareButton';
+import { ReportButton } from '../ui/ReportButton';
 import { ImageCarousel } from '../ui/ImageCarousel';
 
 interface VenuePanelProps {
@@ -164,6 +165,12 @@ export function VenuePanel({ venue, venues = [], onClose, onNavigate }: VenuePan
               className="bg-black/30 hover:bg-black/50 text-white"
               onHide={onClose}
             />
+            <ReportButton
+              venueId={venue.id}
+              venueName={venue.name}
+              size="md"
+              className="bg-black/30 hover:bg-black/50 text-white"
+            />
             <button
               onClick={onClose}
               className="p-2 bg-black/30 hover:bg-black/50 rounded-full transition-colors"
@@ -212,6 +219,7 @@ export function VenuePanel({ venue, venues = [], onClose, onNavigate }: VenuePan
               <ShareButton type="venue" venue={venue} size="md" />
               <FavoriteButton venueId={venue.id} size="md" />
               <HideButton venueId={venue.id} size="md" onHide={onClose} />
+              <ReportButton venueId={venue.id} venueName={venue.name} size="md" />
               <button
                 onClick={onClose}
                 className="p-2 hover:bg-gray-100 rounded-full transition-colors"

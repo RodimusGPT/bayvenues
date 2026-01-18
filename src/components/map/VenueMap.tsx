@@ -19,9 +19,11 @@ export interface MapPosition {
 
 interface VenueMapProps {
   venues: Venue[];
+  hasActiveFilters?: boolean; // If true, show search button (there may be hidden venues)
   onVenueSelect: (venue: Venue) => void;
   onBoundsChange?: (bounds: MapBounds, zoom: number) => void;
   onMapReady?: () => void; // Called when markers are created and fitBounds has run
+  onSearchArea?: (bounds: MapBounds) => void; // Called when user clicks "Search this area"
   initialPosition?: MapPosition;
 }
 
@@ -125,7 +127,7 @@ function createHighlightMarkerIcon(flag: string): google.maps.Icon {
   return icon;
 }
 
-export function VenueMap({ venues, onVenueSelect, onBoundsChange, onMapReady, initialPosition }: VenueMapProps) {
+export function VenueMap({ venues, hasActiveFilters, onVenueSelect, onBoundsChange, onMapReady, onSearchArea, initialPosition }: VenueMapProps) {
   const mapRef = useRef<google.maps.Map | null>(null);
   const markersRef = useRef<google.maps.Marker[]>([]);
   const clustererRef = useRef<MarkerClusterer | null>(null);
@@ -133,13 +135,20 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, onMapReady, in
   const highlightTimeoutsRef = useRef<NodeJS.Timeout[]>([]); // Track timeouts for cleanup
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null); // Track hover animation timeout
   const idleListenerRef = useRef<google.maps.MapsEventListener | null>(null); // Track idle listener
+  const dragListenerRef = useRef<google.maps.MapsEventListener | null>(null); // Track drag listener
+  const zoomListenerRef = useRef<google.maps.MapsEventListener | null>(null); // Track zoom listener
   const prevVenueIdsRef = useRef<string>('');
   const isRestoringPositionRef = useRef(!!initialPosition); // Track if we're restoring a saved position
   const hasCalledMapReadyRef = useRef(false); // Track if we've signaled map ready
+  const isProgrammaticMoveRef = useRef(false); // Track programmatic vs user map movements
+  const searchButtonEnabledRef = useRef(false); // Enable search button after initial load
+  const skipNextFitBoundsRef = useRef(false); // Skip fitBounds after "Search this area" click
   const { hoveredVenueId, selectedVenue } = useVenueStore();
   const [mapType, setMapType] = useState<'roadmap' | 'satellite'>('roadmap');
   const [isMapReady, setIsMapReady] = useState(false); // Track when map is loaded
   const [markersReady, setMarkersReady] = useState(false); // Track when markers are created
+  const [showSearchButton, setShowSearchButton] = useState(false); // Show "Search this area" button
+  const [currentBounds, setCurrentBounds] = useState<MapBounds | null>(null); // Current map bounds for search
 
   // Store initial position in ref so it doesn't change on re-renders
   // This prevents the map from continuously trying to re-center
@@ -154,6 +163,15 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, onMapReady, in
     }
   }, [mapType]);
 
+  // Handle "Search this area" button click
+  const handleSearchArea = useCallback(() => {
+    if (!currentBounds || !onSearchArea) return;
+    // Skip the next fitBounds so map stays in current position
+    skipNextFitBoundsRef.current = true;
+    onSearchArea(currentBounds);
+    setShowSearchButton(false);
+  }, [currentBounds, onSearchArea]);
+
   const onLoad = useCallback((map: google.maps.Map) => {
     mapRef.current = map;
 
@@ -162,29 +180,58 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, onMapReady, in
       setIsMapReady(true);
     });
 
+    // Enable search button feature after a delay (skip initial fitBounds)
+    setTimeout(() => {
+      searchButtonEnabledRef.current = true;
+    }, 2000);
+
+    // Listen for user drag to show "Search this area" button
+    dragListenerRef.current = map.addListener('dragend', () => {
+      if (searchButtonEnabledRef.current) {
+        setShowSearchButton(true);
+      }
+    });
+
+    // Listen for user zoom via mouse wheel or pinch
+    zoomListenerRef.current = map.addListener('zoom_changed', () => {
+      if (searchButtonEnabledRef.current) {
+        setShowSearchButton(true);
+      }
+    });
+
     // Listen for bounds changes (store reference for cleanup)
     idleListenerRef.current = map.addListener('idle', () => {
-      if (!mapRef.current || !onBoundsChange) return;
+      if (!mapRef.current) return;
       const bounds = mapRef.current.getBounds();
       const zoom = mapRef.current.getZoom();
       if (bounds && zoom !== undefined) {
         const ne = bounds.getNorthEast();
         const sw = bounds.getSouthWest();
-        onBoundsChange({
+        const newBounds = {
           north: ne.lat(),
           south: sw.lat(),
           east: ne.lng(),
           west: sw.lng(),
-        }, zoom);
+        };
+        setCurrentBounds(newBounds);
+        onBoundsChange?.(newBounds, zoom);
       }
     });
   }, [onBoundsChange]);
 
   const onUnmount = useCallback(() => {
-    // Clean up idle listener
+    // Clean up map event listeners
     if (idleListenerRef.current) {
       google.maps.event.removeListener(idleListenerRef.current);
       idleListenerRef.current = null;
+    }
+    if (dragListenerRef.current) {
+      google.maps.event.removeListener(dragListenerRef.current);
+      dragListenerRef.current = null;
+    }
+    if (zoomListenerRef.current) {
+      google.maps.event.removeListener(zoomListenerRef.current);
+      zoomListenerRef.current = null;
     }
 
     // Clean up all timeouts
@@ -295,6 +342,12 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, onMapReady, in
     if (currentVenueIds !== prevVenueIdsRef.current) {
       prevVenueIdsRef.current = currentVenueIds;
 
+      // Skip fitBounds if user clicked "Search this area" button
+      if (skipNextFitBoundsRef.current) {
+        skipNextFitBoundsRef.current = false;
+        return;
+      }
+
       // Skip fitBounds if we're restoring a saved position (e.g., returning from list view)
       if (isRestoringPositionRef.current) {
         isRestoringPositionRef.current = false;
@@ -311,6 +364,8 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, onMapReady, in
         venuesWithLocation.forEach((venue) => {
           bounds.extend({ lat: venue.location.lat, lng: venue.location.lng });
         });
+        // Mark as programmatic move so it doesn't trigger "Search this area"
+        isProgrammaticMoveRef.current = true;
         mapRef.current.fitBounds(bounds, 50);
 
         // Signal map is ready for bounds filtering after fitBounds
@@ -318,7 +373,15 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, onMapReady, in
           hasCalledMapReadyRef.current = true;
           // Wait for the idle event to fire after fitBounds before signaling ready
           google.maps.event.addListenerOnce(mapRef.current, 'idle', () => {
+            isProgrammaticMoveRef.current = false;
+            setShowSearchButton(false); // Hide button after programmatic move
             onMapReady();
+          });
+        } else {
+          // Reset programmatic flag after idle
+          google.maps.event.addListenerOnce(mapRef.current, 'idle', () => {
+            isProgrammaticMoveRef.current = false;
+            setShowSearchButton(false);
           });
         }
       } else if (!hasCalledMapReadyRef.current && onMapReady) {
@@ -441,6 +504,19 @@ export function VenueMap({ venues, onVenueSelect, onBoundsChange, onMapReady, in
             <span className="text-sm text-gray-600 font-medium">Loading venues...</span>
           </div>
         </div>
+      )}
+      {/* Search This Area Button - shows after user pans/zooms if there are active filters */}
+      {showSearchButton && onSearchArea && hasActiveFilters && (
+        <button
+          onClick={handleSearchArea}
+          className="absolute top-4 left-1/2 -translate-x-1/2 bg-white rounded-full shadow-lg px-4 py-2.5 flex items-center gap-2 hover:bg-gray-50 active:bg-gray-100 transition-all z-30 border border-gray-200"
+          title="Search venues in this area"
+        >
+          <svg className="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <span className="text-sm font-medium text-gray-700">Search this area</span>
+        </button>
       )}
       {/* Map Type Toggle Button */}
       <button
