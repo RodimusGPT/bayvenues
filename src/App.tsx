@@ -1,12 +1,13 @@
-import { useMemo, useState, useCallback } from 'react';
+import { useMemo, useState, useCallback, useEffect, useRef } from 'react';
 import { useJsApiLoader } from '@react-google-maps/api';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './lib/queryClient';
 import { useFilterStore } from './stores/filterStore';
 import { useVenueStore } from './stores/venueStore';
-import { useSupabaseVenues, useVenueMetadata } from './hooks/useSupabaseVenues';
+import { useSupabaseVenues, useVenueMetadata, useVenue } from './hooks/useSupabaseVenues';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { useUserPreferences } from './hooks/useUserPreferences';
+import { parseUrlState, clearUrlState, updateUrl } from './hooks/useUrlState';
 import { Header } from './components/layout/Header';
 import { FilterPanel } from './components/search/FilterPanel';
 import { FavoritesPanel } from './components/layout/FavoritesPanel';
@@ -30,6 +31,10 @@ function App() {
   const [mapPosition, setMapPosition] = useState<MapPosition | null>(null);
   const [isMapReadyForBounds, setIsMapReadyForBounds] = useState(false); // Wait for map to fitBounds before filtering
 
+  // URL state handling for deep-linking
+  const [pendingVenueId, setPendingVenueId] = useState<string | null>(null);
+  const hasProcessedUrl = useRef(false);
+
   // Auth state from context
   const { authModalOpen, closeAuthModal } = useAuth();
 
@@ -45,6 +50,38 @@ function App() {
   // Get filter state (using debounced filters for API calls)
   const filters = useFilterStore();
   const { selectedVenue, setSelectedVenue } = useVenueStore();
+
+  // Parse URL on mount to extract venue ID for deep-linking
+  useEffect(() => {
+    if (hasProcessedUrl.current) return;
+    hasProcessedUrl.current = true;
+
+    const urlState = parseUrlState();
+    if (urlState.venueId) {
+      setPendingVenueId(urlState.venueId);
+    }
+  }, []);
+
+  // Fetch venue by ID when there's a pending venue from URL
+  const { data: venueFromUrl } = useVenue(pendingVenueId);
+
+  // Set selected venue when it loads from URL
+  useEffect(() => {
+    if (venueFromUrl && pendingVenueId) {
+      setSelectedVenue(venueFromUrl);
+      setPendingVenueId(null); // Clear pending state
+    }
+  }, [venueFromUrl, pendingVenueId, setSelectedVenue]);
+
+  // Update URL when venue selection changes
+  useEffect(() => {
+    if (selectedVenue) {
+      updateUrl({ venueId: selectedVenue.id });
+    } else if (hasProcessedUrl.current) {
+      // Only clear URL if we've already processed the initial URL
+      clearUrlState();
+    }
+  }, [selectedVenue]);
 
   // Fetch venues from Supabase with server-side filtering
   const { data: filteredVenues = [], isLoading: isLoadingVenues } = useSupabaseVenues({

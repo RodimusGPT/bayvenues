@@ -2,6 +2,7 @@ import type { Venue } from '../../types/venue';
 import { COUNTRY_FLAGS, getCountryForRegion } from '../../types/venue';
 import { formatPriceRange, formatCapacity } from '../../utils/formatters';
 import { FavoriteButton } from '../ui/FavoriteButton';
+import { ShareButton } from '../ui/ShareButton';
 
 interface VenueListViewProps {
   venues: Venue[];
@@ -52,8 +53,14 @@ function VenueCard({ venue, onSelect }: { venue: Venue; onSelect: () => void }) 
           </div>
         )}
 
-        {/* Favorite button - always visible on touch, hover to show on desktop */}
-        <div className="absolute top-2 right-2 opacity-100 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity">
+        {/* Action buttons - always visible on touch, hover to show on desktop */}
+        <div className="absolute top-2 right-2 flex items-center gap-1 opacity-100 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity">
+          <ShareButton
+            type="venue"
+            venue={venue}
+            size="sm"
+            className="bg-white/90 hover:bg-white shadow-sm"
+          />
           <FavoriteButton
             venueId={venue.id}
             size="sm"

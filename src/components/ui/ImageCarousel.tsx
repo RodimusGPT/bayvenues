@@ -1,15 +1,17 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import type { GalleryImage, HeaderImage } from '../../types/venue';
+import type { GalleryImage, HeaderImage, Venue } from '../../types/venue';
 import { ImageModal } from './ImageModal';
+import { ShareButton } from './ShareButton';
 
 interface ImageCarouselProps {
   images: GalleryImage[];
   fallbackImage?: HeaderImage;
   venueName: string;
+  venue?: Venue; // Optional: enables share functionality
   onImageError?: (index: number) => void;
 }
 
-export function ImageCarousel({ images, fallbackImage, venueName, onImageError }: ImageCarouselProps) {
+export function ImageCarousel({ images, fallbackImage, venueName, venue, onImageError }: ImageCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [failedImages, setFailedImages] = useState<Set<number>>(new Set());
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -193,11 +195,21 @@ export function ImageCarousel({ images, fallbackImage, venueName, onImageError }
         </span>
       )}
 
-      {/* Expand hint icon - visible on touch, hover to show on desktop */}
-      <div className="absolute top-3 right-12 p-1.5 bg-black/40 rounded-full text-white opacity-100 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
-        </svg>
+      {/* Share & Expand icons - visible on touch, hover to show on desktop */}
+      <div className="absolute top-3 right-12 flex items-center gap-1 opacity-100 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity z-10">
+        {venue && (
+          <ShareButton
+            type="venue"
+            venue={venue}
+            size="sm"
+            className="bg-black/40 hover:bg-black/60 text-white"
+          />
+        )}
+        <div className="p-1.5 bg-black/40 rounded-full text-white pointer-events-none">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+          </svg>
+        </div>
       </div>
 
       {/* Image Modal */}

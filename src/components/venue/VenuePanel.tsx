@@ -6,6 +6,7 @@ import { VenueVideos } from './VenueVideos';
 import { VenueReviews } from './VenueReviews';
 import { FavoriteButton } from '../ui/FavoriteButton';
 import { HideButton } from '../ui/HideButton';
+import { ShareButton } from '../ui/ShareButton';
 import { ImageCarousel } from '../ui/ImageCarousel';
 
 interface VenuePanelProps {
@@ -146,6 +147,12 @@ export function VenuePanel({ venue, venues = [], onClose, onNavigate }: VenuePan
           />
           {/* Action buttons overlay */}
           <div className="absolute top-3 right-3 flex items-center gap-2 z-20">
+            <ShareButton
+              type="venue"
+              venue={venue}
+              size="md"
+              className="bg-black/30 hover:bg-black/50 text-white"
+            />
             <FavoriteButton
               venueId={venue.id}
               size="md"
@@ -202,6 +209,7 @@ export function VenuePanel({ venue, venues = [], onClose, onNavigate }: VenuePan
               </h2>
             </div>
             <div className="flex items-center gap-1 flex-shrink-0">
+              <ShareButton type="venue" venue={venue} size="md" />
               <FavoriteButton venueId={venue.id} size="md" />
               <HideButton venueId={venue.id} size="md" onHide={onClose} />
               <button

@@ -5,6 +5,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { UserMenu } from '../auth/UserMenu';
 import { Logo } from '../ui/Logo';
 import { LogoIcon } from '../ui/LogoIcon';
+import { ShareButton } from '../ui/ShareButton';
 
 interface HeaderProps {
   showFilters: boolean;
@@ -73,6 +74,13 @@ export function Header({ showFilters, onToggleFilters, onToggleFavorites, showFa
 
         {/* Right-aligned controls */}
         <div className="flex items-center gap-2 ml-auto">
+          {/* Share Site Button */}
+          <ShareButton
+            type="site"
+            size="md"
+            className="hidden sm:flex text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg"
+          />
+
           {/* Filter Toggle (Desktop) */}
           <button
             onClick={onToggleFilters}

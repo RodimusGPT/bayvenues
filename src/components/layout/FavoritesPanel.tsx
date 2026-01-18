@@ -4,6 +4,7 @@ import { useFavoriteStore } from '../../stores/favoriteStore';
 import { useFavoriteVenues } from '../../hooks/useSupabaseVenues';
 import { useAuth } from '../../contexts/AuthContext';
 import { formatPriceRange, formatCapacity } from '../../utils/formatters';
+import { ShareButton } from '../ui/ShareButton';
 
 interface FavoritesPanelProps {
   onVenueSelect: (venue: Venue) => void;
@@ -28,12 +29,21 @@ export function FavoritesPanel({ onVenueSelect, onClose }: FavoritesPanelProps) 
         </div>
         <div className="flex items-center gap-2">
           {favoriteVenues.length > 0 && (
-            <button
-              onClick={() => clearFavorites(user?.id)}
-              className="text-xs text-gray-500 hover:text-red-600 transition-colors"
-            >
-              Clear all
-            </button>
+            <>
+              <ShareButton
+                type="favorites"
+                venueIds={favoriteVenues.map(v => v.id)}
+                venueCount={favoriteVenues.length}
+                size="sm"
+                className="text-gray-500 hover:text-primary-600"
+              />
+              <button
+                onClick={() => clearFavorites(user?.id)}
+                className="text-xs text-gray-500 hover:text-red-600 transition-colors"
+              >
+                Clear all
+              </button>
+            </>
           )}
           <button
             onClick={onClose}
