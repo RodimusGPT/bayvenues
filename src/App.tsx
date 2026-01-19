@@ -158,11 +158,17 @@ function App() {
   }, [filteredVenues, searchAreaBounds, hasActiveFilters]);
 
   // Filter venues visible in current map bounds
-  // Always filter by bounds when available so mobile list matches the map
+  // When user has active filters, show all filtered venues (map will pan to them)
+  // When no filters, show only venues in current map viewport
   const venuesInBounds = useMemo(() => {
+    // If user has active filters, show all filtered venues
+    // This allows the list to show results while the map pans to the new region
+    if (hasActiveFilters) return venuesToDisplay;
+
     // No bounds yet, show all filtered venues
     if (!mapBounds) return venuesToDisplay;
 
+    // No active filters - filter by map bounds so list matches visible map area
     const inBounds = venuesToDisplay.filter((venue) => {
       const { lat, lng } = venue.location;
       if (lat == null || lng == null) return false;
@@ -175,7 +181,7 @@ function App() {
     });
 
     return inBounds;
-  }, [venuesToDisplay, mapBounds]);
+  }, [venuesToDisplay, mapBounds, hasActiveFilters]);
 
   // Show list button on mobile when there are venues to display
   const showMobileListButton = venuesInBounds.length > 0;
