@@ -22,7 +22,17 @@ export type Country =
   | 'Ireland'
   | 'United Kingdom'
   | 'Luxembourg'
-  | 'Germany';
+  | 'Germany'
+  | 'Croatia'
+  | 'Denmark'
+  | 'Sweden'
+  | 'UAE'
+  | 'Costa Rica'
+  | 'New Zealand'
+  | 'Morocco'
+  | 'South Africa'
+  | 'Fiji'
+  | 'Maldives';
 
 export type Setting = 'Indoor' | 'Outdoor';
 
@@ -103,7 +113,7 @@ export interface FilterState {
   capacityRange: [number, number];
 }
 
-export const COUNTRIES: Country[] = ['USA', 'Portugal', 'Italy', 'Greece', 'Spain', 'Switzerland', 'France', 'Indonesia', 'Thailand', 'Mexico', 'Japan', 'Taiwan', 'Caribbean Islands', 'Australia', 'South Korea', 'Singapore', 'China', 'Canada', 'Ireland', 'United Kingdom', 'Luxembourg', 'Germany'];
+export const COUNTRIES: Country[] = ['USA', 'Portugal', 'Italy', 'Greece', 'Spain', 'Switzerland', 'France', 'Indonesia', 'Thailand', 'Mexico', 'Japan', 'Taiwan', 'Caribbean Islands', 'Australia', 'South Korea', 'Singapore', 'China', 'Canada', 'Ireland', 'United Kingdom', 'Luxembourg', 'Germany', 'Croatia', 'Denmark', 'Sweden', 'UAE', 'Costa Rica', 'New Zealand', 'Morocco', 'South Africa', 'Fiji', 'Maldives'];
 export const SETTINGS: Setting[] = ['Indoor', 'Outdoor'];
 
 // Map regions to countries
@@ -326,6 +336,73 @@ export const REGION_TO_COUNTRY: Record<string, Country> = {
   'Schleswig-Holstein': 'Germany',
   'North Rhine-Westphalia': 'Germany',
   'Baden-Württemberg': 'Germany',
+  // Croatia
+  'Dubrovnik': 'Croatia',
+  'Split': 'Croatia',
+  'Trogir': 'Croatia',
+  'Hvar': 'Croatia',
+  'Istria': 'Croatia',
+  'Šolta': 'Croatia',
+  // Denmark
+  'Copenhagen': 'Denmark',
+  'Zealand': 'Denmark',
+  'Funen': 'Denmark',
+  'Jutland': 'Denmark',
+  // Sweden
+  'Stockholm': 'Sweden',
+  'Uppsala': 'Sweden',
+  'Skåne': 'Sweden',
+  'West Coast': 'Sweden',
+  'Sörmland': 'Sweden',
+  'Lapland': 'Sweden',
+  'Uppland': 'Sweden',
+  'Mälaren': 'Sweden',
+  // UAE
+  'Dubai': 'UAE',
+  // Costa Rica
+  'Guanacaste': 'Costa Rica',
+  'Manuel Antonio': 'Costa Rica',
+  'Arenal': 'Costa Rica',
+  'Uvita': 'Costa Rica',
+  'Nosara': 'Costa Rica',
+  'Cloud Forest': 'Costa Rica',
+  // New Zealand
+  'Queenstown': 'New Zealand',
+  'Wanaka': 'New Zealand',
+  'Lake Tekapo': 'New Zealand',
+  'Waiheke Island': 'New Zealand',
+  'Hawkes Bay': 'New Zealand',
+  'Wairarapa': 'New Zealand',
+  'Wellington': 'New Zealand',
+  'Bay of Islands': 'New Zealand',
+  'Marlborough': 'New Zealand',
+  'Auckland': 'New Zealand',
+  // Morocco
+  'Marrakech': 'Morocco',
+  'Atlas Mountains': 'Morocco',
+  'Agafay Desert': 'Morocco',
+  'Essaouira': 'Morocco',
+  'Rabat': 'Morocco',
+  'Dakhla': 'Morocco',
+  // South Africa
+  'Cape Town': 'South Africa',
+  'Cape Winelands': 'South Africa',
+  'Breede Valley': 'South Africa',
+  'Overberg': 'South Africa',
+  'Gauteng': 'South Africa',
+  'KwaZulu-Natal': 'South Africa',
+  'Kruger': 'South Africa',
+  // Fiji
+  'Denarau Island': 'Fiji',
+  'Coral Coast': 'Fiji',
+  'Mamanuca Islands': 'Fiji',
+  'Yasawa Islands': 'Fiji',
+  'Vanua Levu': 'Fiji',
+  'Beqa Lagoon': 'Fiji',
+  'Kadavu': 'Fiji',
+  'Momi Bay': 'Fiji',
+  // Maldives
+  'Maldives': 'Maldives',
 };
 
 // Primary color for clusters (matches UI primary-600)
@@ -355,6 +432,16 @@ export const COUNTRY_FLAGS: Record<Country, string> = {
   'United Kingdom': '🇬🇧',
   'Luxembourg': '🇱🇺',
   'Germany': '🇩🇪',
+  'Croatia': '🇭🇷',
+  'Denmark': '🇩🇰',
+  'Sweden': '🇸🇪',
+  'UAE': '🇦🇪',
+  'Costa Rica': '🇨🇷',
+  'New Zealand': '🇳🇿',
+  'Morocco': '🇲🇦',
+  'South Africa': '🇿🇦',
+  'Fiji': '🇫🇯',
+  'Maldives': '🇲🇻',
 };
 
 // Get flag emoji for a country (with fallback)

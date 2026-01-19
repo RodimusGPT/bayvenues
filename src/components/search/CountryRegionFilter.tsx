@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useFilterStore } from '../../stores/filterStore';
 import { useFavoriteStore } from '../../stores/favoriteStore';
 import { useRegionMetadata, type CountryData, type StateData, type RegionData } from '../../hooks/useRegionMetadata';
