@@ -10,7 +10,13 @@ export type Country =
   | 'France'
   | 'Indonesia'
   | 'Thailand'
-  | 'Mexico';
+  | 'Mexico'
+  | 'Japan'
+  | 'Taiwan'
+  | 'Caribbean Islands'
+  | 'Australia'
+  | 'South Korea'
+  | 'Singapore';
 
 export type Setting = 'Indoor' | 'Outdoor';
 
@@ -91,7 +97,7 @@ export interface FilterState {
   capacityRange: [number, number];
 }
 
-export const COUNTRIES: Country[] = ['USA', 'Portugal', 'Italy', 'Greece', 'Spain', 'Switzerland', 'France', 'Indonesia', 'Thailand', 'Mexico'];
+export const COUNTRIES: Country[] = ['USA', 'Portugal', 'Italy', 'Greece', 'Spain', 'Switzerland', 'France', 'Indonesia', 'Thailand', 'Mexico', 'Japan', 'Taiwan', 'Caribbean Islands', 'Australia', 'South Korea', 'Singapore'];
 export const SETTINGS: Setting[] = ['Indoor', 'Outdoor'];
 
 // Map regions to countries
@@ -170,6 +176,21 @@ export const REGION_TO_COUNTRY: Record<string, Country> = {
   'Riviera Maya, Mexico': 'Mexico',
   'Riviera Nayarit, Mexico': 'Mexico',
   'San Miguel de Allende, Mexico': 'Mexico',
+  // Japan
+  'Japan': 'Japan',
+  'Tokyo': 'Japan',
+  'Kyoto': 'Japan',
+  'Okinawa': 'Japan',
+  // Taiwan
+  'Taipei': 'Taiwan',
+  'Sun Moon Lake': 'Taiwan',
+  'Kenting': 'Taiwan',
+  'Beitou': 'Taiwan',
+  // USA - Hawaii
+  'Oahu': 'USA',
+  'Maui': 'USA',
+  'Kauai': 'USA',
+  'Big Island': 'USA',
   // USA - Additional regions
   'Atlanta': 'USA',
   'Bluffton': 'USA',
@@ -209,6 +230,42 @@ export const REGION_TO_COUNTRY: Record<string, Country> = {
   'The Hamptons': 'USA',
   'Virginia Wine Country': 'USA',
   'Washington DC': 'USA',
+  // Caribbean Islands (all islands grouped under one country)
+  'Montego Bay, Jamaica': 'Caribbean Islands',
+  'Negril, Jamaica': 'Caribbean Islands',
+  'Nassau, Bahamas': 'Caribbean Islands',
+  'Eleuthera, Bahamas': 'Caribbean Islands',
+  'Exuma, Bahamas': 'Caribbean Islands',
+  'Soufriere, St Lucia': 'Caribbean Islands',
+  'West Coast, Barbados': 'Caribbean Islands',
+  'Providenciales, Turks and Caicos': 'Caribbean Islands',
+  'Palm Beach, Aruba': 'Caribbean Islands',
+  'Antigua': 'Caribbean Islands',
+  'Anguilla': 'Caribbean Islands',
+  'San Juan, Puerto Rico': 'Caribbean Islands',
+  'Dorado, Puerto Rico': 'Caribbean Islands',
+  'Willemstad, Curacao': 'Caribbean Islands',
+  'Cap Cana, Dominican Republic': 'Caribbean Islands',
+  'La Romana, Dominican Republic': 'Caribbean Islands',
+  // Australia
+  'Sydney': 'Australia',
+  'Yarra Valley': 'Australia',
+  'Hunter Valley': 'Australia',
+  'Byron Bay': 'Australia',
+  'Gold Coast Hinterland': 'Australia',
+  'Southern Highlands': 'Australia',
+  'South Coast NSW': 'Australia',
+  'Mornington Peninsula': 'Australia',
+  'Queensland': 'Australia',
+  'Toowoomba': 'Australia',
+  'Tweed Coast': 'Australia',
+  // South Korea
+  'Seoul': 'South Korea',
+  'Jeju': 'South Korea',
+  'Busan': 'South Korea',
+  // Singapore
+  'Singapore': 'Singapore',
+  'Sentosa': 'Singapore',
 };
 
 // Primary color for clusters (matches UI primary-600)
@@ -226,6 +283,12 @@ export const COUNTRY_FLAGS: Record<Country, string> = {
   'Indonesia': '🇮🇩',
   'Thailand': '🇹🇭',
   'Mexico': '🇲🇽',
+  'Japan': '🇯🇵',
+  'Taiwan': '🇹🇼',
+  'Caribbean Islands': '🏝️',
+  'Australia': '🇦🇺',
+  'South Korea': '🇰🇷',
+  'Singapore': '🇸🇬',
 };
 
 // Get flag emoji for a country (with fallback)
