@@ -1,5 +1,4 @@
 import { useMemo, useState, useCallback, useEffect, useRef } from 'react';
-import { flushSync } from 'react-dom';
 import { useJsApiLoader } from '@react-google-maps/api';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './lib/queryClient';
@@ -37,6 +36,9 @@ function App() {
   // URL state handling for deep-linking
   const [pendingVenueId, setPendingVenueId] = useState<string | null>(null);
   const hasProcessedUrl = useRef(false);
+
+  // Track previous hasActiveFilters to detect when user adds filters after "Search this area"
+  const prevHasActiveFiltersRef = useRef(false);
 
   // Auth state from context
   const { authModalOpen, closeAuthModal } = useAuth();
@@ -132,21 +134,26 @@ function App() {
     // Set ref for immediate access in any synchronous code
     searchAreaBoundsRef.current = bounds;
 
-    // Use flushSync to FORCE the state update to be applied synchronously
-    // This ensures searchAreaBounds is set BEFORE resetFilters triggers a Zustand re-render
-    // Without flushSync, Zustand's useSyncExternalStore can trigger a re-render
-    // before React processes our setState, causing skipFitBounds to be false
-    flushSync(() => {
-      setSearchAreaBounds(bounds);
-    });
-
-    // Now reset filters - any re-render from this will see searchAreaBounds already set
+    // Reset filters - this will cause hasActiveFilters to become false
     filters.resetFilters();
+
+    // Set bounds state
+    setSearchAreaBounds(bounds);
   }, [filters]);
 
-  // Clear search area bounds when user changes filters
+  // Clear search area bounds when user ADDS filters after "Search this area" was clicked
+  // We detect this by checking if hasActiveFilters transitioned from false to true
+  // This prevents clearing during the initial "Search this area" operation (when filters reset)
   useEffect(() => {
-    if (hasActiveFilters && searchAreaBounds) {
+    const prevHadActiveFilters = prevHasActiveFiltersRef.current;
+    const filtersJustBecameActive = !prevHadActiveFilters && hasActiveFilters;
+
+    // Update the ref for next render
+    prevHasActiveFiltersRef.current = hasActiveFilters;
+
+    // Only clear bounds if user just activated a filter while searchAreaBounds was set
+    // This means: they clicked "Search this area" (which reset filters), then added a new filter
+    if (filtersJustBecameActive && searchAreaBounds) {
       searchAreaBoundsRef.current = null;
       setSearchAreaBounds(null);
     }
@@ -158,7 +165,9 @@ function App() {
   const venuesToDisplay = useMemo(() => {
     // Use ref for immediate value (set before Zustand triggers re-render)
     const bounds = searchAreaBoundsRef.current ?? searchAreaBounds;
-    if (!bounds) return filteredVenues;
+    if (!bounds) {
+      return filteredVenues;
+    }
 
     return filteredVenues.filter((venue) => {
       const { lat, lng } = venue.location;
