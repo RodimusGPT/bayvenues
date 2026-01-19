@@ -37,9 +37,6 @@ function App() {
   const [pendingVenueId, setPendingVenueId] = useState<string | null>(null);
   const hasProcessedUrl = useRef(false);
 
-  // Track previous hasActiveFilters to detect when user adds filters after "Search this area"
-  const prevHasActiveFiltersRef = useRef(false);
-
   // Auth state from context
   const { authModalOpen, closeAuthModal } = useAuth();
 
@@ -63,16 +60,15 @@ function App() {
   const capacityBounds = metadata?.capacityBounds ?? [0, 1000] as [number, number];
 
   // Check if there are any active filters that might be hiding venues
+  // IMPORTANT: Use debouncedFilters to stay in sync with filteredVenues (which uses debouncedFilters)
+  // This prevents the intermediate state where hasActiveFilters=true but filteredVenues hasn't updated
+  const debouncedFilters = filters.debouncedFilters;
   const hasActiveFilters = Boolean(
-    filters.searchQuery ||
-    filters.selectedCountries.length > 0 ||
-    filters.selectedRegions.length > 0 ||
-    filters.selectedVenueTypes.length > 0 ||
-    filters.selectedSettings.length > 0 ||
-    filters.priceRange[0] > priceBounds[0] ||
-    filters.priceRange[1] < priceBounds[1] ||
-    filters.capacityRange[0] > capacityBounds[0] ||
-    filters.capacityRange[1] < capacityBounds[1]
+    debouncedFilters.searchQuery ||
+    debouncedFilters.selectedCountries.length > 0 ||
+    debouncedFilters.selectedRegions.length > 0 ||
+    debouncedFilters.selectedVenueTypes.length > 0 ||
+    debouncedFilters.selectedSettings.length > 0
   );
 
   // Parse URL on mount to extract venue ID for deep-linking
@@ -131,55 +127,44 @@ function App() {
 
   // Called when user clicks "Search this area" button on map
   const handleSearchArea = useCallback((bounds: MapBounds) => {
-    // Set ref for immediate access in any synchronous code
+    // Set ref for immediate access in skipFitBounds calculation
     searchAreaBoundsRef.current = bounds;
 
-    // Reset filters - this will cause hasActiveFilters to become false
+    // Reset filters so hasActiveFilters becomes false
     filters.resetFilters();
 
-    // Set bounds state
+    // Set bounds state to trigger memo recomputation
     setSearchAreaBounds(bounds);
   }, [filters]);
 
-  // Clear search area bounds when user ADDS filters after "Search this area" was clicked
-  // We detect this by checking if hasActiveFilters transitioned from false to true
-  // This prevents clearing during the initial "Search this area" operation (when filters reset)
-  useEffect(() => {
-    const prevHadActiveFilters = prevHasActiveFiltersRef.current;
-    const filtersJustBecameActive = !prevHadActiveFilters && hasActiveFilters;
-
-    // Update the ref for next render
-    prevHasActiveFiltersRef.current = hasActiveFilters;
-
-    // Only clear bounds if user just activated a filter while searchAreaBounds was set
-    // This means: they clicked "Search this area" (which reset filters), then added a new filter
-    if (filtersJustBecameActive && searchAreaBounds) {
-      searchAreaBoundsRef.current = null;
-      setSearchAreaBounds(null);
-    }
-  }, [hasActiveFilters, searchAreaBounds]);
-
-  // Venues to display on map - filtered by searchAreaBounds if set
-  // This is used when "Search this area" is clicked to show only venues within saved bounds
-  // Uses ref for immediate access to avoid race condition with Zustand re-renders
+  // Venues to display on map - filtered by searchAreaBounds ONLY if no filters are active
+  // When filters are active, we ignore bounds and show filtered results (allows map to pan to new region)
+  // When no filters are active and bounds are set, show only venues in the bounds area
+  // NOTE: We use state (searchAreaBounds) as the source of truth for the memo
+  // The ref is only for synchronous access in skipFitBounds calculation
   const venuesToDisplay = useMemo(() => {
-    // Use ref for immediate value (set before Zustand triggers re-render)
-    const bounds = searchAreaBoundsRef.current ?? searchAreaBounds;
-    if (!bounds) {
+    // If user has active filters, ignore bounds - let them see filtered results anywhere
+    if (hasActiveFilters) {
       return filteredVenues;
     }
 
+    // No filters active - filter by search area bounds if set
+    if (!searchAreaBounds) {
+      return filteredVenues;
+    }
+
+    // Filter venues to those within the search area bounds
     return filteredVenues.filter((venue) => {
       const { lat, lng } = venue.location;
       if (lat == null || lng == null) return false;
       return (
-        lat >= bounds.south &&
-        lat <= bounds.north &&
-        lng >= bounds.west &&
-        lng <= bounds.east
+        lat >= searchAreaBounds.south &&
+        lat <= searchAreaBounds.north &&
+        lng >= searchAreaBounds.west &&
+        lng <= searchAreaBounds.east
       );
     });
-  }, [filteredVenues, searchAreaBounds]);
+  }, [filteredVenues, searchAreaBounds, hasActiveFilters]);
 
   // Filter venues visible in current map bounds
   // Only filter by bounds AFTER the map has finished initial setup (fitBounds complete)
@@ -245,15 +230,15 @@ function App() {
           <div className={`lg:block ${viewMode === 'map' ? 'block' : 'hidden'} h-full`}>
             {isLoaded ? (
               <VenueMap
-                venues={venuesToDisplay}
-                hasActiveFilters={hasActiveFilters || searchAreaBoundsRef.current !== null || searchAreaBounds !== null}
-                skipFitBounds={searchAreaBoundsRef.current !== null || searchAreaBounds !== null}
-                onVenueSelect={setSelectedVenue}
-                onBoundsChange={handleBoundsChange}
-                onMapReady={handleMapReady}
-                onSearchArea={handleSearchArea}
-                initialPosition={mapPosition || undefined}
-              />
+                  venues={venuesToDisplay}
+                  hasActiveFilters={hasActiveFilters || searchAreaBoundsRef.current !== null || searchAreaBounds !== null}
+                  skipFitBounds={!hasActiveFilters && (searchAreaBoundsRef.current !== null || searchAreaBounds !== null)}
+                  onVenueSelect={setSelectedVenue}
+                  onBoundsChange={handleBoundsChange}
+                  onMapReady={handleMapReady}
+                  onSearchArea={handleSearchArea}
+                  initialPosition={mapPosition || undefined}
+                />
             ) : (
               <div className="flex items-center justify-center h-full">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>

@@ -2,8 +2,9 @@ import { useCallback, useRef, useEffect, useState } from 'react';
 import { GoogleMap } from '@react-google-maps/api';
 import { MarkerClusterer } from '@googlemaps/markerclusterer';
 import type { Venue } from '../../types/venue';
-import { COUNTRY_FLAGS, getCountryForRegion, CLUSTER_COLOR } from '../../types/venue';
+import { CLUSTER_COLOR } from '../../types/venue';
 import { useVenueStore } from '../../stores/venueStore';
+import { useRegionMetadata } from '../../hooks/useRegionMetadata';
 
 export interface MapBounds {
   north: number;
@@ -144,6 +145,7 @@ export function VenueMap({ venues, hasActiveFilters, skipFitBounds, onVenueSelec
   const isProgrammaticMoveRef = useRef(false); // Track programmatic vs user map movements
   const searchButtonEnabledRef = useRef(false); // Enable search button after initial load
   const { hoveredVenueId, selectedVenue } = useVenueStore();
+  const { countryFlags, regionToCountry } = useRegionMetadata();
   const [mapType, setMapType] = useState<'roadmap' | 'satellite'>('roadmap');
   const [isMapReady, setIsMapReady] = useState(false); // Track when map is loaded
   const [markersReady, setMarkersReady] = useState(false); // Track when markers are created
@@ -296,8 +298,9 @@ export function VenueMap({ venues, hasActiveFilters, skipFitBounds, onVenueSelec
 
     // Create new markers
     const markers = venuesWithLocation.map((venue) => {
-      const country = getCountryForRegion(venue.region);
-      const flag = COUNTRY_FLAGS[country] || '📍';
+      // Use database flags: region → country → flag
+      const country = regionToCountry[venue.region] || '';
+      const flag = countryFlags[country] || '📍';
 
       const marker = new google.maps.Marker({
         position: { lat: venue.location.lat, lng: venue.location.lng },
@@ -350,14 +353,18 @@ export function VenueMap({ venues, hasActiveFilters, skipFitBounds, onVenueSelec
     // Only fit bounds when the set of venue IDs actually changes
     // This prevents zoom reset when toggling favorites or other state changes
     const currentVenueIds = venues.map(v => v.id).sort().join(',');
-    if (currentVenueIds !== prevVenueIdsRef.current) {
-      prevVenueIdsRef.current = currentVenueIds;
+    const venueIdsChanged = currentVenueIds !== prevVenueIdsRef.current;
 
-      // Skip fitBounds if we're in "Search this area" mode (prop-based, not one-shot ref)
-      // This stays true as long as searchAreaBounds is set in the parent
+    if (venueIdsChanged) {
+      // Skip fitBounds if we're in "Search this area" mode
+      // IMPORTANT: Don't update prevVenueIdsRef when skipping, so fitBounds will trigger
+      // when skipFitBounds becomes false (e.g., user adds a filter after "Search this area")
       if (skipFitBounds) {
         return;
       }
+
+      // Only update the ref when we're actually going to process the venue change
+      prevVenueIdsRef.current = currentVenueIds;
 
       // Skip fitBounds if we're restoring a saved position (e.g., returning from list view)
       if (isRestoringPositionRef.current) {
@@ -405,7 +412,7 @@ export function VenueMap({ venues, hasActiveFilters, skipFitBounds, onVenueSelec
       hasCalledMapReadyRef.current = true;
       onMapReady();
     }
-  }, [venues, onVenueSelect, isMapReady, onMapReady, skipFitBounds]);
+  }, [venues, onVenueSelect, isMapReady, onMapReady, skipFitBounds, countryFlags, regionToCountry]);
 
   // Highlight hovered marker
   useEffect(() => {
@@ -466,8 +473,9 @@ export function VenueMap({ venues, hasActiveFilters, skipFitBounds, onVenueSelec
       hiddenOriginalMarkerRef.current = originalMarker;
     }
 
-    const country = getCountryForRegion(selectedVenue.region);
-    const flag = COUNTRY_FLAGS[country] || '📍';
+    // Use database flags: region → country → flag
+    const country = regionToCountry[selectedVenue.region] || '';
+    const flag = countryFlags[country] || '📍';
 
     // Create a highlighted marker directly on the map (bypasses clustering)
     // Uses animated SVG with pulsing rings instead of bounce animation
@@ -495,7 +503,7 @@ export function VenueMap({ venues, hasActiveFilters, skipFitBounds, onVenueSelec
     }, 5000);
 
     highlightTimeoutsRef.current = [removeTimeout];
-  }, [selectedVenue]);
+  }, [selectedVenue, countryFlags, regionToCountry]);
 
   return (
     <div className="relative w-full h-full">
