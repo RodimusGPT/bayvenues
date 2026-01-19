@@ -182,27 +182,37 @@ Use the Playwright-based script for reliable YouTube video discovery. This metho
    - Processes in batches of 20 venues
    - Respects YouTube's rate limits
 
-**Google Images Enrichment** (for header_images):
-If venues need more/better header images, use the Serper API script:
+**Google Images Enrichment via Playwright** (PREFERRED - no API key needed):
+Use the Playwright-based script for reliable Google Images scraping:
 
-1. **Requires**: `SERPER_API_KEY` in `.env.local` (get free key at serper.dev - 2,500 queries)
-
-2. **Run the enrichment script**:
+1. **Run the enrichment script**:
    ```bash
-   node scripts/enrich-google-images.mjs
+   npx tsx scripts/enrich-images-playwright.ts
    ```
 
+2. **Options**:
+   - `--limit N`: Process only N venues
+   - `--region X`: Only process venues in region X
+   - `--dry-run`: Preview without making changes
+
 3. **How it works**:
+   - Launches headless Chromium browser
    - Searches Google Images for `<venue name> <region> wedding venue`
-   - Returns 5 high-quality images per venue
+   - Extracts 5 thumbnail images from search results
    - Updates `header_images` jsonb array with source: "google"
 
 4. **Image Data Stored**:
    ```json
    "header_images": [
-     {"url": "https://example.com/venue-photo.jpg", "thumbnail": "https://...", "source": "google"}
+     {"url": "https://encrypted-tbn0.gstatic.com/...", "thumbnail": "...", "source": "google"}
    ]
    ```
+
+**Alternative: Serper API** (if Playwright unavailable):
+```bash
+node scripts/enrich-google-images.mjs
+```
+Requires `SERPER_API_KEY` in `.env.local` (get free key at serper.dev - 2,500 queries)
 
 **Unsplash Fallback Images by Venue Type** (use when scraped images < 3):
 ```
@@ -258,27 +268,65 @@ npx tsx scripts/audit-broken-images.ts --fix
 This fetches 5 replacement images from Google via Serper API.
 
 **Image Enrichment** (ensure 3-5 images per venue):
-For venues with fewer than 3 header images:
+For venues with fewer than 3 header images, use the smart enrichment script (RECOMMENDED):
 ```bash
-npx tsx scripts/enrich-low-image-venues.ts
+npx tsx scripts/enrich-images-smart.ts
 ```
+
+This script searches multiple quality sources in priority order:
+1. Official venue website (og:image, hero images)
+2. Kiwi Collection CDN (professional photography)
+3. Five Star Alliance (high-quality hotel images)
+4. Quality image search (filtered for trusted sources)
+5. YouTube thumbnails (from venue videos)
+6. Unsplash fallback (last resort)
 
 **Options**:
 - `--limit N`: Process only N venues
-- `--start N`: Resume from index N
+- `--region X`: Only process venues in region X
+- `--venue-id X`: Process specific venue
 - `--dry-run`: Preview without making changes
+- `--force`: Re-enrich venues with only Unsplash images
 
-**Priority Order for Images**:
-1. **Google Images** via Serper API (best quality, 5 per venue)
-2. **Website scraping** (og:image, hero images)
-3. **YouTube thumbnails** (use hqdefault.jpg, NOT maxresdefault.jpg)
-4. **Unsplash fallbacks** (LAST RESORT - looks generic)
+Requires `SERPER_API_KEY` in .env.local for travel site searches.
+
+**Alternatives** (if Serper unavailable):
+```bash
+npx tsx scripts/enrich-images-playwright.ts  # Uses Playwright for Google Images
+npx tsx scripts/enrich-low-image-venues.ts   # Older Serper-only approach
+```
+
+**Priority Order for Images** (CRITICAL - follow this order!):
+1. **Official venue website** (og:image, hero images, gallery) - HIGHEST QUALITY
+2. **Travel booking sites** with high-res CDNs:
+   - Kiwi Collection: `cdn.kiwicollection.com` (professional photography)
+   - Five Star Alliance: `fivestaralliance.com/files/`
+   - Venue Report: `venuereport.com/defer_uploads/venue_gallery_big_without_cropping/`
+   - Secret Retreats: `secret-retreats.com/wp-content/uploads/`
+3. **Wikimedia Commons** for landmarks: `upload.wikimedia.org/wikipedia/commons/thumb/`
+4. **YouTube thumbnails** (ONLY as fallback, use sddefault.jpg)
+5. **Unsplash fallbacks** (LAST RESORT - looks generic)
+
+**⚠️ AVOID THESE LOW-QUALITY SOURCES**:
+```
+❌ encrypted-tbn0.gstatic.com - Google thumbnails (150-200px, very low res!)
+❌ img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg - Often returns gray placeholder
+❌ img.youtube.com/vi/VIDEO_ID/hqdefault.jpg - Only 480x360 (too small for headers)
+```
 
 **YouTube Thumbnail Best Practices**:
 ```
-✅ Use: https://img.youtube.com/vi/VIDEO_ID/hqdefault.jpg (always works)
-❌ Avoid: https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg (often 404s)
+✅ Use: https://img.youtube.com/vi/VIDEO_ID/sddefault.jpg (640x480, reliable)
+⚠️ Avoid: https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg (often gray placeholder)
+⚠️ Avoid: https://img.youtube.com/vi/VIDEO_ID/hqdefault.jpg (only 480x360, too small)
 ```
+
+**How to Find High-Res Images for a Venue**:
+1. WebFetch the official venue website - look for og:image, hero banners
+2. If official site blocks (403), WebSearch for: `"<venue name>" site:kiwicollection.com OR site:fivestaralliance.com`
+3. WebFetch the travel site listing page to extract CDN image URLs
+4. For landmarks, use Wikimedia Commons: `https://upload.wikimedia.org/wikipedia/commons/thumb/<path>/1280px-<filename>`
+5. YouTube thumbnails are LAST RESORT only
 
 **Common Broken Image Sources to Avoid**:
 - `cdn0.weddingwire.com` - blocks hotlinking (403)
@@ -300,14 +348,25 @@ Reference the existing REGION_TO_COUNTRY mapping from `src/types/venue.ts`:
 ```typescript
 // Italy regions: Tuscany, Campania, Veneto, Sicily, Lombardy, Puglia, Lazio
 // Greece regions: Santorini, Crete, Mykonos, Rhodes, Corfu, Athens Riviera, Peloponnese
+// Indonesia regions: Bali, Lombok, Komodo
+// Japan regions: Tokyo, Kyoto, Okinawa
 // USA regions: North Bay, Peninsula, South Bay, Monterey, Santa Cruz, Carmel
 // etc.
 ```
 
+**⚠️ CRITICAL: The `region` field must match an entry in the `regions` table!**
+- ✅ CORRECT: `region='Tokyo'` (matches regions table)
+- ❌ WRONG: `region='Japan'` (country name - won't match, venues won't show in filters!)
+
+The pattern is:
+- `region` = city/island/area name (e.g., 'Bali', 'Santorini', 'Tokyo')
+- `subregion` = more specific location within region (e.g., 'Ubud', 'Oia', 'Shibuya')
+
 If the location maps to an existing region, use it. Otherwise:
 1. Determine the country from the location
-2. Use the location name as a new region
-3. Note: New regions may need to be added to REGION_TO_COUNTRY
+2. Use the city/island/area name as the region (NOT the country name)
+3. Add the new region to the `regions` table with correct country
+4. Add to REGION_TO_COUNTRY in `src/types/venue.ts`
 
 **ID Generation**:
 Match existing pattern based on region. Query existing venues first:
@@ -329,6 +388,12 @@ France (all regions): fr-001, fr-002...
   - Provence, Loire Valley, French Riviera, Champagne, Normandy, Paris Area, Bordeaux, Southwest France, Beaujolais
 Switzerland (all regions): ch-001, ch-002...
   - Lugano/Ticino, Lucerne, Interlaken, St. Moritz/Engadine, Lake Geneva, Zermatt/Alps, Zurich
+Japan (all regions): jp-001, jp-002...
+  - Tokyo, Kyoto, Okinawa
+Indonesia (all regions): id-001, id-002...
+  - Bali, Lombok, Komodo
+Thailand (all regions): th-001, th-002...
+  - Phuket, Koh Samui, Chiang Mai, Krabi, etc.
 USA - Bay Area (by subregion):
   - North Bay: nb-001...
   - Peninsula: pb-001...
@@ -336,6 +401,9 @@ USA - Bay Area (by subregion):
   - Monterey: my-001...
   - Santa Cruz: sc-001...
   - Carmel: cm-001...
+USA - Hawaii: hi-001, hi-002...
+  - Regions: Oahu, Maui, Kauai, Big Island
+  - ⚠️ Remember to set state='Hawaii' in regions table!
 ```
 
 For new regions/countries, generate a 2-letter prefix from the country code.
@@ -412,12 +480,173 @@ ON CONFLICT (venue_id, setting_id) DO NOTHING;
 Before inserting venues, check/create the region:
 ```sql
 -- Check if region exists
-SELECT name, country FROM regions WHERE name = 'Santorini';
+SELECT name, country, state FROM regions WHERE name = 'Santorini';
 
--- If not exists, insert it
-INSERT INTO regions (name, country) VALUES ('Santorini', 'Greece')
+-- If not exists, insert it (non-USA countries)
+INSERT INTO regions (name, country, continent) VALUES ('Santorini', 'Greece', 'Europe')
+ON CONFLICT (name) DO NOTHING;
+
+-- ⚠️ USA REGIONS REQUIRE STATE FIELD for proper filter grouping!
+-- USA regions MUST include the state field, otherwise they won't appear
+-- grouped under state headings in the filter UI.
+INSERT INTO regions (name, country, state, continent) VALUES
+  ('Oahu', 'USA', 'Hawaii', 'North America'),
+  ('Maui', 'USA', 'Hawaii', 'North America')
 ON CONFLICT (name) DO NOTHING;
 ```
+
+**USA State Grouping** (CRITICAL):
+For USA regions, the `state` field determines how regions are grouped in the filter:
+- Without state: Region appears ungrouped and may be hidden
+- With state: Region appears under the state heading (e.g., "Hawaii" → Oahu, Maui, Kauai, Big Island)
+
+Common USA states and their regions:
+```
+California: North Bay, Peninsula, South Bay, Napa Valley, Sonoma, etc.
+Florida: Miami, Orlando, Tampa Bay, Palm Beach, Naples, Florida Keys
+Hawaii: Oahu, Maui, Kauai, Big Island
+Massachusetts: Boston, Cape Cod, Marthas Vineyard, Nantucket
+New York: Hudson Valley, The Hamptons
+```
+
+---
+
+### POST-INSERT CHECKLIST (MANDATORY)
+
+⚠️ **After inserting venues, ALL of these steps are REQUIRED for venues to work properly in the app:**
+
+#### 0. Update Frontend Country Mapping (NEW COUNTRIES ONLY)
+If adding venues from a **new country** not already in the system, update `src/types/venue.ts`:
+
+```typescript
+// 1. Add to Country type
+export type Country =
+  | 'USA' | 'Portugal' | ... | 'NewCountry';
+
+// 2. Add to COUNTRIES array
+export const COUNTRIES: Country[] = [..., 'NewCountry'];
+
+// 3. Add region mappings to REGION_TO_COUNTRY
+export const REGION_TO_COUNTRY: Record<string, Country> = {
+  // ... existing entries
+  // NewCountry
+  'NewCountry': 'NewCountry',  // Country-level region
+  'Region1': 'NewCountry',     // Subregion
+  'Region2': 'NewCountry',     // Subregion
+};
+
+// 4. Add flag emoji to COUNTRY_FLAGS
+export const COUNTRY_FLAGS: Record<Country, string> = {
+  // ... existing entries
+  'NewCountry': '🇯🇵',  // Country flag emoji
+};
+```
+
+**Why this matters**: Without this mapping, venues won't appear in country filters and won't show correctly on the map.
+
+**IMPORTANT**: `src/types/venue.ts` is the SINGLE SOURCE OF TRUTH for `COUNTRY_FLAGS`. The filter component (`CountryRegionFilter.tsx`) imports flags from here - you do NOT need to update any other file for country flags to appear in the UI.
+
+#### 1. Ensure Region Exists
+```sql
+-- Check if region exists
+SELECT name, country, state, continent FROM regions WHERE name = '<subregion>';
+
+-- If not exists, insert it with country and continent
+INSERT INTO regions (name, country, continent) VALUES
+  ('<subregion>', '<country>', '<continent>')
+ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, continent = EXCLUDED.continent;
+
+-- Example for Japan:
+INSERT INTO regions (name, country, continent) VALUES
+  ('Tokyo', 'Japan', 'Asia'),
+  ('Kyoto', 'Japan', 'Asia'),
+  ('Okinawa', 'Japan', 'Asia')
+ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, continent = EXCLUDED.continent;
+
+-- ⚠️ USA REGIONS: MUST include the `state` field!
+-- Without the state field, USA regions won't appear grouped properly in the filter UI.
+-- Example for Hawaii:
+INSERT INTO regions (name, country, state, continent) VALUES
+  ('Oahu', 'USA', 'Hawaii', 'North America'),
+  ('Maui', 'USA', 'Hawaii', 'North America'),
+  ('Kauai', 'USA', 'Hawaii', 'North America'),
+  ('Big Island', 'USA', 'Hawaii', 'North America')
+ON CONFLICT (name) DO UPDATE SET
+  country = EXCLUDED.country,
+  state = EXCLUDED.state,  -- Critical for USA!
+  continent = EXCLUDED.continent;
+```
+
+#### 2. Link Venue Types (REQUIRED for type filters)
+```sql
+-- Get available venue type IDs
+SELECT id, name FROM venue_types WHERE name IN ('Luxury Hotel', 'Beach Resort', 'Garden', 'Historic', 'Japanese', 'Villa', 'Castle', 'Winery');
+
+-- Link venue to its types (2-4 types per venue recommended)
+INSERT INTO venue_venue_types (venue_id, venue_type_id) VALUES
+  ('<venue_id>', <type_id_1>),
+  ('<venue_id>', <type_id_2>),
+  ('<venue_id>', <type_id_3>)
+ON CONFLICT DO NOTHING;
+
+-- Common type IDs for reference:
+-- 87: Luxury Hotel, 88: Luxury Resort, 18: Beach Resort, 113: Resort
+-- 57: Garden, 66: Historic, 83: Japanese, 131: Villa, 25: Castle
+-- 140: Winery, 103: Oceanfront, 128: Urban, 120: Spa
+```
+
+#### 3. Link Venue Settings (REQUIRED for setting filters)
+```sql
+-- Get available setting IDs
+SELECT id, name FROM settings WHERE name IN ('Indoor', 'Outdoor', 'Garden', 'Chapel', 'Beach', 'Sea View', 'City View', 'Riverside');
+
+-- Link venue to its settings (2-4 settings per venue recommended)
+INSERT INTO venue_settings (venue_id, setting_id) VALUES
+  ('<venue_id>', <setting_id_1>),
+  ('<venue_id>', <setting_id_2>),
+  ('<venue_id>', <setting_id_3>)
+ON CONFLICT DO NOTHING;
+
+-- Common setting IDs for reference:
+-- 50: Indoor, 81: Outdoor, 35: Garden, 20: Chapel, 10: Beach
+-- 98: Sea View, 23: City View, 93: Riverside, 95: Rooftop
+```
+
+#### 4. Geocode Venues (REQUIRED for map pins)
+```bash
+npx tsx scripts/geocode-venues.ts --region <region_name>
+```
+This uses Google Places API to:
+- Add lat/lng coordinates for map markers
+- Enrich with google_place_id, google_rating, google_reviews_count
+- Update google_formatted_address, google_phone, google_maps_url
+- **Find website via Serper** if Google Places doesn't return one (requires `SERPER_API_KEY`)
+
+Options:
+- `--enrich`: Also process venues missing website (not just coordinates)
+- `--dry-run`: Preview without making changes
+
+#### 5. Verify All Data is Complete
+```sql
+-- Verify venues have all required data
+SELECT
+  v.id, v.name, v.subregion,
+  v.location IS NOT NULL as has_coords,
+  (SELECT COUNT(*) FROM venue_venue_types vvt WHERE vvt.venue_id = v.id) as type_count,
+  (SELECT COUNT(*) FROM venue_settings vs WHERE vs.venue_id = v.id) as setting_count,
+  (SELECT EXISTS(SELECT 1 FROM regions r WHERE r.name = v.subregion)) as region_exists
+FROM venues v
+WHERE v.region = '<region>'
+ORDER BY v.subregion, v.name;
+
+-- All venues should have:
+-- has_coords = true
+-- type_count >= 2
+-- setting_count >= 2
+-- region_exists = true
+```
+
+⚠️ **Never skip these steps** - venues without coordinates won't appear on the map, and venues without types/settings won't appear in filtered searches!
 
 ---
 
@@ -664,19 +893,62 @@ Deduplication Summary:
 5. **Respect robots.txt**: Skip sites that block scraping
 6. **Quality over quantity**: Better to have 10 well-scraped venues than 50 incomplete ones
 7. **Manual verification**: For venues where data couldn't be extracted, note them for manual review
-8. **Coordinates**: Try to extract lat/lng from venue website or use Google Maps search. If unavailable, use approximate region center.
-9. **Data validation**: Ensure capacity_min < capacity_max and price_min < price_max
+8. **Coordinates (MANDATORY)**: Every venue MUST have coordinates for map pins. Run `npx tsx scripts/geocode-venues.ts` after inserting venues to geocode any missing coordinates via Google Places API. Never insert venues without running geocoding - map pins are critical for UX.
+9. **Filters (MANDATORY)**: Every venue MUST have:
+   - Region entry in `regions` table (for location filters)
+   - Venue types linked in `venue_venue_types` (for type filters)
+   - Settings linked in `venue_settings` (for Indoor/Outdoor filters)
+   See POST-INSERT CHECKLIST in Phase 5 for exact SQL commands.
+10. **Frontend Country Mapping (NEW COUNTRIES)**: When adding a new country, ONLY update `src/types/venue.ts`:
+   - Add country to `Country` type union
+   - Add country to `COUNTRIES` array
+   - Add region mappings to `REGION_TO_COUNTRY`
+   - Add flag emoji to `COUNTRY_FLAGS`
+   This is the SINGLE SOURCE OF TRUTH - `CountryRegionFilter.tsx` imports from here automatically.
+   Without this, venues won't appear in country filters or show correctly on the map.
+11. **USA State Grouping (CRITICAL)**: When adding USA regions, you MUST set the `state` field in the `regions` table:
+   - `INSERT INTO regions (name, country, state, continent) VALUES ('Oahu', 'USA', 'Hawaii', 'North America')`
+   - Without `state`, regions won't appear grouped under state headings in the filter UI
+   - Common states: California, Florida, Hawaii, Massachusetts, New York, Georgia, South Carolina, Virginia
+12. **Data validation**: Ensure capacity_min < capacity_max and price_min < price_max
 
 ### ENRICHMENT SCRIPTS REFERENCE
 
 | Script | Purpose | Requires |
 |--------|---------|----------|
-| `scripts/enrich-youtube-simple.ts` | Find YouTube videos via Playwright | Playwright (`npx playwright install chromium`) |
-| `scripts/enrich-google-images.mjs` | Get Google Images via Serper | `SERPER_API_KEY` in .env.local |
+| `scripts/enrich-images-smart.ts` | **RECOMMENDED: Smart image enrichment with travel site fallbacks** | `SERPER_API_KEY` |
+| `scripts/enrich-youtube-simple.ts` | Find YouTube videos via Playwright | Playwright |
+| `scripts/enrich-images-playwright.ts` | Get Google Images via Playwright | Playwright |
+| `scripts/enrich-google-images.mjs` | Get Google Images via Serper API | `SERPER_API_KEY` |
 | `scripts/enrich-header-images.ts` | Scrape og:image from websites | None |
-| `scripts/geocode-venues.mjs` | Geocode addresses to lat/lng | `VITE_GOOGLE_MAPS_API_KEY` |
+| `scripts/geocode-venues.ts` | **Geocode venues + find websites (REQUIRED)** | `VITE_GOOGLE_MAPS_API_KEY`, `SERPER_API_KEY` (optional) |
 | `scripts/audit-broken-images.ts` | Find & fix broken header images | `SERPER_API_KEY` for --fix |
-| `scripts/enrich-low-image-venues.ts` | Add images to venues with <3 | `SERPER_API_KEY` in .env.local |
+| `scripts/enrich-low-image-venues.ts` | Add images to venues with <3 | `SERPER_API_KEY` |
+
+**Smart Image Enrichment** (`enrich-images-smart.ts`):
+```bash
+# Enrich all venues with <3 images
+npx tsx scripts/enrich-images-smart.ts
+
+# Enrich specific region
+npx tsx scripts/enrich-images-smart.ts --region Tokyo
+
+# Re-enrich venues with only Unsplash fallbacks
+npx tsx scripts/enrich-images-smart.ts --force --region Japan
+
+# Enrich specific venue
+npx tsx scripts/enrich-images-smart.ts --venue-id jp-004
+```
+
+Priority order for image sources:
+1. Official venue website (og:image, hero images)
+2. Kiwi Collection CDN (professional photography)
+3. Five Star Alliance (high-quality hotel images)
+4. Quality image search (filtered for trusted sources)
+5. YouTube thumbnails (from venue videos)
+6. Unsplash fallback (last resort - generic but high quality)
+
+**Playwright requirement**: `npx playwright install chromium`
 
 ---
 
@@ -691,8 +963,14 @@ User: `/scrape-venues "Santorini, Greece" --limit 10`
 5. Validate and fix broken images
 6. Enrich venues with <3 images
 7. Generate IDs: gr-xxx (check existing Santorini venues)
-8. Insert into Supabase
-9. Report: "10 venues added to Santorini, all with 5 images"
+8. Insert venues into Supabase
+9. **POST-INSERT CHECKLIST (MANDATORY)**:
+   - Ensure region exists: `INSERT INTO regions (name, country, continent) VALUES ('Santorini', 'Greece', 'Europe') ON CONFLICT...`
+   - Link venue types: `INSERT INTO venue_venue_types (venue_id, venue_type_id) VALUES ...`
+   - Link settings: `INSERT INTO venue_settings (venue_id, setting_id) VALUES ...`
+   - Geocode: `npx tsx scripts/geocode-venues.ts --region Santorini`
+   - Verify: Run verification SQL to confirm all venues have coords + types + settings
+10. Report: "10 venues added to Santorini, all with coordinates, types, settings, and 5 images"
 
 ---
 
