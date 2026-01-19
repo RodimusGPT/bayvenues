@@ -197,7 +197,7 @@ export function VenuePanel({ venue, venues = [], onClose, onNavigate }: VenuePan
               <span className="text-base">{flag}</span>
               <span className="text-sm text-white/90">{venue.region} · {venue.subregion}</span>
             </div>
-            <h2 className="text-xl font-bold text-white leading-tight drop-shadow-md">
+            <h2 className="text-xl font-bold text-white leading-tight drop-shadow-md select-text pointer-events-auto cursor-text">
               {venue.name}
             </h2>
           </div>
@@ -211,7 +211,7 @@ export function VenuePanel({ venue, venues = [], onClose, onNavigate }: VenuePan
                 <span className="text-base">{flag}</span>
                 <span className="text-sm text-gray-500">{venue.region} · {venue.subregion}</span>
               </div>
-              <h2 className="text-xl font-bold text-gray-900 leading-tight">
+              <h2 className="text-xl font-bold text-gray-900 leading-tight select-text cursor-text">
                 {venue.name}
               </h2>
             </div>
