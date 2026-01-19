@@ -6,6 +6,7 @@ export interface RegionData {
   country: string;
   continent: string | null;
   state: string | null;
+  flag: string;
   venueCount: number;
 }
 
@@ -18,6 +19,7 @@ export interface StateData {
 export interface CountryData {
   name: string;
   continent: string | null;
+  flag: string;
   regions: RegionData[];
   states: StateData[];  // For USA/Mexico, regions are grouped by state
   totalVenues: number;
@@ -53,11 +55,12 @@ export function useRegionMetadata(): RegionMetadata {
         if (err) throw err;
 
         // Transform to RegionData format
-        const regions: RegionData[] = (regionCounts || []).map((r: { region_name: string; country_name: string; continent_name: string | null; state_name: string | null; venue_count: number }) => ({
+        const regions: RegionData[] = (regionCounts || []).map((r: { region_name: string; country_name: string; continent_name: string | null; state_name: string | null; country_flag: string; venue_count: number }) => ({
           name: r.region_name,
           country: r.country_name,
           continent: r.continent_name,
           state: r.state_name,
+          flag: r.country_flag || '🌍',
           venueCount: r.venue_count,
         }));
 
@@ -75,9 +78,9 @@ export function useRegionMetadata(): RegionMetadata {
 
   // Group regions by country, then by state for countries with states
   const countries = useMemo(() => {
-    const grouped = data.reduce<Record<string, { regions: RegionData[]; continent: string | null }>>((acc, region) => {
+    const grouped = data.reduce<Record<string, { regions: RegionData[]; continent: string | null; flag: string }>>((acc, region) => {
       if (!acc[region.country]) {
-        acc[region.country] = { regions: [], continent: region.continent };
+        acc[region.country] = { regions: [], continent: region.continent, flag: region.flag };
       }
       acc[region.country].regions.push(region);
       return acc;
@@ -85,7 +88,7 @@ export function useRegionMetadata(): RegionMetadata {
 
     // Convert to array and sort
     return Object.entries(grouped)
-      .map(([name, { regions, continent }]) => {
+      .map(([name, { regions, continent, flag }]) => {
         // Group regions by state (for USA, Mexico, etc.)
         const stateGroups: Record<string, RegionData[]> = {};
         const regionsWithoutState: RegionData[] = [];
@@ -113,6 +116,7 @@ export function useRegionMetadata(): RegionMetadata {
         return {
           name,
           continent,
+          flag,
           regions: regionsWithoutState.sort((a, b) => b.venueCount - a.venueCount),
           states,
           totalVenues: regions.reduce((sum, r) => sum + r.venueCount, 0),

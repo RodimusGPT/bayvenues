@@ -3,19 +3,37 @@ import { useFilterStore } from '../../stores/filterStore';
 import { useFavoriteStore } from '../../stores/favoriteStore';
 import { useRegionMetadata, type CountryData, type StateData, type RegionData } from '../../hooks/useRegionMetadata';
 
-// Country flag emojis - easily extensible
-const COUNTRY_FLAGS: Record<string, string> = {
-  'USA': '🇺🇸',
-  'Mexico': '🇲🇽',
-  'Portugal': '🇵🇹',
-  'Italy': '🇮🇹',
-  'Greece': '🇬🇷',
-  'Spain': '🇪🇸',
-  'Switzerland': '🇨🇭',
-  'France': '🇫🇷',
-  'Indonesia': '🇮🇩',
-  'Thailand': '🇹🇭',
+// Caribbean island flags - for region pills within Caribbean Islands
+const CARIBBEAN_ISLAND_FLAGS: Record<string, string> = {
+  'Jamaica': '🇯🇲',
+  'Bahamas': '🇧🇸',
+  'St Lucia': '🇱🇨',
+  'Barbados': '🇧🇧',
+  'Turks and Caicos': '🇹🇨',
+  'Aruba': '🇦🇼',
+  'Antigua': '🇦🇬',
+  'Anguilla': '🇦🇮',
+  'Puerto Rico': '🇵🇷',
+  'Curacao': '🇨🇼',
+  'Dominican Republic': '🇩🇴',
 };
+
+// Extract island name from region (e.g., "Montego Bay, Jamaica" -> "Jamaica")
+function getIslandFromRegion(regionName: string): string | null {
+  // Check for "Antigua" which doesn't have a comma format
+  if (regionName === 'Antigua' || regionName === 'Anguilla') {
+    return regionName;
+  }
+  // Extract island name after the comma
+  const parts = regionName.split(', ');
+  return parts.length > 1 ? parts[1] : null;
+}
+
+// Get flag for a Caribbean region
+function getCaribbeanRegionFlag(regionName: string): string | null {
+  const island = getIslandFromRegion(regionName);
+  return island ? CARIBBEAN_ISLAND_FLAGS[island] || null : null;
+}
 
 // Continent display configuration
 const CONTINENTS = [
@@ -26,9 +44,6 @@ const CONTINENTS = [
 ] as const;
 
 
-function getCountryFlag(country: string): string {
-  return COUNTRY_FLAGS[country] || '🌍';
-}
 
 // Reusable component for rendering region pills
 interface RegionPillsProps {
@@ -39,10 +54,14 @@ interface RegionPillsProps {
 }
 
 function RegionPills({ regions, selectedRegions, parentCountry, onToggleRegion }: RegionPillsProps) {
+  const isCaribbean = parentCountry === 'Caribbean Islands';
+
   return (
     <div className="flex flex-wrap gap-1.5">
       {regions.map((region) => {
         const isRegionSelected = selectedRegions.includes(region.name);
+        const flag = isCaribbean ? getCaribbeanRegionFlag(region.name) : null;
+
         return (
           <button
             key={region.name}
@@ -53,6 +72,7 @@ function RegionPills({ regions, selectedRegions, parentCountry, onToggleRegion }
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
             }`}
           >
+            {flag && <span className="text-sm">{flag}</span>}
             <span>{region.name}</span>
             <span className={`${isRegionSelected ? 'text-primary-200' : 'text-gray-400'}`}>
               {region.venueCount}
@@ -208,7 +228,7 @@ function CountryRow({
           onClick={onToggleExpand}
           className="flex-1 flex items-center gap-2 text-left group"
         >
-          <span className="text-base">{getCountryFlag(country.name)}</span>
+          <span className="text-base">{country.flag}</span>
           <span className="text-sm text-gray-700 group-hover:text-gray-900 font-medium">
             {country.name}
           </span>
