@@ -20,6 +20,7 @@ export interface MapPosition {
 interface VenueMapProps {
   venues: Venue[];
   hasActiveFilters?: boolean; // If true, show search button (there may be hidden venues)
+  skipFitBounds?: boolean; // If true, don't fitBounds when venues change (e.g., after "Search this area")
   onVenueSelect: (venue: Venue) => void;
   onBoundsChange?: (bounds: MapBounds, zoom: number) => void;
   onMapReady?: () => void; // Called when markers are created and fitBounds has run
@@ -127,7 +128,7 @@ function createHighlightMarkerIcon(flag: string): google.maps.Icon {
   return icon;
 }
 
-export function VenueMap({ venues, hasActiveFilters, onVenueSelect, onBoundsChange, onMapReady, onSearchArea, initialPosition }: VenueMapProps) {
+export function VenueMap({ venues, hasActiveFilters, skipFitBounds, onVenueSelect, onBoundsChange, onMapReady, onSearchArea, initialPosition }: VenueMapProps) {
   const mapRef = useRef<google.maps.Map | null>(null);
   const markersRef = useRef<google.maps.Marker[]>([]);
   const clustererRef = useRef<MarkerClusterer | null>(null);
@@ -142,7 +143,6 @@ export function VenueMap({ venues, hasActiveFilters, onVenueSelect, onBoundsChan
   const hasCalledMapReadyRef = useRef(false); // Track if we've signaled map ready
   const isProgrammaticMoveRef = useRef(false); // Track programmatic vs user map movements
   const searchButtonEnabledRef = useRef(false); // Enable search button after initial load
-  const skipNextFitBoundsRef = useRef(false); // Skip fitBounds after "Search this area" click
   const { hoveredVenueId, selectedVenue } = useVenueStore();
   const [mapType, setMapType] = useState<'roadmap' | 'satellite'>('roadmap');
   const [isMapReady, setIsMapReady] = useState(false); // Track when map is loaded
@@ -166,8 +166,7 @@ export function VenueMap({ venues, hasActiveFilters, onVenueSelect, onBoundsChan
   // Handle "Search this area" button click
   const handleSearchArea = useCallback(() => {
     if (!currentBounds || !onSearchArea) return;
-    // Skip the next fitBounds so map stays in current position
-    skipNextFitBoundsRef.current = true;
+    // The skipFitBounds prop will prevent fitBounds since parent sets searchAreaBounds
     onSearchArea(currentBounds);
     setShowSearchButton(false);
   }, [currentBounds, onSearchArea]);
@@ -342,9 +341,9 @@ export function VenueMap({ venues, hasActiveFilters, onVenueSelect, onBoundsChan
     if (currentVenueIds !== prevVenueIdsRef.current) {
       prevVenueIdsRef.current = currentVenueIds;
 
-      // Skip fitBounds if user clicked "Search this area" button
-      if (skipNextFitBoundsRef.current) {
-        skipNextFitBoundsRef.current = false;
+      // Skip fitBounds if we're in "Search this area" mode (prop-based, not one-shot ref)
+      // This stays true as long as searchAreaBounds is set in the parent
+      if (skipFitBounds) {
         return;
       }
 
@@ -394,7 +393,7 @@ export function VenueMap({ venues, hasActiveFilters, onVenueSelect, onBoundsChan
       hasCalledMapReadyRef.current = true;
       onMapReady();
     }
-  }, [venues, onVenueSelect, isMapReady, onMapReady]);
+  }, [venues, onVenueSelect, isMapReady, onMapReady, skipFitBounds]);
 
   // Highlight hovered marker
   useEffect(() => {

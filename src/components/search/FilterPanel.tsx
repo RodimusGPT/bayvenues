@@ -9,10 +9,12 @@ import { RangeSlider } from '../ui/RangeSlider';
 
 interface FilterPanelProps {
   venueTypes: string[];
+  priceBounds: [number, number];
+  capacityBounds: [number, number];
   onShowFavoritesPanel?: () => void;
 }
 
-export function FilterPanel({ venueTypes, onShowFavoritesPanel }: FilterPanelProps) {
+export function FilterPanel({ venueTypes, priceBounds, capacityBounds, onShowFavoritesPanel }: FilterPanelProps) {
   const {
     selectedVenueTypes,
     selectedSettings,
@@ -156,8 +158,8 @@ export function FilterPanel({ venueTypes, onShowFavoritesPanel }: FilterPanelPro
       <div>
         <h3 className="text-sm font-semibold text-gray-900 mb-2">Guest Capacity</h3>
         <RangeSlider
-          min={0}
-          max={1000}
+          min={capacityBounds[0]}
+          max={capacityBounds[1]}
           step={10}
           value={capacityRange}
           onChange={handleCapacityRangeChange}
@@ -170,9 +172,9 @@ export function FilterPanel({ venueTypes, onShowFavoritesPanel }: FilterPanelPro
       <div>
         <h3 className="text-sm font-semibold text-gray-900 mb-2">Price Range</h3>
         <RangeSlider
-          min={0}
-          max={500000}
-          step={5000}
+          min={priceBounds[0]}
+          max={priceBounds[1]}
+          step={Math.max(1000, Math.round((priceBounds[1] - priceBounds[0]) / 100))}
           value={priceRange}
           onChange={handlePriceRangeChange}
           formatLabel={formatPrice}

@@ -52,6 +52,12 @@ function App() {
   const filters = useFilterStore();
   const { selectedVenue, setSelectedVenue } = useVenueStore();
 
+  // Fetch metadata (venue types, regions, price/capacity bounds)
+  const { data: metadata } = useVenueMetadata();
+  const venueTypes = metadata?.venueTypes ?? [];
+  const priceBounds = metadata?.priceBounds ?? [0, 500000] as [number, number];
+  const capacityBounds = metadata?.capacityBounds ?? [0, 1000] as [number, number];
+
   // Check if there are any active filters that might be hiding venues
   const hasActiveFilters = Boolean(
     filters.searchQuery ||
@@ -59,10 +65,10 @@ function App() {
     filters.selectedRegions.length > 0 ||
     filters.selectedVenueTypes.length > 0 ||
     filters.selectedSettings.length > 0 ||
-    filters.priceRange[0] > 0 ||
-    filters.priceRange[1] < 500000 ||
-    filters.capacityRange[0] > 0 ||
-    filters.capacityRange[1] < 1000
+    filters.priceRange[0] > priceBounds[0] ||
+    filters.priceRange[1] < priceBounds[1] ||
+    filters.capacityRange[0] > capacityBounds[0] ||
+    filters.capacityRange[1] < capacityBounds[1]
   );
 
   // Parse URL on mount to extract venue ID for deep-linking
@@ -101,10 +107,6 @@ function App() {
   const { data: filteredVenues = [], isLoading: isLoadingVenues } = useSupabaseVenues({
     filters: filters.debouncedFilters,
   });
-
-  // Fetch metadata (venue types, regions, price/capacity bounds)
-  const { data: metadata } = useVenueMetadata();
-  const venueTypes = metadata?.venueTypes ?? [];
 
   // Handle map bounds changes
   const handleBoundsChange = useCallback((bounds: MapBounds, zoom: number) => {
@@ -209,7 +211,7 @@ function App() {
         {/* Filter Panel - Left Side (Desktop) */}
         {showFilters && (
           <aside className="w-72 border-r border-gray-200 bg-white overflow-y-auto flex-shrink-0 hidden lg:block">
-            <FilterPanel venueTypes={venueTypes} onShowFavoritesPanel={() => setShowFavorites(true)} />
+            <FilterPanel venueTypes={venueTypes} priceBounds={priceBounds} capacityBounds={capacityBounds} onShowFavoritesPanel={() => setShowFavorites(true)} />
           </aside>
         )}
 
@@ -221,6 +223,7 @@ function App() {
               <VenueMap
                 venues={venuesToDisplay}
                 hasActiveFilters={hasActiveFilters || searchAreaBounds !== null}
+                skipFitBounds={searchAreaBounds !== null}
                 onVenueSelect={setSelectedVenue}
                 onBoundsChange={handleBoundsChange}
                 onMapReady={handleMapReady}
@@ -345,6 +348,8 @@ function App() {
             </div>
             <FilterPanel
               venueTypes={venueTypes}
+              priceBounds={priceBounds}
+              capacityBounds={capacityBounds}
               onShowFavoritesPanel={() => {
                 setShowFavorites(true);
                 setShowFilters(false); // Close mobile filter drawer

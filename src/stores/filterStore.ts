@@ -20,14 +20,16 @@ interface FilterStore extends FilterState {
 let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 const DEBOUNCE_MS = 300;
 
+// Use high initial max values to ensure no venues are excluded before metadata loads
+// These will be constrained by the actual bounds from the database in the UI
 const initialState: FilterState = {
   searchQuery: '',
   selectedCountries: [],
   selectedRegions: [],
   selectedVenueTypes: [],
   selectedSettings: [],
-  priceRange: [0, 500000],
-  capacityRange: [0, 1000],
+  priceRange: [0, 10000000], // 10M - high enough to include all venues
+  capacityRange: [0, 10000],  // 10K - high enough to include all venues
 };
 
 // Helper to update debounced filters after a delay

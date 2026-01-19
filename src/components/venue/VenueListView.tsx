@@ -1,3 +1,4 @@
+import { useState, useCallback, useRef } from 'react';
 import type { Venue } from '../../types/venue';
 import { COUNTRY_FLAGS, getCountryForRegion } from '../../types/venue';
 import { formatPriceRange, formatCapacity } from '../../utils/formatters';
@@ -14,11 +15,53 @@ interface VenueListViewProps {
 function VenueCard({ venue, onSelect }: { venue: Venue; onSelect: () => void }) {
   const country = getCountryForRegion(venue.region);
   const flag = COUNTRY_FLAGS[country] || '📍';
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
 
-  // Get thumbnail image
-  const thumbnailUrl = venue.headerImages?.[0]?.thumbnail
-    || venue.headerImages?.[0]?.url
-    || venue.headerImage?.url;
+  // Build images array
+  const images = venue.headerImages?.length
+    ? venue.headerImages.map(img => img.thumbnail || img.url)
+    : venue.headerImage?.url
+      ? [venue.headerImage.url]
+      : [];
+
+  const hasMultipleImages = images.length > 1;
+
+  const goToNext = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (images.length <= 1) return;
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  }, [images.length]);
+
+  const goToPrev = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (images.length <= 1) return;
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  }, [images.length]);
+
+  // Touch handlers for swipe
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const diff = touchStartX.current - touchEndX.current;
+    const threshold = 50;
+
+    if (Math.abs(diff) > threshold) {
+      e.stopPropagation();
+      if (diff > 0) {
+        setCurrentIndex((prev) => (prev + 1) % images.length);
+      } else {
+        setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+      }
+    }
+  };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -36,15 +79,28 @@ function VenueCard({ venue, onSelect }: { venue: Venue; onSelect: () => void }) 
       className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden cursor-pointer hover:shadow-md hover:border-gray-200 transition-all group focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
       aria-label={`View details for ${venue.name}`}
     >
-      {/* Image */}
-      <div className="relative h-48 sm:h-52 bg-gray-100">
-        {thumbnailUrl ? (
-          <img
-            src={thumbnailUrl}
-            alt={venue.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            loading="lazy"
-          />
+      {/* Image Carousel */}
+      <div
+        className="relative h-48 sm:h-52 bg-gray-100 overflow-hidden"
+        onTouchStart={hasMultipleImages ? handleTouchStart : undefined}
+        onTouchMove={hasMultipleImages ? handleTouchMove : undefined}
+        onTouchEnd={hasMultipleImages ? handleTouchEnd : undefined}
+      >
+        {images.length > 0 ? (
+          <div
+            className="flex transition-transform duration-300 ease-out h-full"
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          >
+            {images.map((url, index) => (
+              <img
+                key={`${url}-${index}`}
+                src={url}
+                alt={`${venue.name} - Image ${index + 1}`}
+                className="min-w-full h-full object-cover flex-shrink-0"
+                loading={index === 0 ? 'eager' : 'lazy'}
+              />
+            ))}
+          </div>
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
             <svg className="w-10 h-10 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -53,8 +109,50 @@ function VenueCard({ venue, onSelect }: { venue: Venue; onSelect: () => void }) 
           </div>
         )}
 
+        {/* Carousel navigation arrows */}
+        {hasMultipleImages && (
+          <>
+            <button
+              onClick={goToPrev}
+              className="absolute left-2 top-1/2 -translate-y-1/2 p-1.5 bg-black/40 hover:bg-black/60 rounded-full text-white opacity-100 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity z-10"
+              aria-label="Previous image"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              onClick={goToNext}
+              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-black/40 hover:bg-black/60 rounded-full text-white opacity-100 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity z-10"
+              aria-label="Next image"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </>
+        )}
+
+        {/* Dot indicators */}
+        {hasMultipleImages && (
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 z-10">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                onClick={(e) => { e.stopPropagation(); setCurrentIndex(index); }}
+                className={`w-1.5 h-1.5 rounded-full transition-all ${
+                  index === currentIndex
+                    ? 'bg-white w-3'
+                    : 'bg-white/50'
+                }`}
+                aria-label={`Go to image ${index + 1}`}
+              />
+            ))}
+          </div>
+        )}
+
         {/* Action buttons - always visible on touch, hover to show on desktop */}
-        <div className="absolute top-2 right-2 flex items-center gap-1 opacity-100 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity">
+        <div className="absolute top-2 right-2 flex items-center gap-1 opacity-100 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity z-10">
           <ShareButton
             type="venue"
             venue={venue}
@@ -69,7 +167,7 @@ function VenueCard({ venue, onSelect }: { venue: Venue; onSelect: () => void }) 
         </div>
 
         {/* Country flag */}
-        <div className="absolute bottom-2 left-2 flex items-center px-2 py-1 bg-black/50 rounded-full">
+        <div className="absolute bottom-2 left-2 flex items-center px-2 py-1 bg-black/50 rounded-full z-10">
           <span className="text-sm">{flag}</span>
         </div>
       </div>
