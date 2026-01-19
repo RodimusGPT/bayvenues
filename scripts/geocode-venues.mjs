@@ -5,13 +5,17 @@
  */
 
 import { createClient } from '@supabase/supabase-js';
+import { config } from 'dotenv';
 
-const GOOGLE_API_KEY = process.env.VITE_GOOGLE_MAPS_API_KEY || 'AIzaSyArD-Nkkatm7uItD7YKRhI6jjbInpW-1no';
+// Load environment variables
+config({ path: '.env.local' });
+
+const GOOGLE_API_KEY = process.env.VITE_GOOGLE_MAPS_API_KEY;
 const SUPABASE_URL = 'https://tpgruvfobcgzictihwrp.supabase.co';
-const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY || process.env.VITE_SUPABASE_ANON_KEY;
 
 if (!SUPABASE_KEY) {
-  console.error('Missing SUPABASE_SERVICE_KEY or VITE_SUPABASE_ANON_KEY environment variable');
+  console.error('Missing SUPABASE_SERVICE_ROLE_KEY environment variable');
   process.exit(1);
 }
 

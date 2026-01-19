@@ -16,7 +16,9 @@ export type Country =
   | 'Caribbean Islands'
   | 'Australia'
   | 'South Korea'
-  | 'Singapore';
+  | 'Singapore'
+  | 'China'
+  | 'Canada';
 
 export type Setting = 'Indoor' | 'Outdoor';
 
@@ -97,7 +99,7 @@ export interface FilterState {
   capacityRange: [number, number];
 }
 
-export const COUNTRIES: Country[] = ['USA', 'Portugal', 'Italy', 'Greece', 'Spain', 'Switzerland', 'France', 'Indonesia', 'Thailand', 'Mexico', 'Japan', 'Taiwan', 'Caribbean Islands', 'Australia', 'South Korea', 'Singapore'];
+export const COUNTRIES: Country[] = ['USA', 'Portugal', 'Italy', 'Greece', 'Spain', 'Switzerland', 'France', 'Indonesia', 'Thailand', 'Mexico', 'Japan', 'Taiwan', 'Caribbean Islands', 'Australia', 'South Korea', 'Singapore', 'China', 'Canada'];
 export const SETTINGS: Setting[] = ['Indoor', 'Outdoor'];
 
 // Map regions to countries
@@ -266,6 +268,20 @@ export const REGION_TO_COUNTRY: Record<string, Country> = {
   // Singapore
   'Singapore': 'Singapore',
   'Sentosa': 'Singapore',
+  // China
+  'Beijing': 'China',
+  'Shanghai': 'China',
+  'Hangzhou': 'China',
+  'Sanya': 'China',
+  'Guangzhou': 'China',
+  'Shenzhen': 'China',
+  // Canada
+  'Vancouver': 'Canada',
+  'Toronto': 'Canada',
+  'Banff': 'Canada',
+  'Lake Louise': 'Canada',
+  'Whistler': 'Canada',
+  'Montreal': 'Canada',
 };
 
 // Primary color for clusters (matches UI primary-600)
@@ -289,6 +305,8 @@ export const COUNTRY_FLAGS: Record<Country, string> = {
   'Australia': '🇦🇺',
   'South Korea': '🇰🇷',
   'Singapore': '🇸🇬',
+  'China': '🇨🇳',
+  'Canada': '🇨🇦',
 };
 
 // Get flag emoji for a country (with fallback)

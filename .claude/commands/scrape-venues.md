@@ -248,6 +248,83 @@ default:    https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&
 
 After enrichment, validate and enhance header images to ensure quality.
 
+**⚠️ CRITICAL: This phase is MANDATORY after every scrape operation!**
+
+---
+
+#### 4A. Logo & Problematic Image Detection (RUN FIRST!)
+
+Many venue websites return logos, app store badges, or social media icons instead of actual venue photos. These MUST be detected and replaced.
+
+**Run the logo detection script**:
+```bash
+npx tsx scripts/check-logo-images.ts
+```
+
+**Patterns that indicate LOGO/USELESS images** (auto-detected):
+```
+URL Pattern                    | Problem
+-------------------------------|----------------------------------
+/logo/i                        | Logo image
+/brand/i                       | Brand asset
+/icon/i                        | Icon (app store, social, etc.)
+/_og\./i, /og_image/i          | Generic OG image (often logo)
+/favicon/i                     | Favicon
+/avatar/i                      | User avatar
+/etc\/designs/i                | AEM CMS logos (Four Seasons, etc.)
+/share-image/i, /opengraph/i   | Social share images (often logos)
+/header.*logo/i                | Header logo assets
+/App-Store/i, /Google-Play/i   | App store badges
+/Instagram/i, /Facebook/i      | Social media icons
+/FS_Header_Logo/i              | Four Seasons logo specifically
+```
+
+**Patterns that indicate SMALL/THUMBNAIL images** (unusable):
+```
+/thumb/i, /thumbnail/i         | Thumbnail version
+/small/i, /_s\./i, /_xs\./i    | Small size indicator
+/100x100/, /150x150/, /200x200/| Tiny dimensions
+```
+
+**Known problematic CDN paths** (always logos/badges):
+```
+❌ fourseasons.com/etc/designs/     → Always returns FS logo
+❌ sitecore-cd.shangri-la.com/-/media/Shangri-La/header_footer/  → App badges, social icons
+❌ cache.marriott.com               → Often 403 or logo
+❌ FS_Header_Logo                   → Four Seasons logo
+```
+
+**How to fix logo images**:
+1. Query venues with problematic first images:
+   ```sql
+   SELECT id, name, header_images->0->>'url' as first_image
+   FROM venues
+   WHERE id LIKE '<prefix>-%'
+   AND (
+     header_images->0->>'url' LIKE '%logo%'
+     OR header_images->0->>'url' LIKE '%icon%'
+     OR header_images->0->>'url' LIKE '%etc/designs%'
+     OR header_images->0->>'url' LIKE '%header_footer%'
+   );
+   ```
+
+2. For each affected venue, either:
+   - **Reorder**: If images 2-5 are good, remove the logo and keep others
+   - **Re-fetch**: Use Kiwi Collection or Five Star Alliance to get proper images:
+     ```bash
+     npx tsx scripts/enrich-images-smart.ts --venue-id <id> --force
+     ```
+
+3. **Verify the fix**:
+   ```sql
+   SELECT id, name, header_images->0->>'url' as new_first_image
+   FROM venues WHERE id = '<venue_id>';
+   ```
+
+---
+
+#### 4B. Broken Image Detection
+
 **Image Validation** (detect broken images):
 Run the audit script to find venues with broken header images:
 ```bash
@@ -911,6 +988,18 @@ Deduplication Summary:
    - Without `state`, regions won't appear grouped under state headings in the filter UI
    - Common states: California, Florida, Hawaii, Massachusetts, New York, Georgia, South Carolina, Virginia
 12. **Data validation**: Ensure capacity_min < capacity_max and price_min < price_max
+13. **Logo/Broken Image Check (MANDATORY)**: After EVERY scrape operation, run:
+    ```bash
+    npx tsx scripts/check-logo-images.ts --region <region>  # Check for logos
+    npx tsx scripts/audit-broken-images.ts                   # Check for broken images
+    ```
+    Common issues: Four Seasons logo, Shangri-La app badges, Marriott 403 errors, small thumbnails.
+    Fix by re-fetching from Kiwi Collection or Five Star Alliance.
+14. **Database Country Table**: When adding a NEW country, you must ALSO add it to the `countries` database table:
+    ```sql
+    INSERT INTO countries (name, flag_emoji) VALUES ('Canada', '🇨🇦');
+    ```
+    Without this, the country flag won't appear in the filter UI (the filter reads from the database, not venue.ts).
 
 ### ENRICHMENT SCRIPTS REFERENCE
 

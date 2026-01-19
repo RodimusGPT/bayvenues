@@ -1,6 +1,6 @@
 #!/usr/bin/env npx tsx
 /**
- * Find missing venue websites using Google Places API
+ * Enrich venue data using Google Places API
  * Uses your existing VITE_GOOGLE_MAPS_API_KEY
  *
  * Run: npx tsx scripts/enrich-websites-places.ts
@@ -9,6 +9,7 @@
  *   --limit N      Only process first N venues (default: 50)
  *   --region X     Only process venues in region X
  *   --dry-run      Preview without making changes
+ *   --missing-data Target venues missing phone OR rating (not just website)
  */
 
 import { createClient } from '@supabase/supabase-js';
@@ -36,6 +37,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 // Parse command line args
 const args = process.argv.slice(2);
 const dryRun = args.includes('--dry-run');
+const missingData = args.includes('--missing-data');
 const limitIndex = args.indexOf('--limit');
 const limit = limitIndex !== -1 ? parseInt(args[limitIndex + 1]) : 50;
 const regionIndex = args.indexOf('--region');
@@ -97,19 +99,27 @@ async function findPlaceAndGetDetails(
 }
 
 async function main() {
-  console.log('🌐 Finding missing venue websites via Google Places API...\n');
+  const mode = missingData ? 'missing phone/rating' : 'missing websites';
+  console.log(`🌐 Enriching venues with ${mode} via Google Places API...\n`);
 
   if (dryRun) {
     console.log('🔍 DRY RUN - No changes will be made\n');
   }
 
-  // Get venues without websites
+  // Get venues based on mode
   let query = supabase
     .from('venues')
-    .select('id, name, region, phone, google_rating, google_reviews_count')
-    .or('website.is.null,website.eq.')
+    .select('id, name, region, website, phone, google_rating, google_reviews_count')
     .order('region')
     .limit(limit);
+
+  if (missingData) {
+    // Target venues missing phone OR rating
+    query = query.or('phone.is.null,google_rating.is.null');
+  } else {
+    // Target venues without websites
+    query = query.or('website.is.null,website.eq.');
+  }
 
   if (regionFilter) {
     query = query.eq('region', regionFilter);
@@ -124,11 +134,11 @@ async function main() {
   }
 
   if (!venues || venues.length === 0) {
-    console.log('✅ No venues with missing websites found!');
+    console.log(`✅ No venues with ${mode} found!`);
     process.exit(0);
   }
 
-  console.log(`📋 Found ${venues.length} venues without websites`);
+  console.log(`📋 Found ${venues.length} venues with ${mode}`);
   console.log(`   This will use ~${venues.length * 2} Places API requests\n`);
 
   let fixed = 0;
@@ -144,29 +154,41 @@ async function main() {
 
     const place = await findPlaceAndGetDetails(venue.name, venue.region);
 
-    if (place?.website) {
+    if (place) {
+      // Build update object with any data we can add
+      const updateData: Record<string, unknown> = {};
+      const updates: string[] = [];
+
+      // Add website if missing
+      if (!venue.website && place.website) {
+        updateData.website = place.website;
+        updates.push('website');
+      }
+
+      // Add phone if missing
+      if (!venue.phone && place.formatted_phone_number) {
+        updateData.phone = place.formatted_phone_number;
+        updates.push('phone');
+      }
+
+      // Add rating if missing
+      if (!venue.google_rating && place.rating) {
+        updateData.google_rating = place.rating;
+        updateData.google_reviews_count = place.user_ratings_total || 0;
+        updates.push('rating');
+      }
+
+      if (Object.keys(updateData).length === 0) {
+        console.log('⚠️  No new data to add');
+        notFound++;
+        continue;
+      }
+
       if (dryRun) {
-        console.log(`✅ Would set: ${place.website}`);
+        console.log(`✅ Would add: ${updates.join(', ')}`);
         fixed++;
+        bonusData += updates.length;
       } else {
-        // Build update object with any bonus data we found
-        const updateData: Record<string, unknown> = {
-          website: place.website,
-        };
-
-        // Add phone if missing
-        if (!venue.phone && place.formatted_phone_number) {
-          updateData.phone = place.formatted_phone_number;
-          bonusData++;
-        }
-
-        // Add rating if missing
-        if (!venue.google_rating && place.rating) {
-          updateData.google_rating = place.rating;
-          updateData.google_reviews_count = place.user_ratings_total || 0;
-          bonusData++;
-        }
-
         // Update database
         const { error: updateError } = await supabase
           .from('venues')
@@ -177,17 +199,11 @@ async function main() {
           console.log(`❌ Update error`);
           errors++;
         } else {
-          const extras = [];
-          if (updateData.phone) extras.push('phone');
-          if (updateData.google_rating) extras.push('rating');
-          const extraStr = extras.length > 0 ? ` (+${extras.join(', ')})` : '';
-          console.log(`✅ ${place.website}${extraStr}`);
+          console.log(`✅ Added: ${updates.join(', ')}`);
           fixed++;
+          bonusData += updates.length;
         }
       }
-    } else if (place) {
-      console.log('⚠️  Place found but no website');
-      notFound++;
     } else {
       console.log('⚠️  Not found');
       notFound++;

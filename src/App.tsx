@@ -31,6 +31,7 @@ function App() {
   const [mapPosition, setMapPosition] = useState<MapPosition | null>(null);
   const [isMapReadyForBounds, setIsMapReadyForBounds] = useState(false); // Wait for map to fitBounds before filtering
   const [searchAreaBounds, setSearchAreaBounds] = useState<MapBounds | null>(null); // Bounds set by "Search this area"
+  const searchAreaBoundsRef = useRef<MapBounds | null>(null); // Ref for immediate access (avoids race with Zustand)
 
   // URL state handling for deep-linking
   const [pendingVenueId, setPendingVenueId] = useState<string | null>(null);
@@ -127,6 +128,8 @@ function App() {
 
   // Called when user clicks "Search this area" button on map
   const handleSearchArea = useCallback((bounds: MapBounds) => {
+    // Set ref FIRST for immediate access (before Zustand triggers re-render)
+    searchAreaBoundsRef.current = bounds;
     // Save the bounds to filter venues by this area
     setSearchAreaBounds(bounds);
     // Reset all filters to show all venues in this area
@@ -136,23 +139,27 @@ function App() {
   // Clear search area bounds when user changes filters
   useEffect(() => {
     if (hasActiveFilters && searchAreaBounds) {
+      searchAreaBoundsRef.current = null;
       setSearchAreaBounds(null);
     }
   }, [hasActiveFilters, searchAreaBounds]);
 
   // Venues to display on map - filtered by searchAreaBounds if set
   // This is used when "Search this area" is clicked to show only venues within saved bounds
+  // Uses ref for immediate access to avoid race condition with Zustand re-renders
   const venuesToDisplay = useMemo(() => {
-    if (!searchAreaBounds) return filteredVenues;
+    // Use ref for immediate value (set before Zustand triggers re-render)
+    const bounds = searchAreaBoundsRef.current ?? searchAreaBounds;
+    if (!bounds) return filteredVenues;
 
     return filteredVenues.filter((venue) => {
       const { lat, lng } = venue.location;
       if (lat == null || lng == null) return false;
       return (
-        lat >= searchAreaBounds.south &&
-        lat <= searchAreaBounds.north &&
-        lng >= searchAreaBounds.west &&
-        lng <= searchAreaBounds.east
+        lat >= bounds.south &&
+        lat <= bounds.north &&
+        lng >= bounds.west &&
+        lng <= bounds.east
       );
     });
   }, [filteredVenues, searchAreaBounds]);
@@ -222,8 +229,8 @@ function App() {
             {isLoaded ? (
               <VenueMap
                 venues={venuesToDisplay}
-                hasActiveFilters={hasActiveFilters || searchAreaBounds !== null}
-                skipFitBounds={searchAreaBounds !== null}
+                hasActiveFilters={hasActiveFilters || searchAreaBoundsRef.current !== null || searchAreaBounds !== null}
+                skipFitBounds={searchAreaBoundsRef.current !== null || searchAreaBounds !== null}
                 onVenueSelect={setSelectedVenue}
                 onBoundsChange={handleBoundsChange}
                 onMapReady={handleMapReady}
