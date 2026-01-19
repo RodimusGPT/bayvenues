@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { useFilterStore } from '../../stores/filterStore';
 import { useFavoriteStore } from '../../stores/favoriteStore';
 import { useRegionMetadata, type CountryData, type StateData, type RegionData } from '../../hooks/useRegionMetadata';
@@ -364,13 +364,20 @@ export function CountryRegionFilter() {
   // Continent filter
   const [selectedContinent, setSelectedContinent] = useState<string | null>(null);
 
-  // Reset local state when global filters are cleared
+  // Track if filters were ever set (to avoid resetting on initial mount)
+  const hadFiltersRef = useRef(false);
+
+  // Reset local state when global filters are cleared (but not on initial mount)
   useEffect(() => {
-    if (selectedCountries.length === 0 && selectedRegions.length === 0) {
+    if (selectedCountries.length > 0 || selectedRegions.length > 0) {
+      hadFiltersRef.current = true;
+    } else if (hadFiltersRef.current) {
+      // Only reset if filters were previously set
       setSelectedContinent(null);
       setSearchQuery('');
       setExpandedCountries(new Set());
       setExpandedStates(new Set());
+      hadFiltersRef.current = false;
     }
   }, [selectedCountries.length, selectedRegions.length]);
 
