@@ -592,7 +592,16 @@ New York: Hudson Valley, The Hamptons
 
 ⚠️ **After inserting venues, ALL of these steps are REQUIRED for venues to work properly in the app:**
 
-#### 0. Update Frontend Country Mapping (NEW COUNTRIES ONLY)
+#### 0. Add Country to Database (NEW COUNTRIES ONLY)
+If adding venues from a **new country**, you MUST add it to the `countries` table:
+```sql
+-- Add the country with its flag emoji
+INSERT INTO countries (name, flag_emoji) VALUES ('Ireland', '🇮🇪')
+ON CONFLICT (name) DO UPDATE SET flag_emoji = EXCLUDED.flag_emoji;
+```
+**Why this matters**: The filter UI reads country flags from the database `countries` table, NOT from venue.ts. Without this, the country won't show its flag in the filter dropdown.
+
+#### 0b. Update Frontend Country Mapping (NEW COUNTRIES ONLY)
 If adding venues from a **new country** not already in the system, update `src/types/venue.ts`:
 
 ```typescript

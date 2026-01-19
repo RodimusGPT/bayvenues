@@ -6,9 +6,10 @@
  * Run: npx tsx scripts/enrich-low-image-venues.ts
  *
  * Options:
- *   --limit N      Only process first N venues
- *   --start N      Start from index N (for resuming)
- *   --dry-run      Show what would be done without making changes
+ *   --limit N       Only process first N venues
+ *   --start N       Start from index N (for resuming)
+ *   --country NAME  Only process venues in this country (e.g., Ireland)
+ *   --dry-run       Show what would be done without making changes
  */
 
 import { createClient } from '@supabase/supabase-js';
@@ -41,6 +42,8 @@ const limitIndex = args.indexOf('--limit');
 const limit = limitIndex !== -1 ? parseInt(args[limitIndex + 1]) : undefined;
 const startIndex = args.indexOf('--start');
 const start = startIndex !== -1 ? parseInt(args[startIndex + 1]) : 0;
+const countryIndex = args.indexOf('--country');
+const country = countryIndex !== -1 ? args[countryIndex + 1] : undefined;
 
 const IMAGES_PER_VENUE = 5;
 const DELAY_MS = 200; // Delay between API calls
@@ -97,12 +100,39 @@ async function main() {
     console.log('🔍 DRY RUN - No changes will be made\n');
   }
 
-  // Get venues with < 3 images
-  const { data: venues, error } = await supabase
+  if (country) {
+    console.log(`🌍 Filtering by country: ${country}\n`);
+  }
+
+  // If filtering by country, first get the regions for that country
+  let regionNames: string[] = [];
+  if (country) {
+    const { data: regions, error: regionError } = await supabase
+      .from('regions')
+      .select('name')
+      .eq('country', country);
+
+    if (regionError) {
+      console.error('❌ Error fetching regions:', regionError.message);
+      process.exit(1);
+    }
+
+    regionNames = regions?.map(r => r.name) || [];
+    console.log(`   Found ${regionNames.length} regions: ${regionNames.join(', ')}\n`);
+  }
+
+  // Get venues with < 3 images (with optional country filter)
+  let query = supabase
     .from('venues')
     .select('id, name, region, header_images')
     .order('region')
     .order('name');
+
+  if (country && regionNames.length > 0) {
+    query = query.in('region', regionNames);
+  }
+
+  const { data: venues, error } = await query;
 
   if (error) {
     console.error('❌ Error fetching venues:', error.message);

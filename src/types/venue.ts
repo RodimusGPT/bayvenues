@@ -18,7 +18,11 @@ export type Country =
   | 'South Korea'
   | 'Singapore'
   | 'China'
-  | 'Canada';
+  | 'Canada'
+  | 'Ireland'
+  | 'United Kingdom'
+  | 'Luxembourg'
+  | 'Germany';
 
 export type Setting = 'Indoor' | 'Outdoor';
 
@@ -99,7 +103,7 @@ export interface FilterState {
   capacityRange: [number, number];
 }
 
-export const COUNTRIES: Country[] = ['USA', 'Portugal', 'Italy', 'Greece', 'Spain', 'Switzerland', 'France', 'Indonesia', 'Thailand', 'Mexico', 'Japan', 'Taiwan', 'Caribbean Islands', 'Australia', 'South Korea', 'Singapore', 'China', 'Canada'];
+export const COUNTRIES: Country[] = ['USA', 'Portugal', 'Italy', 'Greece', 'Spain', 'Switzerland', 'France', 'Indonesia', 'Thailand', 'Mexico', 'Japan', 'Taiwan', 'Caribbean Islands', 'Australia', 'South Korea', 'Singapore', 'China', 'Canada', 'Ireland', 'United Kingdom', 'Luxembourg', 'Germany'];
 export const SETTINGS: Setting[] = ['Indoor', 'Outdoor'];
 
 // Map regions to countries
@@ -282,6 +286,46 @@ export const REGION_TO_COUNTRY: Record<string, Country> = {
   'Lake Louise': 'Canada',
   'Whistler': 'Canada',
   'Montreal': 'Canada',
+  // Ireland
+  'Dublin': 'Ireland',
+  'Mayo': 'Ireland',
+  'Clare': 'Ireland',
+  'Limerick': 'Ireland',
+  'Monaghan': 'Ireland',
+  'Roscommon': 'Ireland',
+  'Leitrim': 'Ireland',
+  'Meath': 'Ireland',
+  'Cork': 'Ireland',
+  'Kerry': 'Ireland',
+  // United Kingdom
+  'London': 'United Kingdom',
+  'Cotswolds': 'United Kingdom',
+  'Yorkshire': 'United Kingdom',
+  'Lake District': 'United Kingdom',
+  'Scottish Lowlands': 'United Kingdom',
+  'Scottish Highlands': 'United Kingdom',
+  'Cornwall': 'United Kingdom',
+  'Devon': 'United Kingdom',
+  'Berkshire': 'United Kingdom',
+  'Buckinghamshire': 'United Kingdom',
+  'Oxfordshire': 'United Kingdom',
+  'Gloucestershire': 'United Kingdom',
+  'Hampshire': 'United Kingdom',
+  'Midlands': 'United Kingdom',
+  // Luxembourg
+  'Luxembourg City': 'Luxembourg',
+  'Moselle Valley': 'Luxembourg',
+  'Northern Luxembourg': 'Luxembourg',
+  'Countryside': 'Luxembourg',
+  // Germany
+  'Berlin': 'Germany',
+  'Bavaria': 'Germany',
+  'Hamburg': 'Germany',
+  'Hessen': 'Germany',
+  'Rheingau': 'Germany',
+  'Schleswig-Holstein': 'Germany',
+  'North Rhine-Westphalia': 'Germany',
+  'Baden-Württemberg': 'Germany',
 };
 
 // Primary color for clusters (matches UI primary-600)
@@ -307,6 +351,10 @@ export const COUNTRY_FLAGS: Record<Country, string> = {
   'Singapore': '🇸🇬',
   'China': '🇨🇳',
   'Canada': '🇨🇦',
+  'Ireland': '🇮🇪',
+  'United Kingdom': '🇬🇧',
+  'Luxembourg': '🇱🇺',
+  'Germany': '🇩🇪',
 };
 
 // Get flag emoji for a country (with fallback)

@@ -27,6 +27,8 @@ export interface CountryData {
 
 export interface RegionMetadata {
   countries: CountryData[];
+  countryFlags: Record<string, string>;  // country name -> flag emoji
+  regionToCountry: Record<string, string>;  // region name -> country name
   isLoading: boolean;
   error: string | null;
 }
@@ -75,6 +77,23 @@ export function useRegionMetadata(): RegionMetadata {
 
     fetchMetadata();
   }, []);
+
+  // Build lookup maps for flags and region-to-country mapping
+  const { countryFlags, regionToCountry } = useMemo(() => {
+    const flags: Record<string, string> = {};
+    const regionMap: Record<string, string> = {};
+
+    data.forEach(region => {
+      // Map country name to flag emoji
+      if (!flags[region.country]) {
+        flags[region.country] = region.flag;
+      }
+      // Map region name to country name
+      regionMap[region.name] = region.country;
+    });
+
+    return { countryFlags: flags, regionToCountry: regionMap };
+  }, [data]);
 
   // Group regions by country, then by state for countries with states
   const countries = useMemo(() => {
@@ -131,5 +150,5 @@ export function useRegionMetadata(): RegionMetadata {
       });
   }, [data]);
 
-  return { countries, isLoading, error };
+  return { countries, countryFlags, regionToCountry, isLoading, error };
 }
