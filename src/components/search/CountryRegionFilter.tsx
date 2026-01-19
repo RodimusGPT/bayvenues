@@ -364,6 +364,16 @@ export function CountryRegionFilter() {
   // Continent filter
   const [selectedContinent, setSelectedContinent] = useState<string | null>(null);
 
+  // Reset local state when global filters are cleared
+  useEffect(() => {
+    if (selectedCountries.length === 0 && selectedRegions.length === 0) {
+      setSelectedContinent(null);
+      setSearchQuery('');
+      setExpandedCountries(new Set());
+      setExpandedStates(new Set());
+    }
+  }, [selectedCountries.length, selectedRegions.length]);
+
   // Filter countries by continent first, then by search
   const filteredCountries = useMemo(() => {
     // First filter by continent
