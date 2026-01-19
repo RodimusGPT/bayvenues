@@ -148,7 +148,6 @@ export function VenueMap({ venues, hasActiveFilters, skipFitBounds, onVenueSelec
   const [isMapReady, setIsMapReady] = useState(false); // Track when map is loaded
   const [markersReady, setMarkersReady] = useState(false); // Track when markers are created
   const [showSearchButton, setShowSearchButton] = useState(false); // Show "Search this area" button
-  const [currentBounds, setCurrentBounds] = useState<MapBounds | null>(null); // Current map bounds for search
 
   // Store initial position in ref so it doesn't change on re-renders
   // This prevents the map from continuously trying to re-center
@@ -164,12 +163,26 @@ export function VenueMap({ venues, hasActiveFilters, skipFitBounds, onVenueSelec
   }, [mapType]);
 
   // Handle "Search this area" button click
+  // Get bounds directly from map to avoid stale state issues
   const handleSearchArea = useCallback(() => {
-    if (!currentBounds || !onSearchArea) return;
-    // The skipFitBounds prop will prevent fitBounds since parent sets searchAreaBounds
-    onSearchArea(currentBounds);
+    if (!mapRef.current || !onSearchArea) return;
+
+    // Get bounds directly from the map, not from state (which could be stale)
+    const bounds = mapRef.current.getBounds();
+    if (!bounds) return;
+
+    const ne = bounds.getNorthEast();
+    const sw = bounds.getSouthWest();
+    const boundsObj: MapBounds = {
+      north: ne.lat(),
+      south: sw.lat(),
+      east: ne.lng(),
+      west: sw.lng(),
+    };
+
+    onSearchArea(boundsObj);
     setShowSearchButton(false);
-  }, [currentBounds, onSearchArea]);
+  }, [onSearchArea]);
 
   const onLoad = useCallback((map: google.maps.Map) => {
     mapRef.current = map;
@@ -206,13 +219,12 @@ export function VenueMap({ venues, hasActiveFilters, skipFitBounds, onVenueSelec
       if (bounds && zoom !== undefined) {
         const ne = bounds.getNorthEast();
         const sw = bounds.getSouthWest();
-        const newBounds = {
+        const newBounds: MapBounds = {
           north: ne.lat(),
           south: sw.lat(),
           east: ne.lng(),
           west: sw.lng(),
         };
-        setCurrentBounds(newBounds);
         onBoundsChange?.(newBounds, zoom);
       }
     });

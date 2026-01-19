@@ -1,4 +1,5 @@
 import { useMemo, useState, useCallback, useEffect, useRef } from 'react';
+import { flushSync } from 'react-dom';
 import { useJsApiLoader } from '@react-google-maps/api';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './lib/queryClient';
@@ -128,11 +129,18 @@ function App() {
 
   // Called when user clicks "Search this area" button on map
   const handleSearchArea = useCallback((bounds: MapBounds) => {
-    // Set ref FIRST for immediate access (before Zustand triggers re-render)
+    // Set ref for immediate access in any synchronous code
     searchAreaBoundsRef.current = bounds;
-    // Save the bounds to filter venues by this area
-    setSearchAreaBounds(bounds);
-    // Reset all filters to show all venues in this area
+
+    // Use flushSync to FORCE the state update to be applied synchronously
+    // This ensures searchAreaBounds is set BEFORE resetFilters triggers a Zustand re-render
+    // Without flushSync, Zustand's useSyncExternalStore can trigger a re-render
+    // before React processes our setState, causing skipFitBounds to be false
+    flushSync(() => {
+      setSearchAreaBounds(bounds);
+    });
+
+    // Now reset filters - any re-render from this will see searchAreaBounds already set
     filters.resetFilters();
   }, [filters]);
 
