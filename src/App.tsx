@@ -19,9 +19,6 @@ import { AuthModal } from './components/auth/AuthModal';
 const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || '';
 const LIBRARIES: ('places' | 'marker')[] = ['places', 'marker'];
 
-// Zoom threshold for showing list view button on mobile
-const MOBILE_LIST_ZOOM_THRESHOLD = 8;
-
 function App() {
   const [showFilters, setShowFilters] = useState(true);
   const [showFavorites, setShowFavorites] = useState(false);
@@ -29,7 +26,6 @@ function App() {
   const [mapBounds, setMapBounds] = useState<MapBounds | null>(null);
   const [mapZoom, setMapZoom] = useState(3);
   const [mapPosition, setMapPosition] = useState<MapPosition | null>(null);
-  const [isMapReadyForBounds, setIsMapReadyForBounds] = useState(false); // Wait for map to fitBounds before filtering
   const [searchAreaBounds, setSearchAreaBounds] = useState<MapBounds | null>(null); // Bounds set by "Search this area"
   const searchAreaBoundsRef = useRef<MapBounds | null>(null); // Ref for immediate access (avoids race with Zustand)
 
@@ -120,10 +116,6 @@ function App() {
     setMapPosition({ center, zoom });
   }, []);
 
-  // Called when map has finished initial setup (markers created, fitBounds complete)
-  const handleMapReady = useCallback(() => {
-    setIsMapReadyForBounds(true);
-  }, []);
 
   // Called when user clicks "Search this area" button on map
   const handleSearchArea = useCallback((bounds: MapBounds) => {
@@ -167,11 +159,10 @@ function App() {
   }, [filteredVenues, searchAreaBounds, hasActiveFilters]);
 
   // Filter venues visible in current map bounds
-  // Only filter by bounds AFTER the map has finished initial setup (fitBounds complete)
-  // This prevents showing "No venues" before the map has zoomed to show all venues
+  // Always filter by bounds when available so mobile list matches the map
   const venuesInBounds = useMemo(() => {
-    // Before map is ready, show all filtered venues in the list
-    if (!isMapReadyForBounds || !mapBounds) return venuesToDisplay;
+    // No bounds yet, show all filtered venues
+    if (!mapBounds) return venuesToDisplay;
 
     const inBounds = venuesToDisplay.filter((venue) => {
       const { lat, lng } = venue.location;
@@ -184,17 +175,11 @@ function App() {
       );
     });
 
-    // Fallback: if bounds filtering would show nothing but we have venues,
-    // show all venues. This handles edge cases where bounds are stale.
-    if (inBounds.length === 0 && venuesToDisplay.length > 0) {
-      return venuesToDisplay;
-    }
-
     return inBounds;
-  }, [venuesToDisplay, mapBounds, isMapReadyForBounds]);
+  }, [venuesToDisplay, mapBounds]);
 
-  // Show list button on mobile when zoomed in enough
-  const showMobileListButton = mapZoom >= MOBILE_LIST_ZOOM_THRESHOLD && venuesInBounds.length > 0;
+  // Show list button on mobile when there are venues to display
+  const showMobileListButton = venuesInBounds.length > 0;
 
   if (loadError) {
     return (
@@ -235,7 +220,6 @@ function App() {
                   skipFitBounds={!hasActiveFilters && (searchAreaBoundsRef.current !== null || searchAreaBounds !== null)}
                   onVenueSelect={setSelectedVenue}
                   onBoundsChange={handleBoundsChange}
-                  onMapReady={handleMapReady}
                   onSearchArea={handleSearchArea}
                   initialPosition={mapPosition || undefined}
                 />
@@ -325,10 +309,13 @@ function App() {
             Filters
           </button>
 
-          {/* View list button - appears when zoomed in */}
+          {/* View list button - appears when venues are on map */}
           {showMobileListButton && (
             <button
-              onClick={() => setViewMode('list')}
+              onClick={() => {
+                setViewMode('list');
+                setShowFilters(false); // Close filter panel when switching to list view
+              }}
               className="bg-white text-gray-900 px-4 py-2 rounded-full shadow-lg flex items-center gap-2 border border-gray-200 touch-target animate-fade-in"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
