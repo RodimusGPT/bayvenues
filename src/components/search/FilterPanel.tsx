@@ -148,7 +148,7 @@ export function FilterPanel({ venueTypes, priceBounds, capacityBounds, onShowFav
       )}
 
       {/* Location - Countries & Regions */}
-      <div>
+      <div className={hasActiveFilters ? "-mt-2" : ""}>
         {/* Reset Filters - only shows when filters are active */}
         {hasActiveFilters && (
           <button
