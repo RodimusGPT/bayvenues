@@ -256,18 +256,41 @@ After enrichment, validate and enhance header images to ensure quality.
 
 Many venue websites return logos, app store badges, or social media icons instead of actual venue photos. These MUST be detected and replaced.
 
-**Run the logo detection script**:
+**⚠️ MANDATORY: After EVERY image enrichment, run this SQL check**:
+```sql
+-- Find venues with logo/useless first images
+SELECT id, name, header_images->0->>'url' as first_image
+FROM venues
+WHERE id LIKE '<prefix>-%'  -- Replace with region prefix (e.g., 'md-%')
+AND (
+  -- Logo patterns
+  header_images->0->>'url' LIKE '%logo%'
+  OR header_images->0->>'url' LIKE '%Logo%'
+  OR header_images->0->>'url' LIKE '%icon%'
+  OR header_images->0->>'url' LIKE '%Icon%'
+  -- Four Seasons specific (very common!)
+  OR header_images->0->>'url' LIKE '%etc/designs%'
+  OR header_images->0->>'url' LIKE '%FS_Header_Logo%'
+  -- Other hotel chains
+  OR header_images->0->>'url' LIKE '%header_footer%'
+  OR header_images->0->>'url' LIKE '%favicon%'
+  OR header_images->0->>'url' LIKE '%.svg'
+  OR header_images->0->>'url' LIKE '%.png' AND header_images->0->>'url' LIKE '%logo%'
+);
+```
+
+**If any venues are found with logos, fix them immediately**:
 ```bash
-npx tsx scripts/check-logo-images.ts
+npx tsx scripts/enrich-images-smart.ts --venue-id <id> --force
 ```
 
 **Patterns that indicate LOGO/USELESS images** (auto-detected):
 ```
 URL Pattern                    | Problem
 -------------------------------|----------------------------------
-/logo/i                        | Logo image
+/logo/i, /Logo/i               | Logo image (case variations!)
 /brand/i                       | Brand asset
-/icon/i                        | Icon (app store, social, etc.)
+/icon/i, /Icon/i               | Icon (app store, social, etc.)
 /_og\./i, /og_image/i          | Generic OG image (often logo)
 /favicon/i                     | Favicon
 /avatar/i                      | User avatar
@@ -277,6 +300,7 @@ URL Pattern                    | Problem
 /App-Store/i, /Google-Play/i   | App store badges
 /Instagram/i, /Facebook/i      | Social media icons
 /FS_Header_Logo/i              | Four Seasons logo specifically
+/\.svg$/i                      | SVG files (usually logos/icons)
 ```
 
 **Patterns that indicate SMALL/THUMBNAIL images** (unusable):
@@ -382,7 +406,12 @@ npx tsx scripts/enrich-low-image-venues.ts   # Older Serper-only approach
    - Secret Retreats: `secret-retreats.com/wp-content/uploads/`
 3. **Wikimedia Commons** for landmarks: `upload.wikimedia.org/wikipedia/commons/thumb/`
 4. **YouTube thumbnails** (ONLY as fallback, use sddefault.jpg)
-5. **Unsplash fallbacks** (LAST RESORT - looks generic)
+
+**⚠️ NEVER USE UNSPLASH IMAGES** - They are generic stock photos that:
+- Don't show the actual venue
+- Get reused across multiple venues (duplicates)
+- Make all venues look the same
+- See section 4D for detection and replacement
 
 **⚠️ AVOID THESE LOW-QUALITY SOURCES**:
 ```
@@ -411,6 +440,224 @@ npx tsx scripts/enrich-low-image-venues.ts   # Older Serper-only approach
 - `lookaside.fbsbx.com` - returns HTML
 - `www.fourseasons.com/etc/designs/` - returns logo instead of venue
 - `breezit.s3.eu-north-1.amazonaws.com` - often returns octet-stream
+
+---
+
+#### 4C. Low-Resolution Image Detection
+
+Many image sources return thumbnails or low-resolution versions that look blurry when displayed as headers. These MUST be detected and replaced with high-quality alternatives.
+
+**Run the low-resolution check**:
+```sql
+-- Find venues with low-resolution images
+SELECT v.id, v.name, img.url
+FROM venues v
+CROSS JOIN LATERAL jsonb_array_elements(v.header_images) AS img
+WHERE v.region IN (SELECT name FROM regions WHERE country = '<country>')
+AND (
+  -- Google Image Search thumbnails (150-200px, very low res!)
+  img->>'url' LIKE '%encrypted-tbn0.gstatic.com%'
+  -- Small YouTube thumbnails
+  OR img->>'url' LIKE '%/hqdefault.jpg%'
+  OR img->>'url' LIKE '%/default.jpg%'
+  OR img->>'url' LIKE '%/mqdefault.jpg%'
+  -- Common low-res URL patterns
+  OR img->>'url' ~ '/[0-9]+x[0-9]+/' AND (img->>'url')::text ~ '/([0-9]+)x' AND SUBSTRING((img->>'url')::text FROM '/([0-9]+)x')::int < 600
+  OR img->>'url' LIKE '%_thumb%'
+  OR img->>'url' LIKE '%_small%'
+  OR img->>'url' LIKE '%_xs%'
+  OR img->>'url' LIKE '%150x%'
+  OR img->>'url' LIKE '%200x%'
+  OR img->>'url' LIKE '%300x%'
+  OR img->>'url' LIKE '%/s150/%'
+  OR img->>'url' LIKE '%/s200/%'
+  OR img->>'url' LIKE '%/s300/%'
+);
+```
+
+**Low-Resolution URL Patterns to Detect**:
+```
+URL Pattern                              | Typical Resolution | Action
+-----------------------------------------|-------------------|--------
+encrypted-tbn0.gstatic.com               | 150-200px wide    | REPLACE (Google thumbnails)
+/hqdefault.jpg                           | 480x360           | Upgrade to sddefault.jpg
+/mqdefault.jpg                           | 320x180           | Upgrade to sddefault.jpg
+/default.jpg                             | 120x90            | Upgrade to sddefault.jpg
+_thumb, _thumbnail                       | varies, <400px    | REPLACE
+_small, _xs, _s.                         | varies, <400px    | REPLACE
+/150x, /200x, /300x                      | as indicated      | REPLACE
+/s150/, /s200/, /s300/                   | as indicated      | REPLACE
+/w_150/, /w_200/, /w_300/                | Cloudinary small  | REPLACE
+?width=150, ?w=200                       | resized small     | REPLACE or remove param
+```
+
+**Minimum Recommended Image Dimensions**:
+```
+Header images: 1200px wide minimum (1920px preferred)
+Card thumbnails: 600px wide minimum
+OG/Social images: 1200x630 (standard)
+```
+
+**How to fix low-resolution images**:
+
+1. **Upgrade YouTube thumbnails** (simple fix):
+   ```sql
+   -- Replace hqdefault/mqdefault with sddefault
+   UPDATE venues
+   SET header_images = (
+     SELECT jsonb_agg(
+       CASE
+         WHEN img->>'url' LIKE '%/hqdefault.jpg' THEN
+           jsonb_set(img, '{url}', to_jsonb(REPLACE(img->>'url', '/hqdefault.jpg', '/sddefault.jpg')))
+         WHEN img->>'url' LIKE '%/mqdefault.jpg' THEN
+           jsonb_set(img, '{url}', to_jsonb(REPLACE(img->>'url', '/mqdefault.jpg', '/sddefault.jpg')))
+         WHEN img->>'url' LIKE '%/default.jpg' THEN
+           jsonb_set(img, '{url}', to_jsonb(REPLACE(img->>'url', '/default.jpg', '/sddefault.jpg')))
+         ELSE img
+       END
+     )
+     FROM jsonb_array_elements(header_images) AS img
+   )
+   WHERE id = '<venue_id>';
+   ```
+
+2. **Remove Google thumbnails and re-enrich**:
+   ```sql
+   -- First, remove the low-res images
+   UPDATE venues
+   SET header_images = (
+     SELECT COALESCE(jsonb_agg(img), '[]'::jsonb)
+     FROM jsonb_array_elements(header_images) AS img
+     WHERE img->>'url' NOT LIKE '%encrypted-tbn0.gstatic.com%'
+   )
+   WHERE id LIKE '<prefix>-%'
+   AND header_images::text LIKE '%encrypted-tbn0.gstatic.com%';
+   ```
+
+   Then re-enrich with high-quality images:
+   ```bash
+   npx tsx scripts/enrich-images-smart.ts --region <region> --force
+   ```
+
+3. **Manual replacement for stubborn cases**:
+   ```sql
+   -- Replace with specific Unsplash fallback
+   UPDATE venues
+   SET header_images = '[{"url": "https://images.unsplash.com/photo-XXXXX?w=1920&q=80", "alt": "Venue Name wedding venue"}]'::jsonb
+   WHERE id = '<venue_id>';
+   ```
+
+**Post-Fix Verification**:
+```sql
+-- Verify no low-res images remain
+SELECT v.id, v.name, jsonb_array_length(v.header_images) as img_count
+FROM venues v
+WHERE v.region IN (SELECT name FROM regions WHERE country = '<country>')
+AND NOT EXISTS (
+  SELECT 1 FROM jsonb_array_elements(v.header_images) AS img
+  WHERE img->>'url' LIKE '%encrypted-tbn0.gstatic.com%'
+     OR img->>'url' LIKE '%/hqdefault.jpg%'
+     OR img->>'url' LIKE '%/mqdefault.jpg%'
+     OR img->>'url' LIKE '%/default.jpg%'
+);
+```
+
+---
+
+#### 4D. Unsplash/Generic Image Detection
+
+**⚠️ CRITICAL: Unsplash images are generic stock photos and should be avoided!**
+
+Unsplash images look professional but are NOT venue-specific. They lead to:
+- Multiple venues having the same "castle" or "garden" image
+- Generic appearance that doesn't represent the actual venue
+- Poor user experience when browsing venues
+
+**Run this check after EVERY enrichment**:
+```sql
+-- Find venues with Unsplash images (should be replaced!)
+SELECT v.id, v.name,
+       COUNT(*) as unsplash_count,
+       jsonb_array_length(v.header_images) as total_images
+FROM venues v
+CROSS JOIN LATERAL jsonb_array_elements(v.header_images) AS img
+WHERE v.id LIKE '<prefix>-%'  -- Replace with region prefix
+AND img->>'url' LIKE '%images.unsplash.com%'
+GROUP BY v.id, v.name
+ORDER BY unsplash_count DESC;
+```
+
+**Find duplicate images across venues** (common with Unsplash):
+```sql
+-- Detect same image used on multiple venues
+WITH all_images AS (
+  SELECT v.id, v.name, img->>'url' as url
+  FROM venues v
+  CROSS JOIN LATERAL jsonb_array_elements(v.header_images) AS img
+  WHERE v.id LIKE '<prefix>-%'
+)
+SELECT url, COUNT(*) as venues_using,
+       string_agg(name, ', ') as venue_names
+FROM all_images
+GROUP BY url
+HAVING COUNT(*) > 1
+ORDER BY venues_using DESC;
+```
+
+**Why Unsplash images are problematic**:
+```
+Problem                          | Impact
+---------------------------------|----------------------------------------
+Generic stock photos             | Doesn't show actual venue
+Duplicates across venues         | Multiple venues look identical
+No venue branding                | Loses venue's unique character
+Legal gray area                  | Some venues may object to stock photos
+```
+
+**Better alternatives to Unsplash**:
+1. **Official venue website** - Always try this first via WebFetch
+2. **Wikimedia Commons** - For landmarks/historic buildings:
+   `https://upload.wikimedia.org/wikipedia/commons/thumb/...`
+3. **Travel sites** - Kiwi Collection, Five Star Alliance have real venue photos
+4. **Google Maps Photos** - Via Places API (venue's actual uploaded photos)
+
+**How to replace Unsplash images**:
+
+1. **Search for venue on travel sites**:
+   ```
+   WebSearch: "<venue name>" site:kiwicollection.com OR site:fivestaralliance.com
+   ```
+
+2. **Check Wikimedia Commons** (for historic venues):
+   ```
+   WebSearch: "<venue name>" site:commons.wikimedia.org
+   ```
+
+3. **Fetch from official website**:
+   ```
+   WebFetch the venue's website, extract og:image or hero images
+   ```
+
+4. **Use enrich script with --force** (re-runs image search):
+   ```bash
+   npx tsx scripts/enrich-images-smart.ts --venue-id <id> --force
+   ```
+
+**Post-Fix Verification**:
+```sql
+-- Verify no Unsplash images remain
+SELECT v.id, v.name
+FROM venues v
+WHERE v.id LIKE '<prefix>-%'
+AND NOT EXISTS (
+  SELECT 1 FROM jsonb_array_elements(v.header_images) AS img
+  WHERE img->>'url' LIKE '%images.unsplash.com%'
+);
+```
+
+**⚠️ MANDATORY: Before completing any scrape, run BOTH checks:**
+1. `4C` - No low-resolution images
+2. `4D` - No Unsplash/generic images (or document why they're acceptable)
 
 ---
 

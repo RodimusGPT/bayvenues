@@ -24,10 +24,10 @@ function App() {
   const [showFavorites, setShowFavorites] = useState(false);
   const [viewMode, setViewMode] = useState<'map' | 'list'>('map');
   const [mapBounds, setMapBounds] = useState<MapBounds | null>(null);
-  const [mapZoom, setMapZoom] = useState(3);
   const [mapPosition, setMapPosition] = useState<MapPosition | null>(null);
   const [searchAreaBounds, setSearchAreaBounds] = useState<MapBounds | null>(null); // Bounds set by "Search this area"
   const searchAreaBoundsRef = useRef<MapBounds | null>(null); // Ref for immediate access (avoids race with Zustand)
+  const [listScrollPosition, setListScrollPosition] = useState(0); // Preserve list scroll position
 
   // URL state handling for deep-linking
   const [pendingVenueId, setPendingVenueId] = useState<string | null>(null);
@@ -107,8 +107,7 @@ function App() {
   // Handle map bounds changes
   const handleBoundsChange = useCallback((bounds: MapBounds, zoom: number) => {
     setMapBounds(bounds);
-    setMapZoom(zoom);
-    // Calculate center from bounds
+    // Calculate center from bounds and store position for map restoration
     const center = {
       lat: (bounds.north + bounds.south) / 2,
       lng: (bounds.east + bounds.west) / 2,
@@ -238,6 +237,8 @@ function App() {
                 onVenueSelect={setSelectedVenue}
                 onBackToMap={() => setViewMode('map')}
                 isLoading={isLoadingVenues}
+                scrollPosition={listScrollPosition}
+                onScrollChange={setListScrollPosition}
               />
             </div>
           )}
@@ -265,6 +266,8 @@ function App() {
               venues={venuesInBounds}
               onVenueSelect={setSelectedVenue}
               isLoading={isLoadingVenues}
+              scrollPosition={listScrollPosition}
+              onScrollChange={setListScrollPosition}
             />
           )}
         </aside>

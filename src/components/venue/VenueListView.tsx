@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import type { Venue } from '../../types/venue';
 import { COUNTRY_FLAGS, getCountryForRegion } from '../../types/venue';
 import { formatPriceRange, formatCapacity } from '../../utils/formatters';
@@ -10,6 +10,8 @@ interface VenueListViewProps {
   onVenueSelect: (venue: Venue) => void;
   onBackToMap?: () => void;
   isLoading?: boolean;
+  scrollPosition?: number;
+  onScrollChange?: (position: number) => void;
 }
 
 function VenueCard({ venue, onSelect }: { venue: Venue; onSelect: () => void }) {
@@ -199,7 +201,29 @@ function VenueCard({ venue, onSelect }: { venue: Venue; onSelect: () => void }) 
   );
 }
 
-export function VenueListView({ venues, onVenueSelect, onBackToMap, isLoading }: VenueListViewProps) {
+export function VenueListView({ venues, onVenueSelect, onBackToMap, isLoading, scrollPosition, onScrollChange }: VenueListViewProps) {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Restore scroll position when component mounts (e.g., returning from venue detail)
+  useEffect(() => {
+    if (scrollContainerRef.current && scrollPosition !== undefined && scrollPosition > 0) {
+      // Use requestAnimationFrame to ensure DOM is ready
+      requestAnimationFrame(() => {
+        if (scrollContainerRef.current) {
+          scrollContainerRef.current.scrollTop = scrollPosition;
+        }
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Intentionally only run on mount to restore position
+
+  // Handle scroll events to track position
+  const handleScroll = useCallback(() => {
+    if (scrollContainerRef.current && onScrollChange) {
+      onScrollChange(scrollContainerRef.current.scrollTop);
+    }
+  }, [onScrollChange]);
+
   // Show loading state
   if (isLoading) {
     return (
@@ -257,7 +281,11 @@ export function VenueListView({ venues, onVenueSelect, onBackToMap, isLoading }:
       </div>
 
       {/* Scrollable list */}
-      <div className="flex-1 overflow-y-auto p-3">
+      <div
+        ref={scrollContainerRef}
+        onScroll={handleScroll}
+        className="flex-1 overflow-y-auto p-3"
+      >
         <div className="space-y-3">
           {venues.map((venue) => (
             <VenueCard

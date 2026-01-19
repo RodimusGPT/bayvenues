@@ -139,8 +139,10 @@ async function fetchFromWebsite(url: string, venueName: string): Promise<HeaderI
 
     if (ogImage) {
       const fullUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, baseUrl.origin).href;
-      if (!isBlockedDomain(fullUrl)) {
+      if (!isBlockedDomain(fullUrl) && !isLogoUrl(fullUrl)) {
         images.push({ url: fullUrl, source: 'website', description: `${venueName} - og:image` });
+      } else if (isLogoUrl(fullUrl)) {
+        console.log(`     ⚠️  Skipping logo image: ${fullUrl.substring(0, 80)}...`);
       }
     }
 
@@ -149,7 +151,7 @@ async function fetchFromWebsite(url: string, venueName: string): Promise<HeaderI
       const src = $(el).attr('src') || $(el).attr('data-src');
       if (src && images.length < TARGET_IMAGES) {
         const fullUrl = src.startsWith('http') ? src : new URL(src, baseUrl.origin).href;
-        if (!isBlockedDomain(fullUrl) && !images.some(img => img.url === fullUrl)) {
+        if (!isBlockedDomain(fullUrl) && !isLogoUrl(fullUrl) && !images.some(img => img.url === fullUrl)) {
           images.push({ url: fullUrl, source: 'website', description: `${venueName} - hero image` });
         }
       }
@@ -380,6 +382,31 @@ function isQualityDomain(url: string): boolean {
 
 function isBlockedDomain(url: string): boolean {
   return BLOCKED_DOMAINS.some(domain => url.includes(domain));
+}
+
+/**
+ * Check if URL is likely a logo, icon, or other non-venue image
+ */
+function isLogoUrl(url: string): boolean {
+  const logoPatterns = [
+    /logo/i,
+    /icon/i,
+    /favicon/i,
+    /avatar/i,
+    /brand/i,
+    /etc\/designs/i,           // AEM CMS logos (Four Seasons, etc.)
+    /FS_Header_Logo/i,         // Four Seasons logo specifically
+    /header_footer/i,          // Shangri-La badges
+    /App-Store/i,
+    /Google-Play/i,
+    /share-image/i,
+    /opengraph/i,
+    /\.svg$/i,                 // SVG files are usually logos
+    /badge/i,
+    /sprite/i,
+    /placeholder/i,
+  ];
+  return logoPatterns.some(pattern => pattern.test(url));
 }
 
 function extractDomain(url: string): string {
