@@ -47,8 +47,8 @@ export function formatVenueForSocial(venue: Venue): ShareData {
   const imageUrl = getVenueImageUrl(venue);
 
   return {
-    title: `${venue.name} - Wedding Venue`,
-    text: `${venue.name} in ${venue.region} - Perfect for weddings!`,
+    title: venue.name,
+    text: '', // Keep text empty so only the clean URL is shared
     url,
     imageUrl,
   };
@@ -172,7 +172,8 @@ export async function shareViaWebShare(data: ShareData): Promise<boolean> {
  * Generate WhatsApp share URL
  */
 export function getWhatsAppShareUrl(text: string, url: string): string {
-  const fullText = `${text}\n\n${url}`;
+  // Only include text if it's not empty
+  const fullText = text ? `${text}\n\n${url}` : url;
   return `https://wa.me/?text=${encodeURIComponent(fullText)}`;
 }
 
@@ -206,10 +207,10 @@ export function getFacebookShareUrl(url: string): string {
  * Generate Twitter/X share URL
  */
 export function getTwitterShareUrl(text: string, url: string): string {
-  const params = new URLSearchParams({
-    text,
-    url,
-  });
+  const params = new URLSearchParams({ url });
+  if (text) {
+    params.set('text', text);
+  }
   return `https://twitter.com/intent/tweet?${params.toString()}`;
 }
 
