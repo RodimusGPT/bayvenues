@@ -59,9 +59,11 @@ export function parseUrlState(): UrlState {
 
 /**
  * Build URL with state parameters
+ * Uses only the origin to ensure clean share URLs
  */
 export function buildShareUrl(state: Partial<UrlState>): string {
-  const url = new URL(window.location.origin + window.location.pathname);
+  // Use only origin (not pathname) to ensure share URLs are clean
+  const url = new URL(window.location.origin);
 
   if (state.venueId) {
     url.searchParams.set('venue', state.venueId);

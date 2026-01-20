@@ -32,7 +32,10 @@ export type Country =
   | 'Morocco'
   | 'South Africa'
   | 'Fiji'
-  | 'Maldives';
+  | 'Maldives'
+  | 'India'
+  | 'French Polynesia'
+  | 'Philippines';
 
 export type Setting = 'Indoor' | 'Outdoor';
 
@@ -113,7 +116,7 @@ export interface FilterState {
   capacityRange: [number, number];
 }
 
-export const COUNTRIES: Country[] = ['USA', 'Portugal', 'Italy', 'Greece', 'Spain', 'Switzerland', 'France', 'Indonesia', 'Thailand', 'Mexico', 'Japan', 'Taiwan', 'Caribbean Islands', 'Australia', 'South Korea', 'Singapore', 'China', 'Canada', 'Ireland', 'United Kingdom', 'Luxembourg', 'Germany', 'Croatia', 'Denmark', 'Sweden', 'UAE', 'Costa Rica', 'New Zealand', 'Morocco', 'South Africa', 'Fiji', 'Maldives'];
+export const COUNTRIES: Country[] = ['USA', 'Portugal', 'Italy', 'Greece', 'Spain', 'Switzerland', 'France', 'Indonesia', 'Thailand', 'Mexico', 'Japan', 'Taiwan', 'Caribbean Islands', 'Australia', 'South Korea', 'Singapore', 'China', 'Canada', 'Ireland', 'United Kingdom', 'Luxembourg', 'Germany', 'Croatia', 'Denmark', 'Sweden', 'UAE', 'Costa Rica', 'New Zealand', 'Morocco', 'South Africa', 'Fiji', 'Maldives', 'India', 'French Polynesia', 'Philippines'];
 export const SETTINGS: Setting[] = ['Indoor', 'Outdoor'];
 
 // Map regions to countries
@@ -403,6 +406,19 @@ export const REGION_TO_COUNTRY: Record<string, Country> = {
   'Momi Bay': 'Fiji',
   // Maldives
   'Maldives': 'Maldives',
+  // India - Rajasthan
+  'Udaipur': 'India',
+  'Jaipur': 'India',
+  'Jodhpur': 'India',
+  // French Polynesia
+  'Bora Bora': 'French Polynesia',
+  'Tahiti': 'French Polynesia',
+  'Moorea': 'French Polynesia',
+  // Philippines
+  'Boracay': 'Philippines',
+  'Palawan': 'Philippines',
+  'Bohol': 'Philippines',
+  'Cebu': 'Philippines',
 };
 
 // Primary color for clusters (matches UI primary-600)
@@ -442,6 +458,9 @@ export const COUNTRY_FLAGS: Record<Country, string> = {
   'South Africa': '🇿🇦',
   'Fiji': '🇫🇯',
   'Maldives': '🇲🇻',
+  'India': '🇮🇳',
+  'French Polynesia': '🇵🇫',
+  'Philippines': '🇵🇭',
 };
 
 // Get flag emoji for a country (with fallback)
