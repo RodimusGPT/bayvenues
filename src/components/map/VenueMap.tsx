@@ -41,6 +41,7 @@ const mapOptions: google.maps.MapOptions = {
   fullscreenControl: true,
   gestureHandling: 'greedy',
   backgroundColor: '#e6eef3', // primary-100 from color scheme
+  minZoom: 2, // Prevent zooming out so far that world repeats (shows duplicate markers)
   styles: [
     {
       featureType: 'poi',
