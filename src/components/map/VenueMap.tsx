@@ -450,9 +450,11 @@ export function VenueMap({ venues, hasActiveFilters, skipFitBounds, onVenueSelec
     highlightTimeoutsRef.current.forEach(clearTimeout);
     highlightTimeoutsRef.current = [];
 
-    // Restore previously hidden original marker
+    // Restore previously hidden original marker (add back to clusterer)
     if (hiddenOriginalMarkerRef.current) {
-      hiddenOriginalMarkerRef.current.setVisible(true);
+      if (clustererRef.current) {
+        clustererRef.current.addMarker(hiddenOriginalMarkerRef.current);
+      }
       hiddenOriginalMarkerRef.current = null;
     }
 
@@ -464,12 +466,12 @@ export function VenueMap({ venues, hasActiveFilters, skipFitBounds, onVenueSelec
 
     if (!selectedVenue?.location || selectedVenue.location.lat == null || selectedVenue.location.lng == null || !mapRef.current) return;
 
-    // Hide the original marker so it doesn't show under the highlight
+    // Remove the original marker from clusterer so it doesn't show under the highlight
     const originalMarker = markersRef.current.find(
       (marker) => (marker as any).venueId === selectedVenue.id
     );
-    if (originalMarker) {
-      originalMarker.setVisible(false);
+    if (originalMarker && clustererRef.current) {
+      clustererRef.current.removeMarker(originalMarker);
       hiddenOriginalMarkerRef.current = originalMarker;
     }
 
@@ -494,9 +496,9 @@ export function VenueMap({ venues, hasActiveFilters, skipFitBounds, onVenueSelec
       if (highlightMarkerRef.current === highlightMarker) {
         highlightMarker.setMap(null);
         highlightMarkerRef.current = null;
-        // Restore original marker visibility
-        if (hiddenOriginalMarkerRef.current === originalMarker && originalMarker) {
-          originalMarker.setVisible(true);
+        // Restore original marker to clusterer
+        if (hiddenOriginalMarkerRef.current === originalMarker && originalMarker && clustererRef.current) {
+          clustererRef.current.addMarker(originalMarker);
           hiddenOriginalMarkerRef.current = null;
         }
       }

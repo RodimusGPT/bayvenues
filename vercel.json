@@ -1,0 +1,20 @@
+{
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "query",
+          "key": "venue"
+        },
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(facebookexternalhit|Facebot|Twitterbot|LinkedInBot|Pinterest|Slackbot|TelegramBot|WhatsApp|Discordbot).*"
+        }
+      ],
+      "destination": "/api/og"
+    }
+  ]
+}
