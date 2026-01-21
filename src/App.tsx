@@ -28,6 +28,7 @@ function App() {
   const [searchAreaBounds, setSearchAreaBounds] = useState<MapBounds | null>(null); // Bounds set by "Search this area"
   const searchAreaBoundsRef = useRef<MapBounds | null>(null); // Ref for immediate access (avoids race with Zustand)
   const [listScrollPosition, setListScrollPosition] = useState(0); // Preserve list scroll position
+  const [isMapReady, setIsMapReady] = useState(false); // True after initial fitBounds completes
 
   // URL state handling for deep-linking
   const [pendingVenueId, setPendingVenueId] = useState<string | null>(null);
@@ -165,8 +166,9 @@ function App() {
     // This allows the list to show results while the map pans to the new region
     if (hasActiveFilters) return venuesToDisplay;
 
-    // No bounds yet, show all filtered venues
-    if (!mapBounds) return venuesToDisplay;
+    // No bounds yet or map not ready (still doing initial fitBounds), show all filtered venues
+    // This prevents showing empty list before fitBounds adjusts the map to show venues
+    if (!mapBounds || !isMapReady) return venuesToDisplay;
 
     // No active filters - filter by map bounds so list matches visible map area
     const inBounds = venuesToDisplay.filter((venue) => {
@@ -181,7 +183,7 @@ function App() {
     });
 
     return inBounds;
-  }, [venuesToDisplay, mapBounds, hasActiveFilters]);
+  }, [venuesToDisplay, mapBounds, hasActiveFilters, isMapReady]);
 
   // Show list button on mobile when there are venues to display
   const showMobileListButton = venuesInBounds.length > 0;
@@ -226,6 +228,7 @@ function App() {
                   onVenueSelect={setSelectedVenue}
                   onBoundsChange={handleBoundsChange}
                   onSearchArea={handleSearchArea}
+                  onMapReady={() => setIsMapReady(true)}
                   initialPosition={mapPosition || undefined}
                 />
             ) : (
