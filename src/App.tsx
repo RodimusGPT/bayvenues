@@ -81,10 +81,10 @@ function App() {
   // Fetch venue by ID when there's a pending venue from URL
   const { data: venueFromUrl } = useVenue(pendingVenueId);
 
-  // Set selected venue when it loads from URL
+  // Set selected venue when it loads from URL (without highlight animation)
   useEffect(() => {
     if (venueFromUrl && pendingVenueId) {
-      setSelectedVenue(venueFromUrl);
+      setSelectedVenue(venueFromUrl, { showHighlight: false });
       setPendingVenueId(null); // Clear pending state
     }
   }, [venueFromUrl, pendingVenueId, setSelectedVenue]);

@@ -145,7 +145,7 @@ export function VenueMap({ venues, hasActiveFilters, skipFitBounds, onVenueSelec
   const hasCalledMapReadyRef = useRef(false); // Track if we've signaled map ready
   const isProgrammaticMoveRef = useRef(false); // Track programmatic vs user map movements
   const searchButtonEnabledRef = useRef(false); // Enable search button after initial load
-  const { hoveredVenueId, selectedVenue } = useVenueStore();
+  const { hoveredVenueId, selectedVenue, showHighlightMarker } = useVenueStore();
   const { countryFlags, regionToCountry } = useRegionMetadata();
   const [mapType, setMapType] = useState<'roadmap' | 'satellite'>('roadmap');
   const [isMapReady, setIsMapReady] = useState(false); // Track when map is loaded
@@ -465,7 +465,8 @@ export function VenueMap({ venues, hasActiveFilters, skipFitBounds, onVenueSelec
       highlightMarkerRef.current = null;
     }
 
-    if (!selectedVenue?.location || selectedVenue.location.lat == null || selectedVenue.location.lng == null || !mapRef.current) return;
+    // Only show highlight marker if explicitly requested (user click, not URL restore)
+    if (!showHighlightMarker || !selectedVenue?.location || selectedVenue.location.lat == null || selectedVenue.location.lng == null || !mapRef.current) return;
 
     // Remove the original marker from clusterer so it doesn't show under the highlight
     const originalMarker = markersRef.current.find(
@@ -506,7 +507,7 @@ export function VenueMap({ venues, hasActiveFilters, skipFitBounds, onVenueSelec
     }, 5000);
 
     highlightTimeoutsRef.current = [removeTimeout];
-  }, [selectedVenue, countryFlags, regionToCountry]);
+  }, [selectedVenue, showHighlightMarker, countryFlags, regionToCountry]);
 
   return (
     <div className="relative w-full h-full">

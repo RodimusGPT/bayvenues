@@ -4,13 +4,18 @@ import type { Venue } from '../types/venue';
 interface VenueStore {
   selectedVenue: Venue | null;
   hoveredVenueId: string | null;
-  setSelectedVenue: (venue: Venue | null) => void;
+  showHighlightMarker: boolean; // Whether to show the animated highlight marker
+  setSelectedVenue: (venue: Venue | null, options?: { showHighlight?: boolean }) => void;
   setHoveredVenue: (id: string | null) => void;
 }
 
 export const useVenueStore = create<VenueStore>((set) => ({
   selectedVenue: null,
   hoveredVenueId: null,
-  setSelectedVenue: (venue) => set({ selectedVenue: venue }),
+  showHighlightMarker: false,
+  setSelectedVenue: (venue, options = {}) => set({
+    selectedVenue: venue,
+    showHighlightMarker: options.showHighlight ?? true, // Default to showing highlight on click
+  }),
   setHoveredVenue: (id) => set({ hoveredVenueId: id }),
 }));
