@@ -1,3 +1,4 @@
+import { memo, useCallback } from 'react';
 import type { Venue } from '../../types/venue';
 import { COUNTRY_FLAGS, getCountryForRegion } from '../../types/venue';
 import { useFavoriteStore } from '../../stores/favoriteStore';
@@ -11,10 +12,127 @@ interface FavoritesPanelProps {
   onClose: () => void;
 }
 
+interface FavoriteVenueItemProps {
+  venue: Venue;
+  onSelect: (venue: Venue) => void;
+  onRemove: (venueId: string) => void;
+}
+
+// Custom comparison to prevent re-renders unless venue data actually changes
+function favoriteItemPropsAreEqual(prevProps: FavoriteVenueItemProps, nextProps: FavoriteVenueItemProps): boolean {
+  return prevProps.venue.id === nextProps.venue.id &&
+    prevProps.onSelect === nextProps.onSelect &&
+    prevProps.onRemove === nextProps.onRemove;
+}
+
+// Memoized list item to prevent re-renders when other favorites change
+const FavoriteVenueItem = memo(function FavoriteVenueItem({
+  venue,
+  onSelect,
+  onRemove
+}: FavoriteVenueItemProps) {
+  const country = getCountryForRegion(venue.region);
+  const flag = COUNTRY_FLAGS[country] || '📍';
+
+  const handleClick = useCallback(() => {
+    onSelect(venue);
+  }, [onSelect, venue]);
+
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onSelect(venue);
+    }
+  }, [onSelect, venue]);
+
+  const handleRemoveClick = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    onRemove(venue.id);
+  }, [onRemove, venue.id]);
+
+  return (
+    <div
+      role="button"
+      tabIndex={0}
+      className="p-4 hover:bg-gray-50 transition-colors cursor-pointer group focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      aria-label={`View ${venue.name}`}
+    >
+      <div className="flex gap-3">
+        {/* Thumbnail */}
+        {venue.headerImage ? (
+          <div className="w-20 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
+            <img
+              src={venue.headerImage.url}
+              alt={venue.name}
+              className="w-full h-full object-cover"
+              loading="lazy"
+              onError={(e) => {
+                (e.target as HTMLImageElement).style.display = 'none';
+              }}
+            />
+          </div>
+        ) : (
+          <div className="w-20 h-16 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
+            <svg className="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+        )}
+
+        {/* Content */}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-1.5 mb-1">
+            <span className="text-sm">{flag}</span>
+            <span className="text-xs text-gray-500 truncate">{venue.region}</span>
+          </div>
+          <h3 className="font-medium text-gray-900 text-sm leading-tight mb-1 group-hover:text-primary-600 transition-colors">
+            {venue.name}
+          </h3>
+          <div className="flex flex-wrap gap-1.5">
+            {venue.price_range && (
+              <span className="text-xs text-green-700 bg-green-50 px-1.5 py-0.5 rounded">
+                {formatPriceRange(venue.price_range.min, venue.price_range.max)}
+              </span>
+            )}
+            {venue.capacity && (
+              <span className="text-xs text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded">
+                {formatCapacity(venue.capacity.min, venue.capacity.max)}
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* Remove Button - always visible on touch, hover to show on desktop */}
+        <button
+          onClick={handleRemoveClick}
+          className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-colors opacity-100 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 flex-shrink-0 self-center"
+          title="Remove from favorites"
+          aria-label="Remove from favorites"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+}, favoriteItemPropsAreEqual);
+
 export function FavoritesPanel({ onVenueSelect, onClose }: FavoritesPanelProps) {
   const { favorites, toggleFavorite, clearFavorites } = useFavoriteStore();
   const { data: favoriteVenues = [], isLoading } = useFavoriteVenues();
   const { user, openAuthModal } = useAuth();
+
+  // Memoized callbacks for list items to maintain referential equality
+  const handleVenueSelect = useCallback((venue: Venue) => {
+    onVenueSelect(venue);
+  }, [onVenueSelect]);
+
+  const handleRemoveFavorite = useCallback((venueId: string) => {
+    if (user) toggleFavorite(venueId, user.id);
+  }, [user, toggleFavorite]);
 
   return (
     <aside className="lg:relative lg:w-full lg:h-full lg:top-auto lg:right-auto lg:shadow-none lg:z-auto fixed right-0 top-[57px] bottom-0 w-full sm:w-[380px] bg-white shadow-2xl overflow-hidden z-40 animate-slide-in-right flex flex-col">
@@ -91,90 +209,14 @@ export function FavoritesPanel({ onVenueSelect, onClose }: FavoritesPanelProps) 
           </div>
         ) : (
           <div className="divide-y divide-gray-100">
-            {favoriteVenues.map((venue) => {
-              const country = getCountryForRegion(venue.region);
-              const flag = COUNTRY_FLAGS[country] || '📍';
-
-              const handleKeyDown = (e: React.KeyboardEvent) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  onVenueSelect(venue);
-                }
-              };
-
-              return (
-                <div
-                  key={venue.id}
-                  role="button"
-                  tabIndex={0}
-                  className="p-4 hover:bg-gray-50 transition-colors cursor-pointer group focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
-                  onClick={() => onVenueSelect(venue)}
-                  onKeyDown={handleKeyDown}
-                  aria-label={`View ${venue.name}`}
-                >
-                  <div className="flex gap-3">
-                    {/* Thumbnail */}
-                    {venue.headerImage ? (
-                      <div className="w-20 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
-                        <img
-                          src={venue.headerImage.url}
-                          alt={venue.name}
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).style.display = 'none';
-                          }}
-                        />
-                      </div>
-                    ) : (
-                      <div className="w-20 h-16 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
-                        <svg className="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                      </div>
-                    )}
-
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-1.5 mb-1">
-                        <span className="text-sm">{flag}</span>
-                        <span className="text-xs text-gray-500 truncate">{venue.region}</span>
-                      </div>
-                      <h3 className="font-medium text-gray-900 text-sm leading-tight mb-1 group-hover:text-primary-600 transition-colors">
-                        {venue.name}
-                      </h3>
-                      <div className="flex flex-wrap gap-1.5">
-                        {venue.price_range && (
-                          <span className="text-xs text-green-700 bg-green-50 px-1.5 py-0.5 rounded">
-                            {formatPriceRange(venue.price_range.min, venue.price_range.max)}
-                          </span>
-                        )}
-                        {venue.capacity && (
-                          <span className="text-xs text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded">
-                            {formatCapacity(venue.capacity.min, venue.capacity.max)}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Remove Button - always visible on touch, hover to show on desktop */}
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        if (user) toggleFavorite(venue.id, user.id);
-                      }}
-                      className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-colors opacity-100 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 flex-shrink-0 self-center"
-                      title="Remove from favorites"
-                      aria-label="Remove from favorites"
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
+            {favoriteVenues.map((venue) => (
+              <FavoriteVenueItem
+                key={venue.id}
+                venue={venue}
+                onSelect={handleVenueSelect}
+                onRemove={handleRemoveFavorite}
+              />
+            ))}
           </div>
         )}
       </div>

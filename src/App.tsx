@@ -174,13 +174,28 @@ function App() {
     const inBounds = venuesToDisplay.filter((venue) => {
       const { lat, lng } = venue.location;
       if (lat == null || lng == null) return false;
-      return (
-        lat >= mapBounds.south &&
-        lat <= mapBounds.north &&
-        lng >= mapBounds.west &&
-        lng <= mapBounds.east
-      );
+
+      // Check latitude (straightforward)
+      const inLatBounds = lat >= mapBounds.south && lat <= mapBounds.north;
+
+      // Check longitude - handle anti-meridian wrapping (when west > east)
+      let inLngBounds: boolean;
+      if (mapBounds.west <= mapBounds.east) {
+        // Normal case: west is less than east
+        inLngBounds = lng >= mapBounds.west && lng <= mapBounds.east;
+      } else {
+        // Wrapping case: map view crosses the antimeridian
+        inLngBounds = lng >= mapBounds.west || lng <= mapBounds.east;
+      }
+
+      return inLatBounds && inLngBounds;
     });
+
+    // Safety fallback: if no venues in bounds but we have venues,
+    // the map might still be adjusting after fitBounds - show all venues
+    if (inBounds.length === 0 && venuesToDisplay.length > 0) {
+      return venuesToDisplay;
+    }
 
     return inBounds;
   }, [venuesToDisplay, mapBounds, hasActiveFilters, isMapReady]);

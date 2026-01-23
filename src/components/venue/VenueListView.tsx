@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect } from 'react';
+import { useState, useCallback, useRef, useEffect, memo } from 'react';
 import type { Venue } from '../../types/venue';
 import { COUNTRY_FLAGS, getCountryForRegion } from '../../types/venue';
 import { formatPriceRange, formatCapacity } from '../../utils/formatters';
@@ -14,7 +14,19 @@ interface VenueListViewProps {
   onScrollChange?: (position: number) => void;
 }
 
-function VenueCard({ venue, onSelect }: { venue: Venue; onSelect: () => void }) {
+interface VenueCardProps {
+  venue: Venue;
+  onSelect: (venue: Venue) => void;
+}
+
+// Custom comparison to prevent re-renders unless venue data actually changes
+function venueCardPropsAreEqual(prevProps: VenueCardProps, nextProps: VenueCardProps): boolean {
+  // Same venue ID and same callback reference means no re-render needed
+  return prevProps.venue.id === nextProps.venue.id && prevProps.onSelect === nextProps.onSelect;
+}
+
+// Memoized VenueCard to prevent re-renders when parent updates
+const VenueCard = memo(function VenueCard({ venue, onSelect }: VenueCardProps) {
   const country = getCountryForRegion(venue.region);
   const flag = COUNTRY_FLAGS[country] || '📍';
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -65,18 +77,22 @@ function VenueCard({ venue, onSelect }: { venue: Venue; onSelect: () => void }) 
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleClick = useCallback(() => {
+    onSelect(venue);
+  }, [onSelect, venue]);
+
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      onSelect();
+      onSelect(venue);
     }
-  };
+  }, [onSelect, venue]);
 
   return (
     <div
       role="button"
       tabIndex={0}
-      onClick={onSelect}
+      onClick={handleClick}
       onKeyDown={handleKeyDown}
       className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden cursor-pointer hover:shadow-md hover:border-gray-200 transition-all group focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
       aria-label={`View details for ${venue.name}`}
@@ -199,10 +215,15 @@ function VenueCard({ venue, onSelect }: { venue: Venue; onSelect: () => void }) 
       </div>
     </div>
   );
-}
+}, venueCardPropsAreEqual);
 
 export function VenueListView({ venues, onVenueSelect, onBackToMap, isLoading, scrollPosition, onScrollChange }: VenueListViewProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Stable callback reference for memoized VenueCard components
+  const handleVenueSelect = useCallback((venue: Venue) => {
+    onVenueSelect(venue);
+  }, [onVenueSelect]);
 
   // Restore scroll position when component mounts (e.g., returning from venue detail)
   useEffect(() => {
@@ -291,7 +312,7 @@ export function VenueListView({ venues, onVenueSelect, onBackToMap, isLoading, s
             <VenueCard
               key={venue.id}
               venue={venue}
-              onSelect={() => onVenueSelect(venue)}
+              onSelect={handleVenueSelect}
             />
           ))}
         </div>

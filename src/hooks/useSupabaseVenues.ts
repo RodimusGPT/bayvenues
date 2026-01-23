@@ -1,9 +1,15 @@
+import { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '../lib/supabase';
 import type { Venue, VenueFromAPI, Setting } from '../types/venue';
 import { transformVenueFromAPI } from '../types/venue';
 import { useFavoriteStore } from '../stores/favoriteStore';
 import { useHiddenStore } from '../stores/hiddenStore';
+
+// Stable key generation for Sets - prevents unnecessary query refetches
+function useStableSetKey(set: Set<string>): string {
+  return useMemo(() => [...set].sort().join(','), [set]);
+}
 
 interface UseVenuesFilters {
   searchQuery: string;
@@ -24,7 +30,11 @@ export function useSupabaseVenues({ filters, enabled = true }: UseVenuesOptions)
   const { favorites, showFavoritesOnly } = useFavoriteStore();
   const { hidden } = useHiddenStore();
 
-  return useQuery({
+  // Use stable keys to prevent unnecessary refetches when Set reference changes
+  const favoritesKey = useStableSetKey(favorites);
+  const hiddenKey = useStableSetKey(hidden);
+
+  const result = useQuery({
     queryKey: [
       'venues',
       filters.searchQuery,
@@ -35,8 +45,8 @@ export function useSupabaseVenues({ filters, enabled = true }: UseVenuesOptions)
       filters.priceRange,
       filters.capacityRange,
       showFavoritesOnly,
-      Array.from(favorites),
-      Array.from(hidden),
+      favoritesKey,
+      hiddenKey,
     ],
     queryFn: async (): Promise<Venue[]> => {
       const { data, error } = await supabase.rpc('search_venues', {
@@ -65,6 +75,8 @@ export function useSupabaseVenues({ filters, enabled = true }: UseVenuesOptions)
     enabled,
     staleTime: 30 * 1000, // 30 seconds
   });
+
+  return result;
 }
 
 // Hook to get a single venue by ID
@@ -110,9 +122,10 @@ interface MapBounds {
 
 export function useVenuesInBounds(bounds: MapBounds | null) {
   const { hidden } = useHiddenStore();
+  const hiddenKey = useStableSetKey(hidden);
 
   return useQuery({
-    queryKey: ['venuesInBounds', bounds, Array.from(hidden)],
+    queryKey: ['venuesInBounds', bounds, hiddenKey],
     queryFn: async (): Promise<MapMarkerVenue[]> => {
       if (!bounds) return [];
 
@@ -139,9 +152,10 @@ export function useVenuesInBounds(bounds: MapBounds | null) {
 // Hook to fetch favorite venues by IDs (for FavoritesPanel)
 export function useFavoriteVenues() {
   const { favorites } = useFavoriteStore();
+  const favoritesKey = useStableSetKey(favorites);
 
   return useQuery({
-    queryKey: ['favoriteVenues', Array.from(favorites)],
+    queryKey: ['favoriteVenues', favoritesKey],
     queryFn: async (): Promise<Venue[]> => {
       if (favorites.size === 0) return [];
 
